@@ -4,13 +4,14 @@ body {
 }
 
 .Nav-bar {
+  padding-left: 20px;
+  padding-top: 20px;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 .Nav-bar ul {
   display: flex;
-  justify-content: space-between;
   list-style-type: none;
 }
 .Nav-bar ul li {
@@ -23,7 +24,18 @@ body {
   text-decoration: none;
 }
 
+.Nav-bar-logos {
+  display: flex;
+  align-items: center;
+} 
+.Nav-bar-logos * {
+  padding-right: 20px;
+}
 #undp-logo {
-  width: 256px;
-  height: 171px;
+  width: 49.75px;
+  height: 102.75px;
+}
+#wpi-logo {
+  width: 140.5px;
+  height: 45.5px;
 }
