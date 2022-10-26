@@ -5,15 +5,29 @@ body {
 
 .Nav-bar ul {
   display: flex;
-  flex-direction: row;
+  grid-auto-flow: column;
+  align-items: center;
   justify-content: space-between;
-  list-style-type: none;
+  list-style: none;
+  padding-left: 0;
 }
-.Nav-bar ul * {
-  padding-right: 5%;
+
+.App-header {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header h1 {
+  grid-row: 1;
+}
+
+.App-header .Nav-bar {
+  grid-row: 2;
 }
 
 #undp-logo {
-  width: 200px;
-  height: 108px;
+  width: 34px;
+  height: 69px;
 }

@@ -4,7 +4,12 @@ import { NavBar } from './App';
 function Testpath() {
     return (
         <div className="TestPath">
-        <NavBar></NavBar>
+        <header className="App-header">
+            <h1>
+            Albania Solar Calculator App
+            </h1>
+            <NavBar></NavBar>
+        </header>
         <p>A test</p>
         </div>
     )
