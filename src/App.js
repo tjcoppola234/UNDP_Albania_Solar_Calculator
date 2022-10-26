@@ -6,14 +6,18 @@ import { Link } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <NavBar></NavBar>
+      <PageHead></PageHead>
       <p>homepage</p>
     </div>
   );
 }
 
-export function NavBar() {
+export function PageHead() {
   return (
+    <header className="App-header">
+        <h1>
+          Shqipëri Solar Calculator
+        </h1>
       <nav className="Nav-bar">
         <div className="Nav-bar-logos">
           <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
@@ -25,6 +29,7 @@ export function NavBar() {
           <li><Link to="/FAQ">FAQ</Link></li>
         </ul>
       </nav>
+    </header>
   );
 }
 

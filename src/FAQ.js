@@ -1,10 +1,10 @@
 import './global.css';
-import { NavBar } from './App';
+import { PageHead } from './App';
 
 function FAQ() {
     return (
         <div className="FAQ">
-            <NavBar></NavBar>
+            <PageHead></PageHead>
             <p>FAQ</p>
         </div>
     )
