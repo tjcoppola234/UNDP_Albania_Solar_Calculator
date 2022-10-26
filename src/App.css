@@ -1,13 +1,29 @@
 body {
-  background-color: pink;
+  background-color: whitesmoke;
+  color: royalblue;
 }
 
 .Nav-bar ul {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   list-style-type: none;
 }
 .Nav-bar ul li {
   padding-right: 5%;
+}
+
+.App-header {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header h1 {
+  grid-row: 1;
+}
+
+.App-header .Nav-bar {
+  grid-row: 2;
 }
