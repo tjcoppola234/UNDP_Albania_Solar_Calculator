@@ -15,8 +15,8 @@ function App() {
 export function NavBar() {
   return (
       <nav className="Nav-bar">
+          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
           <ul>
-            <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/Testpath">testpath</Link></li>
             <li><Link to="/FAQ">FAQ</Link></li>
