@@ -1,33 +1,53 @@
 body {
-  background-color: whitesmoke;
+  background-color: rgb(198, 196, 255);
   color: royalblue;
-}
-
-.Nav-bar ul {
-  display: flex;
-  grid-auto-flow: column;
-  align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  padding-left: 0;
+  padding-left: 20px;
 }
 
 .App-header {
   display: grid;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  
 }
-
 .App-header h1 {
   grid-row: 1;
 }
-
 .App-header .Nav-bar {
   grid-row: 2;
 }
 
+.Nav-bar {
+  display: flex;
+  align-items: center;
+}
+.Nav-bar ul {
+  display: flex;
+  list-style-type: none;
+}
+.Nav-bar ul li {
+  border: 2px solid black;
+  width: 100px;
+}
+.Nav-bar ul li a {
+  display: flex; justify-content: space-evenly;
+  font-size: larger;
+  text-decoration: none;
+}
+
+.Nav-bar-logos {
+  display: flex;
+  align-items: center;
+} 
+.Nav-bar-logos * {
+  padding-right: 20px;
+}
 #undp-logo {
-  width: 34px;
-  height: 69px;
+  width: 49.75px;
+  height: 102.75px;
+}
+#wpi-logo {
+  width: 140.5px;
+  height: 45.5px;
 }
