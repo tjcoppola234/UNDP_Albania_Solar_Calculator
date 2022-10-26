@@ -1,13 +1,11 @@
-import './App.css';
+import './global.css';
 import { NavBar } from './App';
 
 function FAQ() {
     return (
-        <div className="App">
-        <NavBar></NavBar>
-        <header className="App-header">
+        <div className="FAQ">
+            <NavBar></NavBar>
             <p>FAQ</p>
-        </header>
         </div>
     )
 }

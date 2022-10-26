@@ -1,13 +1,11 @@
-import './App.css';
+import './global.css';
 import { NavBar } from './App';
 
 function Testpath() {
     return (
-        <div className="App">
+        <div className="TestPath">
         <NavBar></NavBar>
-        <header className="App-header">
-            <p>A test</p>
-        </header>
+        <p>A test</p>
         </div>
     )
 }
