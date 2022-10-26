@@ -1,11 +1,12 @@
 body {
-  background-color: gold;
+  background-color: whitesmoke;
+  color: royalblue;
 }
 
 .Nav-bar ul {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   list-style-type: none;
 }
 .Nav-bar ul * {
