@@ -9,21 +9,11 @@ body {
   justify-content: space-between;
   list-style-type: none;
 }
-.Nav-bar ul li {
+.Nav-bar ul * {
   padding-right: 5%;
 }
 
-.App-header {
-  display: grid;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.App-header h1 {
-  grid-row: 1;
-}
-
-.App-header .Nav-bar {
-  grid-row: 2;
+#undp-logo {
+  width: 200px;
+  height: 108px;
 }
