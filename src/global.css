@@ -1,0 +1,19 @@
+body {
+  background-color: whitesmoke;
+  color: royalblue;
+}
+
+.Nav-bar ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+}
+.Nav-bar ul * {
+  padding-right: 5%;
+}
+
+#undp-logo {
+  width: 200px;
+  height: 108px;
+}
