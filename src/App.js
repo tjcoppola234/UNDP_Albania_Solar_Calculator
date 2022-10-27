@@ -15,9 +15,9 @@ function App() {
 export function PageHead() {
   return (
     <header className="App-header">
-        <h1>
-          Shqipëri Solar Calculator
-        </h1>
+      <h1>
+        Shqipëri Solar Calculator
+      </h1>
       <nav className="Nav-bar">
         <div className="Nav-bar-logos">
           <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
@@ -25,7 +25,7 @@ export function PageHead() {
         </div>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/Testpath">testpath</Link></li>
+          <li><Link to="/Calculator">Calculator</Link></li>
           <li><Link to="/FAQ">FAQ</Link></li>
         </ul>
       </nav>
