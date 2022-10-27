@@ -26,6 +26,7 @@ export function PageHead() {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/Testpath">testpath</Link></li>
+          <li><Link to="/Resources">Resources</Link></li>
           <li><Link to="/FAQ">FAQ</Link></li>
         </ul>
       </nav>

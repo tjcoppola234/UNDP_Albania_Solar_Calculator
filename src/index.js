@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import TestPath from './TestPath';
+import Resources from './Resources';
 import FAQ from './FAQ';
 import reportWebVitals from './reportWebVitals';
 
@@ -14,6 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Testpath" element={<TestPath />} />
+        <Route path="/Resources" element={<Resources />} />
         <Route path="/FAQ" element={<FAQ />} />
       </Routes>
     </BrowserRouter>
