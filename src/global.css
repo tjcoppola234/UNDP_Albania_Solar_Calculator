@@ -54,3 +54,18 @@ body {
   width: 140.5px;
   height: 45.5px;
 }
+
+#calc-buyback {
+  margin-top: 20px;
+}
+
+.Vert-flex {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+.Hor-flex {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+}
