@@ -68,7 +68,13 @@ function calculateBuyback() {
     //Break that down to years and months
     let years = totalMonths / 12;
     const months = Math.round(totalMonths % 12);
+    if(years === Infinity)
+        return "Don't do that";
+    
     if(years < 1) {
+        if(months === 0)
+            return "Less than 1 month!";
+
         return `${months} Months`;
     } else if(months === 0) {
         return `${Math.floor(years)} Years`;
