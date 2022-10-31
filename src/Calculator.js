@@ -1,13 +1,13 @@
 import './global.css';
 import { PageHead } from './App';
 
-function Testpath() {
+function Calculator() {
     return (
-        <div className="TestPath">
+        <div className="Calculator">
             <PageHead></PageHead>
-            <p>A test</p>
+            <h2>Calculator</h2>
         </div>
     )
 }
 
-export default Testpath;
+export default Calculator;
