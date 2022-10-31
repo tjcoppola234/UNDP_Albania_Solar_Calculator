@@ -5,7 +5,7 @@ function FAQ() {
     return (
         <div className="FAQ">
             <PageHead></PageHead>
-            <p>FAQ</p>
+            <h2>FAQ</h2>
         </div>
     )
 }

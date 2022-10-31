@@ -5,7 +5,7 @@ function Calculator() {
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <p>A test</p>
+            <h2>Calculator</h2>
         </div>
     )
 }
