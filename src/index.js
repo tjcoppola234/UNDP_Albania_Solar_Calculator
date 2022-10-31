@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import TestPath from './TestPath';
 import Resources from './Resources';
+import Calculator from './Calculator';
 import FAQ from './FAQ';
 import reportWebVitals from './reportWebVitals';
 
@@ -14,8 +14,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/Testpath" element={<TestPath />} />
         <Route path="/Resources" element={<Resources />} />
+        <Route path="/Calculator" element={<Calculator />} />
         <Route path="/FAQ" element={<FAQ />} />
       </Routes>
     </BrowserRouter>
