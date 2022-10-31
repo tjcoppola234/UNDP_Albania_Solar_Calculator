@@ -25,6 +25,7 @@ export function PageHead() {
         </div>
         <ul>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/Resources">Resources</Link></li>
           <li><Link to="/Calculator">Calculator</Link></li>
           <li><Link to="/FAQ">FAQ</Link></li>
         </ul>
