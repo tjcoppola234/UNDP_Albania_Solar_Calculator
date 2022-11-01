@@ -4,80 +4,65 @@ body {
 }
 
 .Nav-spacing {
-  margin-bottom: 5%;
+  margin-bottom: 90px;
 }
 
 .App-header {
-  display: flex;
-  flex: 1 2 auto;
+  display: grid;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(0, 132, 200);
   color: rgb(254, 254, 254);
   position: fixed;
-  height: 10%;
+  height: 80px;
   top: 0;
+  white-space: nowrap;
 }
 
-.App-header .Nav-bar {
-  padding-bottom: 10px;
+.Nav-title {
+  grid-column: 1;
+  margin-left: 20px;
 }
 
 .Nav-bar {
-  display: flex;
-  align-items: center;
+  grid-column: 2;
   color: rgb(254, 254, 254);
+  height: 100%;
 }
 .Nav-bar ul {
   display: flex;
   list-style-type: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 .Nav-bar ul li {
+  display: table;
   width: 120px;
   height: 100%;
+  border-left: 1px solid rgb(0, 92, 140);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
-.Nav-bar ul li a {
-  display: block;
+.Nav-bar ul li:hover {
+  background-color: rgb(0, 92, 140);
+}
+
+.Nav-bar ul li a { 
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
   font-size: larger;
   text-decoration: none;
-  text-align: center;
   font-weight: bold;
   color: rgb(254, 254, 254);
+  height: 100%;
+  width: 120px;
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
-}
-
-.Nav-bar ul li:hover {
-  background-color: rgb(47, 47, 47);
-}
-
-.Nav-bar-logos {
-  display: flex;
-  align-items: center;
-} 
-.Nav-bar-logos * {
-  padding-right: 20px;
-}
-#undp-logo {
-  width: 199px;
-  height: 411px;
-}
-#wpi-logo {
-  width: 562px;
-  height: 182px;
-}
-#solar-map {
-  width: 443.25;
-  height: 333.75px;
-}
-
-#calc-buyback {
-  margin-top: 20px;
 }
 
 .Vert-flex {

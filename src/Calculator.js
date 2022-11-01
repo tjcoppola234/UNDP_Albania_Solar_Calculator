@@ -1,4 +1,5 @@
 import './global.css';
+import './Calculator.css';
 import { PageHead } from './App';
 import {useState} from 'react';
 

@@ -1,0 +1,15 @@
+.Sponsor-logos {
+    display: flex;
+    align-items: center;
+
+} 
+
+#undp-logo {
+    width: 199px;
+    height: 411px;
+}
+
+#wpi-logo {
+    width: 562px;
+    height: 182px;
+}

@@ -1,4 +1,5 @@
 import './global.css';
+import './App.css';
 // import UNDP_logo from 'public/UNDP_logo.png';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ function App() {
     <div className="App">
       <PageHead></PageHead>
       <h2>Homepage</h2>
-      <div className="Nav-bar-logos">
+      <div className="Sponsor-logos">
         <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
         <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
       </div>
@@ -18,9 +19,9 @@ function App() {
 
 export function PageHead() {
   return (
-    <div className="Nav-spacing">
+    <div>
       <header className="App-header">
-        <h1>
+        <h1 className="Nav-title">
           Shqipëri Solar Calculator
         </h1>
         <nav className="Nav-bar">
@@ -32,6 +33,7 @@ export function PageHead() {
           </ul>
         </nav>
       </header>
+      <div className="Nav-spacing"></div>
     </div>
   );
 }

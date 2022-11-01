@@ -1,4 +1,5 @@
 import './global.css';
+import './Resources.css';
 import { PageHead } from './App';
 
 function Resources() {
