@@ -4,7 +4,7 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import Albanian from './Albanian';
 import English from './English';
-import {language, DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY} from './Language';
+import LanguageToggle from './LanguageToggle';
 
 function App() {
   return (
@@ -20,17 +20,6 @@ function App() {
 }
 
 export function PageHead() {
-  const switchToAlbanian = () => {
-    document.getElementById("Switch-albanian").toggleAttribute("disabled", true);
-    document.getElementById("Switch-english").toggleAttribute("disabled", false);
-    language.setState(true, false);
-  };
-  const switchToEnglish = () => {
-    document.getElementById("Switch-albanian").toggleAttribute("disabled", false);
-    document.getElementById("Switch-english").toggleAttribute("disabled", true);
-    language.setState(false, true);
-  };
-  
   return (
     <div>
       <header id="App-header">
@@ -44,12 +33,7 @@ export function PageHead() {
             <li><Link to="/Resources">Resources</Link></li>
             <li><Link to="/Calculator">Calculator</Link></li>
             <li><Link to="/FAQ">FAQ</Link></li>
-            <li>
-              <div id="Toggle">
-                <button id="Switch-albanian" type="button" disabled={!DEFAULT_ALBANIAN_VISIBILITY} onClick={switchToAlbanian}><img src={process.env.PUBLIC_URL+'albania_flag.png'} alt="Shqip"></img></button>
-                <button id="Switch-english" type="button" disabled={!DEFAULT_ENGLISH_VISIBILITY} onClick={switchToEnglish}><img src={process.env.PUBLIC_URL+'usa_flag.png'} alt="English"></img></button>
-              </div>
-            </li>
+            <li><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
       </header>
