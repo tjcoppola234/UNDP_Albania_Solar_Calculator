@@ -114,3 +114,12 @@ body {
   flex-direction: row;
   width: max-content;
 }
+.Center-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Space-between {
+  display: flex;
+  justify-content: space-between;
+}
