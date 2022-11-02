@@ -3,11 +3,11 @@ body {
   color: black;
 }
 
-.Nav-spacing {
+#Nav-spacing {
   margin-bottom: 90px;
 }
 
-.App-header {
+#App-header {
   display: grid;
   width: 100%;
   align-items: center;
@@ -20,37 +20,37 @@ body {
   white-space: nowrap;
 }
 
-.Nav-title {
+#Nav-title {
   grid-column: 1;
   margin-left: 20px;
 }
 
-.Nav-bar {
+#Nav-options {
   grid-column: 2;
   color: rgb(254, 254, 254);
-  height: 100%;
+  height: inherit;
 }
-.Nav-bar ul {
+#Nav-options ul {
   display: flex;
   list-style-type: none;
-  height: 100%;
+  height: inherit;
   padding: 0;
   margin: 0;
 }
-.Nav-bar ul li {
+#Nav-options ul li {
   display: table;
   width: 120px;
-  height: 100%;
+  height: inherit;
   border-left: 1px solid rgb(0, 92, 140);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
-.Nav-bar ul li:hover {
+#Nav-options ul li:hover {
   background-color: rgb(0, 92, 140);
 }
 
-.Nav-bar ul li a { 
+#Nav-options ul li a { 
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -63,6 +63,45 @@ body {
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
+}
+
+#Toggle {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  height: inherit;
+}
+#Toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color:rgb(0, 132, 200);
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+#Toggle button:hover {
+  background-color: rgb(0, 92, 140);
+}
+#Toggle img {
+  object-fit: contain;
+  max-height: 90%;
+}
+#Switch-albanian {
+  grid-row: 1;
+  border: none;
+  border-left: 1px solid rgb(0, 92, 140);
+}
+#Switch-english {
+  grid-row: 2;
+  border: none;
+  border-top: 1px solid rgb(0, 92, 140);
+  border-left: 1px solid rgb(0, 92, 140);
+}
+
+.invisible {
+  display: none;
 }
 
 .Vert-flex {
