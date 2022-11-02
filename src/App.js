@@ -2,7 +2,9 @@ import './global.css';
 import './App.css';
 // import UNDP_logo from 'public/UNDP_logo.png';
 import { Link } from 'react-router-dom';
-
+import Albanian from './Albanian';
+import English from './English';
+import LanguageToggle from './LanguageToggle';
 
 function App() {
   return (
@@ -20,20 +22,22 @@ function App() {
 export function PageHead() {
   return (
     <div>
-      <header className="App-header">
-        <h1 className="Nav-title">
-          Shqipëri Solar Calculator
+      <header id="App-header">
+        <h1 id="Nav-title">
+          <English>Albania Solar Calculator</English>
+          <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
         </h1>
-        <nav className="Nav-bar">
+        <nav id="Nav-options">
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/Resources">Resources</Link></li>
             <li><Link to="/Calculator">Calculator</Link></li>
             <li><Link to="/FAQ">FAQ</Link></li>
+            <li><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
       </header>
-      <div className="Nav-spacing"></div>
+      <div id="Nav-spacing"></div>
     </div>
   );
 }
