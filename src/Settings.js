@@ -1,31 +1,13 @@
+import SettingsListener from "./SettingsListener";
+
 //To change the starting settings, switch the two strings
 const DEFAULT_ALBANIAN_VISIBILITY = "invisible";
 const DEFAULT_ENGLISH_VISIBILITY = "";
 
 class Settings {
     constructor(initAlb, initEng){
-        this.state = {albanianVisible: initAlb, englishVisible: initEng}
-        this.listeners = [];
-    } 
-
-    addListener (listener) {
-        this.listeners.push(listener);
-        const removeListener = () => {
-            this.listeners = this.listeners.splice(this.listeners.indexOf(listener), 1);
-        };
-        return removeListener;
-    }
-
-    getState() {
-        return this.state;
-    }
-
-    setState(albanianVis, englishVis) {
-        const innerState = {albanianVisible: (albanianVis ? "" : "invisible"), englishVisible: (englishVis ? "" : "invisible")};
-        this.state = innerState;
-        for(const listener of this.listeners) {
-            listener(innerState);
-        }
+        this.albanianVisible = new SettingsListener(initAlb);
+        this.englishVisible = new SettingsListener(initEng);
     }
 }
     

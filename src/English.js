@@ -9,10 +9,10 @@ class English extends Component {
     }
 
     componentDidMount () {
-        this.removeListener = settings.addListener((state) => {
-            this.setState({englishVisible: state.englishVisible});
+        this.removeListener = settings.englishVisible.addListener((state) => {
+            this.setState({englishVisible: state});
         });
-        this.setState({englishVisible: settings.getState().englishVisible});
+        this.setState({englishVisible: settings.englishVisible.getState()});
     }
     componentWillUnmount() {
         this.removeListener();

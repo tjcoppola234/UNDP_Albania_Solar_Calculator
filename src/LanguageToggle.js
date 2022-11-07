@@ -12,11 +12,13 @@ class LanguageToggle extends Component {
 
     switchToAlbanian() {
         this.setState({englishDisabled: false, albanianDisabled: true});
-        settings.setState(true, false);
+        settings.albanianVisible.setState("");
+        settings.englishVisible.setState("invisible");
     }
     switchToEnglish() {
         this.setState({englishDisabled: true, albanianDisabled: false});
-        settings.setState(false, true);
+        settings.albanianVisible.setState("invisible");
+        settings.englishVisible.setState("");
     }
 
     render() { 

@@ -5,14 +5,14 @@ class Albanian extends Component {
     constructor(props){ 
       super(props) 
           
-      this.state = {englishVisible: DEFAULT_ALBANIAN_VISIBILITY};
+      this.state = {albanianVisible: DEFAULT_ALBANIAN_VISIBILITY};
     }
 
     componentDidMount () {
-        this.removeListener = settings.addListener((state) => {
-            this.setState({albanianVisible: state.albanianVisible});
+        this.removeListener = settings.albanianVisible.addListener((state) => {
+            this.setState({albanianVisible: state});
         });
-        this.setState({albanianVisible: settings.getState().albanianVisible});
+        this.setState({albanianVisible: settings.albanianVisible.getState()});
     }
     componentWillUnmount() {
         this.removeListener();
