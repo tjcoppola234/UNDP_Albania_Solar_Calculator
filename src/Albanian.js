@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {language, DEFAULT_ALBANIAN_VISIBILITY} from './Language';
+import {settings, DEFAULT_ALBANIAN_VISIBILITY} from './Settings';
     
 class Albanian extends Component {
     constructor(props){ 
@@ -9,10 +9,10 @@ class Albanian extends Component {
     }
 
     componentDidMount () {
-        this.removeListener = language.addListener((state) => {
+        this.removeListener = settings.addListener((state) => {
             this.setState({albanianVisible: state.albanianVisible});
         });
-        this.setState({albanianVisible: language.getState().albanianVisible});
+        this.setState({albanianVisible: settings.getState().albanianVisible});
     }
     componentWillUnmount() {
         this.removeListener();

@@ -1,8 +1,8 @@
-//To change the starting language, switch the two strings
+//To change the starting settings, switch the two strings
 const DEFAULT_ALBANIAN_VISIBILITY = "invisible";
 const DEFAULT_ENGLISH_VISIBILITY = "";
 
-class Language {
+class Settings {
     constructor(initAlb, initEng){
         this.state = {albanianVisible: initAlb, englishVisible: initEng}
         this.listeners = [];
@@ -29,5 +29,5 @@ class Language {
     }
 }
     
-const language = new Language(DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY);
-export {language, DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY};
+const settings = new Settings(DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY);
+export {settings, DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY};

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {language, DEFAULT_ENGLISH_VISIBILITY, DEFAULT_ALBANIAN_VISIBILITY} from './Language';
+import {settings, DEFAULT_ENGLISH_VISIBILITY, DEFAULT_ALBANIAN_VISIBILITY} from './Settings';
     
 class LanguageToggle extends Component {
     constructor(props){ 
@@ -12,11 +12,11 @@ class LanguageToggle extends Component {
 
     switchToAlbanian() {
         this.setState({englishDisabled: false, albanianDisabled: true});
-        language.setState(true, false);
+        settings.setState(true, false);
     }
     switchToEnglish() {
         this.setState({englishDisabled: true, albanianDisabled: false});
-        language.setState(false, true);
+        settings.setState(false, true);
     }
 
     render() { 
