@@ -48,7 +48,7 @@ function calculateBuyback() {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
     if(years === Infinity) {
-        return "Don't do that";
+        return "Please input valid numbers";
     }
     
     let yearText, monthText;
@@ -77,6 +77,12 @@ function calculateBuyback() {
             break;
         case 1:
             monthText = "1 Month";
+            break;
+        case 12:
+            years++;
+            yearText = `${years} Year`;
+            if(years > 1) { yearText += "s"; }
+            monthText = "";
             break;
         default:
             monthText = `${months} Months`;
