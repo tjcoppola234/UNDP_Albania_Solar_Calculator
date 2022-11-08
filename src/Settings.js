@@ -8,7 +8,11 @@ class Settings {
     constructor(initAlb, initEng){
         this.albanianVisible = new SettingsListener(initAlb);
         this.englishVisible = new SettingsListener(initEng);
-        this.disabledMenuItem = new SettingsListener("Home");
+        if(window.location.pathname === '/') {
+            this.disabledMenuItem = new SettingsListener("Home");
+        } else {
+            this.disabledMenuItem = new SettingsListener(window.location.pathname.substring(1));
+        }
     }
 }
     
