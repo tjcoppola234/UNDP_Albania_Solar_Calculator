@@ -28,7 +28,7 @@ export function PageHead() {
           <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
         </h1>
         <nav id="Nav-options">
-          <button id="Hamburger" onClick={hamburgerVis}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
+          <button id="Hamburger" onClick={(e) => hamburgerVis(e)}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/Resources">Resources</Link></li>
@@ -43,14 +43,18 @@ export function PageHead() {
   );
 }
 
-function hamburgerVis() {
-  debugger;
+function hamburgerVis(e) {
+  e.preventDefault();
+  e.stopPropagation();
   const nav = document.getElementById("Nav-options-list");
   if(nav.style.visibility === "hidden") {
     nav.style.visibility = "visible";
   } else {
     nav.style.visibility = "hidden";
   }
+}
+document.onclick = (e) => {
+  document.getElementById("Nav-options-list").style.visibility = "hidden";
 }
 
 //To manage hiding the navbar when the hamburger menu appears
