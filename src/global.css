@@ -6,6 +6,7 @@
 body {
   background-color: rgb(254, 254, 254);
   color: black;
+  overflow-y: scroll;
 }
 
 #Nav-spacing {
@@ -83,6 +84,9 @@ body {
 #Nav-options ul li:hover {
   background-color: var(--nav-hover);
 }
+#Nav-options ul li.current-tab {
+  background-color:rgb(0, 92, 140);
+}
 
 #Nav-options ul li a { 
   display: table-cell;
@@ -97,6 +101,9 @@ body {
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
+}
+#Nav-options ul li a.current-tab {
+  pointer-events: none;
 }
 
 #Toggle {

@@ -1,22 +1,24 @@
 import { Component } from 'react';
-import {language, DEFAULT_ENGLISH_VISIBILITY, DEFAULT_ALBANIAN_VISIBILITY} from './Language';
+import { settings } from './Settings';
     
 class LanguageToggle extends Component {
     constructor(props){ 
       super(props) 
           
-      this.state = {englishDisabled: !DEFAULT_ENGLISH_VISIBILITY, albanianDisabled: !DEFAULT_ALBANIAN_VISIBILITY};
+      this.state = {englishDisabled: !settings.englishVisible.getState(), albanianDisabled: !settings.albanianVisible.getState()};
       this.switchToAlbanian = this.switchToAlbanian.bind(this);
       this.switchToEnglish = this.switchToEnglish.bind(this);
     }
 
     switchToAlbanian() {
         this.setState({englishDisabled: false, albanianDisabled: true});
-        language.setState(true, false);
+        settings.albanianVisible.setState("");
+        settings.englishVisible.setState("invisible");
     }
     switchToEnglish() {
         this.setState({englishDisabled: true, albanianDisabled: false});
-        language.setState(false, true);
+        settings.albanianVisible.setState("invisible");
+        settings.englishVisible.setState("");
     }
 
     render() { 

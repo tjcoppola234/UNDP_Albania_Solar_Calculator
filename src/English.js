@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {language, DEFAULT_ENGLISH_VISIBILITY} from './Language';
+import {settings, DEFAULT_ENGLISH_VISIBILITY} from './Settings';
     
 class English extends Component {
     constructor(props){ 
@@ -9,10 +9,10 @@ class English extends Component {
     }
 
     componentDidMount () {
-        this.removeListener = language.addListener((state) => {
-            this.setState({englishVisible: state.englishVisible});
+        this.removeListener = settings.englishVisible.addListener((state) => {
+            this.setState({englishVisible: state});
         });
-        this.setState({englishVisible: language.getState().englishVisible});
+        this.setState({englishVisible: settings.englishVisible.getState()});
     }
     componentWillUnmount() {
         this.removeListener();
