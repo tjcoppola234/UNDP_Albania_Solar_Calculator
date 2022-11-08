@@ -54,7 +54,9 @@ function hamburgerVis(e) {
   }
 }
 document.onclick = (e) => {
-  document.getElementById("Nav-options-list").style.visibility = "hidden";
+  if(window.innerWidth < 920) {
+    document.getElementById("Nav-options-list").style.visibility = "hidden";
+  }
 }
 
 //To manage hiding the navbar when the hamburger menu appears
