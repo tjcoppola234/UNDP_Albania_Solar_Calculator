@@ -44,9 +44,15 @@ function calculateBuyback() {
     const sysCost = document.getElementById("payback-sys-cost");
     const energyCost = document.getElementById("payback-energy-cost");
     const energyUsage = document.getElementById("payback-energy-usage");
+    
+    //If "yearly" option is selected, convert to monthly for calculation purposes
+    let energyUsageVal = energyUsage.value;
+    if(document.getElementById("payback-energy-usage-select").value === "y") {
+        energyUsageVal = energyUsage.value / 12;
+    }
 
     //Calculate the buyback period in total months
-    const totalMonths = sysCost.value / (energyCost.value * energyUsage.value);
+    const totalMonths = sysCost.value / (energyCost.value * energyUsageVal);
 
     //Break that down to years and months
     let years = Math.floor(totalMonths / 12);
