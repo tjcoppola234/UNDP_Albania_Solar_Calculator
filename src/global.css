@@ -1,3 +1,8 @@
+:root {
+  --nav-background: #357AB6;
+  --nav-hover: rgb(0, 92, 140);
+}
+
 body {
   background-color: rgb(254, 254, 254);
   color: black;
@@ -13,7 +18,7 @@ body {
   align-items: center;
   justify-content: space-between;
   /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  background-color: #357AB6; /*Old Color: rgb(0, 132, 200);*/
+  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
   color: rgb(254, 254, 254);
   position: fixed;
   height: 80px;
@@ -31,6 +36,34 @@ body {
   color: rgb(254, 254, 254);
   height: inherit;
 }
+
+@media screen and (max-width: 920px) {
+  #Nav-options ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    height: inherit;
+    padding: 0;
+    margin: 0;
+  }
+  #Nav-options ul li {
+    background-color: var(--nav-background);
+  }
+  #Hamburger {
+    display: block;
+  }
+}
+@media screen and (min-width: 920px) {
+  #Hamburger {
+    display: none;
+  }
+}
+#Hamburger {
+  background-color: var(--nav-background);
+  border: none;
+  height: 70px;
+}
+
 #Nav-options ul {
   display: flex;
   list-style-type: none;
@@ -42,13 +75,13 @@ body {
   display: table;
   width: 120px;
   height: inherit;
-  border-left: 1px solid rgb(0, 92, 140);
+  border-left: 1px solid var(--nav-hover);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
 #Nav-options ul li:hover {
-  background-color: rgb(0, 92, 140);
+  background-color: var(--nav-hover);
 }
 
 #Nav-options ul li a { 
@@ -77,7 +110,7 @@ body {
   justify-content: center;
   margin: 0;
   padding: 0;
-  background-color:rgb(0, 132, 200);
+  background-color: var(--nav-background);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
@@ -95,13 +128,13 @@ body {
 #Switch-albanian {
   grid-row: 1;
   border: none;
-  border-left: 1px solid rgb(0, 92, 140);
+  border-left: 1px solid var(--nav-background);
 }
 #Switch-english {
   grid-row: 2;
   border: none;
-  border-top: 1px solid rgb(0, 92, 140);
-  border-left: 1px solid rgb(0, 92, 140);
+  border-top: 1px solid var(--nav-background);
+  border-left: 1px solid var(--nav-background);
 }
 
 .invisible {
