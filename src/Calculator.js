@@ -11,38 +11,48 @@ function Calculator() {
             <PageHead></PageHead>
             <header>
                 <h2>Calculator</h2>
-                <p>Calculate how long it will take to break even on your solar panel system purchase</p>
             </header>
-            <form id="calc-buyback" onSubmit={(e) => {
-                    e.preventDefault(); 
-                    setBuybackTime(calculateBuyback());
-                }}>
-                <div className="Hor-flex">
-                    <label htmlFor="sys-cost">Upfront cost of solar panel system:</label>
-                    <input id="sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
-                </div>
-                <div className="Hor-flex">
-                    <label htmlFor="energy-cost">Cost of electricity:</label>
-                    <input id="energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh"></input>
-                </div>
-                <div className="Hor-flex">
-                    <label htmlFor="energy-usage">Monthly electricity usage:</label>
-                    <input id="energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder="kWh/Month"></input>
-                </div>
-                <button type="submit">Calculate</button>
-            </form>
-            {buybackTime}
+            <details> {/* place "open" next to "details" to make it open on load */}
+                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+                <form id="calc-payback" onSubmit={(e) => {
+                        e.preventDefault(); 
+                        setBuybackTime(calculateBuyback());
+                    }}>
+                    <div className="Hor-flex">
+                        <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
+                        <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="payback-energy-cost">Cost of electricity:</label>
+                        <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="payback-energy-usage">
+                            <select id="payback-energy-usage-select"><option value="m">Monthly</option><option value="y">Yearly</option></select> electricity consumption:
+                        </label>
+                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder="kWh/Month"></input>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+                {buybackTime}
+            </details>
         </div>
     )
 }
 
 function calculateBuyback() {
-    const sysCost = document.getElementById("sys-cost");
-    const energyCost = document.getElementById("energy-cost");
-    const energyUsage = document.getElementById("energy-usage");
+    const sysCost = document.getElementById("payback-sys-cost");
+    const energyCost = document.getElementById("payback-energy-cost");
+    const energyUsage = document.getElementById("payback-energy-usage");
+    
+    //If "yearly" option is selected, convert to monthly for calculation purposes
+    let energyUsageVal = energyUsage.value;
+    if(document.getElementById("payback-energy-usage-select").value === "y") {
+        energyUsageVal = energyUsage.value / 12;
+    }
 
     //Calculate the buyback period in total months
-    const totalMonths = sysCost.value / (energyCost.value * energyUsage.value);
+    const totalMonths = sysCost.value / (energyCost.value * energyUsageVal);
 
     //Break that down to years and months
     let years = Math.floor(totalMonths / 12);
