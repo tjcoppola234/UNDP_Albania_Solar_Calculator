@@ -11,27 +11,29 @@ function Calculator() {
             <PageHead></PageHead>
             <header>
                 <h2>Calculator</h2>
-                <p>Calculate how long it will take to break even on your solar panel system purchase</p>
             </header>
-            <form id="calc-buyback" onSubmit={(e) => {
-                    e.preventDefault(); 
-                    setBuybackTime(calculateBuyback());
-                }}>
-                <div className="Hor-flex">
-                    <label htmlFor="sys-cost">Upfront cost of solar panel system:</label>
-                    <input id="sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
-                </div>
-                <div className="Hor-flex">
-                    <label htmlFor="energy-cost">Cost of electricity:</label>
-                    <input id="energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh"></input>
-                </div>
-                <div className="Hor-flex">
-                    <label htmlFor="energy-usage">Monthly electricity usage:</label>
-                    <input id="energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder="kWh/Month"></input>
-                </div>
-                <button type="submit">Calculate</button>
-            </form>
-            {buybackTime}
+            <details> {/* place "open" next to "details" to make it open on load */}
+                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+                <form id="calc-buyback" onSubmit={(e) => {
+                        e.preventDefault(); 
+                        setBuybackTime(calculateBuyback());
+                    }}>
+                    <div className="Hor-flex">
+                        <label htmlFor="sys-cost">Upfront cost of solar panel system:</label>
+                        <input id="sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="energy-cost">Cost of electricity:</label>
+                        <input id="energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="energy-usage">Monthly electricity usage:</label>
+                        <input id="energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder="kWh/Month"></input>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+                {buybackTime}
+            </details>
         </div>
     )
 }
