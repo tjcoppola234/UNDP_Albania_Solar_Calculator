@@ -12,7 +12,7 @@ function Calculator() {
             <header>
                 <h2>Calculator</h2>
             </header>
-            <details> {/* place "open" next to "details" to make it open on load */}
+            <details open> {/* place "open" next to "details" to make it open on load */}
                 <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
                 <form id="calc-payback" onSubmit={(e) => {
                         e.preventDefault(); 
