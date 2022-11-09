@@ -48,7 +48,9 @@ function setCurrentTab(tab) {
   settings.disabledMenuItem.setState(tab);
 }
 
+let switching = false;
 function hamburgerVis() {
+  switching = true;
   let nav = document.getElementById("Nav-options-list");
   if(nav.classList.contains("invisible")) {
     nav.classList.remove("invisible");
@@ -58,9 +60,11 @@ function hamburgerVis() {
   }
 }
 document.onclick = () => {
-  if(window.innerWidth < 1070) {
-    document.getElementById("Nav-options-list").classList.remove("invisible");
+  let nav = document.getElementById("Nav-options-list");
+  if(!switching && window.innerWidth < 1070 && !nav.classList.contains("invisible")) {
+    nav.classList.add("invisible");
   }
+  switching = false;
 }
 
 //To manage hiding the navbar when the hamburger menu appears
