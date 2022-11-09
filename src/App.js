@@ -29,7 +29,7 @@ export function PageHead() {
           <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
         </h1>
         <nav id="Nav-options">
-          <button id="Hamburger" onClick={(e) => hamburgerVis(e)}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
+          <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
             <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>Home</Link></li>
             <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>Resources</Link></li>
@@ -48,36 +48,35 @@ function setCurrentTab(tab) {
   settings.disabledMenuItem.setState(tab);
 }
 
-function hamburgerVis(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  const nav = document.getElementById("Nav-options-list");
-  if(nav.style.visibility === "hidden") {
-    nav.style.visibility = "visible";
-  } else {
-    nav.style.visibility = "hidden";
+function hamburgerVis() {
+  let nav = document.getElementById("Nav-options-list");
+  if(nav.classList.contains("invisible")) {
+    nav.classList.remove("invisible");
+  }
+  else {
+    nav.classList.add("invisible");
   }
 }
-document.onclick = (e) => {
-  if(window.innerWidth < 920) {
-    document.getElementById("Nav-options-list").style.visibility = "hidden";
+document.onclick = () => {
+  if(window.innerWidth < 1070) {
+    document.getElementById("Nav-options-list").classList.remove("invisible");
   }
 }
 
 //To manage hiding the navbar when the hamburger menu appears
 let sizeDecreased = false;
 window.onresize = () => {
-  if(window.innerWidth > 920) {
-    document.getElementById("Nav-options-list").style.visibility = "visible";
+  if(window.innerWidth > 1070) {
+    document.getElementById("Nav-options-list").classList.remove("invisible");
     sizeDecreased = false;
-  } else if(!sizeDecreased && window.innerWidth <= 920) {
-    document.getElementById("Nav-options-list").style.visibility = "hidden";
+  } else if(!sizeDecreased && window.innerWidth <= 1070) {
+    document.getElementById("Nav-options-list").classList.add("invisible");
     sizeDecreased = true;
   }
 }
 window.onload = () => {
-  if(window.innerWidth <= 920) {
-    document.getElementById("Nav-options-list").style.visibility = "hidden";
+  if(window.innerWidth <= 1070) {
+    document.getElementById("Nav-options-list").classList.add("invisible");
   }
 }
 
