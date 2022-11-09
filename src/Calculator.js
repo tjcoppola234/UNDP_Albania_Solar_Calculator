@@ -5,6 +5,9 @@ import {useState} from 'react';
 
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
+    const [peuPeriod, setPeuPeriod] = useState("Month");
+    const [peuMetric, setPeuMetric] = useState("kWh");
+    const [pecDisabled, setPecDisabled] = useState(false);
 
     return (
         <div className="Calculator">
@@ -23,14 +26,32 @@ function Calculator() {
                         <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
                     </div>
                     <div className="Hor-flex">
-                        <label htmlFor="payback-energy-cost">Cost of electricity:</label>
-                        <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh"></input>
+                        <label htmlFor="payback-energy-usage">
+                            Electricity consumption in&nbsp;
+                            <select id="payback-energy-usage-metric" onChange={(e) => {
+                                    setPeuMetric(e.target.value);
+                                    if(e.target.value === "Lek") {
+                                        setPecDisabled(true);
+                                    } else {
+                                        setPecDisabled(false);
+                                    }
+                                }}>
+                                <option value="kWh">kWh</option>
+                                <option value="Lek">Lek</option>
+                                {/* <option value="Euros">Euros</option> */}
+                            </select>
+                            /
+                            <select id="payback-energy-usage-period" onChange={(e) => {setPeuPeriod(e.target.value)}}>
+                                <option value="Month">Month</option>
+                                <option value="Year">Year</option>
+                            </select>
+                            :
+                        </label>
+                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
                     </div>
                     <div className="Hor-flex">
-                        <label htmlFor="payback-energy-usage">
-                            <select id="payback-energy-usage-select"><option value="m">Monthly</option><option value="y">Yearly</option></select> electricity consumption:
-                        </label>
-                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder="kWh/Month"></input>
+                        <label htmlFor="payback-energy-cost">Cost of electricity:</label>
+                        <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh" disabled={pecDisabled}></input>
                     </div>
                     <button type="submit">Calculate</button>
                 </form>
@@ -47,12 +68,18 @@ function calculateBuyback() {
     
     //If "yearly" option is selected, convert to monthly for calculation purposes
     let energyUsageVal = energyUsage.value;
-    if(document.getElementById("payback-energy-usage-select").value === "y") {
+    if(document.getElementById("payback-energy-usage-period").value === "Year") {
         energyUsageVal = energyUsage.value / 12;
     }
 
-    //Calculate the buyback period in total months
-    const totalMonths = sysCost.value / (energyCost.value * energyUsageVal);
+    let totalMonths;
+    //If "Lek" option is selected, ignore energyCost
+    if(document.getElementById("payback-energy-usage-metric").value === "Lek") {
+        totalMonths = sysCost.value / energyUsageVal;
+    } else {
+        //Calculate the buyback period in total months
+        totalMonths = sysCost.value / (energyCost.value * energyUsageVal);
+    }
 
     //Break that down to years and months
     let years = Math.floor(totalMonths / 12);
