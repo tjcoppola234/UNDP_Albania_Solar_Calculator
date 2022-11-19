@@ -3,11 +3,13 @@ import './Calculator.css';
 import { PageHead } from './App';
 import {useState} from 'react';
 import { MunicipalDropdown } from './Dropdown';
+import * as SolarData from './SolarIrradiationReader';
 
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
     const [peuPeriod, setPeuPeriod] = useState("Month");
     const [peuMetric, setPeuMetric] = useState("kWh");
+    const [prefecture, setPrefecture] = useState("");
     const [pecDisabled, setPecDisabled] = useState(false);
 
     return (
@@ -23,7 +25,7 @@ function Calculator() {
                         setBuybackTime(calculateBuyback());
                     }}>
                     <div className="Vert-flex">
-                        <MunicipalDropdown></MunicipalDropdown>
+                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
                         <p>Your municipality is used to determine how much sunlight is expected</p>
                     </div>
                     <div className="Hor-flex">

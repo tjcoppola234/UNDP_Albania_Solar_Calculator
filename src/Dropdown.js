@@ -1,7 +1,7 @@
 import { readString } from 'react-papaparse';
-import {useEffect, useState} from 'react';
+import { useEffect } from 'react';
 
-export function MunicipalDropdown() {
+export function MunicipalDropdown({changeEvent}) {
     useEffect(() => {
         //Loading csv as string
         fetch("data/MunicipalityPrefecture.csv", {
@@ -37,6 +37,7 @@ export function MunicipalDropdown() {
                     let val = document.createElement("option");
                     val.innerText = "";
                     val.value = "";
+                    val.id = "municipality -1";
                     val.hidden = true;
                     val.selected = true;
                     val.disabled = true;
@@ -47,6 +48,7 @@ export function MunicipalDropdown() {
                         val = document.createElement("option");
                         val.innerText = results.data[i].municipality;
                         val.value = results.data[i].prefecture;
+                        val.id = "municipality " + i;
                         munSelection.appendChild(val);
                     }
                 },
@@ -55,12 +57,12 @@ export function MunicipalDropdown() {
                 }
             });
         });
-    });
+    }, []);
 
     return (
         <div>
             <label htmlFor="municipality-dropdown">Select your municipality:</label>
-                <select id="municipality-dropdown" defaultChecked={false} defaultValue="Select your municipality">
+                <select id="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
                 </select>
         </div>
     );

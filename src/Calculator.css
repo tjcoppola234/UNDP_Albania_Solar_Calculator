@@ -9,6 +9,8 @@ input[type="number"]:invalid {
 input {
     margin-left: 8px;
 }
+
 #municipality-dropdown {
     margin-left: 8px;
+    min-width: 134.8px;
 }
