@@ -2,11 +2,14 @@ import './global.css';
 import './Calculator.css';
 import { PageHead } from './App';
 import {useState} from 'react';
+import { MunicipalDropdown } from './Dropdown';
+import * as SolarData from './SolarIrradiationReader';
 
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
     const [peuPeriod, setPeuPeriod] = useState("Month");
     const [peuMetric, setPeuMetric] = useState("kWh");
+    const [prefecture, setPrefecture] = useState("");
     const [pecDisabled, setPecDisabled] = useState(false);
 
     return (
@@ -21,6 +24,10 @@ function Calculator() {
                         e.preventDefault(); 
                         setBuybackTime(calculateBuyback());
                     }}>
+                    <div className="Vert-flex">
+                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
+                        <p>Your municipality is used to determine how much sunlight is expected</p>
+                    </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
                         <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
