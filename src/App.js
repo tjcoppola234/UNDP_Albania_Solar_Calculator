@@ -60,7 +60,7 @@ function hamburgerVis() {
 }
 document.onclick = () => {
   let nav = document.getElementById("Nav-options-list");
-  if(!switching && window.innerWidth < 1070 && !nav.classList.contains("invisible")) {
+  if(!switching && window.innerWidth < 1000 && !nav.classList.contains("invisible")) {
     nav.classList.add("invisible");
   }
   switching = false;
@@ -69,16 +69,16 @@ document.onclick = () => {
 //To manage hiding the navbar when the hamburger menu appears
 let sizeDecreased = false;
 window.onresize = () => {
-  if(window.innerWidth > 1070) {
+  if(window.innerWidth > 1000) {
     document.getElementById("Nav-options-list").classList.remove("invisible");
     sizeDecreased = false;
-  } else if(!sizeDecreased && window.innerWidth <= 1070) {
+  } else if(!sizeDecreased && window.innerWidth <= 1000) {
     document.getElementById("Nav-options-list").classList.add("invisible");
     sizeDecreased = true;
   }
 }
 window.onload = () => {
-  if(window.innerWidth <= 1070) {
+  if(window.innerWidth <= 1000) {
     document.getElementById("Nav-options-list").classList.add("invisible");
   }
 }

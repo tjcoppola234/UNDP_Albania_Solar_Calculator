@@ -38,7 +38,7 @@ body {
   height: inherit;
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1000px) {
   #Nav-options-list:not(.invisible) {
     display: flex;
     flex-direction: column;
@@ -62,7 +62,7 @@ body {
     border-top: 1px solid var(--nav-hover);
   }
 }
-@media screen and (min-width: 1070px) {
+@media screen and (min-width: 1000px) {
   #Nav-options-list {
     display: flex;
   }
