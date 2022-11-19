@@ -5,3 +5,10 @@
 input[type="number"]:invalid {
     color: rgb(241, 76, 76);
 }
+
+input {
+    margin-left: 8px;
+}
+#municipality-dropdown {
+    margin-left: 8px;
+}
