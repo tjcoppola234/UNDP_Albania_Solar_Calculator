@@ -31,10 +31,9 @@ export function PageHead() {
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-            <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>Home</Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>Calculator</Link></li>
             <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>Resources</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>Calculator</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "FAQ" ? "current-tab" : ""}><Link to="/FAQ" onClick={() => setCurrentTab("FAQ")}>FAQ</Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>Tutorial</Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>

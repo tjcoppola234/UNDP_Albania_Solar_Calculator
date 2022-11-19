@@ -1,13 +1,13 @@
 import './global.css';
 import { PageHead } from './App';
 
-function FAQ() {
+function Tutorial() {
     return (
-        <div className="FAQ">
+        <div className="Tutorial">
             <PageHead></PageHead>
-            <h2>FAQ</h2>
+            <h2>Tutorial</h2>
         </div>
     )
 }
 
-export default FAQ;
+export default Tutorial;
