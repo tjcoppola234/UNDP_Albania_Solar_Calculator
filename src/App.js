@@ -23,10 +23,12 @@ export function PageHead() {
   return (
     <div>
       <header id="App-header">
-        <h1 id="Nav-title">
-          <English>Albania Solar Calculator</English>
-          <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
-        </h1>
+        <a href="/" id="Nav-title">
+          <h1>
+            <English>Albania Solar Calculator</English>
+            <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
+          </h1>
+        </a>
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
@@ -47,9 +49,9 @@ export function PageFoot() {
     <div>
       <footer id="App-footer">
         <div className="Sponsor-logos">
-          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
-          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
-          <img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img>
+          <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
+          <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
+          <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
         </div>
         <p>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</p>
       </footer>

@@ -40,6 +40,8 @@ body {
 #Nav-title {
   grid-column: 1;
   margin-left: 20px;
+  color: inherit;
+  text-decoration: none;
 }
 
 #Nav-options {
