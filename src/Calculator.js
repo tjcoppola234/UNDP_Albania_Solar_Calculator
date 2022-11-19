@@ -5,6 +5,10 @@ import {useState} from 'react';
 
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
+
+    const [paybackPeriod, setPaybackPeriod] = useState("");
+    const [energyGenerated, setEnergyGenerated] = useState("");
+
     const [peuPeriod, setPeuPeriod] = useState("Month");
     const [peuMetric, setPeuMetric] = useState("kWh");
     const [pecDisabled, setPecDisabled] = useState(false);
@@ -15,7 +19,7 @@ function Calculator() {
             <header>
                 <h2>Calculator</h2>
             </header>
-            <details open> {/* place "open" next to "details" to make it open on load */}
+            <details> {/* place "open" next to "details" to make it open on load */}
                 <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
                 <form id="calc-payback" onSubmit={(e) => {
                         e.preventDefault(); 
@@ -56,6 +60,27 @@ function Calculator() {
                     <button type="submit">Calculate</button>
                 </form>
                 {buybackTime}
+            </details>
+            <details open>
+                <summary><b>Payback Period Starting over:</b></summary>
+                <form onSubmit={(e) => e.preventDefault()}>
+                    <div className="Hor-flex">
+                        <label htmlFor="roof-space">Roof space available for solar</label>
+                        <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="percent-solar">Percent of total energy consumption for solar</label>
+                        <input id="percent-solar" type="number" placeholder="%"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="electricity-paid">Current amount paid for electricity</label>
+                        {/* Placeholder should work like it does in the original calculator*/}
+                        <input id="electricity-paid" type="number" placeholder="Lekë/Month"></input>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+                {paybackPeriod}
+                {energyGenerated}
             </details>
         </div>
     )
