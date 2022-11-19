@@ -1,5 +1,6 @@
 :root {
-  --nav-background: #357AB6;
+  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
+  --nav-background: #357AB6; /*Old Color: rgb(0, 132, 200);*/
   --nav-hover: rgb(0, 92, 140);
 }
 
@@ -18,12 +19,21 @@ body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
+  background-color: var(--nav-background);
   color: rgb(254, 254, 254);
   position: fixed;
   height: 80px;
   top: 0;
+  white-space: nowrap;
+}
+
+#App-footer {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
+  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
+  color: rgb(254, 254, 254);
   white-space: nowrap;
 }
 

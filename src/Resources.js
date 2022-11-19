@@ -1,6 +1,6 @@
 import './global.css';
 import './Resources.css';
-import { PageHead } from './App';
+import { PageHead, PageFoot } from './App';
 
 function Resources() {
     return (
@@ -29,6 +29,7 @@ function Resources() {
                     <li><a href="https://en.wikipedia.org/wiki/Robert_Hersh">Example Link 2</a></li>
                 </ul>
             </aside>
+            <PageFoot></PageFoot>
         </div>
     )
 }

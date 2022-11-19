@@ -1,6 +1,6 @@
 import './global.css';
 import './Calculator.css';
-import { PageHead } from './App';
+import { PageHead, PageFoot } from './App';
 import {useState} from 'react';
 
 function Calculator() {
@@ -57,6 +57,7 @@ function Calculator() {
                 </form>
                 {buybackTime}
             </details>
+            <PageFoot></PageFoot>                        
         </div>
     )
 }

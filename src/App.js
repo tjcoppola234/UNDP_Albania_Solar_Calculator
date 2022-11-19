@@ -1,6 +1,5 @@
 import './global.css';
 import './App.css';
-// import UNDP_logo from 'public/UNDP_logo.png';
 import { Link } from 'react-router-dom';
 import Albanian from './Albanian';
 import English from './English';
@@ -41,6 +40,21 @@ export function PageHead() {
       <div id="Nav-spacing"></div>
     </div>
   );
+}
+
+export function PageFoot() {
+  return (
+    <div>
+      <footer id="App-footer">
+        <div className="Sponsor-logos">
+          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
+          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+          <img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img>
+        </div>
+        <p>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</p>
+      </footer>
+    </div>
+  )
 }
 
 function setCurrentTab(tab) {
