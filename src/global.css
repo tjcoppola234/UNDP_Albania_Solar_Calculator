@@ -6,6 +6,8 @@
 
 html {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -13,42 +15,12 @@ body {
   color: black;
   overflow-y: scroll;
   height: 100%;
-}
-
-.content {
-  padding-bottom: 150px;
+  margin: 0;
+  padding: 0;
 }
 
 #Nav-spacing {
   margin-bottom: 90px;
-}
-
-#App-header {
-  display: grid;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--nav-background);
-  color: rgb(254, 254, 254);
-  position: fixed;
-  height: 80px;
-  top: 0;
-  white-space: nowrap;
-}
-
-#App-footer {
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
-  color: rgb(254, 254, 254);
-  white-space: nowrap;
-  position: absolute;
-  height: 150px;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 #Nav-title {
@@ -219,7 +191,40 @@ body {
   justify-content: space-between;
 }
 
-.Resources {
+#App-header {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--nav-background);
+  color: rgb(254, 254, 254);
+  position: fixed;
+  height: 80px;
+  top: 0;
+  white-space: nowrap;
+}
+
+#App-footer {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
+  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
+  color: rgb(254, 254, 254);
+  white-space: nowrap;
+  position: absolute;
+  height: 150px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.content {
+  padding-bottom: 150px;
+  min-height: calc(100vh - 150px);
+}
+
+.App {
   position: relative;
   min-height: 100%;
 }
@@ -227,7 +232,17 @@ body {
   position: relative;
   min-height: 100%;
 }
-.App {
+.Tutorial {
   position: relative;
   min-height: 100%;
+}
+.Resources {
+  position: relative;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }

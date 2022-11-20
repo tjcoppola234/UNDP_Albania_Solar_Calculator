@@ -5,7 +5,9 @@ function Tutorial() {
     return (
         <div className="Tutorial">
             <PageHead></PageHead>
-            <h2>Tutorial</h2>
+            <div className="content">
+                <h2>Tutorial</h2>
+            </div>
             <PageFoot></PageFoot>
         </div>
     )
