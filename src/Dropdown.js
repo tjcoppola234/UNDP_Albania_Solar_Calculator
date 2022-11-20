@@ -10,8 +10,8 @@ export function MunicipalDropdown({changeEvent}) {
             'Accept': 'application/csv'
            }
         }).then(response => response.arrayBuffer()).then(function(buffer){
-            const decoder = new TextDecoder('iso-8859-1');
-            return decoder.decode(buffer);
+            const decoder = new TextDecoder('iso-8859-16');
+            return decoder.decode(buffer).replace(new RegExp("\\r\\n$"), "");
           })
           .then(function(csvData) {
             //Converting string into array of values
