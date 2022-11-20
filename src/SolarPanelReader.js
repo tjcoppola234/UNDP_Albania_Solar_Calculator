@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { readString } from 'react-papaparse';
 
-export function SolarPanelScrollList() {
+export function SolarPanelScrollList({onSelection}) {
     const [pvList, setPVList] = useState([]);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ export function SolarPanelScrollList() {
                     <tbody>
                         {pvList.map((pv, index) => (
                             <tr key={index}>
-                                <td id="panel-selection"><button onClick={() => fillPanelFields(pv)} type="button">Use this panel</button></td>
+                                <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); onSelection(pv);}} type="button">Use this panel</button></td>
                                 <td>{pv["Name/Model"]}</td>
                                 <td>{pv["Manufacturer"]}</td>
                                 <td>{pv["Cost per Panel"]}</td>

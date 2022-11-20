@@ -12,6 +12,26 @@ function Calculator() {
     const [peuMetric, setPeuMetric] = useState("kWh");
     const [prefecture, setPrefecture] = useState("");
     const [pecDisabled, setPecDisabled] = useState(false);
+    const [solarName, setSolarName] = useState("Unnamed");
+    const [solarManufacturer, setSolarManufacturer] = useState("Unnamed");
+    const [solarCost, setSolarCost] = useState(0);
+    const [solarArea, setSolarArea] = useState(0);
+    const [solarCapacity, setSolarCapacity] = useState(0);
+    const [solarEfficiency, setSolarEfficiency] = useState(0);
+
+    function setSolarData(pvSelection) {
+        setSolarName(pvSelection["Name/Model"]);
+        setSolarManufacturer(pvSelection["Manufacturer"]);
+        setSolarCost(pvSelection["Cost per Panel"]);
+        setSolarArea(pvSelection["Area per Panel"]);
+        setSolarCapacity(pvSelection["Capacity per Panel"]);
+        setSolarEfficiency(pvSelection["Efficiency"].replace("%", ""));
+
+        document.getElementById("solar-cost").value = pvSelection["Cost per Panel"];
+        document.getElementById("solar-area").value = pvSelection["Area per Panel"];
+        document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
+        document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+    }
 
     return (
         <div className="Calculator">
@@ -29,7 +49,7 @@ function Calculator() {
                         <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
                         <p>Your municipality is used to determine how much sunlight is expected</p>
                     </div>
-                    <SolarPanelScrollList></SolarPanelScrollList>
+                    <SolarPanelScrollList onSelection={(e) => setSolarData(e)}></SolarPanelScrollList>
                     <br></br>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
