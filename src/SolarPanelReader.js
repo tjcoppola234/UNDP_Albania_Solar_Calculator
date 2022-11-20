@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import { readString } from 'react-papaparse';
+import English from './English';
+import Albanian from './Albanian';
+import { settings } from './Settings';
 
 export function SolarPanelScrollList({onSelection, getIsCustomData}) {
     const [pvList, setPVList] = useState([]);
+    const [english, setEnglish] = useState(settings.englishVisible.getState());
+    settings.englishVisible.addListener((visible) => {
+        setEnglish(visible);
+    });
 
     useEffect(() => {
         fetch("data/SolarPanelData.csv", {
@@ -36,21 +43,48 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
             <div id="solar-pv-scroll">
                 <table id="solar-pv-list">
                     <thead>
-                        <tr><th colSpan="7" id="solar-pv-title">Solar Panel Info</th></tr>
+                        <tr><th colSpan="7" id="solar-pv-title">
+                            <English>Solar Panel Info</English>
+                            <Albanian>Informacion mbi panelin diellor</Albanian>
+                        </th></tr>
                         <tr>
-                            <th>Panel Selection</th>
-                            <th>Name/Model</th>
-                            <th>Manufacturer</th>
-                            <th>Cost per Panel (€)</th>
-                            <th>Area per Panel (m<sup>2</sup>)</th>
-                            <th>Capacity per Panel (mW)</th>
-                            <th>Efficiency (%)</th>
+                            <th>
+                                <English>Panel Selection</English>
+                                <Albanian>Përzgjedhja e panelit</Albanian>
+                            </th>
+                            <th>
+                                <English>Name/Model</English>
+                                <Albanian>Emri/Modeli</Albanian>
+                            </th>
+                            <th>
+                                <English>Manufacturer</English>
+                                <Albanian>Prodhuesi</Albanian>
+                            </th>
+                            <th>
+                                <English>Cost per Panel (€)</English>
+                                <Albanian>Kostoja për panel (€)</Albanian>
+                            </th>
+                            <th>
+                                <English>Area per Panel (m<sup>2</sup>)</English>
+                                <Albanian>Zona për panel (m<sup>2</sup>)</Albanian>
+                            </th>
+                            <th>
+                                <English>Capacity per Panel (kW)</English>
+                                <Albanian>Kapaciteti për panel (kW)</Albanian>
+                            </th>
+                            <th>
+                                <English>Efficiency (%)</English>
+                                <Albanian>Efikasiteti (%)</Albanian>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {pvList.map((pv, index) => (
                             <tr key={index}>
-                                <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); onSelection(pv); getIsCustomData(false);}} type="button">Use this panel</button></td>
+                                <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); onSelection(pv); getIsCustomData(false);}} type="button">
+                                    <English>Use this panel</English>
+                                    <Albanian>Përdorni këtë panel</Albanian>
+                                </button></td>
                                 <td>{pv["Name/Model"]}</td>
                                 <td>{pv["Manufacturer"]}</td>
                                 <td>{pv["Cost per Panel"]}</td>
@@ -63,22 +97,37 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                 </table>
             </div>
             <div id="solar-panel-info" className="Vert-flex">
-                <p>Solar panel Statistics</p>
-                <div className="Hor-flex">
-                    <label htmlFor="solar-cost">Cost of one solar panel (Euro):</label>
-                    <input type="number" min="0" max="100000" step="0.001" placeholder="Enter cost per panel (Euro)" id="solar-cost" onInput={() => getIsCustomData(true)}></input>
+                <div>
+                    <English>Solar Panel Statistics</English>
+                    <Albanian>Statistikat e paneleve diellore</Albanian>
                 </div>
                 <div className="Hor-flex">
-                    <label htmlFor="solar-area">Area of one solar panel (m²):</label>
-                    <input type="number" min="0" max="100" step="0.01" placeholder="Enter area per panel (m²)" id="solar-area" onInput={() => getIsCustomData(true)}></input>
+                    <label htmlFor="solar-cost">
+                        <English>Cost of one solar panel (€):</English>
+                        <Albanian>Kostoja e një paneli diellor (€):</Albanian>
+                    </label>
+                    <input type="number" min="0" max="100000" step="0.001" placeholder={english ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
-                    <label htmlFor="solar-capacity">Capacity of one solar panel (mW):</label>
-                    <input type="number" min="0" max="1000" step="0.00001" placeholder="Enter capacity per panel (mW)" id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
+                    <label htmlFor="solar-area">
+                        <English>Area of one solar panel (m²):</English>
+                        <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
+                    </label>
+                    <input type="number" min="0" max="100" step="0.01" placeholder={english ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
-                    <label htmlFor="solar-efficiency">Efficiency of solar panels (%):</label>
-                    <input type="number" min="0" max="100" step="0.001" placeholder="Enter efficiency (%)" id="solar-efficiency" onInput={() => getIsCustomData(true)}></input>
+                    <label htmlFor="solar-capacity">
+                        <English>Capacity of one solar panel (kW):</English>
+                        <Albanian>Kapaciteti i një paneli diellor (kW):</Albanian>
+                    </label>
+                    <input type="number" min="0" max="1000" step="0.00001" placeholder={english ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
+                </div>
+                <div className="Hor-flex">
+                    <label htmlFor="solar-efficiency">
+                        <English>Efficiency of solar panels (%):</English>
+                        <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>
+                    </label>
+                    <input type="number" min="0" max="100" step="0.001" placeholder={english ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => getIsCustomData(true)}></input>
                 </div>
             </div>
         </div>

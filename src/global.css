@@ -222,7 +222,7 @@ body {
   color: var(--nav-text);
   white-space: nowrap;
   position: absolute;
-  height: 100px;
+  height: 150px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -231,8 +231,8 @@ body {
 }
 
 .content {
-  padding-bottom: 150px;
-  min-height: calc(100vh - 100px);
+  padding-bottom: 200px;
+  min-height: calc(100vh - 150px);
 }
 
 .App {
@@ -256,4 +256,15 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.Sponsor-logos {
+  margin: 0 auto;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.Sponsor-logos img {
+  padding-left: 15px;
+  padding-right: 15px;
 }

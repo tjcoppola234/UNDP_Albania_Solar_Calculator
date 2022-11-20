@@ -6,6 +6,9 @@ import { MunicipalDropdown } from './Dropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 
+import English from './English';
+import Albanian from './Albanian';
+
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
     const [peuPeriod, setPeuPeriod] = useState("Month");
@@ -39,17 +42,26 @@ function Calculator() {
             <PageHead></PageHead>
             <div className="content">
                 <header>
-                    <h2>Calculator</h2>
+                    <div>
+                        <English><h2>Calculator</h2></English>
+                        <Albanian><h2>Llogaritësi</h2></Albanian>
+                    </div>
                 </header>
                 <details open> {/* place "open" next to "details" to make it open on load */}
-                    <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+                   <div>
+                        <English><summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary></English>
+                        <Albanian> <summary><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</summary></Albanian>
+                    </div>
                     <form id="calc-payback" onSubmit={e => {
                             e.preventDefault(); 
                             setBuybackTime(calculateBuyback());
                         }}>
                         <div className="Vert-flex">
                             <MunicipalDropdown changeEvent={e => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                            <p>Your municipality is used to determine how much sunlight is expected</p>
+                            <div>
+                                <English>Your municipality is used to determine how much sunlight is expected</English>
+                                <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
+                            </div>
                         </div>
                         <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
                         <br></br>

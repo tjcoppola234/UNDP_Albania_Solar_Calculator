@@ -55,7 +55,7 @@ input {
 #solar-panel-info {
     display: table;
 }
-#solar-panel-info div {
+#solar-panel-info div:not(.invisible) {
     display: table-row;
 }
 #solar-panel-info input {

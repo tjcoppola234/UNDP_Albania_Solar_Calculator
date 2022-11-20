@@ -27,17 +27,26 @@ export function PageHead() {
     <div>
       <header id="App-header">
         <a href="/" id="Nav-title">
-          <h1>
-            <English>Albania Solar Calculator</English>
-            <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
-          </h1>
+          <div>
+            <English><h1>Albania Solar Calculator</h1></English>
+            <Albanian><h1>Llogaritësi diellor i Shqipërisë</h1></Albanian>
+          </div>
         </a>
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>Calculator</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>Resources</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>Tutorial</Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>
+              <English>Calculator</English>
+              <Albanian>Llogaritësi</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+              <English>Resources</English>
+              <Albanian>Burimet</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
+              <English>Tutorial</English>
+              <Albanian>Tutorial</Albanian>
+            </Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
@@ -52,11 +61,20 @@ export function PageFoot() {
     <div id="App-footer">
       <footer>
         <div className="Sponsor-logos">
+          <span className="Center-items">
+            <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
+            <div>
+              <English>in collaboration with</English>
+              <Albanian>ne bashkepunim me</Albanian>
+            </div>
+          </span>
           <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
           <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
-          <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
         </div>
-        <p>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</p>
+        <div>
+          <English>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</English>
+          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</Albanian>
+        </div>
       </footer>
     </div>
   )

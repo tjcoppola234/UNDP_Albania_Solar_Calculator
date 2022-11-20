@@ -1,28 +1,18 @@
-import { Component } from 'react';
-import {settings, DEFAULT_ALBANIAN_VISIBILITY} from './Settings';
-    
-class Albanian extends Component {
-    constructor(props){ 
-      super(props) 
-          
-      this.state = {albanianVisible: DEFAULT_ALBANIAN_VISIBILITY};
-    }
+import { useEffect, useState } from 'react';
+import {settings} from './Settings';
 
-    componentDidMount () {
-        this.removeListener = settings.albanianVisible.addListener((state) => {
-            this.setState({albanianVisible: state});
+function Albanian(props) {
+    const [state, setState] = useState(settings.albanianVisible.getState());
+
+    useEffect(() => {
+        return settings.albanianVisible.addListener((stateN) => {
+            setState(stateN);
         });
-        this.setState({albanianVisible: settings.albanianVisible.getState()});
-    }
-    componentWillUnmount() {
-        this.removeListener();
-    }
+    });
 
-    render() { 
-        return (
-            <div className={this.state.albanianVisible}>{this.props.children}</div>
-        );
-    } 
-} 
+    return (
+        <div className={state}>{props.children}</div>
+    );
+}
     
 export default Albanian;
