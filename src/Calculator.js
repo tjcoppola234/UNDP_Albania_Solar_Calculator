@@ -231,8 +231,4 @@ function formatMonths(totalMonths) {
     return yearText + monthText;
 }
 
-window.onload = () => {
-    SolarData.loadData();
-}
-
 export default Calculator;
