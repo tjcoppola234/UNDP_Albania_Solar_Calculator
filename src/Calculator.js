@@ -12,51 +12,53 @@ function Calculator() {
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <header>
-                <h2>Calculator</h2>
-            </header>
-            <details open> {/* place "open" next to "details" to make it open on load */}
-                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
-                <form id="calc-payback" onSubmit={(e) => {
-                        e.preventDefault(); 
-                        setBuybackTime(calculateBuyback());
-                    }}>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
-                        <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
-                    </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-energy-usage">
-                            Electricity consumption in&nbsp;
-                            <select id="payback-energy-usage-metric" onChange={(e) => {
-                                    setPeuMetric(e.target.value);
-                                    if(e.target.value === "Lek") {
-                                        setPecDisabled(true);
-                                    } else {
-                                        setPecDisabled(false);
-                                    }
-                                }}>
-                                <option value="kWh">kWh</option>
-                                <option value="Lek">Lek</option>
-                                {/* <option value="Euros">Euros</option> */}
-                            </select>
-                            /
-                            <select id="payback-energy-usage-period" onChange={(e) => {setPeuPeriod(e.target.value)}}>
-                                <option value="Month">Month</option>
-                                <option value="Year">Year</option>
-                            </select>
-                            :
-                        </label>
-                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
-                    </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-energy-cost">Cost of electricity:</label>
-                        <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh" disabled={pecDisabled}></input>
-                    </div>
-                    <button type="submit">Calculate</button>
-                </form>
-                {buybackTime}
-            </details>
+            <div className="content">
+                <header>
+                    <h2>Calculator</h2>
+                </header>
+                <details open> {/* place "open" next to "details" to make it open on load */}
+                    <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+                    <form id="calc-payback" onSubmit={(e) => {
+                            e.preventDefault(); 
+                            setBuybackTime(calculateBuyback());
+                        }}>
+                        <div className="Hor-flex">
+                            <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
+                            <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="payback-energy-usage">
+                                Electricity consumption in&nbsp;
+                                <select id="payback-energy-usage-metric" onChange={(e) => {
+                                        setPeuMetric(e.target.value);
+                                        if(e.target.value === "Lek") {
+                                            setPecDisabled(true);
+                                        } else {
+                                            setPecDisabled(false);
+                                        }
+                                    }}>
+                                    <option value="kWh">kWh</option>
+                                    <option value="Lek">Lek</option>
+                                    {/* <option value="Euros">Euros</option> */}
+                                </select>
+                                /
+                                <select id="payback-energy-usage-period" onChange={(e) => {setPeuPeriod(e.target.value)}}>
+                                    <option value="Month">Month</option>
+                                    <option value="Year">Year</option>
+                                </select>
+                                :
+                            </label>
+                            <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="payback-energy-cost">Cost of electricity:</label>
+                            <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh" disabled={pecDisabled}></input>
+                        </div>
+                        <button type="submit">Calculate</button>
+                    </form>
+                    {buybackTime}
+                </details>
+            </div>
             <PageFoot></PageFoot>                        
         </div>
     )

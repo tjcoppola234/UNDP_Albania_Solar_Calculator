@@ -4,10 +4,19 @@
   --nav-hover: rgb(0, 92, 140);
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background-color: rgb(254, 254, 254);
   color: black;
   overflow-y: scroll;
+  height: 100%;
+}
+
+.content {
+  padding-bottom: 150px;
 }
 
 #Nav-spacing {
@@ -35,6 +44,11 @@ body {
   background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
   color: rgb(254, 254, 254);
   white-space: nowrap;
+  position: absolute;
+  height: 150px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 #Nav-title {
@@ -203,4 +217,17 @@ body {
 .Space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.Resources {
+  position: relative;
+  min-height: 100%;
+}
+.Calculator {
+  position: relative;
+  min-height: 100%;
+}
+.App {
+  position: relative;
+  min-height: 100%;
 }

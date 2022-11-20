@@ -10,11 +10,14 @@ function App() {
   return (
     <div className="App">
       <PageHead></PageHead>
-      <h2>Homepage</h2>
-      <div className="Sponsor-logos">
-        <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
-        <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+      <div className="content">
+        <h2>Homepage</h2>
+        <div className="Sponsor-logos">
+          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
+          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+        </div>
       </div>
+      <PageFoot></PageFoot>
     </div>
   );
 }
@@ -46,8 +49,8 @@ export function PageHead() {
 
 export function PageFoot() {
   return (
-    <div>
-      <footer id="App-footer">
+    <div id="App-footer">
+      <footer>
         <div className="Sponsor-logos">
           <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
           <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
