@@ -68,13 +68,9 @@ function Calculator() {
                 <summary><b>Payback Period Starting over:</b></summary>
                 <form onSubmit={(e) => {
                         e.preventDefault();
-                        if(SolarData.isLoaded()) {
-                            setEnergyGenerated("Data not loaded");
-                        } else {
-                            const results = formatGenAndROI(prefecture);
-                            setEnergyGenerated(results.genText);
-                            setPaybackPeriod(results.ROIText);
-                        }
+                        const results = formatGenAndROI(prefecture);
+                        setEnergyGenerated(results.genText);
+                        setPaybackPeriod(results.ROIText);
                     }}>
                     <div className="Vert-flex">
                         <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
