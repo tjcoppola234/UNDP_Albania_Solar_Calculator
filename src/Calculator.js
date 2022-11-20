@@ -148,7 +148,7 @@ function formatGenAndROI(prefecture) {
 function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture) {
     let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
     let panelSize = 1.66; /*AVG val*/ // Size of a single solar panel (m^2)
-    let panelCost = 1300; /*AVG val*/ // Cost of panels per kW (Lekë per kW)
+    let panelCost = 130000; /*AVG val*/ // Cost of panels per kW (Lekë per kW)
     let panelCapacity = .15; /*AVG val*/ // Capacity of panels (kW per m^2)
     let expenses = 0; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
     let interest = 0; // Monthly interest in the case of payment by loan (Lekë per month) 
