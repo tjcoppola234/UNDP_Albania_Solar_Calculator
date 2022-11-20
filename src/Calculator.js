@@ -3,6 +3,7 @@ import './Calculator.css';
 import { PageHead } from './App';
 import {useState} from 'react';
 import { MunicipalDropdown } from './Dropdown';
+import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 
 function Calculator() {
@@ -15,6 +16,28 @@ function Calculator() {
     const [peuMetric, setPeuMetric] = useState("kWh");
     const [prefecture, setPrefecture] = useState("");
     const [pecDisabled, setPecDisabled] = useState(false);
+    
+    const [solarName, setSolarName] = useState("Unnamed");
+    const [solarManufacturer, setSolarManufacturer] = useState("Unnamed");
+    const [solarCost, setSolarCost] = useState(0);
+    const [solarArea, setSolarArea] = useState(0);
+    const [solarCapacity, setSolarCapacity] = useState(0);
+    const [solarEfficiency, setSolarEfficiency] = useState(0);
+    const [shouldUseName, setShouldUseName] = useState(false);
+
+    function setSolarData(pvSelection) {
+        setSolarName(pvSelection["Name/Model"]);
+        setSolarManufacturer(pvSelection["Manufacturer"]);
+        setSolarCost(pvSelection["Cost per Panel"]);
+        setSolarArea(pvSelection["Area per Panel"]);
+        setSolarCapacity(pvSelection["Capacity per Panel"]);
+        setSolarEfficiency(pvSelection["Efficiency"].replace("%", ""));
+
+        document.getElementById("solar-cost").value = pvSelection["Cost per Panel"];
+        document.getElementById("solar-area").value = pvSelection["Area per Panel"];
+        document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
+        document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+    }
 
     SolarData.loadData();
 
@@ -26,18 +49,18 @@ function Calculator() {
             </header>
             <details> {/* place "open" next to "details" to make it open on load */}
                 <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
-                <form id="calc-payback" onSubmit={(e) => {
+                <form id="calc-payback" onSubmit={e => {
                         e.preventDefault(); 
                         setBuybackTime(calculateBuyback());
                     }}>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
-                        <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
+                        <input id="payback-sys-cost" type="number" min="0" max="10000000000" step="0.01" placeholder="Lek"></input>
                     </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-energy-usage">
                             Electricity consumption in&nbsp;
-                            <select id="payback-energy-usage-metric" onChange={(e) => {
+                            <select id="payback-energy-usage-metric" onChange={e => {
                                     setPeuMetric(e.target.value);
                                     if(e.target.value === "Lek") {
                                         setPecDisabled(true);
@@ -50,13 +73,13 @@ function Calculator() {
                                 {/* <option value="Euros">Euros</option> */}
                             </select>
                             /
-                            <select id="payback-energy-usage-period" onChange={(e) => {setPeuPeriod(e.target.value)}}>
+                            <select id="payback-energy-usage-period" onChange={e => {setPeuPeriod(e.target.value)}}>
                                 <option value="Month">Month</option>
                                 <option value="Year">Year</option>
                             </select>
                             :
                         </label>
-                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
+                        <input id="payback-energy-usage" type="number" min="0" max="10000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
                     </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-energy-cost">Cost of electricity:</label>
@@ -78,6 +101,8 @@ function Calculator() {
                         <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
                         <p>Your municipality is used to determine how much sunlight is expected</p>
                     </div>
+                    <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                    <br></br>
                     <div className="Hor-flex">
                         <label htmlFor="roof-space">Roof space available for solar</label>
                         <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
