@@ -125,8 +125,6 @@ function calculateBuyback() {
 }
 
 function formatGenAndROI(prefecture) {
-    SolarData.loadData();
-
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
     const electricityPaid = document.getElementById("electricity-paid");
@@ -158,7 +156,7 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture) {
     // Ideal amount of energy generated per month for a system
     const desiredMonthlyGen = ((percentEnergyForSolar / 100) * costPerMonth) / electricityPrice;
     // Area to be used for solar generation
-    const solarArea = Math.min(roofArea, Math.ceil(((desiredMonthlyGen / solarIrradiation) / panelCapacity) / panelSize) * panelSize);
+    const solarArea = Math.min(roofArea, roundUpwards(((desiredMonthlyGen / solarIrradiation) / panelCapacity), panelSize));
     // Amount of energy generated per month for a system (kWh per month)
     const actualMonthlyGen = (panelCapacity * solarArea) * solarIrradiation;
     // Total cost of the system in Lekë
@@ -172,6 +170,14 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture) {
         monthlyGeneration: actualMonthlyGen, 
         ROI: roi,
     };
+}
+
+const DEVIATION = 0.00001;
+function roundUpwards(val, multiple) {
+    if(Math.abs(Math.round(val / multiple) - (val / multiple)) < DEVIATION)
+        return val;
+
+    return (Math.floor(val / multiple) + 1) * multiple;
 }
 
 function formatMonths(totalMonths) {
@@ -219,6 +225,10 @@ function formatMonths(totalMonths) {
     }
     
     return yearText + monthText;
+}
+
+window.onload = () => {
+    SolarData.loadData();
 }
 
 export default Calculator;
