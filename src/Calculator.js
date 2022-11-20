@@ -161,18 +161,32 @@ function calculateBuyback() {
 }
 
 function calcPayback() {
-    let solarData; // Amount of solar irradiation for the specified municipality ((kJ per day) per m^2)
-    let daysInMonth; // Number of days in the month being observed for solar irradiation data (days per month)
     let roofArea; // Amount of roof space to be used for solar panels (m^2)
-    let percentEnergyForSolar; // The amount of total energy consumption dedicated to solar (%)
+    let percentEnergyForSolar = 100; // The amount of total energy consumption dedicated to solar (%)
     let costPerMonth; // The total amount paid for electricity per month (Lekë per month)
-    let electricityPrice; // The cost of electricity (Lekë per kWh)
+    let electricityPrice = 14; // The cost of electricity (Lekë per kWh)
     let panelSize; // The size of a single solar panel (m^2)
-    let panelCost; // The cost of panels per kW (Lekë per kW)
-    let panelCapacity; // The capacity of panels (kW per m^2)
-    let expenses; // initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
-    let interest; // monthly interest in the case of payment by loan (Lekë per month) 
+    let panelCost = 1300; // The cost of panels per kW (Lekë per kW)
+    let panelCapacity = .15; // The capacity of panels (kW per m^2)
+    let expenses = 0; // initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
+    let interest = 0; // monthly interest in the case of payment by loan (Lekë per month) 
 
+    // Amount of solar irradiation for the specified municipality
+    const solarIrradiation = SolarData.getData("Berat", "AVG", panelCapacity, false);
+    // Ideal amount of energy generated per month for a system
+    const desiredMonthlyGen = (percentEnergyForSolar * costPerMonth) / electricityPrice;
+    // Area to be used for solar generation
+    const solarArea = Math.min(roofArea, Math.ceil(((desiredMonthlyGen / solarIrradiation) / panelCapacity) / panelSize) * panelSize);
+    // Amount of energy generated per month for a system
+    const actualMonthlyGen = (panelCapacity * solarArea) * solarIrradiation;
+    // Total cost of the system in Lekë
+    const totalCost = (panelCost * panelCapacity * solarArea) + expenses;
+    // Amount of Lekë saved per month
+    const savings = (electricityPrice * actualMonthlyGen) - interest;
+    // Total time to return on investment in months
+    const roi = totalCost / savings;
+
+    return roi;
 }
 
 export default Calculator;
