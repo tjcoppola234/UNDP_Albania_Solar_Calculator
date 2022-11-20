@@ -28,10 +28,6 @@ function Calculator() {
                         e.preventDefault(); 
                         setBuybackTime(calculateBuyback());
                     }}>
-                    <div className="Vert-flex">
-                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                        <p>Your municipality is used to determine how much sunlight is expected</p>
-                    </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
                         <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
@@ -71,6 +67,10 @@ function Calculator() {
             <details open>
                 <summary><b>Payback Period Starting over:</b></summary>
                 <form onSubmit={(e) => e.preventDefault()}>
+                    <div className="Vert-flex">
+                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
+                        <p>Your municipality is used to determine how much sunlight is expected</p>
+                    </div>
                     <div className="Hor-flex">
                         <label htmlFor="roof-space">Roof space available for solar</label>
                         <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
@@ -158,6 +158,21 @@ function calculateBuyback() {
     }
     
     return yearText + monthText;
+}
+
+function calcPayback() {
+    let solarData; // Amount of solar irradiation for the specified municipality ((kJ per day) per m^2)
+    let daysInMonth; // Number of days in the month being observed for solar irradiation data (days per month)
+    let roofArea; // Amount of roof space to be used for solar panels (m^2)
+    let percentEnergyForSolar; // The amount of total energy consumption dedicated to solar (%)
+    let costPerMonth; // The total amount paid for electricity per month (Lekë per month)
+    let electricityPrice; // The cost of electricity (Lekë per kWh)
+    let panelSize; // The size of a single solar panel (m^2)
+    let panelCost; // The cost of panels per kW (Lekë per kW)
+    let panelCapacity; // The capacity of panels (kW per m^2)
+    let expenses; // initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
+    let interest; // monthly interest in the case of payment by loan (Lekë per month) 
+
 }
 
 export default Calculator;
