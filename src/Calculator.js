@@ -184,15 +184,6 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture) {
     };
 }
 
-const DEVIATION = 0.00001;
-function roundUpwards(val, multiple) {
-    console.log(Math.round(val / multiple) - (val / multiple));
-    if(Math.abs(Math.round(val / multiple) - (val / multiple)) < DEVIATION)
-        return val;
-
-    return (Math.floor(val / multiple) + 1) * multiple;
-}
-
 function formatMonths(totalMonths) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
