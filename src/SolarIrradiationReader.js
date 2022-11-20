@@ -57,11 +57,10 @@ function loadData() {
  * @param {string} prefecture The name of a prefecture, which must match the format use in SolarIrradiation.csv
  * @param {string} month The month to get data for. Must be one of the strings in timeOptions. AVG returns the overall average accross all months
  * @param {number} capacity The capacity of solar panel being calculated for in kW/m^2. Important for converting from (kWh/month)/m^2 to (kWh/month)/kW.
- * @param {number} percentEfficiency How efficient the solar panel is (percentage).
  * @param {boolean} isLeapYear Whether the year is a leap year. The default is false, and only matters for calculations for February
  * @returns The average amount of solar irradiation for the provided prefecture in (kWh/month)/kW
  */
-function getData(prefecture, month, capacity, percentEfficiency, isLeapYear = false) {
+function getData(prefecture, month, capacity, isLeapYear = false) {
     if(!Object.values(timeOptions).some(v => v === month)) {
         console.error("Invalid month entered. Please use timeOptions.");
         return 1400 / 12;
@@ -78,7 +77,7 @@ function getData(prefecture, month, capacity, percentEfficiency, isLeapYear = fa
             //Irradiation of prefecture is in (kJ/day)/m^2
             //s = (irradiation of prefecture / 3600 * days in month) / capacity of panels = (kWh/month)/kW capacity
             //3600 converts kJ to kWh, days in month converts from days to month
-            return (solarData[i][prefecture].replace(",", "") / 3600 * days(month, isLeapYear)) / capacity * percentEfficiency;
+            return (solarData[i][prefecture].replace(",", "") / 3600 * days(month, isLeapYear)) / capacity;
         }
     }
 
