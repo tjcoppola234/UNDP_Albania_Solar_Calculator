@@ -6,9 +6,9 @@ import { settings } from './Settings';
 
 export function SolarPanelScrollList({onSelection, getIsCustomData}) {
     const [pvList, setPVList] = useState([]);
-    const [english, setEnglish] = useState(settings.englishVisible.getState());
-    settings.englishVisible.addListener((visible) => {
-        setEnglish(visible);
+    const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
+    settings.albanianVisible.addListener(visible => {
+        setAlbanian(visible);
     });
 
     useEffect(() => {
@@ -82,8 +82,8 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                         {pvList.map((pv, index) => (
                             <tr key={index}>
                                 <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); onSelection(pv); getIsCustomData(false);}} type="button">
-                                    <English>Use this panel</English>
-                                    <Albanian>Përdorni këtë panel</Albanian>
+                                    <div className={albanian ? "invisible" : ""}><English>Use this panel</English></div>
+                                    <div className={albanian ? "" : "invisible"}><Albanian>Përdorni këtë panel</Albanian></div>
                                 </button></td>
                                 <td>{pv["Name/Model"]}</td>
                                 <td>{pv["Manufacturer"]}</td>
@@ -106,28 +106,28 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                         <English>Cost of one solar panel (€):</English>
                         <Albanian>Kostoja e një paneli diellor (€):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100000" step="0.001" placeholder={english ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => getIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-area">
                         <English>Area of one solar panel (m²):</English>
                         <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100" step="0.01" placeholder={english ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => getIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-capacity">
                         <English>Capacity of one solar panel (kW):</English>
                         <Albanian>Kapaciteti i një paneli diellor (kW):</Albanian>
                     </label>
-                    <input type="number" min="0" max="1000" step="0.00001" placeholder={english ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
+                    <input type="number" min="0" max="1000" step="0.00001" placeholder={albanian ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-efficiency">
                         <English>Efficiency of solar panels (%):</English>
                         <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100" step="0.001" placeholder={english ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => getIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => getIsCustomData(true)}></input>
                 </div>
             </div>
         </div>
