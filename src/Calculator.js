@@ -3,6 +3,7 @@ import './Calculator.css';
 import { PageHead } from './App';
 import {useState} from 'react';
 import { MunicipalDropdown } from './Dropdown';
+import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 
 function Calculator() {
@@ -28,9 +29,11 @@ function Calculator() {
                         <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
                         <p>Your municipality is used to determine how much sunlight is expected</p>
                     </div>
+                    <SolarPanelScrollList></SolarPanelScrollList>
+                    <br></br>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
-                        <input id="payback-sys-cost" type="number" min="0" max="1000000000000000" step="0.01" placeholder="Lek"></input>
+                        <input id="payback-sys-cost" type="number" min="0" max="10000000000" step="0.01" placeholder="Lek"></input>
                     </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-energy-usage">
@@ -54,7 +57,7 @@ function Calculator() {
                             </select>
                             :
                         </label>
-                        <input id="payback-energy-usage" type="number" min="0" max="1000000000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
+                        <input id="payback-energy-usage" type="number" min="0" max="10000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
                     </div>
                     <div className="Hor-flex">
                         <label htmlFor="payback-energy-cost">Cost of electricity:</label>

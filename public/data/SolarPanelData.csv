@@ -1,0 +1,4 @@
+Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (mW),Efficiency (%)
+Example A,Solar A,185,1,0.23,11.20%
+Example B,Solar B,250,1.5,0.345,13.80%
+Example C,PV C,273,1.4,0.424,18.90%
