@@ -1,7 +1,10 @@
 :root {
   /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  --nav-background: #357AB6; /*Old Color: rgb(0, 132, 200);*/
-  --nav-hover: rgb(0, 92, 140);
+  --nav-background: #0f4b94;
+  --nav-background-hover: #053671;
+  --nav-text: #ffffff;
+  --nav-text-hover: #e6ee9c;
+  --background: #ecf0f1;
 }
 
 html {
@@ -11,7 +14,7 @@ html {
 }
 
 body {
-  background-color: rgb(254, 254, 254);
+  background-color: var(--background);
   color: black;
   overflow-y: scroll;
   height: 100%;
@@ -26,13 +29,13 @@ body {
 #Nav-title {
   grid-column: 1;
   margin-left: 20px;
-  color: inherit;
+  color: var(--nav-text);
   text-decoration: none;
 }
 
 #Nav-options {
   grid-column: 2;
-  color: rgb(254, 254, 254);
+  color: var(--nav-text);
   height: inherit;
 }
 
@@ -43,7 +46,7 @@ body {
   }
   #Nav-options-list li:not(:last-child) {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
   #Nav-options-list li {
     height: 100%;
@@ -53,11 +56,11 @@ body {
   }
   #Switch-albanian {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
   #Switch-english {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
 }
 @media screen and (min-width: 1000px) {
@@ -66,7 +69,7 @@ body {
   }
   #Nav-options-list li:not(:last-child) {
     border: none;
-    border-left: 1px solid var(--nav-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
   #Nav-options-list li {
     height: inherit;
@@ -76,12 +79,12 @@ body {
   }
   #Switch-albanian {
     border: none;
-    border-left: 1px solid var(--nav-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
   #Switch-english {
     border: none;
-    border-top: 1px solid var(--nav-hover);
-    border-left: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
 }
 #Hamburger {
@@ -110,10 +113,10 @@ body {
   transition: background-color 200ms linear;
 }
 #Nav-options-list li:hover {
-  background-color: var(--nav-hover);
+  background-color: var(--nav-background-hover);
 }
 #Nav-options-list li.current-tab {
-  background-color:rgb(0, 92, 140);
+  background-color:var(--nav-background-hover);
 }
 
 #Nav-options-list li a { 
@@ -123,15 +126,21 @@ body {
   font-size: larger;
   text-decoration: none;
   font-weight: bold;
-  color: rgb(254, 254, 254);
   height: inherit;
   width: 120px;
+  color: var(--nav-text);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
-#Nav-options-list li a.current-tab {
+#Nav-options-list li:hover a {
+  color: var(--nav-text-hover);
+  text-decoration: underline;
+}
+#Nav-options-list li.current-tab a {
   pointer-events: none;
+  color: var(--nav-text-hover);
+  text-decoration: underline;
 }
 
 #Toggle {
@@ -151,10 +160,10 @@ body {
   transition: background-color 200ms linear;
 }
 #Toggle button:hover {
-  background-color: rgb(0, 92, 140);
+  background-color: var(--nav-background-hover);
 }
 #Toggle button:disabled {
-  background-color:rgb(0, 92, 140);
+  background-color:var(--nav-background-hover);
 }
 #Toggle img {
   object-fit: contain;
@@ -197,7 +206,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: var(--nav-background);
-  color: rgb(254, 254, 254);
+  color: var(--nav-text);
   position: fixed;
   height: 80px;
   top: 0;
@@ -210,18 +219,20 @@ body {
   justify-content: space-between;
   /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
   background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
-  color: rgb(254, 254, 254);
+  color: var(--nav-text);
   white-space: nowrap;
   position: absolute;
-  height: 150px;
+  height: 100px;
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 10px;
+  text-align: center;
 }
 
 .content {
   padding-bottom: 150px;
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 100px);
 }
 
 .App {
