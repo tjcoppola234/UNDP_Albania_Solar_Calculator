@@ -6,6 +6,7 @@ import Albanian from './Albanian';
 import English from './English';
 import LanguageToggle from './LanguageToggle';
 import { settings } from './Settings';
+import * as SolarData from './SolarIrradiationReader'
 
 function App() {
   return (
@@ -82,6 +83,8 @@ window.onload = () => {
   if(window.innerWidth <= 1070) {
     document.getElementById("Nav-options-list").classList.add("invisible");
   }
+
+  // SolarData.loadData();
 }
 
 export default App;
