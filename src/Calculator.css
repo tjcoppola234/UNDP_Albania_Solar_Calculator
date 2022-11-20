@@ -16,20 +16,17 @@ input {
 }
 
 #solar-pv-list {
-    overflow-x: auto;
-    overflow-y: scroll;
-    height: 200px;
     border-collapse: collapse;
 }
 #solar-pv-title {
     background-color: #D3D3D3;
     border: 1px solid black;
-    padding: 20px;
+    padding: 10px 0px 10px 0px;
 }
 #solar-pv-list th:not(#solar-pv-title) {
     background-color: #B3B3B3;
     border: 1px solid black;
-    padding: 20px;
+    padding: 10px;
 }
 #solar-pv-list td:not(#panel-selection) {
     border: 1px solid black;
@@ -40,6 +37,7 @@ input {
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
+    height: 25px;
 }
 #panel-selection button {
     background-color: #C3D3C3;
@@ -52,4 +50,21 @@ input {
 }
 #panel-selection button:hover {
     background-color: #93A393;
+}
+
+#solar-panel-info {
+    display: table;
+}
+#solar-panel-info div {
+    display: table-row;
+}
+#solar-panel-info input {
+    width: 200px;
+}
+
+#solar-pv-scroll {
+    display: inline-block;
+    overflow-x: auto;
+    overflow-y: scroll;
+    max-height: 300px;
 }
