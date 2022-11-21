@@ -9,7 +9,7 @@ class Settings {
         this.albanianVisible = new SettingsListener(DEFAULT_ALBANIAN_VISIBILITY);
         this.englishVisible = new SettingsListener(DEFAULT_ENGLISH_VISIBILITY);
         if(window.location.pathname === '/') {
-            this.disabledMenuItem = new SettingsListener("Calculator");
+            this.disabledMenuItem = new SettingsListener("Home");
         } else {
             this.disabledMenuItem = new SettingsListener(window.location.pathname.substring(1));
         }

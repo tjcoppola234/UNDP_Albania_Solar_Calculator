@@ -3,9 +3,9 @@ import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
 
-function Tutorial() {
+function Help() {
     return (
-        <div className="Tutorial">
+        <div className="Help">
             <PageHead></PageHead>
             <div className="content">
                 <div>
@@ -18,4 +18,4 @@ function Tutorial() {
     )
 }
 
-export default Tutorial;
+export default Help;
