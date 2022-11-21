@@ -1,3 +1,5 @@
+@import './global.css';
+
 #calc-payback {
     margin-top: 20px;
 }
@@ -13,6 +15,7 @@ input {
 #municipality-dropdown {
     margin-left: 8px;
     min-width: 134.8px;
+    font-size: var(--font-size);
 }
 
 #solar-pv-list {
@@ -36,16 +39,18 @@ input {
     border: 1px solid black;
     padding: 2px;
     text-align: center;
+    min-height: 40px;
 }
 #panel-selection {
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
-    height: 25px;
+    min-height: 40px;
+    height: 40px;
 }
 #panel-selection button {
     background-color: #C3D3C3;
-    display:inline-block;
+    display: inline-block;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -79,4 +84,14 @@ input {
 
 .capped-th-width {
     max-width: 180px
+}
+
+#submit-button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    background: none;
+    background-color: var(--nav-background);
+    color: var(--nav-text);
+    font-size: var(--font-size);
 }
