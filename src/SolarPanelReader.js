@@ -82,8 +82,8 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                         {pvList.map((pv, index) => (
                             <tr key={index}>
                                 <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); onSelection(pv); getIsCustomData(false);}} type="button">
-                                    <div className={albanian ? "invisible" : ""}><English>Use this panel</English></div>
-                                    <div className={albanian ? "" : "invisible"}><Albanian>Përdorni këtë panel</Albanian></div>
+                                    <English>Use this panel</English>
+                                    <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
                                 <td>{pv["Name/Model"]}</td>
                                 <td>{pv["Manufacturer"]}</td>
