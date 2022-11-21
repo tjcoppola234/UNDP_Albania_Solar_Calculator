@@ -85,7 +85,7 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
-                                <td className="capped-th-width">{pv["Name/Model"]}</td>
+                                <td className="capped-th-width"><a href={getNameHref(pv["Name/Model"])} target="_blank" rel="noreferrer">{pv["Name/Model"]}</a></td>
                                 <td className="capped-th-width">{pv["Manufacturer"]}</td>
                                 <td>{pv["Cost per Panel"]}</td>
                                 <td>{pv["Area per Panel"]}</td>
@@ -142,4 +142,10 @@ function fillPanelFields(pvSelection) {
     document.getElementById("solar-area").value = pvSelection["Area per Panel"];
     document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
     document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+}
+
+function getNameHref(name) {
+    const searchURL = "https://www.google.com/search?q=";
+    const searchKeywords = name.replace(" ", "+");
+    return searchURL + searchKeywords;
 }
