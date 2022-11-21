@@ -23,6 +23,8 @@ function Calculator() {
     const [solarCapacity, setSolarCapacity] = useState(0);
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
+    const [interest, setInterest] = useState(0);
+    const [percentLoan, setPercentLoan] = useState(0);
 
     
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
@@ -63,7 +65,7 @@ function Calculator() {
                     </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
-                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
+                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency, percentLoan, interest);
                             setEnergyGenerated(results.genText);
                             setPaybackPeriod(results.ROIText);
                         }}>
@@ -104,6 +106,21 @@ function Calculator() {
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                         </div>
+                        <br/>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-percent">
+                                <English>Percentage of final cost to pay with loan</English>
+                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
+                            </label>
+                            <input id="loan-percent" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-interest">
+                                <English>Percent interest on loan</English>
+                                <Albanian>Për qind e interesit në kredi</Albanian>
+                            </label>
+                            <input id="loan-interest" type="number" placeholder="%"></input>
+                        </div>
                         <button type="submit">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
@@ -126,7 +143,7 @@ function Calculator() {
     )
 }
 
-function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
+function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, percentLoan, interest) {
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
     const electricityPaid = document.getElementById("electricity-paid");
@@ -134,7 +151,7 @@ function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarE
     if(document.getElementById("electricity-paid-period").value === "year") {
         electricityPaidVal /= 12;
     }
-    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
+    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, percentLoan, interest);
 
     return {
         genText: systemData.monthlyGeneration,
@@ -152,13 +169,14 @@ function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarE
  * @param {*} panelSize Size of a single solar panel (m^2)
  * @param {*} panelCapacity Capacity of a single solar panel (kW)
  * @param {*} panelEfficiency Efficiency of solar panels (%)
+ * @param {*} percentLoan Percentage of payment to be covered by loan
+ * @param {*} interest Monthly interest in the case of payment by loan (Lekë per month)
  * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, and "ROI" is the length of the payback period for a solar system purchase. 
  */
-function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
     let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
     let panelCost = singlePanelCost / panelCapacity;
     let expenses = 200000; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
-    let interest = 0; // Monthly interest in the case of payment by loan (Lekë per month) 
 
     // Amount of solar irradiation for the specified municipality (kWh/month)/kW
     const solarIrradiation = SolarData.getData(prefecture, "AVG", panelCapacity / panelSize, false);
@@ -171,7 +189,7 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     // Total cost of the system in Lekë
     const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
     // Amount of Lekë saved per month
-    const savings = (electricityPrice * actualMonthlyGen) - interest;
+    const savings = (electricityPrice * actualMonthlyGen) - (percentLoan * interest * totalCost / 10000);
     // Total time to return on investment in months
     const roi = totalCost / savings;
 
