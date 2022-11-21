@@ -43,9 +43,9 @@ export function PageHead() {
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
-              <English>Tutorial</English>
-              <Albanian>Tutorial</Albanian>
+            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ndihmë</Albanian>
             </Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>

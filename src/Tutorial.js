@@ -9,8 +9,8 @@ function Tutorial() {
             <PageHead></PageHead>
             <div className="content">
                 <div>
-                    <English><h2>Tutorial</h2></English>
-                    <Albanian><h2>Tutorial</h2></Albanian>
+                    <English><h2>Help</h2></English>
+                    <Albanian><h2>Ndihmë</h2></Albanian>
                 </div>
             </div>
             <PageFoot></PageFoot>

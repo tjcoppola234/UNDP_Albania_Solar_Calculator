@@ -13,7 +13,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Calculator />} />
         <Route path="/Resources" element={<Resources />} />
-        <Route path="/Tutorial" element={<Tutorial />} />
+        <Route path="/Help" element={<Tutorial />} />
       </Routes>
     </BrowserRouter>
   // </React.StrictMode>
