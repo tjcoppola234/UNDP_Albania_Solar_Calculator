@@ -1,7 +1,7 @@
 Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (kW),Efficiency (%)
-Example A,Solar A,185,1,0.23,11.20%
-Example B,Solar B,250,1.5,0.345,13.80%
-Example C,PV C,273,1.4,0.424,18.90%
+XP 36/156-140 I+35,SunErg,200,1,0.14,14.01%
+Eco Line Full Black M72/190W,Luxor Solar,250,1,0.19,15.61%
+X75L240 HE Module,Aleo,305,1,0.24,18.00%
 Example C2,PV C,295,1.45,0.48,15.5%
 Ex D,PV D,1420,2.3,1.423,24.3%
 IE-X23-M14,SolarCo.,544,1.22,0.364,14.64%

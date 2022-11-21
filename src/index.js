@@ -8,7 +8,7 @@ import Tutorial from './Tutorial';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Calculator />} />
@@ -16,5 +16,5 @@ root.render(
         <Route path="/Tutorial" element={<Tutorial />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
