@@ -13,11 +13,11 @@ function Resources() {
             
             <div className="content">
                      
-            <h2>Resources </h2>
+            <h2 id="h2resources">Resources </h2>
 
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>What is solar and why is it good?</b>
+                <b id="largerfontb">What is solar and why is it good?</b>
             </summary>
             <img id="something" src={process.env.PUBLIC_URL+"benefitsofsolar.jpg"} alt="Benefits" width = "500" height = "500" floatleft/>
             
@@ -27,13 +27,10 @@ function Resources() {
             
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>Why is solar energy beneficial for businesses?</b>
+                <b id="largerfontb">Why is solar energy beneficial for businesses?</b>
             </summary>
-            <img id="something" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "400" height = "800"/>
-            <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <b>More Information</b>
-            </summary>
+
+            <img id="imagefloat" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "400" height = "550"/>
            <h3>Reduced Energy Costs</h3>
             <p>
             Electricity bills can be problematic because they are expensive. Your electricity bill depends on how much energy is consumed and the rate your utility company charges. By using solar energy, your bill can be lowered by X%. You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment. Electricity bills continue to get more expensive because utility companies face high costs to maintain and expand the grid. Solar power systems generally do not require much maintenance and most reliable solar panel manufacturers offer 20–25-year warranties.
@@ -50,19 +47,14 @@ function Resources() {
             Businesses can start going green by installing solar systems.
             </p>
             </details>
-            </details>
 
 
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>Should your business go solar?</b>
+                <b id="largerfontb">Should your business go solar?</b>
             </summary>
-            <img id="something" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
             
-            <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <b>More Information</b>
-            </summary>
+            <img id="imagefloat" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
             
             <h3>Why should I go solar?</h3>
             <p>
@@ -96,18 +88,13 @@ function Resources() {
             Warranty depends on the manufacturer with most lasting between 20-25 years. Some solar companies also offer a few years of maintenance as well after they are installed on your roof.
             </p>
             </details>
-            </details>
 
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>How can your business go solar?</b>
+                <b id="largerfontb">How can your business go solar?</b>
             </summary>
-            <img id="something" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "400" height = "600"/>
             
-            <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <b>More Information</b>
-            </summary>
+            <img id="imagefloat" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "400" height = "600"/>
 
             <h3>Solar Installers</h3>
             <p>
@@ -116,7 +103,7 @@ function Resources() {
 
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>Solar Installer Contacts</b>
+                <b id="largerfont2b">Solar Installer Contacts</b>
             </summary>
             <p><strong><a href = "https://panelebesi.al/"> Panele Fotovoltaike Besi</a></strong></p>
             <p>+355 69 992 9800</p>
@@ -141,23 +128,22 @@ function Resources() {
             </p>
             <details close> {/* place "open" next to "details" to make it open on load */}
             <summary>
-                <b>Financing Options</b>
+                <b id="largerfont2b">Financing Options</b>
             </summary>
-            <p><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
+            <p><strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
                         <English>ProCredit Bank</English>
                         <Albanian>Banka ProCredit</Albanian>
-                    </a></p>
-            <p><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
+                    </a></strong></p>
+            <p><strong><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
                         <English>Union Bank</English>
                         <Albanian>Banka Union</Albanian>
-            </a></p>
+            </a></strong></p>
             </details>
 
             <h3>Calculations</h3>
             <p>
             To determine which of the offers you are receiving from solar installation companies is the most suitable one for your business, use the app to do your own calculations! 
             </p>
-            </details>
             </details>
 
             
