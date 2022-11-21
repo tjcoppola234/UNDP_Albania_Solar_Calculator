@@ -23,9 +23,6 @@ function Calculator() {
     const [solarCapacity, setSolarCapacity] = useState(0);
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
-    const [interest, setInterest] = useState(0);
-    const [percentLoan, setPercentLoan] = useState(0);
-
     
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
@@ -65,7 +62,7 @@ function Calculator() {
                     </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
-                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency, percentLoan, interest);
+                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.genText);
                             setPaybackPeriod(results.ROIText);
                         }}>
@@ -143,15 +140,18 @@ function Calculator() {
     )
 }
 
-function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, percentLoan, interest) {
+function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
     const electricityPaid = document.getElementById("electricity-paid");
+    const percentLoan = document.getElementById("loan-percent");
+    const interest = document.getElementById("loan-interest");
+
     let electricityPaidVal = electricityPaid.value;
     if(document.getElementById("electricity-paid-period").value === "year") {
         electricityPaidVal /= 12;
     }
-    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, percentLoan, interest);
+    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
 
     return {
         genText: systemData.monthlyGeneration,
