@@ -168,6 +168,7 @@ body {
 #Toggle img {
   object-fit: contain;
   max-height: 90%;
+  width: auto;
 }
 #Switch-albanian {
   grid-row: 1;
