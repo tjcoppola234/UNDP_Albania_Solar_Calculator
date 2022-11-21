@@ -17,7 +17,7 @@ function App() {
           <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
           <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
           <div>
-            <button><Link to="/Calculator">
+            <button><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></button>
@@ -26,7 +26,7 @@ function App() {
             <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
           </div>
           <div>
-            <button><Link to="/Resources">
+            <button><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></button>
@@ -35,7 +35,7 @@ function App() {
             <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
           </div>
           <div>
-            <button><Link to="/Help">
+            <button><Link to="/Help" onClick={() => setCurrentTab("Help")}>
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></button>
