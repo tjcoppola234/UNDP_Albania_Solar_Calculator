@@ -28,7 +28,7 @@ export function PageHead() {
       <header id="App-header">
         <a href="/" id="Nav-title">
           <div>
-            <English><h1>Albania Solar Calculator</h1></English>
+            <English><h1>Albanian Business Solar Calculator</h1></English>
             <Albanian><h1>Llogaritësi diellor i Shqipërisë</h1></Albanian>
           </div>
         </a>
