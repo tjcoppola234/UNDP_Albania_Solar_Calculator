@@ -16,7 +16,7 @@ function Resources() {
             <h2>Resources</h2>
 
             <h1>What is solar and why is it good?</h1>
-            <img src="benefitsofsolar.jpg" alt="Benefits"/>
+            <img id="something" src={process.env.PUBLIC_URL+"benefitsofsolar.jpg"} alt="Benefits"/>
 
             <h1>Why is solar energy beneficial for businesses?</h1>
 
