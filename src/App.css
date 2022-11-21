@@ -17,3 +17,7 @@
     width: 164px;
     height: 44px;
 }
+
+span {
+    font-weight: bold;
+}

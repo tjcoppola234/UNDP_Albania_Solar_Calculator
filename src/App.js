@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <PageHead></PageHead>
       <div className="content">
-        <h2>Homepage</h2>
-        <div className="Sponsor-logos">
-          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
-          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
-        </div>
+        <p>This website is designed <span>for businesses</span></p>
+        <p>Here are some tools that can help you determine whether solar panels are a good fit for your business</p>
+        <div><a href="/Calculator">Calculator</a><br/>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</div>
+        <div><a href="/Resources">Resources</a><br/>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</div>
+        <div><a href="/Help">Help</a><br/>See frequently asked questions about solar</div>
       </div>
       <PageFoot></PageFoot>
     </div>

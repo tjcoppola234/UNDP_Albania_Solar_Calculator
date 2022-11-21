@@ -10,14 +10,6 @@ function Resources() {
             <PageHead></PageHead>
             <div className="content">
                 <div>
-                    <English><h2>Solar Installers Nearby</h2></English>
-                    <Albanian><h2>Instalues ​​diellor aty pranë</h2></Albanian>
-                </div>
-                <div>
-                    <English>Here are some solar installation companies in the Tirana region</English>
-                    <Albanian>Ja disa kompani instalimesh diellore në qarkun e Tiranës</Albanian>
-                </div>
-                <div>
                     <English><h2>Map of solar companies in Tirana</h2></English>
                     <Albanian><h2>Harta e kompanive diellore ne Tirane</h2></Albanian>
                 </div>
