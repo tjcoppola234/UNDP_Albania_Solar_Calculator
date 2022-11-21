@@ -28,8 +28,8 @@ export function PageHead() {
       <header id="App-header">
         <a href="/" id="Nav-title">
           <div>
-            <English><h1>Albanian Business Solar Calculator</h1></English>
-            <Albanian><h1>Llogaritësi diellor i Shqipërisë</h1></Albanian>
+            <English><h1>Albania Solar Calculator for Businesses</h1></English>
+            <Albanian><h1>Kalkulator Solar Albania per Bizneset</h1></Albanian>
           </div>
         </a>
         <nav id="Nav-options">
@@ -43,9 +43,9 @@ export function PageHead() {
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
-              <English>Tutorial</English>
-              <Albanian>Tutorial</Albanian>
+            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ndihmë</Albanian>
             </Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>
@@ -67,9 +67,8 @@ export function PageFoot() {
               <English>in collaboration with</English>
               <Albanian>ne bashkepunim me</Albanian>
             </div>
+            <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
           </span>
-          <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
-          <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
         </div>
         <div>
           <English>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</English>
