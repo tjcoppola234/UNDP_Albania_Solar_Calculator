@@ -79,7 +79,7 @@ export function PageHead() {
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></li>
-            <li><LanguageToggle></LanguageToggle></li>
+            <li id="toggle-li"><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
       </header>
