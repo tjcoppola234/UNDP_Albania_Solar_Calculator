@@ -3,3 +3,11 @@
     height: 450px;
     border: none;
 }
+
+h2{
+    color:black;
+    text-align: center;
+    font-size:200%;
+    border: 2px solid powderblue;
+    margin: 10px;
+}
