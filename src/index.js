@@ -9,7 +9,7 @@ import Help from './Help';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
@@ -18,5 +18,5 @@ root.render(
         <Route path="/Help" element={<Help />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
