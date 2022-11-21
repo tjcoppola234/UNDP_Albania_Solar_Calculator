@@ -43,7 +43,7 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                             <th>Manufacturer</th>
                             <th>Cost per Panel (€)</th>
                             <th>Area per Panel (m<sup>2</sup>)</th>
-                            <th>Capacity per Panel (mW)</th>
+                            <th>Capacity per Panel (kW)</th>
                             <th>Efficiency (%)</th>
                         </tr>
                     </thead>
@@ -73,8 +73,8 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                     <input type="number" min="0" max="100" step="0.01" placeholder="Enter area per panel (m²)" id="solar-area" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
-                    <label htmlFor="solar-capacity">Capacity of one solar panel (mW):</label>
-                    <input type="number" min="0" max="1000" step="0.00001" placeholder="Enter capacity per panel (mW)" id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
+                    <label htmlFor="solar-capacity">Capacity of one solar panel (kW):</label>
+                    <input type="number" min="0" max="1000" step="0.00001" placeholder="Enter capacity per panel (kW)" id="solar-capacity" onInput={() => getIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-efficiency">Efficiency of solar panels (%):</label>

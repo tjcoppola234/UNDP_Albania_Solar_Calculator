@@ -8,10 +8,15 @@ import * as SolarData from './SolarIrradiationReader';
 
 function Calculator() {
     const [buybackTime, setBuybackTime] = useState("");
+
+    const [paybackPeriod, setPaybackPeriod] = useState("");
+    const [energyGenerated, setEnergyGenerated] = useState("");
+
     const [peuPeriod, setPeuPeriod] = useState("Month");
     const [peuMetric, setPeuMetric] = useState("kWh");
     const [prefecture, setPrefecture] = useState("");
     const [pecDisabled, setPecDisabled] = useState(false);
+
     const [solarName, setSolarName] = useState("Unnamed");
     const [solarManufacturer, setSolarManufacturer] = useState("Unnamed");
     const [solarCost, setSolarCost] = useState(0);
@@ -34,24 +39,20 @@ function Calculator() {
         document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
     }
 
+    SolarData.loadData();
+
     return (
         <div className="Calculator">
             <PageHead></PageHead>
             <header>
                 <h2>Calculator</h2>
             </header>
-            <details open> {/* place "open" next to "details" to make it open on load */}
-                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+            <details>
+                <summary><b>Old Payback Period:</b></summary>
                 <form id="calc-payback" onSubmit={e => {
                         e.preventDefault(); 
                         setBuybackTime(calculateBuyback());
                     }}>
-                    <div className="Vert-flex">
-                        <MunicipalDropdown changeEvent={e => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                        <p>Your municipality is used to determine how much sunlight is expected</p>
-                    </div>
-                    <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
-                    <br></br>
                     <div className="Hor-flex">
                         <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
                         <input id="payback-sys-cost" type="number" min="0" max="10000000000" step="0.01" placeholder="Lek"></input>
@@ -88,6 +89,45 @@ function Calculator() {
                 </form>
                 {buybackTime}
             </details>
+            <details open>
+                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
+                <form onSubmit={(e) => {
+                        e.preventDefault();
+                        const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
+                        setEnergyGenerated(results.genText);
+                        setPaybackPeriod(results.ROIText);
+                    }}>
+                    <br/>
+                    <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                    <br/>
+                    <div className="Vert-flex">
+                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
+                        <p>Your municipality is used to determine how much sunlight is expected</p>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="roof-space">Roof space available for solar</label>
+                        <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="percent-solar">Percent of total energy consumption for solar</label>
+                        <input id="percent-solar" type="number" placeholder="%"></input>
+                    </div>
+                    <div className="Hor-flex">
+                        <label htmlFor="electricity-paid">Current amount paid for electricity per&nbsp;
+                            <select id="electricity-paid-period">
+                                <option value="month">month</option>
+                                <option value="year">year</option>
+                            </select>
+                        </label>
+                        <input id="electricity-paid" type="number" placeholder="Lekë"></input>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div className="Vert-flex">
+                    <div>{energyGenerated}</div>
+                    <div>{paybackPeriod}</div>
+                </div>
+            </details>
         </div>
     )
 }
@@ -113,6 +153,75 @@ function calculateBuyback() {
     }
 
     //Break that down to years and months
+    return formatMonths(totalMonths);
+}
+
+function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
+    const roofSpace = document.getElementById("roof-space");
+    const percentSolar = document.getElementById("percent-solar");
+    const electricityPaid = document.getElementById("electricity-paid");
+    let electricityPaidVal = electricityPaid.value;
+    if(document.getElementById("electricity-paid-period").value == "year") {
+        electricityPaidVal /= 12;
+    }
+    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
+
+    return {
+        genText: `Energy generated by solar sytem: ${systemData.monthlyGeneration} kWh per month`,
+        ROIText: `Time to make a return on investment: ${formatMonths(systemData.ROI)}`,
+    };
+}
+
+/**
+ * 
+ * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
+ * @param {number} percentEnergyForSolar Amount of total energy consumption dedicated to solar (between 0 and 100) (%)
+ * @param {number} costPerMonth Total amount paid for electricity per month (Lekë per month)
+ * @param {*} prefecture The prefecture to gather solar data from
+ * @param {*} panelCost Cost of a single solar panel (Lekë)
+ * @param {*} panelSize Size of a single solar panel (m^2)
+ * @param {*} panelCapacity Capacity of a single solar panel (kW)
+ * @param {*} panelEfficiency Efficiency of solar panels (%)
+ * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, and "ROI" is the length of the payback period for a solar system purchase. 
+ */
+function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+    let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
+    let panelCost = singlePanelCost / panelCapacity;
+    let expenses = 0; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
+    let interest = 0; // Monthly interest in the case of payment by loan (Lekë per month) 
+
+    // Amount of solar irradiation for the specified municipality (kWh/month)/kW
+    const solarIrradiation = SolarData.getData(prefecture, "AVG", panelCapacity / panelSize, false);
+    // Ideal amount of energy generated per month for a system (kWh/month)
+    const desiredMonthlyGen = ((percentEnergyForSolar / 100) * costPerMonth) / electricityPrice;
+    // Number of solar panels needed
+    const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
+    // Amount of energy generated per month for a system (kWh per month)
+    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+    // Total cost of the system in Lekë
+    const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
+    // Amount of Lekë saved per month
+    const savings = (electricityPrice * actualMonthlyGen) - interest;
+    // Total time to return on investment in months
+    const roi = totalCost / savings;
+
+    // console.log({
+    //     irradiation: solarIrradiation,
+    //     desiredGeneration: desiredMonthlyGen,
+    //     solarPanelCountNeeded: solarPanelAmt,
+    //     monthlyGeneration: actualMonthlyGen,
+    //     cost: totalCost,
+    //     savings: savings,
+    //     returnOnInterest: roi
+    // });
+
+    return {
+        monthlyGeneration: actualMonthlyGen, 
+        ROI: roi,
+    };
+}
+
+function formatMonths(totalMonths) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
     if(years === Infinity) {
