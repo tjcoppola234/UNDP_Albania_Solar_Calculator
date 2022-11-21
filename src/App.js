@@ -35,7 +35,11 @@ export function PageHead() {
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>
+          <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>
+              <English>Home</English>
+              <Albanian>Shitet</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></li>
@@ -43,9 +47,9 @@ export function PageHead() {
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
-              <English>Tutorial</English>
-              <Albanian>Tutorial</Albanian>
+            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ayuda</Albanian>
             </Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>
