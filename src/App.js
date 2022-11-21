@@ -8,14 +8,42 @@ import { settings } from './Settings';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
       <PageHead></PageHead>
       <div className="content">
-        <p>This website is designed <span>for businesses</span></p>
-        <p>Here are some tools that can help you determine whether solar panels are a good fit for your business</p>
-        <div><a href="/Calculator">Calculator</a><br/>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</div>
-        <div><a href="/Resources">Resources</a><br/>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</div>
-        <div><a href="/Help">Help</a><br/>See frequently asked questions about solar</div>
+        <div id="center-fade">
+          <English>This website is designed <span>for businesses</span></English>
+          <Albanian>Kjo faqe interneti është krijuar <span>për bizneset</span></Albanian>
+          <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
+          <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
+          <div>
+            <button><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
+              <English>Calculator</English>
+              <Albanian>Llogaritësi</Albanian>
+            </Link></button>
+            <br/>
+            <English>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
+            <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+          </div>
+          <div>
+            <button><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+              <English>Resources</English>
+              <Albanian>Burimet</Albanian>
+            </Link></button>
+            <br/>
+            <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
+            <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+          </div>
+          <div>
+            <button><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ndihmë</Albanian>
+            </Link></button>
+            <br/>
+            <English>See frequently asked questions about solar</English>
+            <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
+          </div>
+        </div>
       </div>
       <PageFoot></PageFoot>
     </div>

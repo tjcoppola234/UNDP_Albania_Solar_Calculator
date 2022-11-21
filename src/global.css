@@ -24,8 +24,8 @@ body {
   font-size: var(--font-size);
 }
 
-#Nav-spacing {
-  margin-bottom: 90px;
+.content {
+  padding-top: 90px;
 }
 
 #Nav-title {
@@ -112,7 +112,6 @@ body {
   margin: 0;
 }
 #Nav-options-list li:not(#toggle-li) {
-  background-color: var(--nav-background);
   display: table-cell;
   width: 160px;
   -webkit-transition: background-color 200ms linear;
@@ -223,6 +222,7 @@ body {
   height: 80px;
   top: 0;
   white-space: nowrap;
+  z-index: 10;
 }
 
 #App-footer {
