@@ -60,8 +60,32 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                 <English>Manufacturer</English>
                                 <Albanian>Prodhuesi</Albanian>
                             </th>
+                            {/* apr key: https://api.exchangerate-api.com/v4/latest/EUR */}
                             <th>
-                                <English>Cost per Panel (€)</English>
+                                <English>Cost per Panel (
+                                    <select id="spr-cost-per-panel-select" onChange={(e) => {
+                                        e.preventDefault();
+                                        const cppEntries = document.getElementsByClassName("spr-table-cost-per-panel");
+                                        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
+                                        .then(response => response.json())
+                                        .then(json => {
+                                            debugger;
+                                            const lekPerEuro = json.rates.ALL;
+                                            if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) * lekPerEuro);
+                                                }
+                                            } else {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) / lekPerEuro);
+                                                }
+                                            }
+                                        })   
+                                    }}>
+                                        <option id="spr-cost-per-panel-select-EUR" value="EUR">€</option>
+                                        <option id="spr-cost-per-panel-select-ALL" value="ALL">L</option>
+                                    </select>
+                                )</English>
                                 <Albanian>Kostoja për panel (€)</Albanian>
                             </th>
                             <th>
@@ -87,12 +111,11 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                 </button></td>
                                 <td className="capped-th-width"><a href={getNameHref(pv["Name/Model"])} target="_blank" rel="noreferrer">{pv["Name/Model"]}</a></td>
                                 <td className="capped-th-width">{pv["Manufacturer"]}</td>
-                                <td>{pv["Cost per Panel"]}</td>
+                                <td className="spr-table-cost-per-panel">{pv["Cost per Panel"]}</td>
                                 <td>{pv["Area per Panel"]}</td>
                                 <td>{pv["Capacity per Panel"]}</td>
                                 <td>{pv["Efficiency"]}</td>
-                            </tr>
-                        ))}
+                            </tr>))}
                     </tbody>
                 </table>
             </div>
