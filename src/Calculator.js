@@ -42,7 +42,7 @@ function Calculator() {
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <div>
+            <div className="content">
                 <header>
                     <div>
                         <English><h2>Calculator</h2></English>
