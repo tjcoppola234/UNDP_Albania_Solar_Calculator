@@ -1,51 +1,52 @@
 :root {
-  --nav-background: #357AB6;
-  --nav-hover: rgb(0, 92, 140);
+  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
+  --nav-background: #0f4b94;
+  --nav-background-hover: #053671;
+  --nav-text: #ffffff;
+  --nav-text-hover: #e6ee9c;
+  --background: #ecf0f1;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: rgb(254, 254, 254);
+  background-color: var(--background);
   color: black;
   overflow-y: scroll;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #Nav-spacing {
   margin-bottom: 90px;
 }
 
-#App-header {
-  display: grid;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
-  color: rgb(254, 254, 254);
-  position: fixed;
-  height: 80px;
-  top: 0;
-  white-space: nowrap;
-}
-
 #Nav-title {
   grid-column: 1;
   margin-left: 20px;
+  color: var(--nav-text);
+  text-decoration: none;
 }
 
 #Nav-options {
   grid-column: 2;
-  color: rgb(254, 254, 254);
+  color: var(--nav-text);
   height: inherit;
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1000px) {
   #Nav-options-list:not(.invisible) {
     display: flex;
     flex-direction: column;
   }
   #Nav-options-list li:not(:last-child) {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
   #Nav-options-list li {
     height: 100%;
@@ -55,20 +56,20 @@ body {
   }
   #Switch-albanian {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
   #Switch-english {
     border: none;
-    border-top: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
   }
 }
-@media screen and (min-width: 1070px) {
+@media screen and (min-width: 1000px) {
   #Nav-options-list {
     display: flex;
   }
   #Nav-options-list li:not(:last-child) {
     border: none;
-    border-left: 1px solid var(--nav-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
   #Nav-options-list li {
     height: inherit;
@@ -78,12 +79,12 @@ body {
   }
   #Switch-albanian {
     border: none;
-    border-left: 1px solid var(--nav-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
   #Switch-english {
     border: none;
-    border-top: 1px solid var(--nav-hover);
-    border-left: 1px solid var(--nav-hover);
+    border-top: 1px solid var(--nav-background-hover);
+    border-left: 1px solid var(--nav-background-hover);
   }
 }
 #Hamburger {
@@ -112,10 +113,10 @@ body {
   transition: background-color 200ms linear;
 }
 #Nav-options-list li:hover {
-  background-color: var(--nav-hover);
+  background-color: var(--nav-background-hover);
 }
 #Nav-options-list li.current-tab {
-  background-color:rgb(0, 92, 140);
+  background-color:var(--nav-background-hover);
 }
 
 #Nav-options-list li a { 
@@ -125,15 +126,21 @@ body {
   font-size: larger;
   text-decoration: none;
   font-weight: bold;
-  color: rgb(254, 254, 254);
   height: inherit;
   width: 120px;
+  color: var(--nav-text);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
-#Nav-options-list li a.current-tab {
+#Nav-options-list li:hover a {
+  color: var(--nav-text-hover);
+  text-decoration: underline;
+}
+#Nav-options-list li.current-tab a {
   pointer-events: none;
+  color: var(--nav-text-hover);
+  text-decoration: underline;
 }
 
 #Toggle {
@@ -153,10 +160,10 @@ body {
   transition: background-color 200ms linear;
 }
 #Toggle button:hover {
-  background-color: rgb(0, 92, 140);
+  background-color: var(--nav-background-hover);
 }
 #Toggle button:disabled {
-  background-color:rgb(0, 92, 140);
+  background-color:var(--nav-background-hover);
 }
 #Toggle img {
   object-fit: contain;
@@ -191,4 +198,73 @@ body {
 .Space-between {
   display: flex;
   justify-content: space-between;
+}
+
+#App-header {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--nav-background);
+  color: var(--nav-text);
+  position: fixed;
+  height: 80px;
+  top: 0;
+  white-space: nowrap;
+}
+
+#App-footer {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
+  background-color: var(--nav-background); /*Old Color: rgb(0, 132, 200);*/
+  color: var(--nav-text);
+  white-space: nowrap;
+  position: absolute;
+  height: 150px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.content {
+  padding-bottom: 200px;
+  min-height: calc(100vh - 150px);
+}
+
+.App {
+  position: relative;
+  min-height: 100%;
+}
+.Calculator {
+  position: relative;
+  min-height: 100%;
+}
+.Tutorial {
+  position: relative;
+  min-height: 100%;
+}
+.Resources {
+  position: relative;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.Sponsor-logos {
+  margin: 0 auto;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.Sponsor-logos img {
+  padding-left: 15px;
+  padding-right: 15px;
 }

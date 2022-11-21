@@ -1,20 +1,20 @@
 import SettingsListener from "./SettingsListener";
 
-//To change the starting settings, switch the two strings
-const DEFAULT_ALBANIAN_VISIBILITY = "invisible";
-const DEFAULT_ENGLISH_VISIBILITY = "";
+//To change the starting settings, switch the two booleans
+const DEFAULT_ALBANIAN_VISIBILITY = false;
+const DEFAULT_ENGLISH_VISIBILITY = true;
 
 class Settings {
-    constructor(initAlb, initEng){
-        this.albanianVisible = new SettingsListener(initAlb);
-        this.englishVisible = new SettingsListener(initEng);
+    constructor(){
+        this.albanianVisible = new SettingsListener(DEFAULT_ALBANIAN_VISIBILITY);
+        this.englishVisible = new SettingsListener(DEFAULT_ENGLISH_VISIBILITY);
         if(window.location.pathname === '/') {
-            this.disabledMenuItem = new SettingsListener("Home");
+            this.disabledMenuItem = new SettingsListener("Calculator");
         } else {
             this.disabledMenuItem = new SettingsListener(window.location.pathname.substring(1));
         }
     }
 }
     
-const settings = new Settings(DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY);
+const settings = new Settings();
 export {settings, DEFAULT_ALBANIAN_VISIBILITY, DEFAULT_ENGLISH_VISIBILITY};

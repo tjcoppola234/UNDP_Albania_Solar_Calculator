@@ -1,6 +1,5 @@
 import './global.css';
 import './App.css';
-// import UNDP_logo from 'public/UNDP_logo.png';
 import { Link } from 'react-router-dom';
 import Albanian from './Albanian';
 import English from './English';
@@ -11,11 +10,14 @@ function App() {
   return (
     <div className="App">
       <PageHead></PageHead>
-      <h2>Homepage</h2>
-      <div className="Sponsor-logos">
-        <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
-        <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+      <div className="content">
+        <h2>Homepage</h2>
+        <div className="Sponsor-logos">
+          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
+          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+        </div>
       </div>
+      <PageFoot></PageFoot>
     </div>
   );
 }
@@ -24,17 +26,27 @@ export function PageHead() {
   return (
     <div>
       <header id="App-header">
-        <h1 id="Nav-title">
-          <English>Albania Solar Calculator</English>
-          <Albanian>Llogaritësi diellor i Shqipërisë</Albanian>
-        </h1>
+        <a href="/" id="Nav-title">
+          <div>
+            <English><h1>Albania Solar Calculator</h1></English>
+            <Albanian><h1>Llogaritësi diellor i Shqipërisë</h1></Albanian>
+          </div>
+        </a>
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-            <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>Home</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>Resources</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>Calculator</Link></li>
-            <li className={settings.disabledMenuItem.getState() === "FAQ" ? "current-tab" : ""}><Link to="/FAQ" onClick={() => setCurrentTab("FAQ")}>FAQ</Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>
+              <English>Calculator</English>
+              <Albanian>Llogaritësi</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+              <English>Resources</English>
+              <Albanian>Burimet</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
+              <English>Tutorial</English>
+              <Albanian>Tutorial</Albanian>
+            </Link></li>
             <li><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
@@ -42,6 +54,30 @@ export function PageHead() {
       <div id="Nav-spacing"></div>
     </div>
   );
+}
+
+export function PageFoot() {
+  return (
+    <div id="App-footer">
+      <footer>
+        <div className="Sponsor-logos">
+          <span className="Center-items">
+            <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
+            <div>
+              <English>in collaboration with</English>
+              <Albanian>ne bashkepunim me</Albanian>
+            </div>
+          </span>
+          <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
+          <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
+        </div>
+        <div>
+          <English>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</English>
+          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</Albanian>
+        </div>
+      </footer>
+    </div>
+  )
 }
 
 function setCurrentTab(tab) {
@@ -61,7 +97,7 @@ function hamburgerVis() {
 }
 document.onclick = () => {
   let nav = document.getElementById("Nav-options-list");
-  if(!switching && window.innerWidth < 1070 && !nav.classList.contains("invisible")) {
+  if(!switching && window.innerWidth < 1000 && !nav.classList.contains("invisible")) {
     nav.classList.add("invisible");
   }
   switching = false;
@@ -70,16 +106,16 @@ document.onclick = () => {
 //To manage hiding the navbar when the hamburger menu appears
 let sizeDecreased = false;
 window.onresize = () => {
-  if(window.innerWidth > 1070) {
+  if(window.innerWidth > 1000) {
     document.getElementById("Nav-options-list").classList.remove("invisible");
     sizeDecreased = false;
-  } else if(!sizeDecreased && window.innerWidth <= 1070) {
+  } else if(!sizeDecreased && window.innerWidth <= 1000) {
     document.getElementById("Nav-options-list").classList.add("invisible");
     sizeDecreased = true;
   }
 }
 window.onload = () => {
-  if(window.innerWidth <= 1070) {
+  if(window.innerWidth <= 1000) {
     document.getElementById("Nav-options-list").classList.add("invisible");
   }
 }

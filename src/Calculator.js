@@ -1,21 +1,20 @@
 import './global.css';
 import './Calculator.css';
-import { PageHead } from './App';
+import { PageHead, PageFoot } from './App';
 import {useState} from 'react';
 import { MunicipalDropdown } from './Dropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 
-function Calculator() {
-    const [buybackTime, setBuybackTime] = useState("");
+import English from './English';
+import Albanian from './Albanian';
+import { settings } from './Settings';
 
+function Calculator() {
     const [paybackPeriod, setPaybackPeriod] = useState("");
     const [energyGenerated, setEnergyGenerated] = useState("");
 
-    const [peuPeriod, setPeuPeriod] = useState("Month");
-    const [peuMetric, setPeuMetric] = useState("kWh");
     const [prefecture, setPrefecture] = useState("");
-    const [pecDisabled, setPecDisabled] = useState(false);
 
     const [solarName, setSolarName] = useState("Unnamed");
     const [solarManufacturer, setSolarManufacturer] = useState("Unnamed");
@@ -24,6 +23,12 @@ function Calculator() {
     const [solarCapacity, setSolarCapacity] = useState(0);
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
+
+    
+    const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
+    settings.albanianVisible.addListener(visible => {
+        setAlbanian(visible);
+    });
 
     function setSolarData(pvSelection) {
         setSolarName(pvSelection["Name/Model"]);
@@ -44,116 +49,81 @@ function Calculator() {
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <header>
-                <h2>Calculator</h2>
-            </header>
-            <details>
-                <summary><b>Old Payback Period:</b></summary>
-                <form id="calc-payback" onSubmit={e => {
-                        e.preventDefault(); 
-                        setBuybackTime(calculateBuyback());
-                    }}>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-sys-cost">Upfront cost of solar panel system:</label>
-                        <input id="payback-sys-cost" type="number" min="0" max="10000000000" step="0.01" placeholder="Lek"></input>
+            <div className="content">
+                <header>
+                    <div>
+                        <English><h2>Calculator</h2></English>
+                        <Albanian><h2>Llogaritësi</h2></Albanian>
                     </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-energy-usage">
-                            Electricity consumption in&nbsp;
-                            <select id="payback-energy-usage-metric" onChange={e => {
-                                    setPeuMetric(e.target.value);
-                                    if(e.target.value === "Lek") {
-                                        setPecDisabled(true);
-                                    } else {
-                                        setPecDisabled(false);
-                                    }
-                                }}>
-                                <option value="kWh">kWh</option>
-                                <option value="Lek">Lek</option>
-                                {/* <option value="Euros">Euros</option> */}
-                            </select>
-                            /
-                            <select id="payback-energy-usage-period" onChange={e => {setPeuPeriod(e.target.value)}}>
-                                <option value="Month">Month</option>
-                                <option value="Year">Year</option>
-                            </select>
-                            :
-                        </label>
-                        <input id="payback-energy-usage" type="number" min="0" max="10000000000" step="0.01" placeholder={peuMetric + "/" + peuPeriod}></input>
+                </header>
+                <details open> {/* place "open" next to "details" to make it open on load */}
+                    <div>
+                        <English><summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary></English>
+                        <Albanian> <summary><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</summary></Albanian>
                     </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="payback-energy-cost">Cost of electricity:</label>
-                        <input id="payback-energy-cost" type="number" min="0" max="10000" step="0.01" placeholder="Lek/kWh" disabled={pecDisabled}></input>
-                    </div>
-                    <button type="submit">Calculate</button>
-                </form>
-                {buybackTime}
-            </details>
-            <details open>
-                <summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary>
-                <form onSubmit={(e) => {
-                        e.preventDefault();
-                        const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
-                        setEnergyGenerated(results.genText);
-                        setPaybackPeriod(results.ROIText);
-                    }}>
-                    <br/>
-                    <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
-                    <br/>
+                    <form onSubmit={(e) => {
+                            e.preventDefault();
+                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
+                            setEnergyGenerated(results.genText);
+                            setPaybackPeriod(results.ROIText);
+                        }}>
+                        <br />
+                        <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                        <br />
+                        <div className="Vert-flex">
+                            <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
+                            <div>
+                                <English>Your municipality is used to determine how much sunlight is expected</English>
+                                <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
+                            </div>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="roof-space">
+                                <English>Roof space available for solar</English>
+                                <Albanian>Hapësirë ​​çati e disponueshme për solare</Albanian>
+                            </label>
+                            <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="percent-solar">
+                                <English>Percent of total energy consumption for solar</English>
+                                <Albanian>Përqindja e konsumit total të energjisë për energjinë diellore</Albanian>
+                            </label>
+                            <input id="percent-solar" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="electricity-paid">
+                                <div className="Hor-flex">
+                                    <English>Current amount paid for electricity per</English>
+                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike për</Albanian>
+                                    <select id="electricity-paid-period">
+                                        <option value="month">month</option>
+                                        <option value="year">year</option>
+                                    </select>
+                                </div>
+                            </label>
+                            <input id="electricity-paid" type="number" placeholder="Lekë"></input>
+                        </div>
+                        <button type="submit">
+                            <English>Calculate</English>
+                            <Albanian>Llogaritni</Albanian>
+                        </button>
+                    </form>
                     <div className="Vert-flex">
-                        <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                        <p>Your municipality is used to determine how much sunlight is expected</p>
+                        <div>
+                            <English>Energy generated by solar sytem: {energyGenerated} kWh per month</English>
+                            <Albanian>Energjia e gjeneruar nga sistemi diellor: {energyGenerated} kWh në muaj</Albanian>
+                        </div>
+                        <div>
+                            <English>Time to make a return on investment: {formatMonths(paybackPeriod)}</English>
+                            <Albanian>Koha për të bërë një kthim nga investimi: {formatMonths(paybackPeriod, true)}</Albanian>
+                        </div>
                     </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="roof-space">Roof space available for solar</label>
-                        <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
-                    </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="percent-solar">Percent of total energy consumption for solar</label>
-                        <input id="percent-solar" type="number" placeholder="%"></input>
-                    </div>
-                    <div className="Hor-flex">
-                        <label htmlFor="electricity-paid">Current amount paid for electricity per&nbsp;
-                            <select id="electricity-paid-period">
-                                <option value="month">month</option>
-                                <option value="year">year</option>
-                            </select>
-                        </label>
-                        <input id="electricity-paid" type="number" placeholder="Lekë"></input>
-                    </div>
-                    <button type="submit">Calculate</button>
-                </form>
-                <div className="Vert-flex">
-                    <div>{energyGenerated}</div>
-                    <div>{paybackPeriod}</div>
-                </div>
-            </details>
+                </details>
+            </div>
+            <PageFoot></PageFoot>
         </div>
     )
-}
-
-function calculateBuyback() {
-    const sysCost = document.getElementById("payback-sys-cost");
-    const energyCost = document.getElementById("payback-energy-cost");
-    const energyUsage = document.getElementById("payback-energy-usage");
-    
-    //If "yearly" option is selected, convert to monthly for calculation purposes
-    let energyUsageVal = energyUsage.value;
-    if(document.getElementById("payback-energy-usage-period").value === "Year") {
-        energyUsageVal = energyUsage.value / 12;
-    }
-
-    let totalMonths;
-    //If "Lek" option is selected, ignore energyCost
-    if(document.getElementById("payback-energy-usage-metric").value === "Lek") {
-        totalMonths = sysCost.value / energyUsageVal;
-    } else {
-        //Calculate the buyback period in total months
-        totalMonths = sysCost.value / (energyCost.value * energyUsageVal);
-    }
-
-    //Break that down to years and months
-    return formatMonths(totalMonths);
 }
 
 function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
@@ -161,14 +131,14 @@ function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarE
     const percentSolar = document.getElementById("percent-solar");
     const electricityPaid = document.getElementById("electricity-paid");
     let electricityPaidVal = electricityPaid.value;
-    if(document.getElementById("electricity-paid-period").value == "year") {
+    if(document.getElementById("electricity-paid-period").value === "year") {
         electricityPaidVal /= 12;
     }
     const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
 
     return {
-        genText: `Energy generated by solar sytem: ${systemData.monthlyGeneration} kWh per month`,
-        ROIText: `Time to make a return on investment: ${formatMonths(systemData.ROI)}`,
+        genText: systemData.monthlyGeneration,
+        ROIText: systemData.ROI
     };
 }
 
@@ -221,7 +191,7 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     };
 }
 
-function formatMonths(totalMonths) {
+function formatMonths(totalMonths, isAlbanian = false) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
     if(years === Infinity) {
@@ -234,10 +204,16 @@ function formatMonths(totalMonths) {
             yearText = "";
             break;
         case 1:
-            yearText = "1 Year";
+            if(isAlbanian)
+                yearText = "1 Vit";
+            else
+                yearText = "1 Year";
             break;
         default:
-            yearText = `${years} Years`;
+            if(isAlbanian)
+                yearText = `${years} Vjet`;
+            else
+                yearText = `${years} Years`;
             break;
     }
 
@@ -247,22 +223,42 @@ function formatMonths(totalMonths) {
 
     switch(months) {
         case 0:
-            if(years === 0)
-                monthText = "Less than 1 month!";
+            if(years === 0) {
+                if(isAlbanian)
+                    monthText = "Më pak se 1 muaj!";
+                else
+                    monthText = "Less than 1 month!";
+            }
             else
                 monthText = "";
             break;
         case 1:
-            monthText = "1 Month";
+            if(isAlbanian)
+                monthText = "1 muaj";
+            else
+                monthText = "1 month";
             break;
         case 12:
             years++;
-            yearText = `${years} Year`;
-            if(years > 1) { yearText += "s"; }
+            if(isAlbanian)
+                yearText = `${years} Vit`;
+            else {
+                yearText = `${years} Years`;
+            }
+            if(years > 1) {
+                if(isAlbanian)
+                    yearText = `${years} Vjet`;
+                else
+                    yearText = `${years} Years`;
+            }
             monthText = "";
             break;
         default:
-            monthText = `${months} Months`;
+            if(isAlbanian)
+                monthText = `${months} Muaj`;
+            else
+                monthText = `${months} Months`;
+             break;
     }
     
     return yearText + monthText;

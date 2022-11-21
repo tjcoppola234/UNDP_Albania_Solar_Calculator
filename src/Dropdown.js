@@ -1,5 +1,7 @@
 import { readString } from 'react-papaparse';
 import { useEffect } from 'react';
+import English from './English';
+import Albanian from './Albanian';
 
 export function MunicipalDropdown({changeEvent}) {
     useEffect(() => {
@@ -61,9 +63,12 @@ export function MunicipalDropdown({changeEvent}) {
 
     return (
         <div>
-            <label htmlFor="municipality-dropdown">Select your municipality:</label>
-                <select id="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
-                </select>
+            <label htmlFor="municipality-dropdown">
+                <English>Select your municipality:</English>
+                <Albanian>Zgjidhni komunën tuaj:</Albanian>
+            </label>
+            <select id="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
+            </select>
         </div>
     );
 }
