@@ -22,8 +22,8 @@ body {
   padding: 0;
 }
 
-#Nav-spacing {
-  margin-bottom: 90px;
+.content {
+  padding-top: 90px;
 }
 
 #Nav-title {
