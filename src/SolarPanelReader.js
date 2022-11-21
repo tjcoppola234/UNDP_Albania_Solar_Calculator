@@ -98,6 +98,9 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
             </div>
             <div id="solar-panel-info" className="Vert-flex">
                 <div>
+                    <English><b>Disclaimer:</b> Data as of November 2022</English>
+                </div>
+                <div>
                     <English>Solar Panel Statistics</English>
                     <Albanian>Statistikat e paneleve diellore</Albanian>
                 </div>
