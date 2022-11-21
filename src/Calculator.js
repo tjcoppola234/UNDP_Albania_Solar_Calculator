@@ -122,7 +122,7 @@ function Calculator() {
                             </label>
                             <input id="loan-interest" type="number" placeholder="%"></input>
                         </div>
-                        <button type="submit">
+                        <button type="submit" id="submit-button">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
                         </button>
@@ -131,7 +131,7 @@ function Calculator() {
                         <br />
                         <div>
                             <English><b>Disclaimer:</b> These numbers are based off your energy bills and are not exact</English>
-                            <Albanian></Albanian>
+                            <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
                         </div>
                         <br />
                         <div>
