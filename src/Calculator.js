@@ -5,6 +5,8 @@ import {useState} from 'react';
 import { MunicipalDropdown } from './Dropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
+import React from 'react';
+import Plot from 'react-plotly.js';
 
 import English from './English';
 import Albanian from './Albanian';
@@ -120,6 +122,28 @@ function Calculator() {
                         </div>
                     </div>
                 </details>
+                <graph id="graph">
+                    <div>
+                        <English><summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></English>
+                        <Albanian> <summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></Albanian> {/*TODO: Translate to Albanian*/}
+                    </div>
+                    <br />
+                    <div>
+                        <Plot
+                            data={[
+                                {
+                                x: [1, 2, 3],
+                                y: [2, 6, 3],
+                                type: 'scatter',
+                                mode: 'lines+markers',
+                                marker: {color: 'red'},
+                                },
+                            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                            ]}
+                            layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
+                        />
+                    </div>
+                </graph>
             </div>
             <PageFoot></PageFoot>
         </div>
