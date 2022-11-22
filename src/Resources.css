@@ -2,6 +2,7 @@
     width: 600px;
     height: 450px;
     border: none;
+
 }
 
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -13,42 +14,87 @@ details {
 .h2resources {
     color:black;
     font-size:300%;
-    margin: 10px;
+    text-align: center;
+    border:3px solid #9fb0c4;
+    border-radius: 25px;
+    margin-left:250px;
+    margin-right:250px;
+    background-color: #9fb0c4;
 }
 
-#largerfontb {
-    font-size:150%;
+#center{
+    text-align: justify;
 }
-#largerfont2b {
+
+.largerfontb {
+    font-size: 250%;
+    text-align: center;
+}
+.largerfont2b {
     font-size:120%;
+    text-align: center;
 }
 
 h3 {
-    padding-left: 35px
+    padding-left: 35px;
 }
+
+.li-1 {
+    padding-left: 35px;
+    margin-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.l1-2 {
+    padding-left: 35px;
+    margin-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
 .p-text {
     padding-left: 70px;
     padding-right: 50px;
     text-align: left;
 }
 
-
 #something {
     padding-left: 35px;
 }
 
-.imagefloat {
-    padding-right: 50px;
-    padding-bottom: 50px;
+#imagefloat {
+    margin-right: 95px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-top: 60px;
+
     float:right;
-    padding-left: 30px;
+    border : 2px solid black;
+    border-radius: 25px;
+
 }
 
-.imagefloat2 {
-    padding-right: 50px;
-    padding-bottom: 50px;
+#imagefloat2 {
+    margin-right: 70px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-top: 90px;
     float:right;
-    padding-left: 30px;
+    border : 2px solid black;
+    border-radius: 25px;
+}
+
+#imagefloat3 {
+    margin-right: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    float:left;
+    border : 2px solid black;
+    border-radius: 25px;
 }
 
 b {
@@ -57,4 +103,12 @@ b {
 
 iframe {
     padding-left: 35px;
+}
+
+.div5 {
+    background-color: #9fb0c4;
+    border-radius: 25px;
+    border: 2px solid #9fb0c4;
+    margin:70px;
+    padding-bottom: 10px;
 }
