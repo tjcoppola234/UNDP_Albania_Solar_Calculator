@@ -16,73 +16,151 @@ function Resources() {
                     <English><h2 className="h2resources">Resources</h2></English>
                     <Albanian><h2 className="h2resources">Burimet</h2></Albanian>
                 </div>
-            <details close> {/* place "open" next to "details" to make it open on load */}
-                <summary>
-                    <English><b id="largerfontb">Why is solar energy important?</b></English>
-                    <Albanian><b id="largerfontb">Pse është e rëndësishme energjia diellore?</b></Albanian>
-                </summary>
-                <img id="imagefloat" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" width = "400" height = "500" floatleft/>
+            <div>
+                <div>
+                    <English><h1 className="largerfontb">Why is solar energy important?</h1></English>
+                    <Albanian><h1 className="largerfontb">Pse është e rëndësishme energjia diellore?</h1></Albanian>
+                </div>
+                <img id="imagefloat" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" width = "360" height = "450" floatleft/>
                 <div className="div5">
                 <div>
                     <English><h3>The Enviornment</h3></English>
                     <Albanian><h3>Mjedisi</h3></Albanian>
                 </div>
                 <ul>
-                    <li id ="li">Reduces the amount of carbon dioxide released into the air.</li>
-                    <li id ="li">Provides better air quality.</li>
-                    <li id ="li">Helps mitigate climate change.</li>
+                    <li className="li-1">
+                        <English>Reduces the amount of carbon dioxide released into the air.</English>
+                        <Albanian>Redukton sasinë e dioksidit të karbonit të lëshuar në ajër.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Provides better air quality.</English>
+                        <Albanian>Ofron cilësi më të mirë të ajrit.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Helps mitigate climate change.</English>
+                        <Albanian>Ndihmon në zbutjen e ndryshimeve klimatike.</Albanian>
+                    </li>
                 </ul>
-                <h3>Sunny Potential</h3>
+                <div>
+                    <English><h3>Sunny Potential</h3></English>
+                    <Albanian><h3>Potencial me diell</h3></Albanian>
+                </div>
                 <ul>
-                    <li id ="li">Albania has extensive potential for solar energy.</li>
-                    <li id ="li">Between 2400-2500 hours of sunshine per year.</li>
-                    <li id ="li">The irradiation is the amount of power received from the sun.</li>
-                    <li id ="li">The graph to the right shows the irradiation of Albanian regions.</li>
+                    <li className="li-1">
+                        <English>Albania has extensive potential for solar energy.</English>
+                        <Albanian>Shqipëria ka një potencial të gjerë për energjinë diellore.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Between 2400-2500 hours of sunshine per year.</English>
+                        <Albanian>Mes 2400-2500 orëve me diell në vit.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>The irradiation is the amount of power received from the sun.</English>
+                        <Albanian>Rrezatimi është sasia e fuqisë së marrë nga dielli.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>The graph to the right shows the irradiation of Albanian regions.</English>
+                        <Albanian>Grafiku në të djathtë tregon rrezatimin e rajoneve shqiptare.</Albanian>
+                    </li>
                 </ul>
             </div>    
-        </details>
-        <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <English><b id="largerfontb">What are the benefits of solar energy for your business?</b></English>
-                <Albanian><b id="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</b></Albanian>
-            </summary>
+        </div>
+        <div>
+            <div>
+                <English><h1 className="largerfontb">What are the benefits of solar energy for your business?</h1></English>
+                <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
+            </div>
             <div className="div5">
-            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "450" height = "770"/>
-                <h3>Reduced Energy Costs</h3>
+            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "450" height = "770" />
+                <div>
+                    <English><h3>Reduced Energy Costs</h3></English>
+                    <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
+                </div>
                 <ul>
-                    <li id ="li">Electricity bills are expensive and problematic.</li>
-                    <li id ="li">Your electricity bill depends on how much energy is consumed and the rate your utility company charges.</li>
-                    <li id ="li">You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment.</li>
-                    <li id ="li">Utility companies face high costs to maintain and expand the grid making your electricity bills more expensive.</li>
-                    <li id ="li">You can avoid this increase of price by switching to solar!</li>    
+                    <li className="li-1">
+                        <English>Electricity bills are expensive and problematic.</English>
+                        <Albanian>Faturat e energjisë elektrike janë të shtrenjta dhe problematike.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Your electricity bill depends on how much energy is consumed and the rate your utility company charges.</English>
+                        <Albanian>Fatura juaj e energjisë elektrike varet nga sasia e energjisë së konsumuar dhe tarifa që ngarkon kompania juaj e shërbimeve.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment.</English>
+                        <Albanian>Ju mund ta shikoni kalimin në solare si zëvendësim të faturave të energjisë elektrike me pagesa mujore për pajisjet tuaja diellore.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Utility companies face high costs to maintain and expand the grid making your electricity bills more expensive.</English>
+                        <Albanian>Kompanitë e shërbimeve publike përballen me kosto të larta për të mirëmbajtur dhe zgjeruar rrjetin duke i bërë më të shtrenjta faturat tuaja të energjisë elektrike.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>You can avoid this increase of price by switching to solar!</English>
+                        <Albanian>Ju mund ta shmangni këtë rritje të çmimit duke kaluar në solare!</Albanian>
+                    </li>    
                 </ul>
-                <h3>More Energy Security and Independence</h3>
+                <div>
+                    <English><h3>More Energy Security and Independence</h3></English>
+                    <Albanian><h3>Më shumë siguri dhe pavarësi energjetike</h3></Albanian>
+                </div>
                 <ul>
-                    <li id ="li">Becoming your own power providers</li>
-                    <li id ="li">Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</li>
-                    <li id ="li2">Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</li>
+                    <li className="li-1">
+                        <English>Becoming your own power providers</English>
+                        <Albanian>Duke u bërë ofruesit tuaj të energjisë</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</English>
+                        <Albanian>Kostot e përdorimit të energjisë diellore janë shumë të parashikueshme pasi shumë paguajnë gjithashtu tarifa shërbimi që shkojnë për mirëmbajtjen e rrjetit, tarifat për matjen neto dhe kosto të tjera të lidhura.</Albanian>
+                    </li>
+                    <li className="li-2">
+                        <English>ust remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</English>
+                        <Albanian>Mos harroni nëse nuk përdorni 100% diellore, atëherë do të keni një nivel të mbetur të faturës elektrike që do të ndryshojë gjatë vitit.</Albanian>
+                    </li>
                 </ul>
-                <h3>Green Business</h3>
+                <div>
+                    <English><h3>Green Business</h3></English>
+                    <Albanian><h3>Biznesi i gjelbër</h3></Albanian>
+                </div>
                 <ul>
-                    <li id ="li2">You can go green by installing solar systems!</li>
-                    <li id ="li2">Going green means finding the most efficient ways to sustain your companies for the better impact of the environment.</li>
-                    <li id ="li2">It reduces company costs by keeping general operating costs low over time.</li>
-                    <li id ="li2">It attracts more eco-conscious employees to hire, and a better image.</li>
-                    <li id ="li2">It creates a more robust reputation of the company by leaving a lasting impression on your customers.</li>
+                    <li className="li-1">
+                        <English>You can go green by installing solar systems!</English>
+                        <Albanian>Mund të jesh i gjelbër duke instaluar sisteme diellore!</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>Going green means finding the most efficient ways to sustain your companies for the better impact of the environment.</English>
+                        <Albanian>Të jesh i gjelbër do të thotë të gjesh mënyrat më efikase për të mbështetur kompanitë tuaja për ndikimin më të mirë të mjedisit.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>It reduces company costs by keeping general operating costs low over time.</English>
+                        <Albanian>Redukton kostot e kompanisë duke i mbajtur kostot e përgjithshme operative të ulëta me kalimin e kohës.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>It attracts more eco-conscious employees to hire, and a better image.</English>
+                        <Albanian>Ajo tërheq më shumë punonjës të ndërgjegjshëm për mjedisin për të punësuar dhe një imazh më të mirë.</Albanian>
+                    </li>
+                    <li className="li-1">
+                        <English>It creates a more robust reputation of the company by leaving a lasting impression on your customers.</English>
+                        <Albanian>Krijon një reputacion më të fortë të kompanisë duke lënë një përshtypje të qëndrueshme te klientët tuaj.</Albanian>
+                    </li>
                 </ul>
-                <h3>Solar Tax Benefit</h3>
+                <div>
+                    <English><h3>Solar Tax Benefit</h3></English>
+                    <Albanian><h3>Përfitimi nga taksat diellore</h3></Albanian>
+                </div>
                 <ul>
-                    <li id ="li2">The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</li>
+                    <li className="li-2">
+                        <English>The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</English>
+                        <Albanian>Tatimi mbi vlerën e shtuar për të gjitha makineritë dhe pajisjet e tjera të importuara për të investuar në energjinë diellore është diskutuar të anulohet!</Albanian>
+                    </li>
                 </ul>
             </div>
-        </details>
-        <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <English><b id="largerfontb">Should your business go solar?</b></English>
-                <Albanian><b id="largerfontb">A duhet të shkojë biznesi juaj diellor?</b></Albanian>
-            </summary>
+        </div>
+        <div>
+            <div>
+                <English><h1 className="largerfontb">Should your business go solar?</h1></English>
+                <Albanian><h1 className="largerfontb">A duhet të shkojë biznesi juaj diellor?</h1></Albanian>
+            </div>
             
-            <div id="div5">
+            <div className="div5">
                 <img id="imagefloat3" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
                 
                 <div>
@@ -109,6 +187,7 @@ function Resources() {
                     <English>The average Albanian business energy usage can be about X lek which is directly affected by how much energy is used, so this cost varies depending on your business’ consumption. Solar companies will typically generate a report of your estimations.</English>
                     <Albanian>Përdorimi mesatar i energjisë së biznesit shqiptar mund të jetë rreth X lek që ndikohet drejtpërdrejt nga sasia e energjisë së përdorur, kështu që kjo kosto varion në varësi të konsumit të biznesit tuaj. Kompanitë diellore zakonisht do të gjenerojnë një raport të vlerësimeve tuaja.</Albanian>
                 </div>
+                <br />
                 <div className="p-text">
                     <English>Most solar companies will build out an accurate estimate by using the last six months of your energy bills and utilizing sun tracking software to determine the necessary size of your system to generate 100% of your power needs.</English>
                     <Albanian>Shumica e kompanive diellore do të krijojnë një vlerësim të saktë duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji.</Albanian>
@@ -146,16 +225,15 @@ function Resources() {
                     <Albanian>Garancia varet nga prodhuesi me më shumë kohëzgjatje midis 20-25 vjet. Disa kompani diellore ofrojnë gjithashtu disa vite mirëmbajtje, si dhe pasi të jenë instaluar në çatinë tuaj.</Albanian>
                 </div>
             </div>
-        </details>
-        <details close> {/* place "open" next to "details" to make it open on load */}
-            <summary>
-                <English><h1 id="largerfontb">How can your business go solar?</h1></English>
-                <Albanian><h1 id="largerfontb">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
-            </summary>
+        </div>
+        <div>
+            <div>
+                <English><h1 className="largerfontb">How can your business go solar?</h1></English>
+                <Albanian><h1 className="largerfontb">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
+            </div>
             
                 <div className="div5">
                     <img id="imagefloat2" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "450" height = "650"/>
-
                     <div>
                         <English><h3>Solar Installers</h3></English>
                         <Albanian><h3>Instalues ​​diellor</h3></Albanian>
@@ -165,11 +243,11 @@ function Resources() {
                         <Albanian>Bisedoni me kompani të ndryshme instalimi diellor për të përcaktuar nëse dhe si një sistem diellor është i duhuri për ju. Shumë kompani ofrojnë konsulencë teknike dhe financiare, së bashku me parashikimet e plota të një sistemi PV në çatinë tuaj. Tek këta shitës do të mund të aplikoni për një leje dhe të filloni instalimin. Disa kompani diellore dhe shumë prodhues të diellit nga të cilët këto kompani instalimi marrin panelet e tyre gjithashtu ofrojnë mirëmbajtje periodike.</Albanian>
                     </div>
 
-                <details close> {/* place "open" next to "details" to make it open on load */}
-                    <summary>
-                        <English><b id="largerfont2b">Solar Installer Contacts</b></English>
-                        <Albanian><b id="largerfont2b">Kontaktet e instaluesit diellor</b></Albanian>
-                    </summary>
+                <div>
+                    <div>
+                        <English><h3>Solar Installer Contacts</h3></English>
+                        <Albanian><h3>Kontaktet e instaluesit diellor</h3></Albanian>
+                    </div>
                     <div className="p-text"><strong><a href = "https://panelebesi.al/"> Panele Fotovoltaike Besi</a></strong></div>
                     <div className="p-text">+355 69 992 9800</div>
                     <div className="p-text">panelebesi@gmail.com</div>
@@ -184,9 +262,9 @@ function Resources() {
                     <div className="p-text">+355 68 900 1221</div>
                     <div className="p-text">info@enercom.al</div>
                     <div className="p-text">Rruga e Elbasanit, Sauk, 1044, Tiranë</div>
-                    
+                    <br />
                     <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </details>
+                    </div>
 
 
                     <div>
@@ -197,20 +275,27 @@ function Resources() {
 						<English>Talk to different banks to determine if taking out a loan is right for your company. A couple banks, like Union Bank and ProCredit Bank, offer technical and financial assistance to help you determine if a solar system is right for you. These banks will often be partnered with solar installation companies they will get you in contact with.</English>
 						<Albanian>Bisedoni me banka të ndryshme për të përcaktuar nëse marrja e një kredie është e duhura për kompaninë tuaj. Disa banka, si Union Bank dhe ProCredit Bank, ofrojnë ndihmë teknike dhe financiare për t'ju ndihmuar të përcaktoni nëse një sistem diellor është i duhuri për ju. Këto banka shpesh do të jenë partnere me kompanitë e instalimit diellor me të cilat do t'ju kontaktojnë.</Albanian>
 					</div>
-                    <details close> {/* place "open" next to "details" to make it open on load */}
-                    <summary>
-                        <b id="largerfont2b">Financing Options</b>
-                    </summary>
-                    <p><strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
-                        <English>ProCredit Bank</English>
-                        <Albanian>Banka ProCredit</Albanian>
-                    </a></strong></p>
-                    <p><strong><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
-                        <English>Union Bank</English>
-                        <Albanian>Banka Union</Albanian>
-                    </a></strong></p>
-                    </details>
-
+                    <div>
+                    <div>
+                        <div>
+                            <English><h3>Financing Options</h3></English>
+                            <Albanian><h3>Opsionet e financimit</h3></Albanian>
+                        </div>
+                    </div>
+                    <div className="p-text">
+                        <strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
+                            <English>ProCredit Bank</English>
+                            <Albanian>Banka ProCredit</Albanian>
+                        </a></strong>
+                    </div>
+                    <br />
+                    <div className="p-text">
+                        <strong><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
+                            <English>Union Bank</English>
+                            <Albanian>Banka Union</Albanian>
+                        </a></strong>
+                    </div>
+                    </div>
                     <div>
 						<English><h3>Calculations</h3></English>
 						<Albanian><h3>Llogaritjet</h3></Albanian>
@@ -220,7 +305,7 @@ function Resources() {
 						<Albanian>Për të përcaktuar se cila nga ofertat që merrni nga kompanitë e instalimit diellor është më e përshtatshme për biznesin tuaj, përdorni aplikacionin për të bërë llogaritjet tuaja!</Albanian>
 					</div>
                 </div>
-            </details>
+            </div>
             </div>
             <PageFoot></PageFoot>
         </div>
