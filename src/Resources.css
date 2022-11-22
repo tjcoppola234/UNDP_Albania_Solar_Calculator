@@ -4,8 +4,10 @@
     border: none;
 }
 
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 #h2resources{
-    color:blue;
+    color:black;
     font-size:300%;
     margin: 10px;
 }
@@ -38,6 +40,17 @@ p{
     float:right;
 }
 
+#imagefloat2{
+    padding-right: 50px;
+    padding-bottom: 50px;
+    float:right;
+}
+
 b{
     line-height: 50px;
+}
+
+iframe{
+    padding-left: 35px;
+
 }

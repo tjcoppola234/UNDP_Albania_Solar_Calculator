@@ -72,8 +72,8 @@ export function PageFoot() {
           <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
         </div>
         <div>
-          <English>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</English>
-          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</Albanian>
+          <English>Created by: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</English>
+          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</Albanian>
         </div>
       </footer>
     </div>

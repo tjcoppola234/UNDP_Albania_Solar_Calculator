@@ -19,8 +19,20 @@ function Resources() {
             <summary>
                 <b id="largerfontb">What is solar and why is it good?</b>
             </summary>
-            <img id="something" src={process.env.PUBLIC_URL+"benefitsofsolar.jpg"} alt="Benefits" width = "500" height = "500" floatleft/>
-            
+            <img id="imagefloat" src={process.env.PUBLIC_URL+"benefitsofsolar.jpg"} alt="Benefits" width = "400" height = "400" floatleft/>
+            <img id="imagefloat2" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" width = "300" height = "400" floatleft/>
+
+            <h3>The Enviornment</h3>
+            <p>
+                Solar energy is great for the enviornment. Some great benefits it provides are providing better air quality from
+                the reduction of carbon dioxide released into the air, which helps reduce the impacts of climate change.
+            </p>
+            <h3>Sunny Potential</h3>
+            <p>
+            Albania has a great potential for solar energy as it has between 2400-2500 hours of sunshine per year. The irradiation and PV electricity potential in Albania is promising, so expanding grid-based PV systems throughout Albania would increase electricity generation. The irradiation, or the amount of power received from the sun, and PV electricity potential in Albania is promising, so expanding grid-based PV systems throughout Albania would increase electricity generation. Depending on the municipality your business is located in, the irradiation can be high or low, so you can check out the graph to the right, which shows the irradiation more generally.
+
+            </p>
+  
            </details>
             
             
@@ -30,13 +42,14 @@ function Resources() {
                 <b id="largerfontb">Why is solar energy beneficial for businesses?</b>
             </summary>
 
-            <img id="imagefloat" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "400" height = "550"/>
+            <img id="imagefloat" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "380" height = "700"/>
            <h3>Reduced Energy Costs</h3>
             <p>
             Electricity bills can be problematic because they are expensive. Your electricity bill depends on how much energy is consumed and the rate your utility company charges. By using solar energy, your bill can be lowered by X%. You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment. Electricity bills continue to get more expensive because utility companies face high costs to maintain and expand the grid. Solar power systems generally do not require much maintenance and most reliable solar panel manufacturers offer 20–25-year warranties.
             </p>
             <h3>Solar Tax Benefit</h3>
             <p>
+            It has been discussed by the Ministry of Infrastructure and Energy of Albania in October 2022 to cancel the value-added tax on all machinery and other equipment imported to invest in solar energy.
             </p>
             <h3>More Energy Security and Independence</h3>
             <p>
@@ -44,7 +57,7 @@ function Resources() {
             </p>
             <h3>Green Business</h3>
             <p>
-            Businesses can start going green by installing solar systems.
+            Businesses can start going green by installing solar systems. This concept of going green is for business owners who invest their resources in finding the most efficient ways to sustain their companies for the better impact of the environment. This can attract a reduction in company costs by keeping general operating costs low over time, more eco-conscious employees to hire, and a better image and reputation of the company by leaving a lasting impression on your customers, potential customers, and vendors.
             </p>
             </details>
 
@@ -119,6 +132,8 @@ function Resources() {
             <p>+355 68 900 1221</p>
             <p>info@enercom.al</p>
             <p>Rruga e Elbasanit, Sauk, 1044, Tiranë</p>
+            
+            <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </details>
 
 
