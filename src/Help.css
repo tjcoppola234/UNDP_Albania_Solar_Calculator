@@ -3,3 +3,12 @@
     font-size:300%;
     margin: 10px;
 }
+
+.Help .content div div {
+    margin-right: 50px;
+}
+
+.space-left {
+    margin-left: 10px;
+    padding-left: 0px;
+}
