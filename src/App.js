@@ -103,8 +103,8 @@ export function PageFoot() {
           </span>
         </div>
         <div>
-          <English>Created by: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</English>
-          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allen, Ashe Andrews, and Theo Coppola</Albanian>
+          <English>Created by: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</English>
+          <Albanian>Krijuar nga: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</Albanian>
         </div>
       </footer>
     </div>

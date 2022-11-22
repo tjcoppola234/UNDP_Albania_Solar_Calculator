@@ -3,3 +3,54 @@
     height: 450px;
     border: none;
 }
+
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+#h2resources{
+    color:black;
+    font-size:300%;
+    margin: 10px;
+}
+
+#largerfontb{
+    font-size:150%;
+}
+#largerfont2b{
+    font-size:120%;
+}
+
+h3{
+    padding-left: 35px
+}
+
+p{
+    padding-left: 35px;
+    margin-left: 50px;
+    margin-right: 800px;
+}
+
+
+#something{
+    padding-left: 35px;
+}
+
+#imagefloat{
+    padding-right: 105px;
+    padding-bottom: 50px;
+    float:right;
+}
+
+#imagefloat2{
+    padding-right: 50px;
+    padding-bottom: 50px;
+    float:right;
+}
+
+b{
+    line-height: 50px;
+}
+
+iframe{
+    padding-left: 35px;
+
+}
