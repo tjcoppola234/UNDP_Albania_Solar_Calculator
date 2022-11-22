@@ -1,5 +1,19 @@
+#help-panel-table {
+    width: 75%;
+    height: 75%;
+}
+
 .h2resources {
     color:black;
     font-size:200%;
     margin: 10px;
+}
+
+.Help .content div div {
+    margin-right: 50px;
+}
+
+.space-left {
+    margin-left: 10px;
+    padding-left: 0px;
 }
