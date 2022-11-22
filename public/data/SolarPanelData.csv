@@ -1,9 +1,10 @@
 Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (kW),Efficiency (%)
 XP 36/156-140 I+35,SunErg,200,1,0.14,14.01%
-Eco Line Full Black M72/190W,Luxor Solar,250,1,0.19,15.61%
+Eco Line Full Black M72/190 W,Luxor Solar,250,1,0.19,15.61%
 X75L240 HE Module,Aleo,305,1,0.24,18.00%
-Example C2,PV C,295,1.45,0.48,15.5%
-Ex D,PV D,1420,2.3,1.423,24.3%
-IE-X23-M14,SolarCo.,544,1.22,0.364,14.64%
-MH-SB-CGV,XBXxMGs,334,1.35,0.55,17%
-Name7,Company7.,444,1.4,0.44,14.44%
+Eco Line M72/205 W,Luxor Solar,280,1,0.205,16.84%
+SG335P,Peimar,320,2,0.235,14.40%
+Axitec AxiPower AC-290PH/60S,Axitec,380,1,0.29,17.72%
+Pv Smart-60 KPV 290 WP-POLY Module,Kioto Solar,320,2,0.29,17.55%
+NUAK300B Module,Sharp,342,2,0.3,18.40%
+Axitec AXIworldpremium AC-300M/156-60S,Axitec,390,1,0.3,19.55%

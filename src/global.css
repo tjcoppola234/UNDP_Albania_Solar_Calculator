@@ -5,6 +5,7 @@
   --nav-text: #ffffff;
   --nav-text-hover: #e6ee9c;
   --background: #ecf0f1;
+  --font-size: 16pt;
 }
 
 html {
@@ -20,10 +21,11 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-size: var(--font-size);
 }
 
-#Nav-spacing {
-  margin-bottom: 90px;
+.content {
+  padding-top: 90px;
 }
 
 #Nav-title {
@@ -31,6 +33,11 @@ body {
   margin-left: 20px;
   color: var(--nav-text);
   text-decoration: none;
+}
+
+#Nav-title h1 {
+  padding: 0;
+  margin: 0;
 }
 
 #Nav-options {
@@ -104,13 +111,15 @@ body {
   padding: 0;
   margin: 0;
 }
-#Nav-options-list li {
-  background-color: var(--nav-background);
+#Nav-options-list li:not(#toggle-li) {
   display: table-cell;
-  width: 120px;
+  width: 160px;
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
+}
+#toggle-li {
+  width: 40px;
 }
 #Nav-options-list li:hover {
   background-color: var(--nav-background-hover);
@@ -127,7 +136,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   height: inherit;
-  width: 120px;
+  width: 160px;
   color: var(--nav-text);
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
@@ -147,6 +156,7 @@ body {
   display: grid;
   grid-template-rows: 50% 50%;
   height: inherit;
+  width: 40px;
 }
 #Toggle button {
   display: flex;
@@ -168,6 +178,7 @@ body {
 #Toggle img {
   object-fit: contain;
   max-height: 90%;
+  width: auto;
 }
 #Switch-albanian {
   grid-row: 1;
@@ -211,6 +222,7 @@ body {
   height: 80px;
   top: 0;
   white-space: nowrap;
+  z-index: 10;
 }
 
 #App-footer {
@@ -226,8 +238,11 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 10px;
   text-align: center;
+}
+
+#App-footer footer {
+  margin: 10px;
 }
 
 .content {
@@ -243,7 +258,7 @@ body {
   position: relative;
   min-height: 100%;
 }
-.Tutorial {
+.Help {
   position: relative;
   min-height: 100%;
 }

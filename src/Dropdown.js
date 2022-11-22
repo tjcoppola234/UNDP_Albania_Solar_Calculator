@@ -2,6 +2,7 @@ import { readString } from 'react-papaparse';
 import { useEffect } from 'react';
 import English from './English';
 import Albanian from './Albanian';
+import {settings} from './Settings';
 
 export function MunicipalDropdown({changeEvent}) {
     useEffect(() => {
@@ -46,10 +47,11 @@ export function MunicipalDropdown({changeEvent}) {
 
                     munSelection.appendChild(val);
 
-                    for(let i = 0; i < results.data.length; i++) {
+                    results = results.data.sort((a, b) => a.municipality.localeCompare(b.municipality, settings.albanianVisible.getState() ? "sq-AL" : "en-US"));
+                    for(let i = 0; i < results.length; i++) {
                         val = document.createElement("option");
-                        val.innerText = results.data[i].municipality;
-                        val.value = results.data[i].prefecture;
+                        val.innerText = results[i].municipality;
+                        val.value = results[i].prefecture;
                         val.id = "municipality " + i;
                         munSelection.appendChild(val);
                     }

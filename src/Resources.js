@@ -146,12 +146,12 @@ function Resources() {
                 <b id="largerfont2b">Financing Options</b>
             </summary>
             <p><strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
-                        <English>ProCredit Bank</English>
-                        <Albanian>Banka ProCredit</Albanian>
-                    </a></strong></p>
+                <English>ProCredit Bank</English>
+                <Albanian>Banka ProCredit</Albanian>
+            </a></strong></p>
             <p><strong><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
-                        <English>Union Bank</English>
-                        <Albanian>Banka Union</Albanian>
+                <English>Union Bank</English>
+                <Albanian>Banka Union</Albanian>
             </a></strong></p>
             </details>
 

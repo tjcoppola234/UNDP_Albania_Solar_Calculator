@@ -43,7 +43,7 @@ class LanguageToggle extends Component {
         return (
             <div id="Toggle">
                 <button id="Switch-albanian" type="button" disabled={this.state.albVisible} onClick={this.switchToAlbanian}><img src={process.env.PUBLIC_URL+'albania_flag.png'} alt="Shqip"></img></button>
-                <button id="Switch-english" type="button" disabled={this.state.engVisible} onClick={this.switchToEnglish}><img src={process.env.PUBLIC_URL+'usa_flag.png'} alt="English"></img></button>
+                <button id="Switch-english" type="button" disabled={this.state.engVisible} onClick={this.switchToEnglish}><img src={process.env.PUBLIC_URL+'uk_flag.png'} alt="English"></img></button>
             </div>
         );
     } 

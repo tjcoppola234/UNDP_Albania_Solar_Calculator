@@ -8,13 +8,41 @@ import { settings } from './Settings';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
       <PageHead></PageHead>
       <div className="content">
-        <h2>Homepage</h2>
-        <div className="Sponsor-logos">
-          <img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img>
-          <img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img>
+        <div id="center-fade">
+          <English>This website is designed <span>for businesses</span></English>
+          <Albanian>Kjo faqe interneti është krijuar <span>për bizneset</span></Albanian>
+          <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
+          <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
+          <div>
+            <button><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
+              <English>Calculator</English>
+              <Albanian>Llogaritësi</Albanian>
+            </Link></button>
+            <br/>
+            <English>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
+            <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+          </div>
+          <div>
+            <button><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+              <English>Resources</English>
+              <Albanian>Burimet</Albanian>
+            </Link></button>
+            <br/>
+            <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
+            <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+          </div>
+          <div>
+            <button><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ndihmë</Albanian>
+            </Link></button>
+            <br/>
+            <English>See frequently asked questions about solar</English>
+            <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
+          </div>
         </div>
       </div>
       <PageFoot></PageFoot>
@@ -28,14 +56,18 @@ export function PageHead() {
       <header id="App-header">
         <a href="/" id="Nav-title">
           <div>
-            <English><h1>Albania Solar Calculator</h1></English>
-            <Albanian><h1>Llogaritësi diellor i Shqipërisë</h1></Albanian>
+            <English><h1>Albania Solar Calculator for Businesses</h1></English>
+            <Albanian><h1>Kalkulator Solar Albania per Bizneset</h1></Albanian>
           </div>
         </a>
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Calculator")}>
+          <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>
+              <English>Home</English>
+              <Albanian>Shitet</Albanian>
+            </Link></li>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></li>
@@ -43,11 +75,11 @@ export function PageHead() {
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Tutorial" ? "current-tab" : ""}><Link to="/Tutorial" onClick={() => setCurrentTab("Tutorial")}>
-              <English>Tutorial</English>
-              <Albanian>Tutorial</Albanian>
+            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+              <English>Help</English>
+              <Albanian>Ndihmë</Albanian>
             </Link></li>
-            <li><LanguageToggle></LanguageToggle></li>
+            <li id="toggle-li"><LanguageToggle></LanguageToggle></li>
           </ul>
         </nav>
       </header>
@@ -67,9 +99,8 @@ export function PageFoot() {
               <English>in collaboration with</English>
               <Albanian>ne bashkepunim me</Albanian>
             </div>
+            <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
           </span>
-          <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
-          <a href="https://www.wpi.edu/" target="_blank" rel="noreferrer"><img id="wpi-logo" src={process.env.PUBLIC_URL+'WPI_logo.png'} alt='Logo for WPI'></img></a>
         </div>
         <div>
           <English>Created by: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</English>

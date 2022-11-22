@@ -52,11 +52,11 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                 <English>Panel Selection</English>
                                 <Albanian>Përzgjedhja e panelit</Albanian>
                             </th>
-                            <th>
+                            <th className="capped-th-width">
                                 <English>Name/Model</English>
                                 <Albanian>Emri/Modeli</Albanian>
                             </th>
-                            <th>
+                            <th className="capped-th-width">
                                 <English>Manufacturer</English>
                                 <Albanian>Prodhuesi</Albanian>
                             </th>
@@ -85,8 +85,8 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
-                                <td>{pv["Name/Model"]}</td>
-                                <td>{pv["Manufacturer"]}</td>
+                                <td className="capped-th-width"><a href={getNameHref(pv["Name/Model"])} target="_blank" rel="noreferrer">{pv["Name/Model"]}</a></td>
+                                <td className="capped-th-width">{pv["Manufacturer"]}</td>
                                 <td>{pv["Cost per Panel"]}</td>
                                 <td>{pv["Area per Panel"]}</td>
                                 <td>{pv["Capacity per Panel"]}</td>
@@ -97,6 +97,9 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                 </table>
             </div>
             <div id="solar-panel-info" className="Vert-flex">
+                <div>
+                    <English><b>Disclaimer:</b> Data as of November 2022</English>
+                </div>
                 <div>
                     <English>Solar Panel Statistics</English>
                     <Albanian>Statistikat e paneleve diellore</Albanian>
@@ -139,4 +142,10 @@ function fillPanelFields(pvSelection) {
     document.getElementById("solar-area").value = pvSelection["Area per Panel"];
     document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
     document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+}
+
+function getNameHref(name) {
+    const searchURL = "https://www.google.com/search?q=";
+    const searchKeywords = name.replace(" ", "+");
+    return searchURL + searchKeywords;
 }
