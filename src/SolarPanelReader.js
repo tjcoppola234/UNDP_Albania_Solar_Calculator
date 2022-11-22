@@ -109,8 +109,8 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
-                                <td className="capped-th-width"><a href={getNameHref(pv["Name/Model"])} target="_blank" rel="noreferrer">{pv["Name/Model"]}</a></td>
-                                <td className="capped-th-width">{pv["Manufacturer"]}</td>
+                                <td className="capped-th-width">{pv["Name/Model"]}</td>
+                                <td className="capped-th-width"><a href={getNameHref(pv["Manufacturer"])} target="_blank" rel="noreferrer">{pv["Manufacturer"]}</a></td>
                                 <td className="spr-table-cost-per-panel">{pv["Cost per Panel"]}</td>
                                 <td>{pv["Area per Panel"]}</td>
                                 <td>{pv["Capacity per Panel"]}</td>
@@ -168,7 +168,30 @@ function fillPanelFields(pvSelection) {
 }
 
 function getNameHref(name) {
-    const searchURL = "https://www.google.com/search?q=";
-    const searchKeywords = name.replace(" ", "+");
-    return searchURL + searchKeywords;
+    // const searchURL = "https://www.google.com/search?q=";
+    // const searchKeywords = name.replace(" ", "+");
+    // return searchURL + searchKeywords;
+
+    if(name === "SunErg") {
+        return "https://www.sunergsolar.com/en/";
+    }
+    if(name === "Luxor Solar") {
+        return "https://www.luxor.solar/en/";
+    }
+    if(name === "Aleo") {
+        return "https://www.aleo-solar.com/";
+    }
+    if(name === "Peimar") {
+        return "https://www.peimar.com/uk/home/";
+    }
+    if(name === "Axitec") {
+        return "https://www.axitecsolar.com/en"
+    }
+    if(name === "Kioto Solar") {
+        return "https://www.kiotosolar.com/en/"
+    }
+    if(name === "Sharp") {
+        return "https://www.sharp.eu/solar-energy/find-a-solar-panel"
+    }
+    return "#";
 }

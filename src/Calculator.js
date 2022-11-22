@@ -57,6 +57,29 @@ function Calculator() {
                         <Albanian><h2 className="h2resources">Llogaritësi</h2></Albanian>
                     </div>
                 </header>
+                <details>
+                    <summary>
+                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
+                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
+                    </summary>
+                    <form>
+                        <MunicipalDropdown></MunicipalDropdown>
+                        <div className="Hor-flex">
+                            <label htmlFor="nop-electricity-usage">
+                                <div className="Hor-flex">
+                                    <English>Electricity usage per&nbsp;</English>
+                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                    <select id="nop-electricity-usage-period">
+                                            <option value="month">month</option>
+                                            <option value="year">year</option>
+                                    </select>
+                                </div>
+                            </label>
+                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
+                </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
                         <English><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</English>
@@ -173,29 +196,6 @@ function Calculator() {
                                 <option>Half-yearly</option>
                                 <option>Yearly</option>
                             </select>
-                        </div>
-                        <button type="button" id="submit-button">Calculate</button>
-                    </form>
-                </details>
-                <details>
-                    <summary>
-                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
-                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
-                    </summary>
-                    <form>
-                        <MunicipalDropdown></MunicipalDropdown>
-                        <div className="Hor-flex">
-                            <label htmlFor="nop-electricity-usage">
-                                <div className="Hor-flex">
-                                    <English>Electricity usage per&nbsp;</English>
-                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
-                                    <select id="nop-electricity-usage-period">
-                                            <option value="month">month</option>
-                                            <option value="year">year</option>
-                                    </select>
-                                </div>
-                            </label>
-                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
                         </div>
                         <button type="button" id="submit-button">Calculate</button>
                     </form>
