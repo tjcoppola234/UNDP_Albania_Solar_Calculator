@@ -53,8 +53,8 @@ function Calculator() {
             <div className="content">
                 <header>
                     <div>
-                        <English><h2>Calculator</h2></English>
-                        <Albanian><h2>Llogaritësi</h2></Albanian>
+                        <English><h2 className="h2resources">Calculator</h2></English>
+                        <Albanian><h2 className="h2resources">Llogaritësi</h2></Albanian>
                     </div>
                 </header>
                 <details open> {/* place "open" next to "details" to make it open on load */}

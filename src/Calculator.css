@@ -4,6 +4,12 @@
     margin-top: 20px;
 }
 
+.h2resources {
+    color:black;
+    font-size:300%;
+    margin: 10px;
+}
+
 input[type="number"]:invalid {
     color: rgb(241, 76, 76);
 }
