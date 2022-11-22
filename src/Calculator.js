@@ -132,16 +132,13 @@ function Calculator() {
                         <Plot
                             data={[
                                 {
-                                x: [1, 2, 3],
-                                y: [2, 6, 3],
-                                type: 'scatter',
-                                mode: 'lines+markers',
-                                marker: {color: 'red'},
+                                x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                                y: [12,85,14,35,89,74,45,85,96,10,42,47],
+                                type: 'bar',
                                 },
-                            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
                             ]}
-                            layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
-                        />
+                            layout={ {width: 1000, height: 500, title: 'Example Savings Plot'} }
+                        /> {/*calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings*/}
                     </div>
                 </graph>
             </div>
@@ -288,4 +285,29 @@ function formatMonths(totalMonths, isAlbanian = false) {
     return yearText + monthText;
 }
 
+function calcMonthlySavings(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
+    let monthlySavings = []
+
+    const roofSpace = document.getElementById("roof-space").value;
+    const percentSolar = document.getElementById("percent-solar").value;
+    const costPerMonth = document.getElementById("electricity-paid").value;
+
+    for(let month in months) {
+        // Amount of solar irradiation for the specified municipality (kWh/month)/kW
+        const solarIrradiation = SolarData.getData(prefecture, month, panelCapacity / panelSize, false);
+        // Ideal amount of energy generated per month for a system (kWh/month)
+        const desiredMonthlyGen = ((percentSolar / 100) * costPerMonth) / electricityPrice;
+        // Number of solar panels needed
+        const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
+        // Amount of energy generated per month for a system (kWh per month)
+        const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+
+        monthlySavings.push(actualMonthlyGen);
+    }
+    
+    return {
+        monthlySavings: monthlySavings,
+    };
+}
 export default Calculator;
