@@ -35,7 +35,7 @@ body {
   text-decoration: none;
 }
 
-#Nav-title h1 {
+#Nav-title h2 {
   padding: 0;
   margin: 0;
 }
@@ -61,6 +61,10 @@ body {
   #Hamburger {
     display: table-cell;
   }
+  #Toggle {
+    width: 160px;
+    height: 60px;
+  }
   #Switch-albanian {
     border: none;
     border-top: 1px solid var(--nav-background-hover);
@@ -83,6 +87,10 @@ body {
   }
   #Hamburger {
     display: none;
+  }
+  #Toggle {
+    width: 40px;
+    height: inherit;
   }
   #Switch-albanian {
     border: none;
@@ -117,6 +125,9 @@ body {
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
+}
+#Nav-options-list li:not(:hover) {
+  background-color: var(--nav-background);
 }
 #toggle-li {
   width: 40px;
@@ -155,8 +166,6 @@ body {
 #Toggle {
   display: grid;
   grid-template-rows: 50% 50%;
-  height: inherit;
-  width: 40px;
 }
 #Toggle button {
   display: flex;
