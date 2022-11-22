@@ -16,32 +16,47 @@ function App() {
           <Albanian>Kjo faqe interneti është krijuar <span>për bizneset</span></Albanian>
           <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
           <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
-          <div>
+          <div className="square">
             <button><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></button>
-            <br/>
-            <English>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
-            <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+            <div className="square-bullets">
+              <ul>
+                <li>
+                  <English>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
+                  <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
+          <div className="square">
             <button><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></button>
-            <br/>
-            <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
-            <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+            <div className="square-bullets">
+              <ul>
+                <li>
+                <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
+              <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
+          <div className="square">
             <button><Link to="/Help" onClick={() => setCurrentTab("Help")}>
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></button>
-            <br/>
-            <English>See frequently asked questions about solar</English>
-            <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
+            <div className="square-bullets">
+            <ul>
+              <li>
+                <English>See frequently asked questions about solar</English>
+                <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
+              </li>
+            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -56,8 +71,8 @@ export function PageHead() {
       <header id="App-header">
         <a href="/" id="Nav-title">
           <div>
-            <English><h1>Albania Solar Calculator for Businesses</h1></English>
-            <Albanian><h1>Kalkulator Solar Albania per Bizneset</h1></Albanian>
+            <English><h2>Albania Solar Calculator for Businesses</h2></English>
+            <Albanian><h2>Kalkulator Solar Albania per Bizneset</h2></Albanian>
           </div>
         </a>
         <nav id="Nav-options">

@@ -7,13 +7,12 @@
 
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-#div{
-    margin:100px;
+details {
+    padding-left: 10px;
 }
 
-
-#h2resources{
-    color: black;
+.h2resources {
+    color:black;
     font-size:300%;
     text-align: center;
     border:3px solid #9fb0c4;
@@ -21,70 +20,56 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
     margin-left:250px;
     margin-right:250px;
     background-color: #9fb0c4;
-
 }
 
 #center{
     text-align: justify;
 }
 
-#largerfontb{
-    font-size:250%;
+.largerfontb {
+    font-size: 250%;
     text-align: center;
-
-
 }
-#largerfont2b{
+.largerfont2b {
     font-size:120%;
     text-align: center;
-
-
 }
 
-h3{
+h3 {
     padding-left: 35px;
 }
 
-#li{
+.li-1 {
     padding-left: 35px;
     margin-left: 50px;
-    margin-right: 510px;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
 }
 
-#li2{
+.l1-2 {
     padding-left: 35px;
     margin-left: 50px;
-    padding-top: 20px;
-    margin-right: 50px;
-
-
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
 }
 
-p{
-    padding-left: 35px;
-    margin-left: 50px;
-    margin-right: 50px;
-    text-align: justify;
-}
-#p{
-    padding-left: 35px;
-    margin-left: 50px;
-    margin-right: 600px;
-    text-align: justify;
-
+.p-text {
+    padding-left: 70px;
+    padding-right: 50px;
+    text-align: left;
 }
 
-
-#something{
+#something {
     padding-left: 35px;
 }
 
-#imagefloat{
-    margin-right: 105px;
+#imagefloat {
+    margin-right: 95px;
     margin-bottom: 50px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 60px;
 
     float:right;
     border : 2px solid black;
@@ -92,7 +77,7 @@ p{
 
 }
 
-#imagefloat2{
+#imagefloat2 {
     margin-right: 70px;
     margin-bottom: 50px;
     margin-left: 20px;
@@ -100,10 +85,9 @@ p{
     float:right;
     border : 2px solid black;
     border-radius: 25px;
-
 }
 
-#imagefloat3{
+#imagefloat3 {
     margin-right: 50px;
     margin-bottom: 20px;
     margin-left: 20px;
@@ -111,23 +95,20 @@ p{
     float:left;
     border : 2px solid black;
     border-radius: 25px;
-
-
 }
 
-b{
+b {
     line-height: 50px;
 }
 
-iframe{
+iframe {
     padding-left: 35px;
-
 }
 
-#div5{
+.div5 {
     background-color: #9fb0c4;
     border-radius: 25px;
     border: 2px solid #9fb0c4;
     margin:70px;
-
+    padding-bottom: 10px;
 }

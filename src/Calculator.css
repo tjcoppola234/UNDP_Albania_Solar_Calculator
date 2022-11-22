@@ -4,6 +4,12 @@
     margin-top: 20px;
 }
 
+.h2resources {
+    color:black;
+    font-size:300%;
+    margin: 10px;
+}
+
 input[type="number"]:invalid {
     color: rgb(241, 76, 76);
 }
@@ -94,5 +100,13 @@ input {
     background: none;
     background-color: var(--nav-background);
     color: var(--nav-text);
+    font-size: var(--font-size);
+}
+
+input {
+    font-size: var(--font-size);
+    min-width: 300px;
+}
+select {
     font-size: var(--font-size);
 }
