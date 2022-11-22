@@ -80,7 +80,8 @@ function Resources() {
                 </details>
                 <details close> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <b id="largerfontb">Should your business go solar?</b>
+                        <English><b id="largerfontb">Should your business go solar?</b></English>
+                        <Albanian><b id="largerfontb">A duhet të shkojë biznesi juaj diellor?</b></Albanian>
                     </summary>
                     <img className="imagefloat" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
                     <div>
@@ -147,7 +148,8 @@ function Resources() {
 
                 <details close> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <b id="largerfontb">How can your business go solar?</b>
+                        <English><b id="largerfontb">How can your business go solar?</b></English>
+                        <Albanian><b id="largerfontb">Si mund të shkojë biznesi juaj diellor?</b></Albanian>
                     </summary>
                     
                     <img className="imagefloat" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "400" height = "600"/>
@@ -162,7 +164,8 @@ function Resources() {
 					</div>
                     <details close> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <b id="largerfont2b">Solar Installer Contacts</b>
+                        <English><b id="largerfont2b">Solar Installer Contacts</b></English>
+                        <Albanian><b id="largerfont2b">Kontaktet e instaluesit diellor</b></Albanian>
                     </summary>
                     <div className="p-text"><strong><a href = "https://panelebesi.al/"> Panele Fotovoltaike Besi</a></strong></div>
                     <div className="p-text">+355 69 992 9800</div>
@@ -191,7 +194,8 @@ function Resources() {
 					</div>
                     <details close> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <b id="largerfont2b">Financing Options</b>
+                        <English><b id="largerfont2b">Financing Options</b></English>
+                        <Albanian><b id="largerfont2b">Opsionet e financimit</b></Albanian>
                     </summary>
                     <div className="p-text">
                         <strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
