@@ -6,27 +6,63 @@
 
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
+#div{
+    margin:100px;
+}
+
+
 #h2resources{
-    color:black;
+    color:#ecf0f1;
     font-size:300%;
-    margin: 10px;
+    text-align: center;
+    border:3px solid #0f4b94;
+    margin-left:250px;
+    margin-right:250px;
+    background-color: #0f4b94;
+
+}
+
+#center{
+    text-align: justify;
 }
 
 #largerfontb{
-    font-size:150%;
+    font-size:250%;
+    text-align: center;
+
+
 }
 #largerfont2b{
     font-size:120%;
+    text-align: center;
+
+
 }
 
 h3{
-    padding-left: 35px
+    padding-left: 35px;
+}
+
+#li{
+    padding-left: 35px;
+    margin-left: 50px;
+    margin-right: 510px;
+    padding-top: 20px;
 }
 
 p{
     padding-left: 35px;
     margin-left: 50px;
-    margin-right: 800px;
+    text-align: justify;
+
+
+}
+#p{
+    padding-left: 35px;
+    margin-left: 50px;
+    margin-right: 600px;
+    text-align: justify;
+
 }
 
 
@@ -46,6 +82,12 @@ p{
     float:right;
 }
 
+#imagefloat3{
+    padding-right: 50px;
+    padding-bottom: 50px;
+    float:left;
+}
+
 b{
     line-height: 50px;
 }
@@ -54,3 +96,4 @@ iframe{
     padding-left: 35px;
 
 }
+
