@@ -34,27 +34,29 @@ export function MunicipalDropdown({changeEvent}) {
                 },
                 complete: function(results, file) {
                     //Adding municipality objects to dropdown
-                    let munSelection = document.getElementById("municipality-dropdown");
-                    munSelection.innerText = "";
-                    
-                    let val = document.createElement("option");
-                    val.innerText = "";
-                    val.value = "";
-                    val.id = "municipality -1";
-                    val.hidden = true;
-                    val.selected = true;
-                    val.disabled = true;
-
-                    munSelection.appendChild(val);
-
+                    const munSelections = Array.from(document.getElementsByClassName("municipality-dropdown"));
                     results = results.data.sort((a, b) => a.municipality.localeCompare(b.municipality, settings.albanianVisible.getState() ? "sq-AL" : "en-US"));
-                    for(let i = 0; i < results.length; i++) {
-                        val = document.createElement("option");
-                        val.innerText = results[i].municipality;
-                        val.value = results[i].prefecture;
-                        val.id = "municipality " + i;
+                    munSelections.forEach(munSelection => {
+                        munSelection.innerText = "";
+                        
+                        let val = document.createElement("option");
+                        val.innerText = "";
+                        val.value = "";
+                        val.id = "municipality -1";
+                        val.hidden = true;
+                        val.selected = true;
+                        val.disabled = true;
+    
                         munSelection.appendChild(val);
-                    }
+    
+                        for(let i = 0; i < results.length; i++) {
+                            val = document.createElement("option");
+                            val.innerText = results[i].municipality;
+                            val.value = results[i].prefecture;
+                            val.id = "municipality " + i;
+                            munSelection.appendChild(val);
+                        }
+                    });
                 },
                 error: function(error, file) {
                     console.log(error);
@@ -69,7 +71,7 @@ export function MunicipalDropdown({changeEvent}) {
                 <English>Select your municipality:</English>
                 <Albanian>Zgjidhni komunën tuaj:</Albanian>
             </label>
-            <select id="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
+            <select className="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
             </select>
         </div>
     );

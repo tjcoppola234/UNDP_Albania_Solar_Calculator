@@ -57,9 +57,36 @@ function Calculator() {
                         <Albanian><h2 className="h2resources">Llogaritësi</h2></Albanian>
                     </div>
                 </header>
+                <details>
+                    <summary>
+                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
+                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
+                    </summary>
+                    <form>
+                        <MunicipalDropdown></MunicipalDropdown>
+                        <div className="Hor-flex">
+                            <label htmlFor="nop-electricity-usage">
+                                <div className="Hor-flex">
+                                    <English>Electricity usage per&nbsp;</English>
+                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                    <select id="nop-electricity-usage-period">
+                                        <option value="month">
+                                            {albanian ? "muaj" : "month"}
+                                        </option>
+                                        <option value="year">
+                                            {albanian ? "vit" : "year"}
+                                        </option>
+                                    </select>
+                                </div>
+                            </label>
+                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
+                </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <English><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</English>
+                        <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
                         <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
                     </summary>
                     <form onSubmit={(e) => {
@@ -82,15 +109,15 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
-                                <English>Roof space available for solar</English>
-                                <Albanian>Hapësirë ​çati e disponueshme për solare</Albanian>
+                                <English>Flat roof space available for solar</English>
+                                <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
                             </label>
                             <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="percent-solar">
-                                <English>Percent of total energy consumption for solar</English>
-                                <Albanian>Përqindja e konsumit total të energjisë për energjinë diellore</Albanian>
+                                <English>Percent of electricity consumption for solar</English>
+                                <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
                             </label>
                             <input id="percent-solar" type="number" placeholder="%"></input>
                         </div>
@@ -98,7 +125,7 @@ function Calculator() {
                             <label htmlFor="electricity-paid">
                                 <div className="Hor-flex">
                                     <English>Current amount paid for electricity per</English>
-                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike për</Albanian>
+                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
                                     <select id="electricity-paid-period">
                                         <option value="month">
                                             {albanian ? "muaj" : "month"}
@@ -111,21 +138,6 @@ function Calculator() {
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                         </div>
-                        <br/>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-percent">
-                                <English>Percentage of final cost to pay with loan</English>
-                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
-                            </label>
-                            <input id="loan-percent" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-interest">
-                                <English>Percent interest on loan</English>
-                                <Albanian>Për qind e interesit në kredi</Albanian>
-                            </label>
-                            <input id="loan-interest" type="number" placeholder="%"></input>
-                        </div>
                         <button type="submit" id="submit-button">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
@@ -134,7 +146,7 @@ function Calculator() {
                     <div className="Vert-flex">
                         <br />
                         <div>
-                            <English><b>Disclaimer:</b> These numbers are based off your energy bills and are not exact</English>
+                            <English><b>Disclaimer:</b> These numbers are based on your current energy bills</English>
                             <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
                         </div>
                         <br />
@@ -155,6 +167,52 @@ function Calculator() {
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
                     </div>
+                </details>
+                <details>
+                    <summary>
+                        <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
+                        <Albanian><b>Financimi me kredi</b>: Periudha e kostos dhe kthimit të një sistemi diellor kur financohet me një kredi</Albanian>
+                    </summary>
+                    <form>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-percent">
+                                <English>Percentage of final cost to pay with loan</English>
+                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
+                            </label>
+                            <input id="loan-percent" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-interest">
+                                <English>Percent interest on loan</English>
+                                <Albanian>Për qind e interesit në kredi</Albanian>
+                            </label>
+                            <input id="loan-interest" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-term">
+                                <English>Loan term:&nbsp;</English>
+                                <Albanian>Afati i kredisë:&nbsp;</Albanian>
+                            </label>
+                            <select id="loan-term">
+                                <option>
+                                    {albanian ? "Mujore" : "Monthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Dymujore" : "Bimonthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Tremujore" : "Quarterly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Gjysmëvjetor" : "Half-yearly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Vjetore" : "Yearly"}
+                                </option>
+                            </select>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
                 </details>
             </div>
             <PageFoot></PageFoot>

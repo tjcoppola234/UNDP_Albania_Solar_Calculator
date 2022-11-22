@@ -50,6 +50,12 @@ span {
     text-decoration: none;
 }
 
+.h2resources {
+    color:black;
+    font-size:200%;
+    margin: 10px;
+}
+
 .square {
     width: 100%;
     display: grid;
