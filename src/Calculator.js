@@ -100,8 +100,12 @@ function Calculator() {
                                     <English>Current amount paid for electricity per</English>
                                     <Albanian>Shuma aktuale e paguar për energjinë elektrike për</Albanian>
                                     <select id="electricity-paid-period">
-                                        <option value="month">month</option>
-                                        <option value="year">year</option>
+                                        <option value="month">
+                                            {albanian ? "muaj" : "month"}
+                                        </option>
+                                        <option value="year">
+                                            {albanian ? "vit" : "year"}
+                                        </option>
                                     </select>
                                 </div>
                             </label>
