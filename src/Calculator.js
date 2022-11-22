@@ -26,7 +26,8 @@ function Calculator() {
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
 
-    
+    let monthlyCostSavings = [0,0,0,0,0,0,0,0,0,0,0,0];
+
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
         setAlbanian(visible);
@@ -68,6 +69,7 @@ function Calculator() {
                             const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.genText);
                             setPaybackPeriod(results.ROIText);
+                            monthlyCostSavings = calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings;
                         }}>
                         <br />
                         <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
@@ -122,7 +124,7 @@ function Calculator() {
                         </div>
                     </div>
                 </details>
-                <graph id="graph">
+                <div id="graph">
                     <div>
                         <English><summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></English>
                         <Albanian> <summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></Albanian> {/*TODO: Translate to Albanian*/}
@@ -133,14 +135,14 @@ function Calculator() {
                             data={[
                                 {
                                 x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                y: [12,85,14,35,89,74,45,85,96,10,42,47],
+                                y: monthlyCostSavings,
                                 type: 'bar',
                                 },
                             ]}
                             layout={ {width: 1000, height: 500, title: 'Example Savings Plot'} }
-                        /> {/*calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings*/}
+                        />
                     </div>
-                </graph>
+                </div>
             </div>
             <PageFoot></PageFoot>
         </div>
@@ -287,21 +289,29 @@ function formatMonths(totalMonths, isAlbanian = false) {
 
 function calcMonthlySavings(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
-    let monthlySavings = []
+    let electricityPrice = 14;
+    let monthlySavings = [];
 
     const roofSpace = document.getElementById("roof-space").value;
     const percentSolar = document.getElementById("percent-solar").value;
     const costPerMonth = document.getElementById("electricity-paid").value;
 
-    for(let month in months) {
+    for(let i in months) {
         // Amount of solar irradiation for the specified municipality (kWh/month)/kW
-        const solarIrradiation = SolarData.getData(prefecture, month, panelCapacity / panelSize, false);
+        const solarIrradiation = SolarData.getData(prefecture, months[i], panelCapacity / panelSize, false);
         // Ideal amount of energy generated per month for a system (kWh/month)
         const desiredMonthlyGen = ((percentSolar / 100) * costPerMonth) / electricityPrice;
         // Number of solar panels needed
         const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
         // Amount of energy generated per month for a system (kWh per month)
         const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+        
+        console.log({
+            irradiation: solarIrradiation,
+            desiredMonthlyGen: desiredMonthlyGen,
+            solarPanelAmt: solarPanelAmt,
+            actualMonthlyGen : actualMonthlyGen,
+        });
 
         monthlySavings.push(actualMonthlyGen);
     }
