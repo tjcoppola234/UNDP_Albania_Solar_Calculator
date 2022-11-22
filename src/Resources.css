@@ -2,6 +2,7 @@
     width: 600px;
     height: 450px;
     border: none;
+
 }
 
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -12,13 +13,14 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 
 #h2resources{
-    color:#ecf0f1;
+    color: black;
     font-size:300%;
     text-align: center;
-    border:3px solid #0f4b94;
+    border:3px solid #9fb0c4;
+    border-radius: 25px;
     margin-left:250px;
     margin-right:250px;
-    background-color: #0f4b94;
+    background-color: #9fb0c4;
 
 }
 
@@ -50,12 +52,20 @@ h3{
     padding-top: 20px;
 }
 
+#li2{
+    padding-left: 35px;
+    margin-left: 50px;
+    padding-top: 20px;
+    margin-right: 50px;
+
+
+}
+
 p{
     padding-left: 35px;
     margin-left: 50px;
+    margin-right: 50px;
     text-align: justify;
-
-
 }
 #p{
     padding-left: 35px;
@@ -71,21 +81,38 @@ p{
 }
 
 #imagefloat{
-    padding-right: 105px;
-    padding-bottom: 50px;
+    margin-right: 105px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-top: 20px;
+
     float:right;
+    border : 2px solid black;
+    border-radius: 25px;
+
 }
 
 #imagefloat2{
-    padding-right: 50px;
-    padding-bottom: 50px;
+    margin-right: 70px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-top: 90px;
     float:right;
+    border : 2px solid black;
+    border-radius: 25px;
+
 }
 
 #imagefloat3{
-    padding-right: 50px;
-    padding-bottom: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
     float:left;
+    border : 2px solid black;
+    border-radius: 25px;
+
+
 }
 
 b{
@@ -97,3 +124,10 @@ iframe{
 
 }
 
+#div5{
+    background-color: #9fb0c4;
+    border-radius: 25px;
+    border: 2px solid #9fb0c4;
+    margin:70px;
+
+}

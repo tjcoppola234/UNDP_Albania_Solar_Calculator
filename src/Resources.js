@@ -11,61 +11,71 @@ function Resources() {
         <div className="Resources">
             <PageHead></PageHead>
             
-            <div className="content">
+            <div id ="div" className="content">
                      
             <h2 id="h2resources">Resources </h2>
 
             <h1 id="largerfontb">Why is solar energy important?</h1>
-            <div id ="div"> {/* place "open" next to "details" to make it open on load */}
+            <div> {/* place "open" next to "details" to make it open on load */}
             <img id="imagefloat" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" width = "400" height = "500" floatleft/>
 
+            <div id="div5">
             <h3>The Enviornment</h3>
 
-            <li id ="li">Reduces the amount of carbon dioxide released into the air</li>
-            <li id ="li">Provides better air quality</li>
-            <li id ="li">Helps mitigate climate change</li>
+            <li id ="li">Reduces the amount of carbon dioxide released into the air.</li>
+            <li id ="li">Provides better air quality.</li>
+            <li id ="li">Helps mitigate climate change.</li>
 
 
             <h3>Sunny Potential</h3>
 
-            <li id ="li">Albania has extensive potential for solar energy with 2400-2500 hours of sunshine per year</li>
-            <li id ="li">The irradiation, or the amount of power received from the sun, is promising</li>
-            <li id ="li">The irradiation varies depending on the region your business is in, so you can check out the graph to the right, which shows the irradiation more generally</li>
-
+            <li id ="li">Albania has extensive potential for solar energy.</li>
+            <li id ="li">Between 2400-2500 hours of sunshine per year.</li>
+            <li id ="li">The irradiation is the amount of power received from the sun.</li>
+            <li id ="li">The graph to the right shows the irradiation of Albanian regions.</li>
+            <p></p>
   
+            </div>
            </div>
             
             
             
-            <div id ="div"> {/* place "open" next to "details" to make it open on load */}
+            <div> {/* place "open" next to "details" to make it open on load */}
                 <h1 id="largerfontb">What are the benefits of solar energy for your business?</h1>
-
-            <img id="imagefloat" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "430" height = "750"/>
+                <div id="div5">
+            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "450" height = "770"/>
            <h3>Reduced Energy Costs</h3>
-           <li id ="li">Electricity bills can be problematic because they are expensive.</li>
+           <li id ="li">Electricity bills are expensive and problematic.</li>
            <li id ="li">Your electricity bill depends on how much energy is consumed and the rate your utility company charges.</li>
            <li id ="li">You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment.</li>
-           <li id ="li">Electricity bills continue to get more expensive because utility companies face high costs to maintain and expand the grid.</li>
+           <li id ="li">Utility companies face high costs to maintain and expand the grid making your electricity bills more expensive.</li>
            <li id ="li">You can avoid this increase of price by switching to solar!</li>
 
             
             <h3>More Energy Security and Independence</h3>
             <li id ="li">Becoming your own power providers</li>
             <li id ="li">Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</li>
-            <li id ="li">Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</li>
+            <li id ="li2">Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</li>
             
             <h3>Green Business</h3>
-            <li id ="li">You can go green by installing solar systems!</li>
-            <li id ="li">Going green means finding the most efficient ways to sustain your companies for the better impact of the environment</li>
-            <li id ="li">This attracts a reduction in company costs by keeping general operating costs low over time, more eco-conscious employees to hire, and a better image and reputation of the company by leaving a lasting impression on your customers, potential customers, and vendors.</li>
+            <li id ="li2">You can go green by installing solar systems!</li>
+            <li id ="li2">Going green means finding the most efficient ways to sustain your companies for the better impact of the environment.</li>
+            <li id ="li2">It reduces company costs by keeping general operating costs low over time.</li>
+            <li id ="li2">It attracts more eco-conscious employees to hire, and a better image.</li>
+            <li id ="li2">It creates a more robust reputation of the company by leaving a lasting impression on your customers.</li>
 
             <h3>Solar Tax Benefit</h3>
-            <li id ="li">The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</li>
+            <li id ="li2">The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</li>
+            <p></p>
+
+            </div>
             </div>
 
 
-            <div id ="div"> {/* place "open" next to "details" to make it open on load */}
+
+            <div> {/* place "open" next to "details" to make it open on load */}
                 <h1 id="largerfontb">Should your business go solar?</h1>
+            <div id="div5">
             
             <img id="imagefloat3" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
             
@@ -101,11 +111,15 @@ function Resources() {
             Warranty depends on the manufacturer with most lasting between 20-25 years. Some solar companies also offer a few years of maintenance as well after they are installed on your roof.
             </p>
             </div>
+            </div>
 
-            <div id ="div"> {/* place "open" next to "details" to make it open on load */}
+
+            <div> {/* place "open" next to "details" to make it open on load */}
                 <h1 id="largerfontb">How can your business go solar?</h1>
             
-            <img id="imagefloat" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "400" height = "600"/>
+            <div id="div5">
+
+            <img id="imagefloat2" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "450" height = "650"/>
 
             <h3>Solar Installers</h3>
             <p id="p">
@@ -154,7 +168,7 @@ function Resources() {
             </details>
 
             <h3>Calculations</h3>
-            <p id="p">
+            <p>
             To determine which of the offers you are receiving from solar installation companies is the most suitable one for your business, use the app to do your own calculations! 
             </p>
             </div>
@@ -163,6 +177,7 @@ function Resources() {
             </div>
             
             <PageFoot></PageFoot>
+        </div>
         </div>
     )
 
