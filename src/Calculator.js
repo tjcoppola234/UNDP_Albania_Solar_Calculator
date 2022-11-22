@@ -70,8 +70,12 @@ function Calculator() {
                                     <English>Electricity usage per&nbsp;</English>
                                     <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
                                     <select id="nop-electricity-usage-period">
-                                            <option value="month">month</option>
-                                            <option value="year">year</option>
+                                        <option value="month">
+                                            {albanian ? "muaj" : "month"}
+                                        </option>
+                                        <option value="year">
+                                            {albanian ? "vit" : "year"}
+                                        </option>
                                     </select>
                                 </div>
                             </label>
@@ -190,11 +194,21 @@ function Calculator() {
                                 <Albanian>Afati i kredisë:&nbsp;</Albanian>
                             </label>
                             <select id="loan-term">
-                                <option>Monthly</option>
-                                <option>Bimonthly</option>
-                                <option>Quarterly</option>
-                                <option>Half-yearly</option>
-                                <option>Yearly</option>
+                                <option>
+                                    {albanian ? "Mujore" : "Monthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Dymujore" : "Bimonthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Tremujore" : "Quarterly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Gjysmëvjetor" : "Half-yearly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Vjetore" : "Yearly"}
+                                </option>
                             </select>
                         </div>
                         <button type="button" id="submit-button">Calculate</button>
