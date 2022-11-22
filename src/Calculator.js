@@ -98,7 +98,7 @@ function Calculator() {
                             <label htmlFor="electricity-paid">
                                 <div className="Hor-flex">
                                     <English>Current amount paid for electricity per</English>
-                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike për</Albanian>
+                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
                                     <select id="electricity-paid-period">
                                         <option value="month">month</option>
                                         <option value="year">year</option>
@@ -138,8 +138,12 @@ function Calculator() {
                     </div>
                 </details>
                 <details>
-                    <summary><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</summary>
-                    <div className="Hor-flex">
+                    <summary>
+                        <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
+                        <Albanian><b>Financimi me kredi</b>: Periudha e kostos dhe kthimit të një sistemi diellor kur financohet me një kredi</Albanian>
+                    </summary>
+                    <form>
+                        <div className="Hor-flex">
                             <label htmlFor="loan-percent">
                                 <English>Percentage of final cost to pay with loan</English>
                                 <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
@@ -155,8 +159,8 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="loan-term">
-                                <English>Loan term: </English>
-                                <Albanian>Afati i kredisë: </Albanian>
+                                <English>Loan term:&nbsp;</English>
+                                <Albanian>Afati i kredisë:&nbsp;</Albanian>
                             </label>
                             <select id="loan-term">
                                 <option>Monthly</option>
@@ -166,6 +170,31 @@ function Calculator() {
                                 <option>Yearly</option>
                             </select>
                         </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
+                </details>
+                <details>
+                    <summary>
+                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
+                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
+                    </summary>
+                    <form>
+                        <MunicipalDropdown></MunicipalDropdown>
+                        <div className="Hor-flex">
+                            <label htmlFor="nop-electricity-usage">
+                                <div className="Hor-flex">
+                                    <English>Electricity usage per&nbsp;</English>
+                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                    <select id="nop-electricity-usage-period">
+                                            <option value="month">month</option>
+                                            <option value="year">year</option>
+                                    </select>
+                                </div>
+                            </label>
+                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
                 </details>
             </div>
             <PageFoot></PageFoot>
