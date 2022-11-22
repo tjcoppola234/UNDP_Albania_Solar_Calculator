@@ -107,21 +107,6 @@ function Calculator() {
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                         </div>
-                        <br/>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-percent">
-                                <English>Percentage of final cost to pay with loan</English>
-                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
-                            </label>
-                            <input id="loan-percent" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-interest">
-                                <English>Percent interest on loan</English>
-                                <Albanian>Për qind e interesit në kredi</Albanian>
-                            </label>
-                            <input id="loan-interest" type="number" placeholder="%"></input>
-                        </div>
                         <button type="submit" id="submit-button">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
@@ -130,7 +115,7 @@ function Calculator() {
                     <div className="Vert-flex">
                         <br />
                         <div>
-                            <English><b>Disclaimer:</b> These numbers are based off your energy bills and are not exact</English>
+                            <English><b>Disclaimer:</b> These numbers are based on your current energy bills</English>
                             <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
                         </div>
                         <br />
@@ -151,6 +136,36 @@ function Calculator() {
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
                     </div>
+                </details>
+                <details>
+                    <summary><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</summary>
+                    <div className="Hor-flex">
+                            <label htmlFor="loan-percent">
+                                <English>Percentage of final cost to pay with loan</English>
+                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
+                            </label>
+                            <input id="loan-percent" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-interest">
+                                <English>Percent interest on loan</English>
+                                <Albanian>Për qind e interesit në kredi</Albanian>
+                            </label>
+                            <input id="loan-interest" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-term">
+                                <English>Loan term: </English>
+                                <Albanian>Afati i kredisë: </Albanian>
+                            </label>
+                            <select id="loan-term">
+                                <option>Monthly</option>
+                                <option>Bimonthly</option>
+                                <option>Quarterly</option>
+                                <option>Half-yearly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </div>
                 </details>
             </div>
             <PageFoot></PageFoot>
