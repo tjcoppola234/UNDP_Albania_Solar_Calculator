@@ -105,8 +105,8 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
-                                <English>Roof space available for solar</English>
-                                <Albanian>Hapësirë ​çati e disponueshme për solare</Albanian>
+                                <English>Flat roof space available for solar</English>
+                                <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
                             </label>
                             <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
                         </div>
