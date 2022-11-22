@@ -82,7 +82,7 @@ function Calculator() {
                 </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <English><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</English>
+                        <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
                         <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
                     </summary>
                     <form onSubmit={(e) => {
@@ -112,8 +112,8 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="percent-solar">
-                                <English>Percent of total energy consumption for solar</English>
-                                <Albanian>Përqindja e konsumit total të energjisë për energjinë diellore</Albanian>
+                                <English>Percent of electricity consumption for solar</English>
+                                <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
                             </label>
                             <input id="percent-solar" type="number" placeholder="%"></input>
                         </div>

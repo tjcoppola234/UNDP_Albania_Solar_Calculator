@@ -24,8 +24,8 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Enter information about your electricity bills and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
-                  <Albanian>Futni informacione për faturat tuaja të energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+                  <English>Enter information about your electricity costs and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
+                  <Albanian>Futni informacione për kostot e energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa energji <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
                 </li>
               </ul>
             </div>
