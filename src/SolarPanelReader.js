@@ -52,16 +52,40 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                 <English>Panel Selection</English>
                                 <Albanian>Përzgjedhja e panelit</Albanian>
                             </th>
-                            <th>
+                            <th className="capped-th-width">
                                 <English>Name/Model</English>
                                 <Albanian>Emri/Modeli</Albanian>
                             </th>
-                            <th>
+                            <th className="capped-th-width">
                                 <English>Manufacturer</English>
                                 <Albanian>Prodhuesi</Albanian>
                             </th>
+                            {/* apr key: https://api.exchangerate-api.com/v4/latest/EUR */}
                             <th>
-                                <English>Cost per Panel (€)</English>
+                                <English>Cost per Panel (
+                                    <select id="spr-cost-per-panel-select" onChange={(e) => {
+                                        e.preventDefault();
+                                        const cppEntries = document.getElementsByClassName("spr-table-cost-per-panel");
+                                        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
+                                        .then(response => response.json())
+                                        .then(json => {
+                                            debugger;
+                                            const lekPerEuro = json.rates.ALL;
+                                            if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) * lekPerEuro);
+                                                }
+                                            } else {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) / lekPerEuro);
+                                                }
+                                            }
+                                        })   
+                                    }}>
+                                        <option id="spr-cost-per-panel-select-EUR" value="EUR">€</option>
+                                        <option id="spr-cost-per-panel-select-ALL" value="ALL">L</option>
+                                    </select>
+                                )</English>
                                 <Albanian>Kostoja për panel (€)</Albanian>
                             </th>
                             <th>
@@ -85,18 +109,20 @@ export function SolarPanelScrollList({onSelection, getIsCustomData}) {
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
-                                <td>{pv["Name/Model"]}</td>
-                                <td>{pv["Manufacturer"]}</td>
-                                <td>{pv["Cost per Panel"]}</td>
+                                <td className="capped-th-width">{pv["Name/Model"]}</td>
+                                <td className="capped-th-width"><a href={getNameHref(pv["Manufacturer"])} target="_blank" rel="noreferrer">{pv["Manufacturer"]}</a></td>
+                                <td className="spr-table-cost-per-panel">{pv["Cost per Panel"]}</td>
                                 <td>{pv["Area per Panel"]}</td>
                                 <td>{pv["Capacity per Panel"]}</td>
                                 <td>{pv["Efficiency"]}</td>
-                            </tr>
-                        ))}
+                            </tr>))}
                     </tbody>
                 </table>
             </div>
             <div id="solar-panel-info" className="Vert-flex">
+                <div>
+                    <English><b>Disclaimer:</b> Data as of November 2022</English>
+                </div>
                 <div>
                     <English>Solar Panel Statistics</English>
                     <Albanian>Statistikat e paneleve diellore</Albanian>
@@ -139,4 +165,33 @@ function fillPanelFields(pvSelection) {
     document.getElementById("solar-area").value = pvSelection["Area per Panel"];
     document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
     document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+}
+
+function getNameHref(name) {
+    // const searchURL = "https://www.google.com/search?q=";
+    // const searchKeywords = name.replace(" ", "+");
+    // return searchURL + searchKeywords;
+
+    if(name === "SunErg") {
+        return "https://www.sunergsolar.com/en/";
+    }
+    if(name === "Luxor Solar") {
+        return "https://www.luxor.solar/en/";
+    }
+    if(name === "Aleo") {
+        return "https://www.aleo-solar.com/";
+    }
+    if(name === "Peimar") {
+        return "https://www.peimar.com/uk/home/";
+    }
+    if(name === "Axitec") {
+        return "https://www.axitecsolar.com/en"
+    }
+    if(name === "Kioto Solar") {
+        return "https://www.kiotosolar.com/en/"
+    }
+    if(name === "Sharp") {
+        return "https://www.sharp.eu/solar-energy/find-a-solar-panel"
+    }
+    return "#";
 }

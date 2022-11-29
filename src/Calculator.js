@@ -14,6 +14,8 @@ import { settings } from './Settings';
 
 function Calculator() {
     const [paybackPeriod, setPaybackPeriod] = useState("");
+    const [totalSavings, setTotalSavings] = useState("");
+    const [totalCost, setTotalCost] = useState("");
     const [energyGenerated, setEnergyGenerated] = useState("");
 
     const [prefecture, setPrefecture] = useState("");
@@ -55,21 +57,50 @@ function Calculator() {
             <div className="content">
                 <header>
                     <div>
-                        <English><h2>Calculator</h2></English>
-                        <Albanian><h2>Llogaritësi</h2></Albanian>
+                        <English><h2 className="h2resources">Calculator</h2></English>
+                        <Albanian><h2 className="h2resources">Llogaritësi</h2></Albanian>
                     </div>
                 </header>
+                <details>
+                    <summary>
+                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
+                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
+                    </summary>
+                    <form>
+                        <MunicipalDropdown></MunicipalDropdown>
+                        <div className="Hor-flex">
+                            <label htmlFor="nop-electricity-usage">
+                                <div className="Hor-flex">
+                                    <English>Electricity usage per&nbsp;</English>
+                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                    <select id="nop-electricity-usage-period">
+                                        <option value="month">
+                                            {albanian ? "muaj" : "month"}
+                                        </option>
+                                        <option value="year">
+                                            {albanian ? "vit" : "year"}
+                                        </option>
+                                    </select>
+                                </div>
+                            </label>
+                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
+                </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
-                    <div>
-                        <English><summary><b>Payback Period:</b> How long it will take to break even on your initial solar panel system purchase</summary></English>
-                        <Albanian> <summary><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</summary></Albanian>
-                    </div>
+                    <summary>
+                        <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
+                        <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
+                    </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
-                            const results = formatGenAndROI(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
-                            setEnergyGenerated(results.genText);
-                            setPaybackPeriod(results.ROIText);
                             monthlyCostSavings = calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings;
+                            const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
+                            setEnergyGenerated(results.monthlyGeneration);
+                            setTotalSavings(results.totalSavings);
+                            setTotalCost(results.totalCost);
+                            setPaybackPeriod(results.ROI);
                         }}>
                         <br />
                         <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
@@ -83,15 +114,15 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
-                                <English>Roof space available for solar</English>
-                                <Albanian>Hapësirë ​​çati e disponueshme për solare</Albanian>
+                                <English>Flat roof space available for solar</English>
+                                <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
                             </label>
                             <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="percent-solar">
-                                <English>Percent of total energy consumption for solar</English>
-                                <Albanian>Përqindja e konsumit total të energjisë për energjinë diellore</Albanian>
+                                <English>Percent of electricity consumption for solar</English>
+                                <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
                             </label>
                             <input id="percent-solar" type="number" placeholder="%"></input>
                         </div>
@@ -99,28 +130,46 @@ function Calculator() {
                             <label htmlFor="electricity-paid">
                                 <div className="Hor-flex">
                                     <English>Current amount paid for electricity per</English>
-                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike për</Albanian>
+                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
                                     <select id="electricity-paid-period">
-                                        <option value="month">month</option>
-                                        <option value="year">year</option>
+                                        <option value="month">
+                                            {albanian ? "muaj" : "month"}
+                                        </option>
+                                        <option value="year">
+                                            {albanian ? "vit" : "year"}
+                                        </option>
                                     </select>
                                 </div>
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                         </div>
-                        <button type="submit">
+                        <button type="submit" id="submit-button">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
                         </button>
                     </form>
                     <div className="Vert-flex">
+                        <br />
                         <div>
-                            <English>Energy generated by solar sytem: {energyGenerated} kWh per month</English>
-                            <Albanian>Energjia e gjeneruar nga sistemi diellor: {energyGenerated} kWh në muaj</Albanian>
+                            <English><b>Disclaimer:</b> These numbers are based on your current energy bills</English>
+                            <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
+                        </div>
+                        <br />
+                        <div>
+                            <English>{energyGenerated ? `Energy generated by solar sytem: ${Math.round(energyGenerated)} kWh per month` : ""}</English>
+                            <Albanian>{energyGenerated ? `Energjia e gjeneruar nga sistemi diellor: ${Math.round(energyGenerated)} kWh në muaj` : ""}</Albanian>
                         </div>
                         <div>
-                            <English>Time to make a return on investment: {formatMonths(paybackPeriod)}</English>
-                            <Albanian>Koha për të bërë një kthim nga investimi: {formatMonths(paybackPeriod, true)}</Albanian>
+                            <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
+                            <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
+                        </div>
+                        <div>
+                            <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} Lekë` : ""}</English>
+                            <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
+                        </div>
+                        <div>
+                            <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
+                            <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
                     </div>
                 </details>
@@ -143,26 +192,72 @@ function Calculator() {
                         />
                     </div>
                 </div>
+                <details>
+                    <summary>
+                        <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
+                        <Albanian><b>Financimi me kredi</b>: Periudha e kostos dhe kthimit të një sistemi diellor kur financohet me një kredi</Albanian>
+                    </summary>
+                    <form>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-percent">
+                                <English>Percentage of final cost to pay with loan</English>
+                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
+                            </label>
+                            <input id="loan-percent" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-interest">
+                                <English>Percent interest on loan</English>
+                                <Albanian>Për qind e interesit në kredi</Albanian>
+                            </label>
+                            <input id="loan-interest" type="number" placeholder="%"></input>
+                        </div>
+                        <div className="Hor-flex">
+                            <label htmlFor="loan-term">
+                                <English>Loan term:&nbsp;</English>
+                                <Albanian>Afati i kredisë:&nbsp;</Albanian>
+                            </label>
+                            <select id="loan-term">
+                                <option>
+                                    {albanian ? "Mujore" : "Monthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Dymujore" : "Bimonthly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Tremujore" : "Quarterly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Gjysmëvjetor" : "Half-yearly"}
+                                </option>
+                                <option>
+                                    {albanian ? "Vjetore" : "Yearly"}
+                                </option>
+                            </select>
+                        </div>
+                        <button type="button" id="submit-button">Calculate</button>
+                    </form>
+                </details>
             </div>
             <PageFoot></PageFoot>
         </div>
     )
 }
 
-function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
+function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
     const electricityPaid = document.getElementById("electricity-paid");
+    const percentLoan = document.getElementById("loan-percent");
+    const interest = document.getElementById("loan-interest");
+
     let electricityPaidVal = electricityPaid.value;
     if(document.getElementById("electricity-paid-period").value === "year") {
         electricityPaidVal /= 12;
     }
     const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
 
-    return {
-        genText: systemData.monthlyGeneration,
-        ROIText: systemData.ROI
-    };
+    return systemData;
 }
 
 /**
@@ -175,13 +270,14 @@ function formatGenAndROI(prefecture, solarCost, solarArea, solarCapacity, solarE
  * @param {*} panelSize Size of a single solar panel (m^2)
  * @param {*} panelCapacity Capacity of a single solar panel (kW)
  * @param {*} panelEfficiency Efficiency of solar panels (%)
- * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, and "ROI" is the length of the payback period for a solar system purchase. 
+ * @param {*} percentLoan Percentage of payment to be covered by loan
+ * @param {*} interest Monthly interest in the case of payment by loan (Lekë per month)
+ * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, "totalSavings" is the amount of money saved by using a solar panel system, "totalCost" is the amount of money that a solar panel system would cost, "ROI" is the length of the payback period for a solar system purchase. 
  */
-function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
     let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
     let panelCost = singlePanelCost / panelCapacity;
-    let expenses = 0; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
-    let interest = 0; // Monthly interest in the case of payment by loan (Lekë per month) 
+    let expenses = 200000; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
 
     // Amount of solar irradiation for the specified municipality (kWh/month)/kW
     const solarIrradiation = SolarData.getData(prefecture, "AVG", panelCapacity / panelSize, false);
@@ -194,7 +290,7 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     // Total cost of the system in Lekë
     const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
     // Amount of Lekë saved per month
-    const savings = (electricityPrice * actualMonthlyGen) - interest;
+    const savings = (electricityPrice * actualMonthlyGen) - (percentLoan * interest * totalCost / 10000);
     // Total time to return on investment in months
     const roi = totalCost / savings;
 
@@ -210,6 +306,8 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
 
     return {
         monthlyGeneration: actualMonthlyGen, 
+        totalSavings: savings,
+        totalCost: totalCost,
         ROI: roi,
     };
 }
