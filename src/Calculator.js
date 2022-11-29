@@ -101,6 +101,8 @@ function Calculator() {
                             setTotalSavings(results.totalSavings);
                             setTotalCost(results.totalCost);
                             setPaybackPeriod(results.ROI);
+
+                            document.getElementById("savings-graph").style.display = "block";
                         }}>
                         <br />
                         <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
@@ -171,27 +173,27 @@ function Calculator() {
                             <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
+                        <div id="savings-graph" style={{display: 'none'}}>
+                            <div>
+                                <English><b>See the cost and savings of a solar photovoltaic system over time</b></English>
+                                <Albanian><b>Shihni koston dhe kursimet e një sistemi fotovoltaik diellor me kalimin e kohës</b></Albanian> {/*TODO: Translate to Albanian*/}
+                            </div>
+                            <div id="savings-graph-plot">
+                                <Plot
+                                    data={[
+                                        {
+                                        x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                                        y: monthlyCostSavings,
+                                        type: 'bar',
+                                        },
+                                    ]}
+                                    layout={ {width: 700, height: 400, title: 'Example Savings Plot'} }
+                                    config={{responsive: true}}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </details>
-                <div id="graph">
-                    <div>
-                        <English><summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></English>
-                        <Albanian> <summary><b>See the cost and savings of a solar photovoltaic system over time</b></summary></Albanian> {/*TODO: Translate to Albanian*/}
-                    </div>
-                    <br />
-                    <div>
-                        <Plot
-                            data={[
-                                {
-                                x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                y: monthlyCostSavings,
-                                type: 'bar',
-                                },
-                            ]}
-                            layout={ {width: 1000, height: 500, title: 'Example Savings Plot'} }
-                        />
-                    </div>
-                </div>
                 <details>
                     <summary>
                         <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
