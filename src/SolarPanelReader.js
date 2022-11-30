@@ -12,6 +12,7 @@ import { settings } from './Settings';
  * @property {number} AreaPerPanel
  * @property {number} CapacityPerPanel
  * @property {number} Efficiency
+ * @property {string} ManufacturerLink
  * 
  * @callback selectTableItemCallback A function to update external code when a table item is selected.
  * @param {SolarPVEntry} selectedEntry The entry from the table selected.
@@ -63,6 +64,8 @@ export function SolarPanelScrollList(props) {
                             return "CapacityPerPanel";
                         case "Efficiency (%)":
                             return "Efficiency";
+                        case "Manufacturer Link":
+                            return "ManufacturerLink";
                         default:
                             console.error("Undefined header found in SolarPanelData.csv: " + header);
                             return "UndefinedHeader";
@@ -151,7 +154,7 @@ export function SolarPanelScrollList(props) {
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
                                 <td className="capped-th-width">{pv.NameOrModel}</td>
-                                <td className="capped-th-width"><a href={getNameHref(pv.Manufacturer)} target="_blank" rel="noreferrer">{pv.Manufacturer}</a></td>
+                                <td className="capped-th-width"><a href={pv.ManufacturerLink} target="_blank" rel="noreferrer">{pv.Manufacturer}</a></td>
                                 <td className="spr-table-cost-per-panel">{pv.CostPerPanel}</td>
                                 <td>{pv.AreaPerPanel}</td>
                                 <td>{pv.CapacityPerPanel}</td>
@@ -210,33 +213,4 @@ function fillPanelFields(pvSelection) {
     document.getElementById("solar-area").value = pvSelection.AreaPerPanel;
     document.getElementById("solar-capacity").value = pvSelection.CapacityPerPanel;
     document.getElementById("solar-efficiency").value = pvSelection.Efficiency.replace("%", "");
-}
-
-function getNameHref(name) {
-    // const searchURL = "https://www.google.com/search?q=";
-    // const searchKeywords = name.replace(" ", "+");
-    // return searchURL + searchKeywords;
-
-    if(name === "SunErg") {
-        return "https://www.sunergsolar.com/en/";
-    }
-    if(name === "Luxor Solar") {
-        return "https://www.luxor.solar/en/";
-    }
-    if(name === "Aleo") {
-        return "https://www.aleo-solar.com/";
-    }
-    if(name === "Peimar") {
-        return "https://www.peimar.com/uk/home/";
-    }
-    if(name === "Axitec") {
-        return "https://www.axitecsolar.com/en"
-    }
-    if(name === "Kioto Solar") {
-        return "https://www.kiotosolar.com/en/"
-    }
-    if(name === "Sharp") {
-        return "https://www.sharp.eu/solar-energy/find-a-solar-panel"
-    }
-    return "#";
 }
