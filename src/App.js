@@ -6,6 +6,10 @@ import English from './English';
 import LanguageToggle from './LanguageToggle';
 import { settings } from './Settings';
 
+/**
+ * The HTML for the home page.
+ * @returns {HTMLElement} An HTMLElement representing the home page, with class "App".
+ */
 function App() {
   return (
     <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
@@ -17,7 +21,7 @@ function App() {
           <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
           <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
           <div className="square">
-            <button><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
+            <button><Link to="/Calculator" onClick={() => settings.disabledMenuItem.setState("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></button>
@@ -31,7 +35,7 @@ function App() {
             </div>
           </div>
           <div className="square">
-            <button><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+            <button><Link to="/Resources" onClick={() => settings.disabledMenuItem.setState("Resources")}>
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></button>
@@ -45,7 +49,7 @@ function App() {
             </div>
           </div>
           <div className="square">
-            <button><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+            <button><Link to="/Help" onClick={() => settings.disabledMenuItem.setState("Help")}>
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></button>
@@ -65,6 +69,10 @@ function App() {
   );
 }
 
+/**
+ * The HTML for the navigation bar and language toggle.
+ * @returns {HTMLElement} An HTMLElement representing the navigation bar, with class "App-header".
+ */
 export function PageHead() {
   return (
     <div>
@@ -78,19 +86,19 @@ export function PageHead() {
         <nav id="Nav-options">
           <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
           <ul id="Nav-options-list">
-          <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => setCurrentTab("Home")}>
+          <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => settings.disabledMenuItem.setState("Home")}>
               <English>Home</English>
               <Albanian>Shitet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => setCurrentTab("Calculator")}>
+            <li className={settings.disabledMenuItem.getState() === "Calculator" ? "current-tab" : ""}><Link to="/Calculator" onClick={() => settings.disabledMenuItem.setState("Calculator")}>
               <English>Calculator</English>
               <Albanian>Llogaritësi</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => setCurrentTab("Resources")}>
+            <li className={settings.disabledMenuItem.getState() === "Resources" ? "current-tab" : ""}><Link to="/Resources" onClick={() => settings.disabledMenuItem.setState("Resources")}>
               <English>Resources</English>
               <Albanian>Burimet</Albanian>
             </Link></li>
-            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => setCurrentTab("Help")}>
+            <li className={settings.disabledMenuItem.getState() === "Help" ? "current-tab" : ""}><Link to="/Help" onClick={() => settings.disabledMenuItem.setState("Help")}>
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></li>
@@ -103,6 +111,10 @@ export function PageHead() {
   );
 }
 
+/**
+ * The HTML for the footer at the bottom of each page.
+ * @returns {HTMLElement} An HTMLElement representing the footer, with class "App-footer".
+ */
 export function PageFoot() {
   return (
     <div id="App-footer">
@@ -126,11 +138,11 @@ export function PageFoot() {
   )
 }
 
-function setCurrentTab(tab) {
-  settings.disabledMenuItem.setState(tab);
-}
-
 let switching = false;
+/**
+ * Switches hamburger dropdown from visible to invisible and back when clicking on the menu icon.
+ * The variable switching is to stop visibility loops keeping the menu invisible even when clicking on the menu icon.
+ */
 function hamburgerVis() {
   switching = true;
   let nav = document.getElementById("Nav-options-list");
@@ -141,16 +153,23 @@ function hamburgerVis() {
     nav.classList.add("invisible");
   }
 }
+
+/**
+ * Hides hamburger dropdown menu when clicking off of the menu.
+ */
 document.onclick = () => {
   let nav = document.getElementById("Nav-options-list");
-  if(!switching && window.innerWidth < 1000 && !nav.classList.contains("invisible")) {
+  if(!switching && window.innerWidth <= 1000 && !nav.classList.contains("invisible")) {
     nav.classList.add("invisible");
   }
   switching = false;
 }
 
-//To manage hiding the navbar when the hamburger menu appears
 let sizeDecreased = false;
+/**
+ * Hides or shows hamburger dropdown menu when resizing screen. Hides the menu when adding the hamburger menu, and adds the menu when there is no hamburger element.
+ * The variable sizeDecreased prevents hiding the dropdown when the hamburger menu is already visible.
+ */
 window.onresize = () => {
   if(window.innerWidth > 1000) {
     document.getElementById("Nav-options-list").classList.remove("invisible");
@@ -160,6 +179,9 @@ window.onresize = () => {
     sizeDecreased = true;
   }
 }
+/**
+ * Hides hamburger dropdown menu when the page is loaded, if necessary.
+ */
 window.onload = () => {
   if(window.innerWidth <= 1000) {
     document.getElementById("Nav-options-list").classList.add("invisible");
