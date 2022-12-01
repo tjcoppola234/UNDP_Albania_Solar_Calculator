@@ -25,6 +25,12 @@ import { settings } from './Settings';
  * @returns An HTMLElement representing the calculator, with class "Calculator".
  */
 function Calculator() {
+
+    //Number of Panels calculator state variables
+    const [numPanels, setNumPanels] = useState("");
+    const [numPanelsPref, setNumPanelsPref] = useState("");
+
+    //Payback Period calculator state variables
     const [paybackPeriod, setPaybackPeriod] = useState("");
     const [totalSavings, setTotalSavings] = useState("");
     const [totalCost, setTotalCost] = useState("");
@@ -75,9 +81,12 @@ function Calculator() {
                         <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
                         <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
-                    <form>
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        setNumPanels(calcNumPanels(numPanelsPref, document.getElementById("nop-electricity-usage").value, document.getElementById("nop-electricity-usage-period").value))
+                    }}>
                         <div className="Vert-flex">
-                            <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
+                            <MunicipalDropdown changeEvent={(e) => setNumPanelsPref(e.target.value)}></MunicipalDropdown>
                             <div>
                                 <English>Your municipality is used to determine how much sunlight is expected</English>
                                 <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
@@ -100,7 +109,9 @@ function Calculator() {
                             </label>
                             <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
                         </div>
-                        <button type="button" id="submit-button">Calculate</button>
+                        <button type="submit" id="submit-button">Calculate</button>
+                        <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
+                        <Albanian>{numPanels ? `Panels required: ${numPanels} panels` : ""}</Albanian>
                     </form>
                 </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
@@ -291,16 +302,6 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     // Total time to return on investment in months
     const roi = totalCost / savings;
 
-    // console.log({
-    //     irradiation: solarIrradiation,
-    //     desiredGeneration: desiredMonthlyGen,
-    //     solarPanelCountNeeded: solarPanelAmt,
-    //     monthlyGeneration: actualMonthlyGen,
-    //     cost: totalCost,
-    //     savings: savings,
-    //     returnOnInterest: roi
-    // });
-
     return {
         monthlyGeneration: actualMonthlyGen, 
         totalSavings: savings,
@@ -389,6 +390,14 @@ function formatMonths(totalMonths, isAlbanian = false) {
     }
     
     return yearText + monthText;
+}
+
+function calcNumPanels(numPanelsPref, electricityUsage, electricityUsagePeriod) {
+    const solarIrradiation = SolarData.getData(numPanelsPref, "AVG", .21, false);
+    if(electricityUsagePeriod == "year") {
+        return Math.ceil(electricityUsage / 12 / .15 / solarIrradiation / .21);
+    }
+    return Math.ceil(electricityUsage / .15 / solarIrradiation / .21);
 }
 
 export default Calculator;
