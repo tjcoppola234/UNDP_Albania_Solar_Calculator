@@ -2,7 +2,7 @@ import './global.css';
 import './Calculator.css';
 import { PageHead, PageFoot } from './App';
 import {useState} from 'react';
-import { MunicipalDropdown } from './Dropdown';
+import { MunicipalDropdown } from './MunicipalDropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 
@@ -10,6 +10,20 @@ import English from './English';
 import Albanian from './Albanian';
 import { settings } from './Settings';
 
+/**
+ * @typedef {import('./SolarPanelReader').SolarPVEntry} SolarPVEntry A collection of data about a specific solar PV example.
+ * 
+ * @typedef Calculations A collection of calculations based on the entered location and solar PV data.
+ * @property {number} AverageMonthlyGeneration
+ * @property {number} TotalSavings
+ * @property {number} TotalCost
+ * @property {number} ReturnOnInvestment
+ */
+
+/**
+ * The HTML for the calculator.
+ * @returns An HTMLElement representing the calculator, with class "Calculator".
+ */
 function Calculator() {
     const [paybackPeriod, setPaybackPeriod] = useState("");
     const [totalSavings, setTotalSavings] = useState("");
@@ -31,18 +45,17 @@ function Calculator() {
         setAlbanian(visible);
     });
 
+    /**
+     * Updates all relevant react functional hooks with the selected solar PV data.
+     * @param {SolarPVEntry} pvSelection The selected solar PV to update the hooks with.
+     */
     function setSolarData(pvSelection) {
-        setSolarName(pvSelection["Name/Model"]);
-        setSolarManufacturer(pvSelection["Manufacturer"]);
-        setSolarCost(pvSelection["Cost per Panel"]);
-        setSolarArea(pvSelection["Area per Panel"]);
-        setSolarCapacity(pvSelection["Capacity per Panel"]);
-        setSolarEfficiency(pvSelection["Efficiency"].replace("%", ""));
-
-        document.getElementById("solar-cost").value = pvSelection["Cost per Panel"];
-        document.getElementById("solar-area").value = pvSelection["Area per Panel"];
-        document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
-        document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+        setSolarName(pvSelection.NameOrModel);
+        setSolarManufacturer(pvSelection.Manufacturer);
+        setSolarCost(pvSelection.CostPerPanel);
+        setSolarArea(pvSelection.AreaPerPanel);
+        setSolarCapacity(pvSelection.CapacityPerPanel);
+        setSolarEfficiency(pvSelection.Efficiency.replace("%", ""));
     }
 
     SolarData.loadData();
@@ -63,7 +76,13 @@ function Calculator() {
                         <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
                     <form>
-                        <MunicipalDropdown></MunicipalDropdown>
+                        <div className="Vert-flex">
+                            <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
+                            <div>
+                                <English>Your municipality is used to determine how much sunlight is expected</English>
+                                <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
+                            </div>
+                        </div>
                         <div className="Hor-flex">
                             <label htmlFor="nop-electricity-usage">
                                 <div className="Hor-flex">
@@ -98,15 +117,8 @@ function Calculator() {
                             setPaybackPeriod(results.ROI);
                         }}>
                         <br />
-                        <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                        <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
                         <br />
-                        <div className="Vert-flex">
-                            <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                            <div>
-                                <English>Your municipality is used to determine how much sunlight is expected</English>
-                                <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
-                            </div>
-                        </div>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
                                 <English>Flat roof space available for solar</English>
@@ -220,6 +232,15 @@ function Calculator() {
     )
 }
 
+/**
+ * Use the provided location and solar PV data to calculate {@link Calculations} values.
+ * @param {string} prefecture The prefecture to use for irradiation data
+ * @param {number} solarCost The cost of a single solar PV unit
+ * @param {number} solarArea The dimensions of a single solar PV unit
+ * @param {number} solarCapacity The capacity of a single solar PV unit
+ * @param {number} solarEfficiency The efficiency of the selected solar PV unit
+ * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
+ */
 function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
@@ -237,18 +258,18 @@ function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEff
 }
 
 /**
- * 
+ * Calculates the return on investment.
  * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
  * @param {number} percentEnergyForSolar Amount of total energy consumption dedicated to solar (between 0 and 100) (%)
  * @param {number} costPerMonth Total amount paid for electricity per month (Lekë per month)
- * @param {*} prefecture The prefecture to gather solar data from
- * @param {*} panelCost Cost of a single solar panel (Lekë)
- * @param {*} panelSize Size of a single solar panel (m^2)
- * @param {*} panelCapacity Capacity of a single solar panel (kW)
- * @param {*} panelEfficiency Efficiency of solar panels (%)
- * @param {*} percentLoan Percentage of payment to be covered by loan
- * @param {*} interest Monthly interest in the case of payment by loan (Lekë per month)
- * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, "totalSavings" is the amount of money saved by using a solar panel system, "totalCost" is the amount of money that a solar panel system would cost, "ROI" is the length of the payback period for a solar system purchase. 
+ * @param {string} prefecture The prefecture to gather solar data from
+ * @param {number} singlePanelCost Cost of a single solar panel (Lekë)
+ * @param {number} [panelSize] Size of a single solar panel (m^2)
+ * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
+ * @param {number} [panelEfficiency] Efficiency of solar panels (%)
+ * @param {number} [percentLoan] Percentage of payment to be covered by loan
+ * @param {number} [interest] Monthly interest in the case of payment by loan (Lekë per month)
+ * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
  */
 function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
     let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
@@ -288,11 +309,20 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     };
 }
 
+/**
+ * Converts a decimal number of months into a representation as a number of months and years (Eg. 13.11111 total months becomes 1 year and 2 months).
+ * @param {number} totalMonths A decimal representing some amount of months
+ * @param {boolean} isAlbanian Whether the output should use Albanian or English words for "month" and "year"
+ * @returns {string} Some number of years and months
+ */
 function formatMonths(totalMonths, isAlbanian = false) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
     if(years === Infinity) {
-        return "Please input valid numbers";
+        if(isAlbanian)
+            return "Ju lutemi futni numra të vlefshëm";
+        else
+            return "Please input valid numbers";
     }
     
     let yearText, monthText;

@@ -20,34 +20,36 @@ let solarData = [{Month: "Jan"}, {Month: "Feb"}, {Month: "Mar"}, {Month: "Apr"},
                  {Month: "Aug"}, {Month: "Sep"}, {Month: "Oct"}, {Month: "Nov"}, {Month: "Dec"}, {Month: "AVG"}];
 let loaded = false;
 
+/**
+ * Reads solar irradiation data from "data/SolarIrradiation.csv" by prefecture and loads the data into solarData.
+ */
 function loadData() {
-    if(loaded)
-        return;
-    
-    //Loading csv as string
-    fetch("data/SolarIrradiation.csv", {
-        headers : { 
-            'Content-Type': 'application/csv',
-            'Accept': 'application/csv'
-        }
-    }).then(response => response.arrayBuffer()).then(function(buffer){
-        const decoder = new TextDecoder('iso-8859-16');
-        //Removes extra line with unecessary data and re-attaches Month to the entry
-        return decoder.decode(buffer).replace(new RegExp("^.*\\r\\n"), "Month").replace(new RegExp("\\r\\n$"), "");
-    })
-    .then(function(csvData) {
-        //Converting string into map of months and the irradiation for each month
-        readString(csvData, {
-            header: true,
-            complete: function(results, file) {
-                solarData = results.data;
-                loaded = true;
-            },
-            error: function(error, file) {
-                console.log(error);
+    if(!loaded) {
+        //Loading csv as string
+        fetch("data/SolarIrradiation.csv", {
+            headers : { 
+                'Content-Type': 'application/csv',
+                'Accept': 'application/csv'
             }
+        }).then(response => response.arrayBuffer()).then(function(buffer){
+            const decoder = new TextDecoder('iso-8859-16');
+            //Removes extra line with unecessary data and re-attaches Month to the entry
+            return decoder.decode(buffer).replace(new RegExp("^.*\\r\\n"), "Month").replace(new RegExp("\\r\\n$"), "");
+        })
+        .then(function(csvData) {
+            //Converting string into map of months and the irradiation for each month
+            readString(csvData, {
+                header: true,
+                complete: function(results, file) {
+                    solarData = results.data;
+                    loaded = true;
+                },
+                error: function(error, file) {
+                    console.log(error);
+                }
+            });
         });
-    });
+    }
 }
 
 /**
@@ -58,7 +60,7 @@ function loadData() {
  * @param {string} month The month to get data for. Must be one of the strings in timeOptions. AVG returns the overall average accross all months
  * @param {number} capacity The capacity of solar panel being calculated for in kW/m^2. Important for converting from (kWh/month)/m^2 to (kWh/month)/kW.
  * @param {boolean} isLeapYear Whether the year is a leap year. The default is false, and only matters for calculations for February
- * @returns The average amount of solar irradiation for the provided prefecture in (kWh/month)/kW
+ * @returns {number} The average amount of solar irradiation for the provided prefecture in (kWh/month)/kW
  */
 function getData(prefecture, month, capacity, isLeapYear = false) {
     if(!Object.values(timeOptions).some(v => v === month)) {
@@ -85,6 +87,12 @@ function getData(prefecture, month, capacity, isLeapYear = false) {
     return 1400 / 12;
 }
 
+/**
+ * Calculates the number of days in a month, taking into account whether it is a leap year.
+ * @param {string} month A value from timeOptions representing a month, or the average of all months.
+ * @param {boolean} isLeapYear True if it is a leap year, and false otherwise.
+ * @returns {number} The number of days in the month, or the average number of days in all months if the average was provided as the current month.
+ */
 function days(month, isLeapYear) {
     if(month === "Jan" || month === "Mar" || month === "May" || month === "Jul" || month === "Aug" || month === "Oct" || month === "Dec")
         return 31;
@@ -101,6 +109,10 @@ function days(month, isLeapYear) {
     return 365 / 12;
 }
 
+/**
+ * Determines whether the solar irradiation data has been loaded.
+ * @returns {boolean} Whether the irradiation data has been loaded.
+ */
 const isLoaded = () => loaded;
 
 export {timeOptions, isLoaded, loadData, getData};

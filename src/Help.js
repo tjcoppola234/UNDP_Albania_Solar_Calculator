@@ -4,6 +4,10 @@ import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
 
+/**
+ * The HTML for the help/information page.
+ * @returns {HTMLElement} An HTMLElement representing the help/information page, with class "Help".
+ */
 function Help() {
     return (
         <div className="Help">
