@@ -4,12 +4,6 @@
     margin-top: 20px;
 }
 
-.h2resources {
-    color:black;
-    font-size:300%;
-    margin: 10px;
-}
-
 input[type="number"]:invalid {
     color: rgb(241, 76, 76);
 }
@@ -110,3 +104,22 @@ input {
 select {
     font-size: var(--font-size);
 }
+
+#muni-panel-choice {
+    background-color: #b0c3d8;
+    margin: 10px;
+}
+
+summary {
+    margin-bottom: 10px;
+}
+details {
+    margin-bottom: 10px;
+}
+
+:target {
+    animation: highlight 4s ease;    
+  }
+  @keyframes highlight {
+    20% { background-color: rgb(248, 231, 131); }
+  }
