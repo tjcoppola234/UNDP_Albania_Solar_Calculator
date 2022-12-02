@@ -1,5 +1,6 @@
 import './global.css';
 import './Resources.css';
+import { useState } from 'react';
 import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
@@ -9,11 +10,27 @@ import Albanian from './Albanian';
  * @returns {HTMLElement} An HTMLElement representing the resources page, with class "Resources".
  */
 function Resources() {
+    const [openImage, setImageOpened] = useState(false);
+    const [openedSRC, setOpenSRC] = useState("");
+    const [caption, setCaption] = useState("");
+
+    const load = (num) => {
+        const image = document.getElementById(`img${num}`);
+        setImageOpened(true);
+        setOpenSRC(image.src);
+        setCaption(image.alt);
+    }
+
     return (
         <div className="Resources">
             <PageHead></PageHead>
             
             <div className="content">
+                <div className={"modal-img" + (openImage ? "" : " invisible")}>
+                    <span className="close-modal" onClick={() => setImageOpened(false)}>&times;</span>
+                    <img className="modal-img-src" src={openedSRC} alt={caption}></img>
+                    <div className="modal-caption">{caption}</div>
+                </div>
                 <div>
                     <English><h2 className="h2resources">Resources</h2></English>
                     <Albanian><h2 className="h2resources">Burimet</h2></Albanian>
@@ -23,7 +40,7 @@ function Resources() {
                     <English><h1 className="largerfontb">Why is solar energy important?</h1></English>
                     <Albanian><h1 className="largerfontb">Pse është e rëndësishme energjia diellore?</h1></Albanian>
                 </div>
-                <img id="imagefloat" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" width = "360" height = "450" floatleft/>
+                <img className="imagefloat0" id="img0" src={process.env.PUBLIC_URL+"solarmap.png"} alt="Benefits" onClick={() => load(0)} width = "360" height = "450" floatleft/>
                 <div className="div5">
                 <div>
                     <English><h3>The Enviornment</h3></English>
@@ -73,7 +90,7 @@ function Resources() {
                 <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
             </div>
             <div className="div5">
-            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "450" height = "770" />
+            <img className="imagefloat1" id="img1" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" onClick={() => load(1)} width = "450" height = "770" />
                 <div>
                     <English><h3>Reduced Energy Costs</h3></English>
                     <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
@@ -163,7 +180,7 @@ function Resources() {
             </div>
             
             <div className="div5">
-                <img id="imagefloat3" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" width = "500" height = "500"/>
+                <img className="imagefloat2" id="img2" src={process.env.PUBLIC_URL+"qs.png"} alt="Questions To Ask" onClick={() => load(2)} width = "500" height = "500"/>
                 
                 <div>
                     <English><h3>Why should I go solar?</h3></English>
@@ -235,7 +252,7 @@ function Resources() {
             </div>
             
                 <div className="div5">
-                    <img id="imagefloat2" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" width = "450" height = "650"/>
+                    <img className="imagefloat2" id="img3" src={process.env.PUBLIC_URL+"how.png"} alt="How to Install" onClick={() => load(3)} width = "450" height = "650"/>
                     <div>
                         <English><h3>Solar Installers</h3></English>
                         <Albanian><h3>Instalues ​​diellor</h3></Albanian>
@@ -313,4 +330,5 @@ function Resources() {
         </div>
     )
 }
+
 export default Resources;
