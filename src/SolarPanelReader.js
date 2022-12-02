@@ -168,8 +168,8 @@ export function SolarPanelScrollList(props) {
                     <English><b>Disclaimer:</b> Data as of November 2022</English>
                 </div>
                 <div>
-                    <English>Solar Panel Statistics</English>
-                    <Albanian>Statistikat e paneleve diellore</Albanian>
+                    <English>Solar Panel Information</English>
+                    <Albanian>Informacion e paneleve diellore</Albanian>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-cost">
