@@ -1,28 +1,4 @@
-.Sponsor-logos {
-    display: flex;
-    align-items: center;
-}
-
-#undp-logo {
-    width: 50px;
-    height: 103px;
-}
-
-#wpi-logo {
-    width: 124px;
-    height: 40px;
-}
-
-#aee-logo {
-    width: 164px;
-    height: 44px;
-}
-
-span {
-    font-weight: bold;
-}
-
-#center-fade {
+.App #center-fade {
     background-color: rgba(255, 255, 255, 0.9);
     display: block;
     position: absolute;
@@ -35,7 +11,7 @@ span {
     width: 60%;
 }
 
-#center-fade button {
+.App #center-fade button {
     width: 100%;
     height: 50px;
     border: none;
@@ -44,26 +20,20 @@ span {
     margin: auto;
 }
 
-#center-fade button a {
+.App #center-fade button a {
     color: var(--nav-text);
     font-size: var(--font-size);
     text-decoration: none;
 }
 
-.h2resources {
-    color:black;
-    font-size:200%;
-    margin: 10px;
-}
-
-.square {
+.App .square {
     width: 100%;
     display: grid;
     grid-template-columns: 20% 80%;
     min-height: 100px;
 }
 
-.square-bullets {
+.App .square-bullets {
     margin-top: auto;
     margin-bottom: auto;
 }

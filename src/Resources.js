@@ -28,8 +28,8 @@ function Resources() {
             <div className="content">
                 <div className={"modal-img" + (openImage ? "" : " invisible")}>
                     <span className="close-modal" onClick={() => setImageOpened(false)}>&times;</span>
-                    <img className="modal-img-src" src={openedSRC} alt={caption}></img>
                     <div className="modal-caption">{caption}</div>
+                    <img className="modal-img-src" src={openedSRC} alt={caption}></img>
                 </div>
                 <div>
                     <English><h2 className="h2resources">Resources</h2></English>

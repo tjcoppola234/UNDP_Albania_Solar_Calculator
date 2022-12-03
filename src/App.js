@@ -16,8 +16,8 @@ function App() {
       <PageHead></PageHead>
       <div className="content">
         <div id="center-fade">
-          <English>This website is designed <span>for businesses</span></English>
-          <Albanian>Kjo faqe interneti është krijuar <span>për bizneset</span></Albanian>
+          <English>This website is designed <b>for businesses</b></English>
+          <Albanian>Kjo faqe interneti është krijuar <b>për bizneset</b></Albanian>
           <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
           <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
           <div className="square">
@@ -28,8 +28,8 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Enter information about your electricity costs and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
-                  <Albanian>Futni informacione për kostot e energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa energji <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+                  <English>Enter information about your electricity costs and available roof space to see how much <b>energy you could generate</b> and <b>money you could save</b> with a solar panel system</English>
+                  <Albanian>Futni informacione për kostot e energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa energji <b>energji mund të gjeneroni</b> dhe <b>para mund të kurseni</b> me një sistem paneli diellor</Albanian>
                 </li>
               </ul>
             </div>
@@ -120,14 +120,14 @@ export function PageFoot() {
     <div id="App-footer">
       <footer>
         <div className="Sponsor-logos">
-          <span className="Center-items">
+          <div className="Center-items">
             <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
             <div>
               <English>in collaboration with</English>
               <Albanian>ne bashkepunim me</Albanian>
             </div>
             <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
-          </span>
+          </div>
         </div>
         <div>
           <English>Created by: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</English>
