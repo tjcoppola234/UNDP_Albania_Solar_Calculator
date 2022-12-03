@@ -163,13 +163,13 @@ export function SolarPanelScrollList(props) {
                     </tbody>
                 </table>
             </div>
-            <div id="solar-panel-info" className="Vert-flex">
+            <div id="solar-panel-info">
                 <div>
                     <English><b>Disclaimer:</b> Data as of November 2022</English>
                 </div>
                 <div>
-                    <English>Solar Panel Information</English>
-                    <Albanian>Informacion e paneleve diellore</Albanian>
+                    <English>Select a solar panel from the table above or enter custom information below</English>
+                    <Albanian>Zgjidhni një panel diellor nga tabela e mësipërme ose futni informacione të personalizuara më poshtë</Albanian>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-cost">
