@@ -90,43 +90,46 @@ function Calculator() {
                         <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
                         <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
-                    <form onSubmit={e => {
-                        e.preventDefault();
-                        if(prefecture === "") {
-                            return;
-                        }
-                        setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
-                    }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
-                        <div className="Hor-flex">
-                            <label htmlFor="nop-electricity-usage">
-                                <div className="Hor-flex">
-                                    <English>Electricity usage per&nbsp;</English>
-                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
-                                    <select id="nop-electricity-usage-period">
-                                        <option value="month">
-                                            {albanian ? "muaj" : "month"}
-                                        </option>
-                                        <option value="year">
-                                            {albanian ? "vit" : "year"}
-                                        </option>
-                                    </select>
-                                </div>
-                            </label>
-                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
-                        </div>
-                        <button type="submit" className="submit-button">Calculate</button>
-                        <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
-                        <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
-                    </form>
+                    <div className="detail-content">
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            if(prefecture === "") {
+                                return;
+                            }
+                            setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
+                        }}>
+                            <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
+                            <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
+                            <div className="Hor-flex">
+                                <label htmlFor="nop-electricity-usage">
+                                    <div className="Hor-flex">
+                                        <English>Electricity usage per&nbsp;</English>
+                                        <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                        <select id="nop-electricity-usage-period">
+                                            <option value="month">
+                                                {albanian ? "muaj" : "month"}
+                                            </option>
+                                            <option value="year">
+                                                {albanian ? "vit" : "year"}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </label>
+                                <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                            </div>
+                            <button type="submit" className="submit-button">Calculate</button>
+                            <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
+                            <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
+                        </form>
+                    </div>
                 </details>
                 <details open>
                     <summary>
                         <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
                         <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
                     </summary>
-                    <form onSubmit={(e) => {
+                    <div className="detail-content">
+                        <form onSubmit={(e) => {
                             e.preventDefault();
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.AverageMonthlyGeneration);
@@ -134,66 +137,67 @@ function Calculator() {
                             setTotalCost(results.TotalCost);
                             setPaybackPeriod(results.ReturnOnInvestment);
                         }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
-                        <div className="Hor-flex">
-                            <label htmlFor="roof-space">
-                                <English>Flat roof space available for solar</English>
-                                <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
-                            </label>
-                            <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="percent-solar">
-                                <English>Percent of electricity consumption for solar</English>
-                                <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
-                            </label>
-                            <input id="percent-solar" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="electricity-paid">
-                                <div className="Hor-flex">
-                                    <English>Current amount paid for electricity per</English>
-                                    <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
-                                    <select id="electricity-paid-period">
-                                        <option value="month">
-                                            {albanian ? "muaj" : "month"}
-                                        </option>
-                                        <option value="year">
-                                            {albanian ? "vit" : "year"}
-                                        </option>
-                                    </select>
-                                </div>
-                            </label>
-                            <input id="electricity-paid" type="number" placeholder="Lekë"></input>
-                        </div>
-                        <button type="submit" className="submit-button">
-                            <English>Calculate</English>
-                            <Albanian>Llogaritni</Albanian>
-                        </button>
-                    </form>
-                    <div className="Vert-flex">
-                        <br />
-                        <div>
-                            <English><b>Disclaimer:</b> These numbers are based on your current energy bills</English>
-                            <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
-                        </div>
-                        <br />
-                        <div>
-                            <English>{energyGenerated ? `Energy generated by solar sytem: ${Math.round(energyGenerated)} kWh per month` : ""}</English>
-                            <Albanian>{energyGenerated ? `Energjia e gjeneruar nga sistemi diellor: ${Math.round(energyGenerated)} kWh në muaj` : ""}</Albanian>
-                        </div>
-                        <div>
-                            <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
-                            <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
-                        </div>
-                        <div>
-                            <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} Lekë` : ""}</English>
-                            <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
-                        </div>
-                        <div>
-                            <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
-                            <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
+                            <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
+                            <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
+                            <div className="Hor-flex">
+                                <label htmlFor="roof-space">
+                                    <English>Flat roof space available for solar</English>
+                                    <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
+                                </label>
+                                <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
+                            </div>
+                            <div className="Hor-flex">
+                                <label htmlFor="percent-solar">
+                                    <English>Percent of electricity consumption for solar</English>
+                                    <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
+                                </label>
+                                <input id="percent-solar" type="number" placeholder="%"></input>
+                            </div>
+                            <div className="Hor-flex">
+                                <label htmlFor="electricity-paid">
+                                    <div className="Hor-flex">
+                                        <English>Current amount paid for electricity per</English>
+                                        <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
+                                        <select id="electricity-paid-period">
+                                            <option value="month">
+                                                {albanian ? "muaj" : "month"}
+                                            </option>
+                                            <option value="year">
+                                                {albanian ? "vit" : "year"}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </label>
+                                <input id="electricity-paid" type="number" placeholder="Lekë"></input>
+                            </div>
+                            <button type="submit" className="submit-button">
+                                <English>Calculate</English>
+                                <Albanian>Llogaritni</Albanian>
+                            </button>
+                        </form>
+                        <div className="Vert-flex">
+                            <br />
+                            <div>
+                                <English><b>Disclaimer:</b> These numbers are based on your current energy bills</English>
+                                <Albanian><b>Mohim përgjegjësie:</b> Këta numra bazohen në faturat tuaja të energjisë dhe nuk janë të sakta</Albanian>
+                            </div>
+                            <br />
+                            <div>
+                                <English>{energyGenerated ? `Energy generated by solar sytem: ${Math.round(energyGenerated)} kWh per month` : ""}</English>
+                                <Albanian>{energyGenerated ? `Energjia e gjeneruar nga sistemi diellor: ${Math.round(energyGenerated)} kWh në muaj` : ""}</Albanian>
+                            </div>
+                            <div>
+                                <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
+                                <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
+                            </div>
+                            <div>
+                                <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} Lekë` : ""}</English>
+                                <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
+                            </div>
+                            <div>
+                                <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
+                                <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
+                            </div>
                         </div>
                     </div>
                 </details>
@@ -202,8 +206,10 @@ function Calculator() {
                         <English><b>Municipality and Solar Panel Info</b>: Input the municipality of your building. Then input information about the solar panels you will use, or select a solar panel from the table</English>
                         <Albanian><b>Informacionet e bashkisë dhe panelit diellor</b>: Futni komunën e ndërtesës suaj. Më pas futni informacione për panelet diellore që do të përdorni, ose zgjidhni një panel diellor nga tabela</Albanian>
                     </summary>
-                    <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
-                    <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                    <div className="detail-content">
+                        <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
+                        <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                    </div>
                 </details>
             </div>
             <PageFoot></PageFoot>
@@ -261,8 +267,8 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     const desiredMonthlyGen = ((percentEnergyForSolar / 100) * costPerMonth) / electricityPrice;
     // Number of solar panels needed
     const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
-    // Amount of energy generated per month for a system (kWh per month)
-    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+    // Amount of energy generated per month for a system (kWh per month). The last 1.15 is to add a 15% multiplier due to assuming solar PV is correctly angled
+    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15;
     // Total cost of the system in Lekë
     const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
     // Amount of Lekë saved per month

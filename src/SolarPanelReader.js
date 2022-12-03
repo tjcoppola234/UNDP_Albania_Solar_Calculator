@@ -107,7 +107,7 @@ export function SolarPanelScrollList(props) {
                             {/* apr key: https://api.exchangerate-api.com/v4/latest/EUR */}
                             <th>
                                 <English>Cost per Panel (
-                                    <select id="spr-cost-per-panel-select" onChange={(e) => {
+                                    <select id="spr-cost-per-panel-select" title="Select Currency Type" onChange={(e) => {
                                         e.preventDefault();
                                         const cppEntries = document.getElementsByClassName("spr-table-cost-per-panel");
                                         fetch("https://api.exchangerate-api.com/v4/latest/EUR")

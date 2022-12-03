@@ -28,8 +28,16 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Enter information about your electricity costs and available roof space to see how much <b>energy you could generate</b> and <b>money you could save</b> with a solar panel system</English>
-                  <Albanian>Futni informacione për kostot e energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa energji <b>energji mund të gjeneroni</b> dhe <b>para mund të kurseni</b> me një sistem paneli diellor</Albanian>
+                  <English>See how much energy you could generate</English>
+                  <Albanian>Shihni sa energji mund të gjeneroni</Albanian>
+                </li>
+                <li>
+                  <English>See how much money you could save</English>
+                  <Albanian>Shihni sa para mund të kurseni</Albanian>
+                </li>
+                <li>
+                  <English>Learn if solar photovoltaics are right for you!</English>
+                  <Albanian>Mësoni nëse fotovoltaikët diellorë janë të duhurat për ju!</Albanian>
                 </li>
               </ul>
             </div>
@@ -42,8 +50,8 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Learn about how solar works</English>
-                  <Albanian>Mësoni se si funksionon solari</Albanian>
+                  <English>Learn about how solar photovoltaics works</English>
+                  <Albanian>Mësoni se si funksionojnë fotovoltaikët diellorë</Albanian>
                 </li>
                 <li>
                   <English>Find solar installers</English>
