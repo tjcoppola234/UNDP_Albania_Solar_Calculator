@@ -136,11 +136,11 @@
     text-align: center;
     color: #ccc;
     padding: 10px 0;
-    height: 150px;
+    height: 50px;
 }
 
 .Resources .close-modal {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 35px;
     color: #f1f1f1;
@@ -149,7 +149,7 @@
     transition: 0.3s;
 }
   
-.close-modal:hover,
+.Resources .close-modal:hover,
 .Resources .close-modal:focus {
     color: #bbb;
     text-decoration: none;
@@ -162,7 +162,7 @@
     }
 }
 
-.Resources .modal-content, .modal-caption {
+.Resources .modal-img-src, .Resources .modal-caption {
     animation-name: zoom;
     animation-duration: 0.6s;
 }
@@ -170,4 +170,12 @@
 @keyframes zoom {
     from {transform:scale(0)}
     to {transform:scale(1)}
+}
+
+.Resources .title-box {
+  background-position: 0 55%;
+}
+
+.Resources .modal-content {
+    margin-bottom: 200px;
 }

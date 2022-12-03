@@ -24,16 +24,19 @@ function Resources() {
     return (
         <div className="Resources">
             <PageHead></PageHead>
-            
+            <div className="title-box Vert-flex" style={{backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/resources-background.jpg)`}}>
+                <English><h2 className="page-title">Resources</h2></English>
+                <Albanian><h2 className="page-title">Burimet</h2></Albanian>
+                <English><h3 className="page-subtitle">Learn more about solar photovoltaics!</h3></English>
+                <Albanian><h3 className="page-subtitle">Mësoni më shumë rreth fotovoltaikëve diellorë!</h3></Albanian>
+            </div>
             <div className="content">
                 <div className={"modal-img" + (openImage ? "" : " invisible")}>
                     <span className="close-modal" onClick={() => setImageOpened(false)}>&times;</span>
-                    <div className="modal-caption">{caption}</div>
-                    <img className="modal-img-src" src={openedSRC} alt={caption}></img>
-                </div>
-                <div>
-                    <English><h2 className="h2resources">Resources</h2></English>
-                    <Albanian><h2 className="h2resources">Burimet</h2></Albanian>
+                    <div className="modal-content">
+                        <div className="modal-caption">{caption}</div>
+                        <img className="modal-img-src" src={openedSRC} alt={caption}></img>
+                    </div>
                 </div>
             <div>
                 <div>

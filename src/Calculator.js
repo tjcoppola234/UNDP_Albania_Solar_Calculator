@@ -1,7 +1,7 @@
 import './global.css';
 import './Calculator.css';
 import { PageHead, PageFoot } from './App';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import { MunicipalDropdown } from './MunicipalDropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
@@ -25,6 +25,7 @@ import { settings } from './Settings';
  * @returns An HTMLElement representing the calculator, with class "Calculator".
  */
 function Calculator() {
+    SolarData.loadData();
 
     //Number of Panels calculator state variables
     const [numPanels, setNumPanels] = useState("");
@@ -63,19 +64,28 @@ function Calculator() {
         setSolarEfficiency(pvSelection.Efficiency.replace("%", ""));
     }
 
-    SolarData.loadData();
+    /**
+     * Opens the data entry for solar PV selection and municipality selection while bringing the page there
+     * @param {React.MouseEvent} e Event data based on click information
+     */
+    function openMuniPanel(e) {
+        e.preventDefault();
+        const muniPanel = document.getElementById("muni-panel-choice");
+        muniPanel.open = true;
+        window.scrollTo(0, muniPanel.offsetTop - 85);
+    }
 
     return (
         <div className="Calculator">
             <PageHead></PageHead>
+            <div className="title-box Vert-flex" style={{backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)`}}>  
+                <English><h2 className="page-title">Solar Calculator</h2></English>
+                <Albanian><h2 className="page-title">Llogaritësi diellor</h2></Albanian>
+                <English><h3 className="page-subtitle">Find an estimate for your business</h3></English>
+                <Albanian><h3 className="page-subtitle">Gjeni një vlerësim për biznesin tuaj</h3></Albanian>
+            </div>
             <div className="content">
-                <header>
-                    <div>
-                        <English><h2 className="h2resources">Calculator</h2></English>
-                        <Albanian><h2 className="h2resources">Llogaritësi</h2></Albanian>
-                    </div>
-                </header>
-                <details>
+                <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
                         <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
                         <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
@@ -87,8 +97,8 @@ function Calculator() {
                         }
                         setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
                     }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
+                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
                         <div className="Hor-flex">
                             <label htmlFor="nop-electricity-usage">
                                 <div className="Hor-flex">
@@ -106,12 +116,12 @@ function Calculator() {
                             </label>
                             <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
                         </div>
-                        <button type="submit" id="submit-button">Calculate</button>
+                        <button type="submit" className="submit-button">Calculate</button>
                         <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
                         <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
                     </form>
                 </details>
-                <details open> {/* place "open" next to "details" to make it open on load */}
+                <details open>
                     <summary>
                         <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
                         <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
@@ -119,13 +129,13 @@ function Calculator() {
                     <form onSubmit={(e) => {
                             e.preventDefault();
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
-                            setEnergyGenerated(results.monthlyGeneration);
-                            setTotalSavings(results.totalSavings);
-                            setTotalCost(results.totalCost);
-                            setPaybackPeriod(results.ROI);
+                            setEnergyGenerated(results.AverageMonthlyGeneration);
+                            setTotalSavings(results.TotalSavings);
+                            setTotalCost(results.TotalCost);
+                            setPaybackPeriod(results.ReturnOnInvestment);
                         }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
+                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
                                 <English>Flat roof space available for solar</English>
@@ -157,7 +167,7 @@ function Calculator() {
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                         </div>
-                        <button type="submit" id="submit-button">
+                        <button type="submit" className="submit-button">
                             <English>Calculate</English>
                             <Albanian>Llogaritni</Albanian>
                         </button>
@@ -186,52 +196,6 @@ function Calculator() {
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
                     </div>
-                </details>
-                <details>
-                    <summary>
-                        <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
-                        <Albanian><b>Financimi me kredi</b>: Periudha e kostos dhe kthimit të një sistemi diellor kur financohet me një kredi</Albanian>
-                    </summary>
-                    <form>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-percent">
-                                <English>Percentage of final cost to pay with loan</English>
-                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
-                            </label>
-                            <input id="loan-percent" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-interest">
-                                <English>Percent interest on loan</English>
-                                <Albanian>Për qind e interesit në kredi</Albanian>
-                            </label>
-                            <input id="loan-interest" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-term">
-                                <English>Loan term:&nbsp;</English>
-                                <Albanian>Afati i kredisë:&nbsp;</Albanian>
-                            </label>
-                            <select id="loan-term">
-                                <option>
-                                    {albanian ? "Mujore" : "Monthly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Dymujore" : "Bimonthly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Tremujore" : "Quarterly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Gjysmëvjetor" : "Half-yearly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Vjetore" : "Yearly"}
-                                </option>
-                            </select>
-                        </div>
-                        <button type="button" id="submit-button">Calculate</button>
-                    </form>
                 </details>
                 <details id="muni-panel-choice">
                     <summary>

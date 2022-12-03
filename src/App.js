@@ -12,7 +12,7 @@ import { settings } from './Settings';
  */
 function App() {
   return (
-    <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+    <div className="App" style={{backgroundImage: `linear-gradient(to bottom, rgba(236,240,241,0.25), rgba(236,240,241,0.25)), url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
       <PageHead></PageHead>
       <div className="content">
         <div id="center-fade">
@@ -42,8 +42,16 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
-              <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+                  <English>Learn about how solar works</English>
+                  <Albanian>Mësoni se si funksionon solari</Albanian>
+                </li>
+                <li>
+                  <English>Find solar installers</English>
+                  <Albanian>Gjeni instalues ​​diellor</Albanian>
+                </li>
+                <li>
+                  <English>Explore links to banks with solar energy programs</English>
+                  <Albanian>Eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
                 </li>
               </ul>
             </div>

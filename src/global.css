@@ -6,8 +6,9 @@
   --nav-text-hover: #e6ee9c;
   --background: #ecf0f1;
   --font-size: 16pt;
-  --h2-background: #9fb0c4;
+}
 
+#root {
   min-height: 100%;
   margin: 0;
   padding: 0;
@@ -55,20 +56,26 @@ body {
   justify-content: space-between;
 }
 
-.h2resources {
-  color:black;
-  font-size:300%;
-  text-align: center;
-  border:3px solid #9fb0c4;
-  border-radius: 25px;
-  margin-left:250px;
-  margin-right:250px;
-  background-color: #9fb0c4;
+.page-title {
+  color: black;
+  font-size: 500%;
+  margin: 0;
+}
+
+.title-box {
+  width: 100%;
+  height: 50vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
-  padding-top: 90px;
   padding-bottom: 200px;
+  padding-left: 10px;
+  padding-right: 10px;
   min-height: calc(100vh - 150px);
 }
 
@@ -159,6 +166,12 @@ body {
   pointer-events: none;
   color: var(--nav-text-hover);
   text-decoration: underline;
+}
+
+#Nav-spacing {
+  display: block;
+  width: 100%;
+  height: 80px;
 }
 
 /* Hamburger menu & dropdown for smaller screens */
