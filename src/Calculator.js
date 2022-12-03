@@ -187,52 +187,6 @@ function Calculator() {
                         </div>
                     </div>
                 </details>
-                <details>
-                    <summary>
-                        <English><b>Loan Financing</b>: The cost and payback period of a solar system when financing it with a loan</English>
-                        <Albanian><b>Financimi me kredi</b>: Periudha e kostos dhe kthimit të një sistemi diellor kur financohet me një kredi</Albanian>
-                    </summary>
-                    <form>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-percent">
-                                <English>Percentage of final cost to pay with loan</English>
-                                <Albanian>Përqindja e kostos përfundimtare për të paguar me kredi</Albanian>
-                            </label>
-                            <input id="loan-percent" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-interest">
-                                <English>Percent interest on loan</English>
-                                <Albanian>Për qind e interesit në kredi</Albanian>
-                            </label>
-                            <input id="loan-interest" type="number" placeholder="%"></input>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="loan-term">
-                                <English>Loan term:&nbsp;</English>
-                                <Albanian>Afati i kredisë:&nbsp;</Albanian>
-                            </label>
-                            <select id="loan-term">
-                                <option>
-                                    {albanian ? "Mujore" : "Monthly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Dymujore" : "Bimonthly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Tremujore" : "Quarterly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Gjysmëvjetor" : "Half-yearly"}
-                                </option>
-                                <option>
-                                    {albanian ? "Vjetore" : "Yearly"}
-                                </option>
-                            </select>
-                        </div>
-                        <button type="button" id="submit-button">Calculate</button>
-                    </form>
-                </details>
                 <details id="muni-panel-choice">
                     <summary>
                         <English><b>Municipality and Solar Panel Info</b>: Input the municipality of your building. Then input information about the solar panels you will use, or select a solar panel from the table</English>
