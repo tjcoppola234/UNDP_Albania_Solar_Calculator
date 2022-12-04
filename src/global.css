@@ -5,9 +5,18 @@
   --nav-text: #ffffff;
   --nav-text-hover: #e6ee9c;
   --background: #ecf0f1;
+  --content-background: #bec3f8;
+  --content-heading: #767DD3;
   --font-size: 16pt;
-  --h2-background: #9fb0c4;
 }
+
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* General page layout */
 
 html {
   height: 100%;
@@ -25,8 +34,72 @@ body {
   font-size: var(--font-size);
 }
 
+.invisible {
+  display: none;
+}
+
+.Vert-flex {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+.Hor-flex {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+}
+.Center-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-title {
+  color: black;
+  font-size: 500%;
+  margin: 0;
+}
+
+.title-box {
+  width: 100%;
+  height: 50vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .content {
-  padding-top: 90px;
+  padding-bottom: 200px;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-height: calc(100vh - 150px);
+}
+
+.App, .Calculator, .Help, .Resources {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Header */
+
+#App-header {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--nav-background);
+  color: var(--nav-text);
+  position: fixed;
+  height: 80px;
+  top: 0;
+  white-space: nowrap;
+  z-index: 10;
 }
 
 #Nav-title {
@@ -45,6 +118,75 @@ body {
   grid-column: 2;
   color: var(--nav-text);
   height: inherit;
+}
+
+#Nav-options-list {
+  list-style-type: none;
+  height: inherit;
+  padding: 0;
+  margin: 0;
+}
+#Nav-options-list li:not(#toggle-li) {
+  display: table-cell;
+  width: 160px;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+#Nav-options-list li:not(:hover) {
+  background-color: var(--nav-background);
+}
+#toggle-li {
+  width: 40px;
+}
+#Nav-options-list li:hover {
+  background-color: var(--nav-background-hover);
+}
+#Nav-options-list li.current-tab {
+  background-color:var(--nav-background-hover);
+}
+
+#Nav-options-list li a { 
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: larger;
+  text-decoration: none;
+  font-weight: bold;
+  height: inherit;
+  width: 160px;
+  color: var(--nav-text);
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+#Nav-options-list li:hover a {
+  color: var(--nav-text-hover);
+  text-decoration: underline;
+}
+#Nav-options-list li.current-tab a {
+  pointer-events: none;
+  color: var(--nav-text-hover);
+  text-decoration: underline;
+}
+
+#Nav-spacing {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+/* Hamburger menu & dropdown for smaller screens */
+
+#Hamburger {
+  background-color: var(--nav-background);
+  border: none;
+  height: inherit;
+  width: 120px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 1000px) {
@@ -103,66 +245,8 @@ body {
     border-left: 1px solid var(--nav-background-hover);
   }
 }
-#Hamburger {
-  background-color: var(--nav-background);
-  border: none;
-  height: inherit;
-  width: 120px;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
 
-#Nav-options-list {
-  list-style-type: none;
-  height: inherit;
-  padding: 0;
-  margin: 0;
-}
-#Nav-options-list li:not(#toggle-li) {
-  display: table-cell;
-  width: 160px;
-  -webkit-transition: background-color 200ms linear;
-  -ms-transition: background-color 200ms linear;
-  transition: background-color 200ms linear;
-}
-#Nav-options-list li:not(:hover) {
-  background-color: var(--nav-background);
-}
-#toggle-li {
-  width: 40px;
-}
-#Nav-options-list li:hover {
-  background-color: var(--nav-background-hover);
-}
-#Nav-options-list li.current-tab {
-  background-color:var(--nav-background-hover);
-}
-
-#Nav-options-list li a { 
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  font-size: larger;
-  text-decoration: none;
-  font-weight: bold;
-  height: inherit;
-  width: 160px;
-  color: var(--nav-text);
-  -webkit-transition: background-color 200ms linear;
-  -ms-transition: background-color 200ms linear;
-  transition: background-color 200ms linear;
-}
-#Nav-options-list li:hover a {
-  color: var(--nav-text-hover);
-  text-decoration: underline;
-}
-#Nav-options-list li.current-tab a {
-  pointer-events: none;
-  color: var(--nav-text-hover);
-  text-decoration: underline;
-}
+/* Language toggle */
 
 #Toggle {
   display: grid;
@@ -197,43 +281,7 @@ body {
   grid-row: 2;
 }
 
-.invisible {
-  display: none;
-}
-
-.Vert-flex {
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-}
-.Hor-flex {
-  display: flex;
-  flex-direction: row;
-  width: max-content;
-}
-.Center-items {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.Space-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-#App-header {
-  display: grid;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--nav-background);
-  color: var(--nav-text);
-  position: fixed;
-  height: 80px;
-  top: 0;
-  white-space: nowrap;
-  z-index: 10;
-}
+/* Footer */
 
 #App-footer {
   width: 100%;
@@ -255,34 +303,6 @@ body {
   margin: 10px;
 }
 
-.content {
-  padding-bottom: 200px;
-  min-height: calc(100vh - 150px);
-}
-
-.App {
-  position: relative;
-  min-height: 100%;
-}
-.Calculator {
-  position: relative;
-  min-height: 100%;
-}
-.Help {
-  position: relative;
-  min-height: 100%;
-}
-.Resources {
-  position: relative;
-  min-height: 100%;
-}
-
-#root {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 .Sponsor-logos {
   margin: 0 auto;
   width: 50%;
@@ -292,4 +312,19 @@ body {
 .Sponsor-logos img {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.Sponsor-logos {
+  display: flex;
+  align-items: center;
+}
+
+#undp-logo {
+  width: 50px;
+  height: 103px;
+}
+
+#aee-logo {
+  width: 164px;
+  height: 44px;
 }
