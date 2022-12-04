@@ -465,7 +465,11 @@ export function TableOfContents() {
 function jumpTo(e, id) {
     e.preventDefault();
     const index = document.getElementById(id);
-    window.scrollTo(0, index.offsetTop - 85);
+    window.scrollTo({
+        left: 0,
+        top: index.offsetTop - 85,
+        behavior: 'smooth'
+    });
     document.getElementById("toc-access").click();
 }
 
