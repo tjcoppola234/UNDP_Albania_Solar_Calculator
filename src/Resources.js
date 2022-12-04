@@ -288,8 +288,8 @@ function Resources() {
                 <English><h1 className="largerfontb">Applying for a Building Permit</h1></English>
                 <Albanian></Albanian>
                 <div className="div5">
-                <English><h3></h3></English>
-                <Albanian></Albanian>
+                {/* <English><h3></h3></English>
+                <Albanian></Albanian> */}
 
                 <div className="p-text">
                 <English><p>When starting a private project, you must hire an electrical engineer with a license in solar photovoltaics to develop it. The developed project that includes an explanation of the whole plan is then signed by your business.</p></English>
@@ -316,12 +316,12 @@ function Resources() {
             <div class="div5">
             <div class="row">
             <div class="column">
-            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part1-install.jpg"} alt="Benefits" width = "570" height = "520" floatleft/>
+            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part1-install.jpg"} alt="Benefits-1" width = "570" height = "520" floatleft/>
             </div>
 
 
             <div class="column">
-            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part2-install.png"} alt="Benefits" width = "570" height = "520" floatleft/>
+            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part2-install.png"} alt="Benefits-2" width = "570" height = "520" floatleft/>
             </div>
             </div>
             <English><p className="p-text">1. Determine if a solar photovoltaic system is right for your business financially.</p></English>
