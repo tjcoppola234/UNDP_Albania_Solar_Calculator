@@ -13,6 +13,8 @@ import Albanian from './Albanian';
 import { settings } from './Settings';
 
 function Calculator() {
+    SolarData.loadData();
+    
     const [paybackPeriod, setPaybackPeriod] = useState("");
     const [totalSavings, setTotalSavings] = useState("");
     const [totalCost, setTotalCost] = useState("");
@@ -28,7 +30,7 @@ function Calculator() {
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
 
-    let monthlyProd = [0,0,0,0,0,0,0,0,0,0,0,0];
+    const [monthlyCostSavings, setMonthlyCostSavings] = useState([0,0,0,0,0,0,0,0,0,0,0,0]);
 
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
@@ -48,8 +50,6 @@ function Calculator() {
         document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
         document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
     }
-
-    SolarData.loadData();
 
     return (
         <div className="Calculator">
@@ -95,7 +95,7 @@ function Calculator() {
                     </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
-                            monthlyProd = calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency).monthlyProduction;
+                            setMonthlyCostSavings(calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings);
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.monthlyGeneration);
                             setTotalSavings(results.totalSavings);
