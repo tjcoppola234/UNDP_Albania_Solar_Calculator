@@ -45,7 +45,7 @@ function loadData() {
                     loaded = true;
                 },
                 error: function(error, file) {
-                    console.log(error);
+                    console.error(error);
                 }
             });
         });
@@ -63,6 +63,10 @@ function loadData() {
  * @returns {number} The average amount of solar irradiation for the provided prefecture in (kWh/month)/kW
  */
 function getData(prefecture, month, capacity, isLeapYear = false) {
+    if(!loaded) {
+        console.error("Municipality irradiation data not loaded.");
+    }
+
     if(!Object.values(timeOptions).some(v => v === month)) {
         console.error("Invalid month entered. Please use timeOptions.");
         return 1400 / 12;
