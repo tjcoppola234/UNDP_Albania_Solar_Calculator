@@ -207,10 +207,10 @@ function Calculator() {
                                 <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                                 <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                             </div>
-                        </div>
-                        <div>
-                            <English>{emissionsSavings ? `Carbon dioxide saved: ${Number(emissionsSavings).toFixed(3)} tonnes of CO2` : ""}</English>
-                            <Albanian>{emissionsSavings ? `Dioksidi i karbonit kursehet: ${Number(emissionsSavings).toFixed(3)} ton CO2` : ""}</Albanian>
+                            <div className={emissionsSavings ? "spaced-result" : ""}>
+                                <English>{emissionsSavings ? `Carbon dioxide saved: ${Number(emissionsSavings).toFixed(3)} tonnes of CO2` : ""}</English>
+                                <Albanian>{emissionsSavings ? `Dioksidi i karbonit kursehet: ${Number(emissionsSavings).toFixed(3)} ton CO2` : ""}</Albanian>
+                            </div>
                         </div>
                         <div id="production-graph" style={{display: 'none'}}>
                             <div id = "bottom-margin">
@@ -316,7 +316,7 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
         TotalSavings: savings,
         TotalCost: totalCost,
         ReturnOnInvestment: roi,
-        EmissionSavings: emissionsSaved
+        EmissionsSavings: emissionsSaved
     };
 }
 
@@ -421,12 +421,12 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         // Amount of energy generated per month for a system (kWh per month)
         const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
         
-        console.log({
-            irradiation: solarIrradiation,
-            desiredMonthlyGen: desiredMonthlyGen,
-            solarPanelAmt: solarPanelAmt,
-            actualMonthlyGen : actualMonthlyGen,
-        });
+        // console.log({
+        //     irradiation: solarIrradiation,
+        //     desiredMonthlyGen: desiredMonthlyGen,
+        //     solarPanelAmt: solarPanelAmt,
+        //     actualMonthlyGen : actualMonthlyGen,
+        // });
 
         monthlyProd.push(actualMonthlyGen);
     }
