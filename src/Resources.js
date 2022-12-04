@@ -12,13 +12,26 @@ import Albanian from './Albanian';
 function Resources() {
     const [openImage, setImageOpened] = useState(false);
     const [openedSRC, setOpenSRC] = useState("");
+    const [openedSRC2, setOpenSRC2] = useState("");
     const [caption, setCaption] = useState("");
+    const [caption2, setCaption2] = useState("");
 
-    const load = (num) => {
-        const image = document.getElementById(`img${num}`);
-        setImageOpened(true);
-        setOpenSRC(image.src);
-        setCaption(image.alt);
+    const load = num => {
+        if(num === 4) {
+            const img1 = document.getElementById("img4");
+            const img2 = document.getElementById("img5");
+            setImageOpened(true);
+            setOpenSRC(img1.src);
+            setOpenSRC2(img2.src);
+            setCaption(img1.alt);
+            setCaption2(img2.alt);
+        }
+        else {
+            const image = document.getElementById(`img${num}`);
+            setImageOpened(true);
+            setOpenSRC(image.src);
+            setCaption(image.alt);
+        }
     }
 
     return (
@@ -35,7 +48,8 @@ function Resources() {
                     <span className="close-modal" onClick={() => setImageOpened(false)}>&times;</span>
                     <div className="modal-content">
                         <div className="modal-caption">{caption}</div>
-                        <img className="modal-img-src" src={openedSRC} alt={caption}></img>
+                        <img className="modal-img-src" src={openedSRC} alt={caption} />
+                        <img className="modal-img-src" src={openedSRC2} alt={caption2} />
                     </div>
                 </div>
                 <div>
@@ -44,7 +58,7 @@ function Resources() {
                         <Albanian><h1 className="largerfontb">Pse është e rëndësishme energjia diellore?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-right" id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450" floatleft="true" /></div>
+                        <img className="imagefloat-right" id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450"/>
                         <div>
                             <English><h3>The Enviornment</h3></English>
                             <Albanian><h3>Mjedisi</h3></Albanian>
@@ -91,7 +105,7 @@ function Resources() {
                         <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-right" id="img1" src={process.env.PUBLIC_URL + "reasons.png"} alt="Reasons" onClick={() => load(1)} width="450" height="770" /></div>
+                        <img className="imagefloat-right" id="img1" src={process.env.PUBLIC_URL + "reasons.png"} alt="Reasons" onClick={() => load(1)} width="450" height="770" />
                         <div>
                             <English><h3>Reduced Energy Costs</h3></English>
                             <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
@@ -182,7 +196,7 @@ function Resources() {
                         <Albanian><h1 className="largerfontb">A duhet të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-left" id="img3" src={process.env.PUBLIC_URL + "qs.png"} alt="Questions To Ask" onClick={() => load(2)} width="500" height="500" /></div>
+                        <img className="imagefloat-left" id="img2" src={process.env.PUBLIC_URL + "qs.png"} alt="Questions To Ask" onClick={() => load(2)} width="500" height="500" />
                         <div>
                             <English><h3>Why should I go solar?</h3></English>
                             <Albanian><h3>Pse duhet të shkoj në diell?</h3></Albanian>
@@ -250,7 +264,7 @@ function Resources() {
                         <Albanian><h1 className="largerfontb">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-left" id="img4" src={process.env.PUBLIC_URL + "how.png"} alt="How to Install" onClick={() => load(3)} width="450" height="650" /></div>
+                        <img className="imagefloat-right" id="img3" src={process.env.PUBLIC_URL + "how.png"} alt="How to Install" onClick={() => load(3)} width="450" height="650" />
                         <div>
                             <English><h3>Solar Installers</h3></English>
                             <Albanian><h3>Instalues ​​diellor</h3></Albanian>
@@ -260,7 +274,7 @@ function Resources() {
                                 <English>Talk to different solar installation companies to determine if and how a solar system is right for you. Many companies offer technical and financial consulting, along with the full projections of a PV system on your roof. At these vendors will you be able to apply for a permit and start installation. Some solar companies and many solar manufacturers in which these installation companies get their panels from also offer periodic maintenance.</English>
                                 <Albanian>Bisedoni me kompani të ndryshme instalimi diellor për të përcaktuar nëse dhe si një sistem diellor është i duhuri për ju. Shumë kompani ofrojnë konsulencë teknike dhe financiare, së bashku me parashikimet e plota të një sistemi PV në çatinë tuaj. Tek këta shitës do të mund të aplikoni për një leje dhe të filloni instalimin. Disa kompani diellore dhe shumë prodhues të diellit nga të cilët këto kompani instalimi marrin panelet e tyre gjithashtu ofrojnë mirëmbajtje periodike.</Albanian>
                             </div>
-                            <div id="center-solar" className="Vert-flex">
+                            <div id="center-solar">
                                 <English><h3>Map of solar installers near Tirana</h3></English>
                                 <Albanian><h3>Harta e instaluesve diellorë pranë Tiranës</h3></Albanian>
                                 <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
@@ -283,14 +297,14 @@ function Resources() {
                         <div className="p-text">
                             <English>Ask your local commericial banks for their loan options and solar photovoltaics programs for businesses.</English>
                         </div>
-                    </div>
-                    <div>
-                        <English><h3>Calculations</h3></English>
-                        <Albanian><h3>Llogaritjet</h3></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>To determine which of the offers you are receiving from solar installation companies is the most suitable one for your business, use the app to do your own calculations!</English>
-                        <Albanian>Për të përcaktuar se cila nga ofertat që merrni nga kompanitë e instalimit diellor është më e përshtatshme për biznesin tuaj, përdorni aplikacionin për të bërë llogaritjet tuaja!</Albanian>
+                        <div>
+                            <English><h3>Calculations</h3></English>
+                            <Albanian><h3>Llogaritjet</h3></Albanian>
+                        </div>
+                        <div className="p-text">
+                            <English>To determine which of the offers you are receiving from solar installation companies is the most suitable one for your business, use the app to do your own calculations!</English>
+                            <Albanian>Për të përcaktuar se cila nga ofertat që merrni nga kompanitë e instalimit diellor është më e përshtatshme për biznesin tuaj, përdorni aplikacionin për të bërë llogaritjet tuaja!</Albanian>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -302,10 +316,12 @@ function Resources() {
                         <English>When starting a private project, you must hire an electrical engineer with a license in solar photovoltaics to develop it. The developed project that includes an explanation of the whole plan is then signed by your business.</English>
                         <Albanian></Albanian>
                     </div>
+                    <br />
                     <div className="p-text">
                         <English>You then hire a lawyer to start the permit application process. The firm goes to E-Permit at E-Albania and fills out the permit, Deklarate Paraprake. The permit will have all the information you and the lawyer need, including the municipality fee that is charged for your project being checked. This fee is dependent on municipality taxes.</English>
                         <Albanian></Albanian>
                     </div>
+                    <br />
                     <div className="p-text">
                         <English>The next step is to apply for the permit and the application is sent to the municipality who will accept it or deny it.</English>
                         <Albanian></Albanian>
@@ -316,54 +332,52 @@ function Resources() {
                     <Albanian></Albanian>
                 </div>
                 <div className="content-section">
-                    <div className="row">
-                        <div className="column">
-                            <img id="imagefloat4" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="570" height="520" floatleft="true" />
-                        </div>
-                        <div className="column">
-                            <img id="imagefloat4" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="570" height="520" floatleft="true" />
-                        </div>
+                    <div className="Vert-flex" id="false-modal" onClick={() => load(4)}>
+                        <img id="img4" className="half-top" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="342" height="312"/>
+                        <img id="img5" className="half-bottom" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="342" height="312"/>
                     </div>
-                    <div className="p-text">
-                        <English>1. Determine if a solar photovoltaic system is right for your business financially.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>2. Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>3. Installers will show up and start setting up their equipment and scaffolding.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>4. Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>5. The solar panels are then installed onto the panel mounts securely.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>6. Electrical wiring is then carried out while the building's electricity supply is shut off. </English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>7. The solar inverter is connected to the panels. A battery can also be installed and connected.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>8. To finally generate electricity, the inverter is connected to the building's consumer unit.</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>9. Switch the power on and test the new system. Then installation is complete!</English>
-                        <Albanian></Albanian>
-                    </div>
-                    <div className="p-text">
-                        <English>10. Panels require little maintenance if they remain clean and regularly inspected.</English>
-                        <Albanian></Albanian>
-                    </div>
+                    <ol>
+                        <li className="p-text">
+                            <English>Determine if a solar photovoltaic system is right for your business financially.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Installers will show up and start setting up their equipment and scaffolding.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>The solar panels are then installed onto the panel mounts securely.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Electrical wiring is then carried out while the building's electricity supply is shut off. </English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>The solar inverter is connected to the panels. A battery can also be installed and connected.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>To finally generate electricity, the inverter is connected to the building's consumer unit.</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Switch the power on and test the new system. Then installation is complete!</English>
+                            <Albanian></Albanian>
+                        </li>
+                        <li className="p-text">
+                            <English>Panels require little maintenance if they remain clean and regularly inspected.</English>
+                            <Albanian></Albanian>
+                        </li>
+                    </ol>
                 </div>
             </div>
         <PageFoot></PageFoot>
