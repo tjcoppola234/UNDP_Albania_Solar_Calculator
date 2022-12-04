@@ -112,3 +112,26 @@ iframe {
     margin:70px;
     padding-bottom: 10px;
 }
+
+#toc {
+    position: fixed;
+    top: 160px;
+    background-color: #c6dbf3d2;
+}
+#toc a {
+    text-decoration: none;
+    color: var(--nav-background);
+}
+#toc :hover {
+    color: var(--nav-background-hover);
+}
+
+#toc-access {
+    width: 30px;
+    height: 80px;
+    background-color: var(--background);
+}
+
+#toc-toplist {
+    display: none;
+}

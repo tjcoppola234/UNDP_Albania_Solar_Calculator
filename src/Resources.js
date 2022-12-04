@@ -19,6 +19,7 @@ function Resources() {
             }}>^</button>
             <PageHead></PageHead>
             <div className="content">
+            <TableOfContents></TableOfContents>
                 <div>
                     <English><h2 className="h2resources">Resources</h2></English>
                     <Albanian><h2 className="h2resources">Burimet</h2></Albanian>
@@ -320,6 +321,37 @@ function Resources() {
 }
 export default Resources;
 
+export function TableOfContents() {
+    return (
+        <div id="toc" className="Hor-flex">
+            <ul id="toc-toplist">
+                <li><a href="#">Section A</a>
+                    <ul>
+                        <li><a href="#">Section A1</a></li>
+                        <li><a href="#">Section A2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Section B</a></li>
+                <li><a href="#">Section C</a></li>
+            </ul>
+            <button id="toc-access" type="button" onClick={e => {
+                e.preventDefault();
+                debugger;
+                if(e.target.innerText === ">") {
+                    document.getElementById("toc-toplist").style.display = "block";
+                    e.target.innerText = "<";
+                } else {
+                    document.getElementById("toc-toplist").style.display = "none";
+                    e.target.innerText = ">";
+                }
+            }}>{">"}</button>
+        </div>
+    )
+}
+
+/**
+ * To handle the back-to-top button appearing
+ */
 window.onscroll = () => {
     if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         document.getElementById("scroll-to-top").style.visibility = "visible";
