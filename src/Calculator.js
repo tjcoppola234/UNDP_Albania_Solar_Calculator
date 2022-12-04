@@ -16,10 +16,11 @@ import { settings } from './Settings';
  * @typedef {import('./SolarPanelReader').SolarPVEntry} SolarPVEntry A collection of data about a specific solar PV example.
  * 
  * @typedef Calculations A collection of calculations based on the entered location and solar PV data.
- * @property {number} AverageMonthlyGeneration
- * @property {number} TotalSavings
- * @property {number} TotalCost
- * @property {number} ReturnOnInvestment
+ * @property {number} monthlyGeneration
+ * @property {number} totalSavings
+ * @property {number} totalCost
+ * @property {number} returnOnInvestment
+ * @property {number} emissionsSavings
  */
 
 /**
@@ -38,6 +39,7 @@ function Calculator() {
     const [totalSavings, setTotalSavings] = useState("");
     const [totalCost, setTotalCost] = useState("");
     const [energyGenerated, setEnergyGenerated] = useState("");
+    const [emissionsSavings, setEmissionsSavings] = useState("");
 
     const [prefecture, setPrefecture] = useState("");
 
@@ -127,7 +129,8 @@ function Calculator() {
                             setEnergyGenerated(results.monthlyGeneration);
                             setTotalSavings(results.totalSavings);
                             setTotalCost(results.totalCost);
-                            setPaybackPeriod(results.ROI);
+                            setPaybackPeriod(results.returnOnInvestment);
+                            setEmissionsSavings(results.emissionsSavings);
 
                             document.getElementById("production-graph").style.display = "block";
                         }}>
@@ -191,6 +194,10 @@ function Calculator() {
                         <div>
                             <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
+                        </div>
+                        <div>
+                            <English>{emissionsSavings ? `Carbon dioxide saved: ${Number(emissionsSavings).toFixed(3)} tonnes of CO2` : ""}</English>
+                            <Albanian>{emissionsSavings ? `Dioksidi i karbonit kursehet: ${Number(emissionsSavings).toFixed(3)} ton CO2` : ""}</Albanian>
                         </div>
                         <div id="production-graph" style={{display: 'none'}}>
                             <div>
@@ -286,12 +293,15 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     const savings = (electricityPrice * actualMonthlyGen) - (percentLoan * interest * totalCost / 10000);
     // Total time to return on investment in months
     const roi = totalCost / savings;
+    //energy in kwh * 0.38 MWh per toe (tonnes of crude oil burned) / 1000 = tonnes of CO2
+    const emissionsSaved = (actualMonthlyGen * 0.38) / 1000; 
 
     return {
         monthlyGeneration: actualMonthlyGen, 
         totalSavings: savings,
         totalCost: totalCost,
-        ROI: roi,
+        returnOnInvestment: roi,
+        emissionsSavings:  emissionsSaved
     };
 }
 
