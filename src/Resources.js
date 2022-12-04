@@ -86,8 +86,6 @@ function Resources() {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div>
                     <div>
                         <English><h1 className="largerfontb">What are the benefits of solar energy for your business?</h1></English>
                         <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
@@ -179,99 +177,12 @@ function Resources() {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div className="div5">
-                    <img id="imagefloat2" src={process.env.PUBLIC_URL + "reasons2.png"} alt="Reasons" width="450" height="810" />
-                    <div>
-                        <English><h3>Reduced Energy Costs</h3></English>
-                        <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
-                    </div>
-                    <ul>
-                        <li className="li-1">
-                            <English>Electricity bills are expensive and problematic.</English>
-                            <Albanian>Faturat e energjisë elektrike janë të shtrenjta dhe problematike.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>Your electricity bill depends on how much energy is consumed and the rate your utility company charges.</English>
-                            <Albanian>Fatura juaj e energjisë elektrike varet nga sasia e energjisë së konsumuar dhe tarifa që ngarkon kompania juaj e shërbimeve.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>You can look at switching to solar as replacing your electricity bill with monthly payments for your solar equipment.</English>
-                            <Albanian>Ju mund ta shikoni kalimin në solare si zëvendësim të faturave të energjisë elektrike me pagesa mujore për pajisjet tuaja diellore.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>Utility companies face high costs to maintain and expand the grid making your electricity bills more expensive.</English>
-                            <Albanian>Kompanitë e shërbimeve publike përballen me kosto të larta për të mirëmbajtur dhe zgjeruar rrjetin duke i bërë më të shtrenjta faturat tuaja të energjisë elektrike.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>You can avoid this increase of price by switching to solar!</English>
-                            <Albanian>Ju mund ta shmangni këtë rritje të çmimit duke kaluar në solare!</Albanian>
-                        </li>
-                    </ul>
-                    <div>
-                        <English><h3>More Energy Security and Independence</h3></English>
-                        <Albanian><h3>Më shumë siguri dhe pavarësi energjetike</h3></Albanian>
-                    </div>
-                    <ul>
-                        <li className="li-1">
-                            <English>Becoming your own power providers</English>
-                            <Albanian>Duke u bërë ofruesit tuaj të energjisë</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</English>
-                            <Albanian>Kostot e përdorimit të energjisë diellore janë shumë të parashikueshme pasi shumë paguajnë gjithashtu tarifa shërbimi që shkojnë për mirëmbajtjen e rrjetit, tarifat për matjen neto dhe kosto të tjera të lidhura.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</English>
-                            <Albanian>Mos harroni nëse nuk përdorni 100% diellore, atëherë do të keni një nivel të mbetur të faturës elektrike që do të ndryshojë gjatë vitit.</Albanian>
-                        </li>
-                    </ul>
-                    <div>
-                        <English><h3>Green Business</h3></English>
-                        <Albanian><h3>Biznesi i gjelbër</h3></Albanian>
-                    </div>
-                    <ul>
-                        <li className="li-1">
-                            <English>You can go green by installing solar systems!</English>
-                            <Albanian>Mund të jesh i gjelbër duke instaluar sisteme diellore!</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>Going green means finding the most efficient ways to sustain your companies for the better impact of the environment.</English>
-                            <Albanian>Të jesh i gjelbër do të thotë të gjesh mënyrat më efikase për të mbështetur kompanitë tuaja për ndikimin më të mirë të mjedisit.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>It reduces company costs by keeping general operating costs low over time.</English>
-                            <Albanian>Redukton kostot e kompanisë duke i mbajtur kostot e përgjithshme operative të ulëta me kalimin e kohës.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>It attracts more eco-conscious employees to hire, and a better image.</English>
-                            <Albanian>Ajo tërheq më shumë punonjës të ndërgjegjshëm për mjedisin për të punësuar dhe një imazh më të mirë.</Albanian>
-                        </li>
-                        <li className="li-1">
-                            <English>It creates a more robust reputation of the company by leaving a lasting impression on your customers.</English>
-                            <Albanian>Krijon një reputacion më të fortë të kompanisë duke lënë një përshtypje të qëndrueshme te klientët tuaj.</Albanian>
-                        </li>
-                    </ul>
-                    <div>
-                        <English><h3>Solar Tax Benefit</h3></English>
-                        <Albanian><h3>Përfitimi nga taksat diellore</h3></Albanian>
-                    </div>
-                    <ul>
-                        <li className="li-1">
-                            <English>The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</English>
-                            <Albanian>Tatimi mbi vlerën e shtuar për të gjitha makineritë dhe pajisjet e tjera të importuara për të investuar në energjinë diellore është diskutuar të anulohet!</Albanian>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <div>
                     <div>
                         <English><h1 className="largerfontb">Should your business go solar?</h1></English>
                         <Albanian><h1 className="largerfontb">A duhet të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-left" id="img2" src={process.env.PUBLIC_URL + "qs.png"} alt="Questions To Ask" onClick={() => load(2)} width="500" height="500" /></div>
+                        <div className="imagefloat-box"><img className="imagefloat-left" id="img3" src={process.env.PUBLIC_URL + "qs.png"} alt="Questions To Ask" onClick={() => load(2)} width="500" height="500" /></div>
                         <div>
                             <English><h3>Why should I go solar?</h3></English>
                             <Albanian><h3>Pse duhet të shkoj në diell?</h3></Albanian>
@@ -334,14 +245,12 @@ function Resources() {
                             <Albanian>Garancia varet nga prodhuesi me më shumë kohëzgjatje midis 20-25 vjet. Disa kompani diellore ofrojnë gjithashtu disa vite mirëmbajtje, si dhe pasi të jenë instaluar në çatinë tuaj.</Albanian>
                         </div>
                     </div>
-                </div>
-                <div>
                     <div>
                         <English><h1 className="largerfontb">How can your business go solar?</h1></English>
                         <Albanian><h1 className="largerfontb">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
-                        <div className="imagefloat-box"><img className="imagefloat-left" id="img3" src={process.env.PUBLIC_URL + "how.png"} alt="How to Install" onClick={() => load(3)} width="450" height="650" /></div>
+                        <div className="imagefloat-box"><img className="imagefloat-left" id="img4" src={process.env.PUBLIC_URL + "how.png"} alt="How to Install" onClick={() => load(3)} width="450" height="650" /></div>
                         <div>
                             <English><h3>Solar Installers</h3></English>
                             <Albanian><h3>Instalues ​​diellor</h3></Albanian>
@@ -384,8 +293,6 @@ function Resources() {
                         <Albanian>Për të përcaktuar se cila nga ofertat që merrni nga kompanitë e instalimit diellor është më e përshtatshme për biznesin tuaj, përdorni aplikacionin për të bërë llogaritjet tuaja!</Albanian>
                     </div>
                 </div>
-            </div>
-            <div>
                 <div>
                     <English><h1 className="largerfontb">Applying for a Building Permit</h1></English>
                     <Albanian></Albanian>
@@ -404,64 +311,63 @@ function Resources() {
                         <Albanian></Albanian>
                     </div>
                 </div>
-            </div>
-            <div>
-                <English><h1 className="largerfontb">Solar Photovoltaic Installation Process</h1></English>
-                <Albanian></Albanian>
-            </div>
-            <div className="content-section">
-                <div className="row">
-                    <div className="column">
-                        <img id="imagefloat4" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="570" height="520" floatleft="true" />
+                <div>
+                    <English><h1 className="largerfontb">Solar Photovoltaic Installation Process</h1></English>
+                    <Albanian></Albanian>
+                </div>
+                <div className="content-section">
+                    <div className="row">
+                        <div className="column">
+                            <img id="imagefloat4" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="570" height="520" floatleft="true" />
+                        </div>
+                        <div className="column">
+                            <img id="imagefloat4" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="570" height="520" floatleft="true" />
+                        </div>
                     </div>
-                    <div className="column">
-                        <img id="imagefloat4" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="570" height="520" floatleft="true" />
+                    <div className="p-text">
+                        <English>1. Determine if a solar photovoltaic system is right for your business financially.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>2. Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>3. Installers will show up and start setting up their equipment and scaffolding.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>4. Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>5. The solar panels are then installed onto the panel mounts securely.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>6. Electrical wiring is then carried out while the building's electricity supply is shut off. </English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>7. The solar inverter is connected to the panels. A battery can also be installed and connected.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>8. To finally generate electricity, the inverter is connected to the building's consumer unit.</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>9. Switch the power on and test the new system. Then installation is complete!</English>
+                        <Albanian></Albanian>
+                    </div>
+                    <div className="p-text">
+                        <English>10. Panels require little maintenance if they remain clean and regularly inspected.</English>
+                        <Albanian></Albanian>
                     </div>
                 </div>
-                <div className="p-text">
-                    <English>1. Determine if a solar photovoltaic system is right for your business financially.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>2. Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>3. Installers will show up and start setting up their equipment and scaffolding.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>4. Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>5. The solar panels are then installed onto the panel mounts securely.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>6. Electrical wiring is then carried out while the building's electricity supply is shut off. </English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>7. The solar inverter is connected to the panels. A battery can also be installed and connected.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>8. To finally generate electricity, the inverter is connected to the building's consumer unit.</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>9. Switch the power on and test the new system. Then installation is complete!</English>
-                    <Albanian></Albanian>
-                </div>
-                <div className="p-text">
-                    <English>10. Panels require little maintenance if they remain clean and regularly inspected.</English>
-                    <Albanian></Albanian>
-                </div>
             </div>
-            <PageFoot></PageFoot>
-        </div>
-
+        <PageFoot></PageFoot>
+    </div>
     )
 }
 
