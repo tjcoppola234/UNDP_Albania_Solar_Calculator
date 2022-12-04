@@ -202,7 +202,7 @@ function Resources() {
                 </div>
                 <div>
                     <English><h3 id="res-how-finance">How should I finance my panels?</h3></English>
-                    <Albanian><h3 id="res-how-finance">Si duhet t'i financoj panelet e mia?</h3></Albanian>
+                    <Albanian><h3 id="res-how-finance">Si duhet të financoj panelet e mia?</h3></Albanian>
                 </div>
                 <div className="p-text">
                     <English>A business has a variety of options to explore as solar companies have packages of solar systems they sell, or a business may consider taking out a loan to finance their solar panels.</English>
@@ -356,14 +356,43 @@ export function TableOfContents() {
     return (
         <div id="toc" className="Hor-flex">
             <ul id="toc-toplist">
-                <li><a href="#"><English>Why is solar energy important?</English></a>
+            <h2>Contents</h2>
+                <li><a href="#res-why-imp"><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a>
                     <ul>
-                        <li><a href="#">Section A1</a></li>
-                        <li><a href="#">Section A2</a></li>
+                        <li><a href="#res-the-enviro"><English>The Enviornment</English><Albanian>Mjedisi</Albanian></a></li>
+                        <li><a href="#res-sunny-pot"><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#">Section B</a></li>
-                <li><a href="#">Section C</a></li>
+                <li><a href="#res-what-benefits"><English>What are the benefits of solar energy for your business?</English><Albanian>Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-reduced-costs"><English>Reduced Energy Costs</English><Albanian>Kosto të reduktuara të energjisë</Albanian></a></li>
+                        <li><a href="#res-more-security"><English>More Energy Security and Independence</English><Albanian>Më shumë siguri dhe pavarësi energjetike</Albanian></a></li>
+                        <li><a href="#res-green-bus"><English>Green Business</English><Albanian>Biznesi i gjelbër</Albanian></a></li>
+                        <li><a href="#res-solar-tax"><English>Solar Tax Benefit</English><Albanian>Përfitimi nga taksat diellore</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-go-solar"><English>Should your business go solar?</English><Albanian>A duhet të shkojë biznesi juaj diellor?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-why-go-solar"><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
+                        <li><a href="#res-bus-right"><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
+                        <li><a href="#res-how-cost"><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
+                        <li><a href="#res-how-finance"><English>How should I finance my panels?</English><Albanian>Si duhet të financoj panelet e mia?</Albanian></a></li>
+                        <li><a href="#res-how-money"><English>How much money will I save with solar?</English><Albanian>Sa para do të kursej me solar?</Albanian></a></li>
+                        <li><a href="#res-how-long"><English>How long will my solar panels last?</English><Albanian>Sa do të zgjasin panelet e mia diellore?</Albanian></a></li>
+                        <li><a href="#res-do-panels"><English>Do solar panels have a warranty?</English><Albanian>A kanë garanci panelet diellore?</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-how-bus"><English>How can your business go solar?</English><Albanian>Si mund të shkojë biznesi juaj diellor?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-solar-inst"><English>Solar Installers</English><Albanian>Instalues ​​diellor</Albanian></a></li>
+                        <li><a href="#res-solar-inst-tir"><English>Solar Installers in Tirana</English><Albanian>Instalues ​​Solar ne Tirane</Albanian></a></li>
+                        <li><a href="#res-banks"><English>Banks</English><Albanian>Bankat</Albanian></a></li>
+                        <li><a href="#res-fin-op"><English>Financing Options</English><Albanian>Opsionet e financimit</Albanian></a></li>
+                        <li><a href="#res-own-calc"><English>Calculations</English><Albanian>Llogaritjet</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-app-permit"><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
+                <li><a href="#res-inst-proc"><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a></li>
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
@@ -389,4 +418,12 @@ window.onscroll = () => {
     } else {
         document.getElementById("scroll-to-top").style.visibility = "hidden";
     }
+}
+
+/**
+ * Headers are in view when table of contents link is pressed
+ * https://stackoverflow.com/a/17535094
+ */
+window.onhashchange = () => {
+    window.scrollTo(window.scrollX, window.scrollY - 80);
 }

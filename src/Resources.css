@@ -128,13 +128,19 @@ iframe {
     position: fixed;
     top: 160px;
     background-color: #c6dbf3d2;
+    max-width: 400px;
+    max-height: 800px;
+    overflow-y: auto;
+}
+#toc ul {
+    list-style: none;
 }
 #toc a {
     text-decoration: none;
     color: var(--nav-background);
 }
-#toc :hover {
-    color: var(--nav-background-hover);
+#toc a :hover {
+    background-color: #b0c2d7e0;
 }
 
 #toc-access {
@@ -142,6 +148,7 @@ iframe {
     height: 80px;
     background-color: var(--background);
     font-weight: bold;
+    position: fixed;
 }
 
 #toc-toplist {
