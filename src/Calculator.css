@@ -128,6 +128,7 @@ details {
     width: 400px;
     height: fit-content;
     position: absolute;
+    left: calc(-200px + (var(--font-size) + 4px) / 2); /*Equal to -1/2 width + 1/2 width of .tool-button*/
     z-index: 50;
     color: rgb(210,210,210);
     background-color: rgba(0,0,0,0.75);
