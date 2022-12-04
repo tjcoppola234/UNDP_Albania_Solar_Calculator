@@ -308,6 +308,7 @@ function Resources() {
                         </div>
                         <div className="p-text">
                             <English>Ask your local commericial banks for their loan options and solar photovoltaics programs for businesses.</English>
+                            <Albanian>Pyesni bankat tuaja tregtare lokale për opsionet e tyre të kredisë dhe programet e fotovoltaikëve diellorë për bizneset.</Albanian>
                         </div>
                         <div>
                             <English><h3 id="res-own-calc">Calculations</h3></English>
