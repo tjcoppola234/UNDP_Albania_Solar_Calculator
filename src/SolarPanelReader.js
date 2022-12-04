@@ -92,10 +92,6 @@ export function SolarPanelScrollList(props) {
                             <th colSpan="7" id="solar-pv-title">
                                 <English>Solar Panel Info</English>
                                 <Albanian>Informacion mbi panelin diellor</Albanian>
-                                <Tooltip>
-                                    <English>View and select example solar photovoltaic modules. These modules are for educational purpose only, and this tool is not associated with or promoting any solar photovoltaic manufacturers.</English>
-                                    <Albanian>Shikoni dhe zgjidhni shembullin e moduleve fotovoltaike diellore. Këto module janë vetëm për qëllime edukative dhe ky mjet nuk lidhet apo promovon ndonjë prodhues fotovoltaik diellor.</Albanian>
-                                </Tooltip>
                             </th>
                         </tr>
                         <tr>
