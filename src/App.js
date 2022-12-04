@@ -159,7 +159,7 @@ function hamburgerVis() {
  */
 document.onclick = () => {
   let nav = document.getElementById("Nav-options-list");
-  if(!switching && window.innerWidth <= 1000 && !nav.classList.contains("invisible")) {
+  if(!switching && window.innerWidth <= 1330 && !nav.classList.contains("invisible")) {
     nav.classList.add("invisible");
   }
   switching = false;
@@ -171,10 +171,10 @@ let sizeDecreased = false;
  * The variable sizeDecreased prevents hiding the dropdown when the hamburger menu is already visible.
  */
 window.onresize = () => {
-  if(window.innerWidth > 1000) {
+  if(window.innerWidth > 1330) {
     document.getElementById("Nav-options-list").classList.remove("invisible");
     sizeDecreased = false;
-  } else if(!sizeDecreased && window.innerWidth <= 1000) {
+  } else if(!sizeDecreased && window.innerWidth <= 1330) {
     document.getElementById("Nav-options-list").classList.add("invisible");
     sizeDecreased = true;
   }
@@ -183,7 +183,7 @@ window.onresize = () => {
  * Hides hamburger dropdown menu when the page is loaded, if necessary.
  */
 window.onload = () => {
-  if(window.innerWidth <= 1000) {
+  if(window.innerWidth <= 1330) {
     document.getElementById("Nav-options-list").classList.add("invisible");
   }
 }

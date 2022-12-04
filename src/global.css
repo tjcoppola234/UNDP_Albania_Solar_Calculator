@@ -47,7 +47,7 @@ body {
   height: inherit;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1330px) {
   #Nav-options-list:not(.invisible) {
     display: flex;
     flex-direction: column;
@@ -75,7 +75,7 @@ body {
     border-top: 1px solid var(--nav-background-hover);
   }
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1330px) {
   #Nav-options-list {
     display: flex;
   }
@@ -292,4 +292,19 @@ body {
 .Sponsor-logos img {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#scroll-to-top {
+  position: fixed;
+  bottom: 160px;
+  right: 10px;
+  background-color: var(--h2-background);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: x-large;
+  visibility: hidden;
+}
+#scroll-to-top:hover {
+  background-color: #7c8999;
 }

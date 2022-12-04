@@ -11,8 +11,13 @@ import Albanian from './Albanian';
 function Resources() {
     return (
         <div className="Resources">
+            <button id="scroll-to-top" type="button" onClick={e => {
+                e.preventDefault();
+                document.body.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }}>^</button>
             <PageHead></PageHead>
-            
             <div className="content">
                 <div>
                     <English><h2 className="h2resources">Resources</h2></English>
@@ -314,3 +319,11 @@ function Resources() {
     )
 }
 export default Resources;
+
+window.onscroll = () => {
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        document.getElementById("scroll-to-top").style.visibility = "visible";
+    } else {
+        document.getElementById("scroll-to-top").style.visibility = "hidden";
+    }
+}
