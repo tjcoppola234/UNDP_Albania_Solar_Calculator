@@ -82,7 +82,8 @@ export function MunicipalDropdown(props) {
                 <English>Select your municipality: Used to determine how much sunlight is expected</English>
                 <Albanian>Zgjidhni komunën tuaj: Përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
             </label>
-            <select className="municipality-dropdown" defaultChecked={false} onChange={e => props.changeEvent(e)}>
+            <select className="municipality-dropdown" title="Select Municipality" defaultChecked={false} onChange={e => props.changeEvent(e)}>
+            {}
             </select>
         </div>
     );

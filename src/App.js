@@ -12,12 +12,12 @@ import { settings } from './Settings';
  */
 function App() {
   return (
-    <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+    <div className="App" style={{backgroundImage: `linear-gradient(to bottom, rgba(236,240,241,0.25), rgba(236,240,241,0.25)), url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
       <PageHead></PageHead>
       <div className="content">
         <div id="center-fade">
-          <English>This website is designed <span>for businesses</span></English>
-          <Albanian>Kjo faqe interneti është krijuar <span>për bizneset</span></Albanian>
+          <English>This website is designed <b>for businesses</b></English>
+          <Albanian>Kjo faqe interneti është krijuar <b>për bizneset</b></Albanian>
           <English>Here are some tools that can help you determine whether solar panels are a good fit for your business</English>
           <Albanian>Këtu janë disa mjete që mund t'ju ndihmojnë të përcaktoni nëse panelet diellore janë një përshtatje e mirë për biznesin tuaj</Albanian>
           <div className="square">
@@ -28,8 +28,16 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Enter information about your electricity costs and available roof space to see how much <span>energy you could generate</span> and <span>money you could save</span> with a solar panel system</English>
-                  <Albanian>Futni informacione për kostot e energjisë elektrike dhe hapësirën e disponueshme të çatisë për të parë se sa energji <span>energji mund të gjeneroni</span> dhe <span>para mund të kurseni</span> me një sistem paneli diellor</Albanian>
+                  <English>See how much energy you could generate</English>
+                  <Albanian>Shihni sa energji mund të gjeneroni</Albanian>
+                </li>
+                <li>
+                  <English>See how much money you could save</English>
+                  <Albanian>Shihni sa para mund të kurseni</Albanian>
+                </li>
+                <li>
+                  <English>Learn if solar photovoltaics are right for you!</English>
+                  <Albanian>Mësoni nëse fotovoltaikët diellorë janë të duhurat për ju!</Albanian>
                 </li>
               </ul>
             </div>
@@ -42,8 +50,16 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                <English>Learn about how solar works, find solar installers, and explore links to banks with solar energy programs</English>
-              <Albanian>Mësoni se si funksionon solari, gjeni instalues ​​diellor dhe eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
+                  <English>Learn about how solar photovoltaics works</English>
+                  <Albanian>Mësoni se si funksionojnë fotovoltaikët diellorë</Albanian>
+                </li>
+                <li>
+                  <English>Find solar installers</English>
+                  <Albanian>Gjeni instalues ​​diellor</Albanian>
+                </li>
+                <li>
+                  <English>Explore links to banks with solar energy programs</English>
+                  <Albanian>Eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
                 </li>
               </ul>
             </div>
@@ -120,14 +136,14 @@ export function PageFoot() {
     <div id="App-footer">
       <footer>
         <div className="Sponsor-logos">
-          <span className="Center-items">
+          <div className="Center-items">
             <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
             <div>
               <English>in collaboration with</English>
               <Albanian>ne bashkepunim me</Albanian>
             </div>
             <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
-          </span>
+          </div>
         </div>
         <div>
           <English>Created by: Andrew Salls, Annalisa Allan, Ashe Andrews, and Theo Coppola</English>

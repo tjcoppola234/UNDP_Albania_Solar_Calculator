@@ -1,54 +1,54 @@
 @import './global.css';
 
-#calc-payback {
+.Calculator #calc-payback {
     margin-top: 20px;
 }
 
-input[type="number"]:invalid {
+.Calculator input[type="number"]:invalid {
     color: rgb(241, 76, 76);
 }
 
-input {
+.Calculator input {
     margin-left: 8px;
 }
 
-.municipality-dropdown {
+.Calculator .municipality-dropdown {
     margin-left: 8px;
     min-width: 134.8px;
     font-size: var(--font-size);
 }
 
-#solar-pv-list {
+.Calculator #solar-pv-list {
     border-collapse: collapse;
     background-color: #ffffff;
 }
-#solar-pv-list thead {
+.Calculator #solar-pv-list thead {
     color: var(--nav-text);
 }
-#solar-pv-title {
+.Calculator #solar-pv-title {
     background-color: var(--nav-background);
     padding: 10px 0px 10px 0px;
     border: 1px solid black;
 }
-#solar-pv-list th:not(#solar-pv-title) {
+.Calculator #solar-pv-list th:not(#solar-pv-title) {
     background-color: var(--nav-background-hover);
     border: 1px solid black;
     padding: 10px;
 }
-#solar-pv-list td:not(#panel-selection) {
+.Calculator #solar-pv-list td:not(#panel-selection) {
     border: 1px solid black;
     padding: 2px;
     text-align: center;
     min-height: 40px;
 }
-#panel-selection {
+.Calculator #panel-selection {
     border: 1px solid black;
     margin: 0px;
     padding: 0px;
     min-height: 40px;
     height: 40px;
 }
-#panel-selection button {
+.Calculator #panel-selection button {
     background-color: #C3D3C3;
     display: inline-block;
     margin: 0px;
@@ -57,25 +57,20 @@ input {
     height: 100%;
     border: 0px;
     font-size: calc(var(--font-size) - 2pt);
+    transition: 0.5s;
 }
-#panel-selection button:hover {
+.Calculator #panel-selection button:hover {
     background-color: #93A393;
 }
 
-#solar-panel-info {
-    display: table;
-}
-#solar-panel-info div:not(.invisible) {
-    display: table-row;
-}
-#solar-panel-info input {
+.Calculator #solar-panel-info input {
     width: 200px;
 }
-#electricity-paid-period {
+.Calculator #electricity-paid-period {
     margin-left: 5px;
 }
 
-#solar-pv-scroll {
+.Calculator #solar-pv-scroll {
     display: inline-block;
     overflow-x: auto;
     overflow-y: scroll;
@@ -83,11 +78,11 @@ input {
     border: 1px solid black;
 }
 
-.capped-th-width {
-    max-width: 180px
+.Calculator .capped-th-width {
+    max-width: 180px;
 }
 
-#submit-button {
+.Calculator .submit-button {
     width: 200px;
     height: 50px;
     border: none;
@@ -97,29 +92,62 @@ input {
     font-size: var(--font-size);
 }
 
-input {
+.Calculator input {
     font-size: var(--font-size);
     min-width: 300px;
 }
-select {
+.Calculator select {
     font-size: var(--font-size);
 }
 
-#muni-panel-choice {
-    background-color: #b0c3d8;
-    margin: 10px;
-}
-
-summary {
-    margin-bottom: 10px;
-}
-details {
+.Calculator summary {
     margin-bottom: 10px;
 }
 
-:target {
-    animation: highlight 4s ease;    
-  }
-  @keyframes highlight {
-    20% { background-color: rgb(248, 231, 131); }
-  }
+.Calculator .title-box {
+  background-position: 0 45%;
+}
+
+.Calculator details {
+    margin: 10px 10px 20px 10px;
+}
+.Calculator details[open] {
+    background-color: var(--content-background);
+}
+.Calculator .detail-content {
+    padding: 10px;
+}
+.Calculator details summary {
+    background-color: var(--content-heading);
+    padding: 10px;
+}
+
+.Calculator .municipality-dropdown {
+    margin-bottom: 10px;
+}
+
+.Calculator .content {
+    margin-top: 40px;
+}
+
+.Calculator form div, .Calculator #solar-panel-info .Hor-flex {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.Calculator .spaced-result {
+    margin-top: 15px;
+}
+
+.Calculator .result-spacer {
+    border: 4px solid var(--content-heading);
+    border-radius: 5px;
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.Calculator #bottom-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
