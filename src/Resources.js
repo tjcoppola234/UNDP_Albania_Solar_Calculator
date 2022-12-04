@@ -379,6 +379,32 @@ function Resources() {
                         </li>
                     </ol>
                 </div>
+
+                <div>
+                        <English><h1 className="largerfontb">How to Finance Your System?</h1></English>
+                        <Albanian><h1 className="largerfontb"></h1></Albanian>
+                    </div>
+                    <div className="content-section">
+                        <div>
+                            <English><h3>Cash Purchase</h3></English>
+                        </div>
+                        <ul>
+                            <p className="p-text">You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</p>
+                            <img className="imagefloat-center" id="img6" src={process.env.PUBLIC_URL + "cashPurchase.png"} alt="Cash Purchase" onClick={() => load(6)} width="560" height="350"/>
+
+                        </ul>
+
+                        <div>
+                            <English><h3>Loans</h3></English>
+                        </div>
+                        <ul>
+                           <p className="p-text">You can opt to pay your panels with assistance from a loan!</p>
+                           <img className="imagefloat-center" id="img7" src={process.env.PUBLIC_URL + "loantable.png"} alt="Loan Table" onClick={() => load(7)} width="600" height="350"/>
+                           <img className="imagefloat-center" id="img8" src={process.env.PUBLIC_URL + "loanpurchase.png"} alt="Loan Purchase" onClick={() => load(8)} width="600" height="350"/>
+
+                        </ul>
+                   
+                    </div>
             </div>
         <PageFoot></PageFoot>
     </div>
