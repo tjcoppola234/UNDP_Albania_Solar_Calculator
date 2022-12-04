@@ -102,7 +102,7 @@ function Calculator() {
                             setTotalCost(results.totalCost);
                             setPaybackPeriod(results.ROI);
 
-                            document.getElementById("savings-graph").style.display = "block";
+                            document.getElementById("production-graph").style.display = "block";
                         }}>
                         <br />
                         <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
@@ -173,21 +173,21 @@ function Calculator() {
                             <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                             <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
                         </div>
-                        <div id="savings-graph" style={{display: 'none'}}>
+                        <div id="production-graph" style={{display: 'none'}}>
                             <div>
-                                <English><b>See the cost and savings of a solar photovoltaic system over time</b></English>
+                                <English><b>See the production of a solar photovoltaic system by month</b></English>
                                 <Albanian><b>Shihni koston dhe kursimet e një sistemi fotovoltaik diellor me kalimin e kohës</b></Albanian> {/*TODO: Translate to Albanian*/}
                             </div>
-                            <div id="savings-graph-plot">
+                            <div id="production-graph-plot">
                                 <Plot
                                     data={[
                                         {
                                         x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                        y: monthlyCostSavings,
+                                        y: monthlyProd,
                                         type: 'bar',
                                         },
                                     ]}
-                                    layout={ {width: 700, height: 400, title: 'Example Savings Plot'} }
+                                    layout={ {width: 700, height: 400, title: 'Monthly Production Plot'} }
                                     config={{responsive: true}}
                                 />
                             </div>
@@ -341,10 +341,10 @@ function formatMonths(totalMonths, isAlbanian = false) {
     return yearText + monthText;
 }
 
-function calcMonthlySavings(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
     let electricityPrice = 14;
-    let monthlySavings = [];
+    let monthlyProduction = [];
 
     const roofSpace = document.getElementById("roof-space").value;
     const percentSolar = document.getElementById("percent-solar").value;
@@ -367,11 +367,11 @@ function calcMonthlySavings(prefecture, panelSize = 1.66, panelCapacity = .150, 
             actualMonthlyGen : actualMonthlyGen,
         });
 
-        monthlySavings.push(actualMonthlyGen);
+        monthlyProduction.push(actualMonthlyGen);
     }
     
     return {
-        monthlySavings: monthlySavings,
+        monthlyProduction: monthlyProduction,
     };
 }
 export default Calculator;
