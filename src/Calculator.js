@@ -9,6 +9,7 @@ import * as SolarData from './SolarIrradiationReader';
 import English from './English';
 import Albanian from './Albanian';
 import { settings } from './Settings';
+import Tooltip from './Tooltip';
 
 /**
  * @typedef {import('./SolarPanelReader').SolarPVEntry} SolarPVEntry A collection of data about a specific solar PV example.
@@ -25,7 +26,6 @@ import { settings } from './Settings';
  * @returns An HTMLElement representing the calculator, with class "Calculator".
  */
 function Calculator() {
-
     //Number of Panels calculator state variables
     const [numPanels, setNumPanels] = useState("");
 
@@ -44,7 +44,7 @@ function Calculator() {
     const [solarCapacity, setSolarCapacity] = useState(0);
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
-    
+
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
         setAlbanian(visible);
@@ -77,8 +77,8 @@ function Calculator() {
                 </header>
                 <details>
                     <summary>
-                        <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
-                        <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
+                        <English><b>Number of photovoltaics</b>: The number of photovoltaics required to cover 100% of your electricity consumption</English>
+                        <Albanian><b>Numri i fotovoltaikëve</b>: Numri i fotovoltaikëve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
                     <form onSubmit={e => {
                         e.preventDefault();
@@ -87,8 +87,17 @@ function Calculator() {
                         }
                         setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
                     }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                        <div className="Hor-flex">
+                            <English>Enter municipality and solar photovoltaics info <a href="#muni-panel-choice">here</a></English>
+                            <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                            <Tooltip>
+                                <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
+                                <Albanian>Komuna juaj është qyteti ose qyteti ku jetoni dhe përdoret për të gjetur sasinë e rrezatimit diellor që marrin bizneset në zonën tuaj.</Albanian>
+                                <br />
+                                <English>For solar photovoltaics, either choose an example from our list, or enter photovoltaics information yourself!</English>
+                                <Albanian>Për fotovoltaikëve diellore, ose zgjidhni një shembull nga lista jonë, ose vendosni vetë informacionin e fotovoltaikëve!</Albanian>
+                            </Tooltip>
+                        </div>
                         <div className="Hor-flex">
                             <label htmlFor="nop-electricity-usage">
                                 <div className="Hor-flex">
@@ -105,6 +114,10 @@ function Calculator() {
                                 </div>
                             </label>
                             <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                            <Tooltip>
+                                <English>Enter the amount of electricity your business uses on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the last 12 months of electrictiy usage for your business.</English>
+                                <Albanian>Shkruani sasinë e energjisë elektrike që biznesi juaj përdor mesatarisht në muaj. Ky informacion duhet të jetë në faturën tuaj të energjisë elektrike, ose mund të llogaritet lehtësisht duke marrë mesataren e 12 muajve të fundit të përdorimit të energjisë elektrike për biznesin tuaj.</Albanian>
+                            </Tooltip>
                         </div>
                         <button type="submit" id="submit-button">Calculate</button>
                         <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
@@ -113,8 +126,8 @@ function Calculator() {
                 </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
-                        <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar panel system</English>
-                        <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të panelit diellor</Albanian>
+                        <English><b>Payback Period:</b> Time for return on investment, total cost, savings, and solar energy generated for a solar photovoltaic system</English>
+                        <Albanian><b>Periudha e kthimit:</b> Sa kohë do të duhet për të prishur edhe blerjen fillestare të sistemit të fotovoltaikëve diellor</Albanian>
                     </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
@@ -124,14 +137,27 @@ function Calculator() {
                             setTotalCost(results.totalCost);
                             setPaybackPeriod(results.ROI);
                         }}>
-                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
-                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                        <div className="Hor-flex">
+                            <English>Enter municipality and solar photovoltaic info <a href="#muni-panel-choice">here</a></English>
+                            <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor <a href="#muni-panel-choice">këtu</a></Albanian>
+                            <Tooltip>
+                                <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
+                                <Albanian>Komuna juaj është qyteti ose qyteti ku jetoni dhe përdoret për të gjetur sasinë e rrezatimit diellor që marrin bizneset në zonën tuaj.</Albanian>
+                                <br />
+                                <English>For solar photovoltaics, either choose an example from our list, or enter photovoltaic information yourself!</English>
+                                <Albanian>Për fotovoltaikëve diellore, ose zgjidhni një shembull nga lista jonë, ose vendosni vetë informacionin e fotovoltaikëve!</Albanian>
+                            </Tooltip>
+                        </div>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
                                 <English>Flat roof space available for solar</English>
                                 <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
                             </label>
                             <input id="roof-space" type="number" placeholder={"m\u00B2"}></input>
+                            <Tooltip>
+                                <English>Enter the amount of flat open space you have on your business' roof for solar photovoltaics. If you don't know the exact amount, provide a rough estimate. Keep in mind that the roof space must recieve sunlight for solar photovoltaics to work there.</English>
+                                <Albanian>Futni sasinë e hapësirës së hapur të sheshtë që keni në çatinë e biznesit tuaj për fotovoltaikë diellorë. Nëse nuk e dini shumën e saktë, jepni një vlerësim të përafërt. Mbani në mend se hapësira e çatisë duhet të marrë dritën e diellit që fotovoltaikët diellorë të punojnë atje.</Albanian>
+                            </Tooltip>
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="percent-solar">
@@ -139,6 +165,13 @@ function Calculator() {
                                 <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
                             </label>
                             <input id="percent-solar" type="number" placeholder="%"></input>
+                            <Tooltip>
+                                <English>Enter how much of your total energy usage you want to replace with solar photovoltaic generation.</English>
+                                <Albanian>Futni se sa nga konsumi total i energjisë dëshironi të zëvendësoni me gjenerimin e fotovoltaikëve diellorë.</Albanian>
+                                <br />
+                                <English>For example, if you enter 50, then 50% of your current electricity usage will be generated by solar photovoltaics, and the other 50% will come from the grid.</English>
+                                <Albanian>Për shembull, nëse futni 50, atëherë 50% e përdorimit aktual të energjisë elektrike do të gjenerohet nga fotovoltaikët diellorë, dhe 50% e tjera do të vijnë nga rrjeti.</Albanian>
+                            </Tooltip>
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="electricity-paid">
@@ -156,6 +189,10 @@ function Calculator() {
                                 </div>
                             </label>
                             <input id="electricity-paid" type="number" placeholder="Lekë"></input>
+                            <Tooltip>
+                                <English>Enter the amount of money your businesses spends on electricity on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the cost of electricity for your business for the last 12 months.</English>
+                                <Albanian>Shkruani shumën e parave që bizneset tuaja shpenzojnë për energji elektrike mesatarisht në muaj. Ky informacion duhet të jetë në faturën tuaj të energjisë elektrike, ose mund të llogaritet lehtësisht duke marrë mesataren e kostos së energjisë elektrike për biznesin tuaj për 12 muajt e fundit.</Albanian>
+                            </Tooltip>
                         </div>
                         <button type="submit" id="submit-button">
                             <English>Calculate</English>
@@ -174,12 +211,12 @@ function Calculator() {
                             <Albanian>{energyGenerated ? `Energjia e gjeneruar nga sistemi diellor: ${Math.round(energyGenerated)} kWh në muaj` : ""}</Albanian>
                         </div>
                         <div>
-                            <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
-                            <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
+                            <English>{totalSavings ? `Total amount saved by solar photovoltaic system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
+                            <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të fotovoltaikëve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
                         </div>
                         <div>
-                            <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} Lekë` : ""}</English>
-                            <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
+                            <English>{totalCost ? `Total cost of solar photovoltaic system: ${Math.round(totalCost)} Lekë` : ""}</English>
+                            <Albanian>{totalCost ? `Kostoja totale e sistemit të fotovoltaikëve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
                         </div>
                         <div>
                             <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
@@ -189,8 +226,8 @@ function Calculator() {
                 </details>
                 <details id="muni-panel-choice">
                     <summary>
-                        <English><b>Municipality and Solar Panel Info</b>: Input the municipality of your building. Then input information about the solar panels you will use, or select a solar panel from the table</English>
-                        <Albanian><b>Informacionet e bashkisë dhe panelit diellor</b>: Futni komunën e ndërtesës suaj. Më pas futni informacione për panelet diellore që do të përdorni, ose zgjidhni një panel diellor nga tabela</Albanian>
+                        <English><b>Municipality and Solar Photovoltaic Info</b>: Input the municipality of your building. Then input information about the solar photovoltaics you will use, or select a solar photovoltaic system from the table</English>
+                        <Albanian><b>Informacion komunal dhe fotovoltaik diellor</b>: Futni bashkinë e ndërtesës suaj. Më pas futni informacione rreth fotovoltaikëve diellorë që do të përdorni, ose zgjidhni një sistem fotovoltaik diellor nga tabela</Albanian>
                     </summary>
                     <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
                     <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>

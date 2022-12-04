@@ -2,6 +2,7 @@ import { readString } from 'react-papaparse';
 import { useEffect } from 'react';
 import English from './English';
 import Albanian from './Albanian';
+import Tooltip from './Tooltip';
 import {settings} from './Settings';
 
 /**
@@ -77,13 +78,17 @@ export function MunicipalDropdown(props) {
     }, []);
 
     return (
-        <div>
+        <div className="Hor-flex">
             <label htmlFor="municipality-dropdown">
-                <English>Select your municipality: Used to determine how much sunlight is expected</English>
-                <Albanian>Zgjidhni komunën tuaj: Përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
+                <English>Select your municipality:</English>
+                <Albanian>Zgjidhni komunën tuaj:</Albanian>
             </label>
             <select className="municipality-dropdown" defaultChecked={false} onChange={e => props.changeEvent(e)}>
             </select>
+            <Tooltip>
+                <English>Your municipality is used to determine the approximate solar irradiation, or amount of sunlight, reaching your business.</English>
+                <Albanian>Komuna juaj përdoret për të përcaktuar rrezatimin e përafërt diellor ose sasinë e dritës së diellit që arrin në biznesin tuaj.</Albanian>
+            </Tooltip>
         </div>
     );
 }

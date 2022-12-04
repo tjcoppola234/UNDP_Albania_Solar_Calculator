@@ -3,6 +3,7 @@ import { readString } from 'react-papaparse';
 import English from './English';
 import Albanian from './Albanian';
 import { settings } from './Settings';
+import Tooltip from './Tooltip';
 
 /**
  * A collection of data about a specific solar PV example.
@@ -87,10 +88,16 @@ export function SolarPanelScrollList(props) {
             <div id="solar-pv-scroll">
                 <table id="solar-pv-list">
                     <thead>
-                        <tr><th colSpan="7" id="solar-pv-title">
-                            <English>Solar Panel Info</English>
-                            <Albanian>Informacion mbi panelin diellor</Albanian>
-                        </th></tr>
+                        <tr>
+                            <th colSpan="7" id="solar-pv-title">
+                                <English>Solar Panel Info</English>
+                                <Albanian>Informacion mbi panelin diellor</Albanian>
+                                <Tooltip>
+                                    <English>View and select example solar photovoltaic modules. These modules are for educational purpose only, and this tool is not associated with or promoting any solar photovoltaic manufacturers.</English>
+                                    <Albanian>Shikoni dhe zgjidhni shembullin e moduleve fotovoltaike diellore. Këto module janë vetëm për qëllime edukative dhe ky mjet nuk lidhet apo promovon ndonjë prodhues fotovoltaik diellor.</Albanian>
+                                </Tooltip>
+                            </th>
+                        </tr>
                         <tr>
                             <th>
                                 <English>Panel Selection</English>
