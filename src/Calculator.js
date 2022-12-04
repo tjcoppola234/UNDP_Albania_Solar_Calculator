@@ -19,6 +19,7 @@ import { settings } from './Settings';
  * @property {number} TotalSavings
  * @property {number} TotalCost
  * @property {number} ReturnOnInvestment
+ * @property {number} EmissionsSavings
  */
 
 /**
@@ -38,6 +39,7 @@ function Calculator() {
     const [totalSavings, setTotalSavings] = useState("");
     const [totalCost, setTotalCost] = useState("");
     const [energyGenerated, setEnergyGenerated] = useState("");
+    const [emissionsSavings, setEmissionsSavings] = useState("");
 
     const [prefecture, setPrefecture] = useState("");
 
@@ -142,6 +144,7 @@ function Calculator() {
                             setTotalSavings(results.TotalSavings);
                             setTotalCost(results.TotalCost);
                             setPaybackPeriod(results.ReturnOnInvestment);
+                            setEmissionsSavings(results.EmissionsSavings);
                             document.getElementById("production-graph").style.display = "block";
                         }}>
                             <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
@@ -203,6 +206,10 @@ function Calculator() {
                             <div className={paybackPeriod ? "spaced-result" : ""}>
                                 <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                                 <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
+                            </div>
+                            <div className={emissionsSavings ? "spaced-result" : ""}>
+                                <English>{emissionsSavings ? `Carbon dioxide saved: ${Number(emissionsSavings).toFixed(3)} tonnes of CO2` : ""}</English>
+                                <Albanian>{emissionsSavings ? `Dioksidi i karbonit kursehet: ${Number(emissionsSavings).toFixed(3)} ton CO2` : ""}</Albanian>
                             </div>
                         </div>
                         <div id="production-graph" style={{display: 'none'}}>
@@ -301,12 +308,15 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     const savings = (electricityPrice * actualMonthlyGen) - (percentLoan * interest * totalCost / 10000);
     // Total time to return on investment in months
     const roi = totalCost / savings;
+    //energy in kwh * 0.38 MWh per toe (tonnes of crude oil burned) / 1000 = tonnes of CO2
+    const emissionsSaved = (actualMonthlyGen * 0.38) / 1000; 
 
     return {
         AverageMonthlyGeneration: actualMonthlyGen, 
         TotalSavings: savings,
         TotalCost: totalCost,
         ReturnOnInvestment: roi,
+        EmissionsSavings: emissionsSaved
     };
 }
 
@@ -411,12 +421,12 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         // Amount of energy generated per month for a system (kWh per month)
         const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
         
-        console.log({
-            irradiation: solarIrradiation,
-            desiredMonthlyGen: desiredMonthlyGen,
-            solarPanelAmt: solarPanelAmt,
-            actualMonthlyGen : actualMonthlyGen,
-        });
+        // console.log({
+        //     irradiation: solarIrradiation,
+        //     desiredMonthlyGen: desiredMonthlyGen,
+        //     solarPanelAmt: solarPanelAmt,
+        //     actualMonthlyGen : actualMonthlyGen,
+        // });
 
         monthlyProd.push(actualMonthlyGen);
     }
