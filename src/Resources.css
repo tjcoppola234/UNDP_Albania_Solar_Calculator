@@ -5,8 +5,6 @@
 
 }
 
-body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
 details {
     padding-left: 10px;
 }
@@ -69,8 +67,7 @@ h3 {
     margin-right: 95px;
     margin-bottom: 50px;
     margin-left: 20px;
-    margin-top: 60px;
-
+    margin-top: 30px;
     float:right;
     border : 2px solid black;
     border-radius: 25px;
@@ -97,8 +94,17 @@ h3 {
     border-radius: 25px;
 }
 
+#imagefloat4 {
+    border : 10px solid #9fb0c4;
+    border-radius: 75px;
+}
+
 b {
     line-height: 50px;
+}
+
+#bfix{
+    line-height: 0px;
 }
 
 iframe {
@@ -109,6 +115,25 @@ iframe {
     background-color: #9fb0c4;
     border-radius: 25px;
     border: 2px solid #9fb0c4;
-    margin:70px;
+    margin-left:70px;
+    margin-right:70px;
+    margin-top:30px;
+    margin-bottom:30px;
+
+
     padding-bottom: 10px;
 }
+
+.column {
+    float: left;
+    width: 33%;
+    padding: 5px;
+    margin:30px;
+    padding-left: 65px;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
