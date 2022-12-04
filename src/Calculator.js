@@ -277,9 +277,9 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     // Ideal amount of energy generated per month for a system (kWh/month)
     const desiredMonthlyGen = ((percentEnergyForSolar / 100) * costPerMonth) / electricityPrice;
     // Number of solar panels needed
-    const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
+    const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity / 1.15 / .99)); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
     // Amount of energy generated per month for a system (kWh per month)
-    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
     // Total cost of the system in Lekë
     const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
     // Amount of Lekë saved per month
@@ -392,9 +392,9 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         // Ideal amount of energy generated per month for a system (kWh/month)
         const desiredMonthlyGen = ((percentSolar / 100) * costPerMonth) / electricityPrice;
         // Number of solar panels needed
-        const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
+        const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity / 1.15 / .99)); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
         // Amount of energy generated per month for a system (kWh per month)
-        const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+        const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
         
         console.log({
             irradiation: solarIrradiation,
@@ -418,9 +418,9 @@ function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEffi
     const solarIrradiation = SolarData.getData(prefecture, "AVG", solarCapacity / solarArea, false);
 
     if(electricityUsagePeriod.value === "year") {
-        return Math.ceil(electricityUsage.value / 12 / (solarEfficiency / 100) / solarIrradiation / solarCapacity);
+        return Math.ceil(electricityUsage.value / 12 / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
     }
-    return Math.ceil(electricityUsage.value / (solarEfficiency / 100) / solarIrradiation / solarCapacity);
+    return Math.ceil(electricityUsage.value / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
 }
 
 export default Calculator;
