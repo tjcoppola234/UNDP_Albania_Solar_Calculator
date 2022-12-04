@@ -142,8 +142,8 @@ function Calculator() {
                         </div>
                         <div className="Hor-flex">
                             <label htmlFor="percent-solar">
-                                <English>Percent of electricity consumption for solar</English>
-                                <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
+                                <English>Percent energy savings from solar</English>
+                                <Albanian>Kursime në përqindje të energjisë nga dielli</Albanian>
                             </label>
                             <input id="percent-solar" type="number" placeholder="%"></input>
                         </div>
