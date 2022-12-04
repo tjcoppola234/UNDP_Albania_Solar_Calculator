@@ -217,7 +217,7 @@ body {
     border-top: 1px solid var(--nav-background-hover);
   }
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1330px) {
   #Nav-options-list {
     display: flex;
   }
@@ -307,16 +307,13 @@ body {
   margin: 0 auto;
   width: 50%;
   justify-content: space-around;
+  display: flex;
+  align-items: center;
 }
 
 .Sponsor-logos img {
   padding-left: 15px;
   padding-right: 15px;
-}
-
-.Sponsor-logos {
-  display: flex;
-  align-items: center;
 }
 
 #undp-logo {

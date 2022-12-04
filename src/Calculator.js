@@ -150,7 +150,7 @@ function Calculator() {
                     <div className="detail-content">
                         <form onSubmit={(e) => {
                             e.preventDefault();
-                            setMonthlyProduction(calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency).monthlyProd);
+                            setMonthlyProduction(calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency));
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.AverageMonthlyGeneration);
                             setTotalSavings(results.TotalSavings);
@@ -438,6 +438,14 @@ function formatMonths(totalMonths, isAlbanian = false) {
     return yearText + monthText;
 }
 
+/**
+ * Calculates the electricity production for a given month.
+ * @param {string} prefecture The prefecture to gather solar data from
+ * @param {number} [panelSize] Size of a single solar panel (m^2)
+ * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
+ * @param {number} [panelEfficiency] Efficiency of solar panels (%)
+ * @returns {number[]} The production for each month of the year.
+ */
 function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
     let electricityPrice = 14;
@@ -467,11 +475,17 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         monthlyProd.push(actualMonthlyGen);
     }
     
-    return {
-        monthlyProd: monthlyProd,
-    };
+    return monthlyProd;
 }
 
+/**
+ * Calculates the amount of solar PV units required to produce 100% of electricity consumption
+ * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
+ * @param {string} prefecture The prefecture to gather solar data from
+ * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
+ * @param {number} [panelEfficiency] Efficiency of solar panels (%)
+ * @returns {number} The number of PV units required to replace electricity consumption
+ */
 function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEfficiency = .15) {
     const electricityUsage = document.getElementById("nop-electricity-usage");
     const electricityUsagePeriod = document.getElementById("nop-electricity-usage-period");
