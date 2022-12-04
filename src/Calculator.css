@@ -146,3 +146,8 @@
     margin-top: 15px;
     margin-bottom: 0px;
 }
+
+.Calculator #bottom-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
