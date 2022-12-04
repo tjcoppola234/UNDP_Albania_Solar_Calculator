@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import { MunicipalDropdown } from './MunicipalDropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
+import Plot from 'react-plotly.js';
 
 import English from './English';
 import Albanian from './Albanian';
@@ -27,6 +28,8 @@ import { settings } from './Settings';
 function Calculator() {
     SolarData.loadData();
 
+    SolarData.loadData();
+
     //Number of Panels calculator state variables
     const [numPanels, setNumPanels] = useState("");
 
@@ -45,7 +48,9 @@ function Calculator() {
     const [solarCapacity, setSolarCapacity] = useState(0);
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
-    
+
+    const [monthlyProduction, setMonthlyProduction] = useState([0,0,0,0,0,0,0,0,0,0,0,0]);
+
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
         setAlbanian(visible);
@@ -131,11 +136,13 @@ function Calculator() {
                     <div className="detail-content">
                         <form onSubmit={(e) => {
                             e.preventDefault();
+                            setMonthlyProduction(calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency).monthlyProd);
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.AverageMonthlyGeneration);
                             setTotalSavings(results.TotalSavings);
                             setTotalCost(results.TotalCost);
                             setPaybackPeriod(results.ReturnOnInvestment);
+                            document.getElementById("production-graph").style.display = "block";
                         }}>
                             <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
                             <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
@@ -196,6 +203,26 @@ function Calculator() {
                             <div className={paybackPeriod ? "spaced-result" : ""}>
                                 <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
                                 <Albanian>{paybackPeriod ? `Koha për të bërë një kthim nga investimi: ${formatMonths(paybackPeriod, true)}` : ""}</Albanian>
+                            </div>
+                        </div>
+                        <div id="production-graph" style={{display: 'none'}}>
+                            <div id = "bottom-margin">
+                                <English><b>See the production of a solar photovoltaic system by month</b></English>
+                                <Albanian><b>Shihni prodhimin e një sistemi fotovoltaik diellor sipas muajve</b></Albanian>
+                            </div>
+                            <div id="production-graph-plot">
+                                <Plot
+                                    data={[
+                                        {
+                                        x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                                        y: monthlyProduction,
+                                        type: 'bar',
+                                        },
+                                    ]}
+                                    layout={ {width: 700, height: 400, title: 'Monthly Production of the Calculated System', 
+                                    xaxis: {title: "Month"}, yaxis: {title: "Production in kWh"}} }
+                                    config={{responsive: true}}
+                                />
                             </div>
                         </div>
                     </div>
@@ -363,6 +390,40 @@ function formatMonths(totalMonths, isAlbanian = false) {
     }
     
     return yearText + monthText;
+}
+
+function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
+    let electricityPrice = 14;
+    let monthlyProd = [];
+
+    const roofSpace = document.getElementById("roof-space").value;
+    const percentSolar = document.getElementById("percent-solar").value;
+    const costPerMonth = document.getElementById("electricity-paid").value;
+
+    for(let i in months) {
+        // Amount of solar irradiation for the specified municipality (kWh/month)/kW
+        const solarIrradiation = SolarData.getData(prefecture, months[i], panelCapacity / panelSize, false);
+        // Ideal amount of energy generated per month for a system (kWh/month)
+        const desiredMonthlyGen = ((percentSolar / 100) * costPerMonth) / electricityPrice;
+        // Number of solar panels needed
+        const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity));
+        // Amount of energy generated per month for a system (kWh per month)
+        const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100);
+        
+        console.log({
+            irradiation: solarIrradiation,
+            desiredMonthlyGen: desiredMonthlyGen,
+            solarPanelAmt: solarPanelAmt,
+            actualMonthlyGen : actualMonthlyGen,
+        });
+
+        monthlyProd.push(actualMonthlyGen);
+    }
+    
+    return {
+        monthlyProd: monthlyProd,
+    };
 }
 
 function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEfficiency = .15) {
