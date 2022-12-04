@@ -18,7 +18,7 @@ function Resources() {
                     <English><h2 className="h2resources">Resources</h2></English>
                     <Albanian><h2 className="h2resources">Burimet</h2></Albanian>
                 </div>
-            <div>
+                <div>
                 <div>
                     <English><h1 className="largerfontb">Why is solar energy important?</h1></English>
                     <Albanian><h1 className="largerfontb">Pse është e rëndësishme energjia diellore?</h1></Albanian>
@@ -73,7 +73,7 @@ function Resources() {
                 <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
             </div>
             <div className="div5">
-            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons.png"} alt="Reasons" width = "450" height = "770" />
+            <img id="imagefloat2" src={process.env.PUBLIC_URL+"reasons2.png"} alt="Reasons" width = "450" height = "810" />
                 <div>
                     <English><h3>Reduced Energy Costs</h3></English>
                     <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
@@ -113,8 +113,8 @@ function Resources() {
                         <English>Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</English>
                         <Albanian>Kostot e përdorimit të energjisë diellore janë shumë të parashikueshme pasi shumë paguajnë gjithashtu tarifa shërbimi që shkojnë për mirëmbajtjen e rrjetit, tarifat për matjen neto dhe kosto të tjera të lidhura.</Albanian>
                     </li>
-                    <li className="li-2">
-                        <English>ust remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</English>
+                    <li className="li-1">
+                        <English>Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</English>
                         <Albanian>Mos harroni nëse nuk përdorni 100% diellore, atëherë do të keni një nivel të mbetur të faturës elektrike që do të ndryshojë gjatë vitit.</Albanian>
                     </li>
                 </ul>
@@ -149,7 +149,7 @@ function Resources() {
                     <Albanian><h3>Përfitimi nga taksat diellore</h3></Albanian>
                 </div>
                 <ul>
-                    <li className="li-2">
+                    <li className="li-1">
                         <English>The value-added tax on all machinery and other equipment imported to invest in solar energy has been discussed to be cancelled!</English>
                         <Albanian>Tatimi mbi vlerën e shtuar për të gjitha makineritë dhe pajisjet e tjera të importuara për të investuar në energjinë diellore është diskutuar të anulohet!</Albanian>
                     </li>
@@ -186,13 +186,13 @@ function Resources() {
                     <Albanian><h3>Sa kushton solari?</h3></Albanian>
                 </div>
                 <div className="p-text">
-                    <English>The average Albanian business energy usage can be about X lek which is directly affected by how much energy is used, so this cost varies depending on your business’ consumption. Solar companies will typically generate a report of your estimations.</English>
-                    <Albanian>Përdorimi mesatar i energjisë së biznesit shqiptar mund të jetë rreth X lek që ndikohet drejtpërdrejt nga sasia e energjisë së përdorur, kështu që kjo kosto varion në varësi të konsumit të biznesit tuaj. Kompanitë diellore zakonisht do të gjenerojnë një raport të vlerësimeve tuaja.</Albanian>
+                    <English>Your energy usuage is directly affected by how much energy is consumed. Solar companies will typically generate a report of your estimations.</English>
+                    <Albanian>Përdorimi juaj i energjisë ndikohet drejtpërdrejt nga sasia e energjisë së konsumuar. Kompanitë diellore zakonisht do të gjenerojnë një raport të vlerësimeve tuaja.</Albanian>
                 </div>
                 <br />
                 <div className="p-text">
-                    <English>Most solar companies will build out an accurate estimate by using the last six months of your energy bills and utilizing sun tracking software to determine the necessary size of your system to generate 100% of your power needs.</English>
-                    <Albanian>Shumica e kompanive diellore do të krijojnë një vlerësim të saktë duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji.</Albanian>
+                    <English>Solar companies will build out an estimate by using the last six months of your energy bills and utilizing sun tracking software to determine the necessary size of your system to generate 100% of your power needs. <b id="bfix">Make note that some companies oversize your system, making you pay more than what you need.</b></English>
+                    <Albanian>Kompanitë diellore do të bëjnë një vlerësim duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji. <b id="bfix">Vini re se disa kompani e tejkalojnë sistemin tuaj, duke ju bërë të paguani më shumë se sa keni nevojë.</b></Albanian>
                 </div>
                 <div>
                     <English><h3>How should I finance my panels?</h3></English>
@@ -247,24 +247,9 @@ function Resources() {
 
                 <div>
                     <div>
-                        <English><h3>Solar Installer Contacts</h3></English>
-                        <Albanian><h3>Kontaktet e instaluesit diellor</h3></Albanian>
+                        <English><h3>Solar Installers in Tirana</h3></English>
                     </div>
-                    <div className="p-text"><strong><a href = "https://panelebesi.al/"> Panele Fotovoltaike Besi</a></strong></div>
-                    <div className="p-text">+355 69 992 9800</div>
-                    <div className="p-text">panelebesi@gmail.com</div>
-                    <div className="p-text">Rruga Artan Lenja, Tirana 1023</div>
-                    <br />
-                    <div className="p-text"><strong><a href = "https://vegasolar.al/">Vega Electric</a></strong></div>
-                    <div className="p-text">+355 69 202 1115</div>
-                    <div className="p-text">info@vegasolar.al</div>
-                    <div className="p-text">Artan Lenja Street 61 Lyra Palace, Magnet Complex Tirana AL, Tirana 1001</div>
-                    <br />
-                    <div className="p-text"><strong><a href ="https://enercom.al/index.html">Enercom</a></strong></div>
-                    <div className="p-text">+355 68 900 1221</div>
-                    <div className="p-text">info@enercom.al</div>
-                    <div className="p-text">Rruga e Elbasanit, Sauk, 1044, Tiranë</div>
-                    <br />
+                    
                     <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
@@ -285,17 +270,7 @@ function Resources() {
                         </div>
                     </div>
                     <div className="p-text">
-                        <strong><a href="https://www.procreditbank.com.al/eng/business-clients/loans/loan-for-photovoltaics/">
-                            <English>ProCredit Bank</English>
-                            <Albanian>Banka ProCredit</Albanian>
-                        </a></strong>
-                    </div>
-                    <br />
-                    <div className="p-text">
-                        <strong><a href="https://www.unionbank.al/kredia-per-panele-fotovoltaike/">
-                            <English>Union Bank</English>
-                            <Albanian>Banka Union</Albanian>
-                        </a></strong>
+                        <English>Ask your local commericial banks for their loan options and solar photovoltaics programs for businesses.</English>
                     </div>
                     </div>
                     <div>
@@ -308,9 +283,64 @@ function Resources() {
 					</div>
                 </div>
             </div>
+            <div>
+            <div>
+                <English><h1 className="largerfontb">Applying for a Building Permit</h1></English>
+                <Albanian></Albanian>
+                <div className="div5">
+                <English><h3></h3></English>
+                <Albanian></Albanian>
+
+                <div className="p-text">
+                <English><p>When starting a private project, you must hire an electrical engineer with a license in solar photovoltaics to develop it. The developed project that includes an explanation of the whole plan is then signed by your business.</p></English>
+                <Albanian></Albanian>
+                </div>
+                <div className="p-text">
+                <English><p>You then hire a lawyer to start the permit application process. The firm goes to E-Permit at E-Albania and fills out the permit, Deklarate Paraprake. The permit will have all the information you and the lawyer need, including the municipality fee that is charged for your project being checked. This fee is dependent on municipality taxes.</p></English>
+                <Albanian></Albanian>
+                </div>
+                <div className="p-text">
+                <English><p>The next step is to apply for the permit and the application is sent to the municipality who will accept it or deny it.</p></English>
+                <Albanian></Albanian>
+                </div>
+                </div>
+
+
+            </div>
+            </div>
+
+            <div>
+                <English><h1 className="largerfontb">Solar Photovoltaic Installation Process</h1></English>
+                <Albanian></Albanian>
+            </div>
+            <div class="div5">
+            <div class="row">
+            <div class="column">
+            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part1-install.jpg"} alt="Benefits" width = "570" height = "520" floatleft/>
+            </div>
+
+
+            <div class="column">
+            <img id="imagefloat4" src={process.env.PUBLIC_URL+"part2-install.png"} alt="Benefits" width = "570" height = "520" floatleft/>
+            </div>
+            </div>
+            <English><p className="p-text">1. Determine if a solar photovoltaic system is right for your business financially.</p></English>
+            <English><p className="p-text">2. Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</p></English>
+            <English><p className="p-text">3. Installers will show up and start setting up their equipment and scaffolding.</p></English>
+            <English><p className="p-text">4. Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</p></English>
+            <English><p className="p-text">5. The solar panels are then installed onto the panel mounts securely.</p></English>
+            <English><p className="p-text">6. Electrical wiring is then carried out while the building's electricity supply is shut off. </p></English>
+            <English><p className="p-text">7. The solar inverter is connected to the panels. A battery can also be installed and connected.</p></English>
+            <English><p className="p-text">8. To finally generate electricity, the inverter is connected to the building's consumer unit.</p></English>
+            <English><p className="p-text">9. Switch the power on and test the new system. Then installation is complete!</p></English>
+            <English><p className="p-text">10. Panels require little maintenance if they remain clean and regularly inspected.</p></English>
+
+
+            </div>
             </div>
             <PageFoot></PageFoot>
         </div>
+
     )
 }
 export default Resources;
