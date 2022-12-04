@@ -81,8 +81,8 @@ function Help() {
                         </li>
                         <li>
                             <div>
-                                <English>Under <strong>Percent of total energy consumption for solar</strong>, enter the percentage you would like solar to cover your electricity demands. For example, if you would like 70% of your electricity consumption to come from solar energy and 30% from other forms, you would enter in “70”.</English>
-                                <Albanian>Nën <strong>Përqindja e konsumit total të energjisë për energjinë diellore</strong>, shkruani përqindjen që dëshironi që energjia diellore të mbulojë kërkesat tuaja për energji elektrike. Për shembull, nëse dëshironi që 70% e konsumit tuaj të energjisë elektrike të vijë nga energjia diellore dhe 30% nga forma të tjera, do të futni "70".</Albanian>
+                                <English>Under <strong>Percent energy savings from solar</strong>, enter the percentage you would like solar to cover your electricity demands. For example, if you would like 70% of your electricity consumption to come from solar energy and 30% from other forms, you would enter in “70”.</English>
+                                <Albanian>Nën <strong>Kursime në përqindje të energjisë nga dielli</strong>, shkruani përqindjen që dëshironi që energjia diellore të mbulojë kërkesat tuaja për energji elektrike. Për shembull, nëse dëshironi që 70% e konsumit tuaj të energjisë elektrike të vijë nga energjia diellore dhe 30% nga forma të tjera, do të futni "70".</Albanian>
                             </div>
                         </li>
                         <li>
