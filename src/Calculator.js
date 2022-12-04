@@ -30,7 +30,7 @@ function Calculator() {
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
 
-    const [monthlyCostSavings, setMonthlyCostSavings] = useState([0,0,0,0,0,0,0,0,0,0,0,0]);
+    const [monthlyProduction, setMonthlyProduction] = useState([0,0,0,0,0,0,0,0,0,0,0,0]);
 
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
@@ -95,7 +95,7 @@ function Calculator() {
                     </summary>
                     <form onSubmit={(e) => {
                             e.preventDefault();
-                            setMonthlyCostSavings(calcMonthlySavings(prefecture, solarArea, solarCapacity, solarEfficiency).monthlySavings);
+                            setMonthlyProduction(calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency).monthlyProd);
                             const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
                             setEnergyGenerated(results.monthlyGeneration);
                             setTotalSavings(results.totalSavings);
@@ -176,18 +176,19 @@ function Calculator() {
                         <div id="production-graph" style={{display: 'none'}}>
                             <div>
                                 <English><b>See the production of a solar photovoltaic system by month</b></English>
-                                <Albanian><b>Shihni koston dhe kursimet e një sistemi fotovoltaik diellor me kalimin e kohës</b></Albanian> {/*TODO: Translate to Albanian*/}
+                                <Albanian><b>Shihni prodhimin e një sistemi fotovoltaik diellor sipas muajve</b></Albanian>
                             </div>
                             <div id="production-graph-plot">
                                 <Plot
                                     data={[
                                         {
                                         x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                        y: monthlyProd,
+                                        y: monthlyProduction,
                                         type: 'bar',
                                         },
                                     ]}
-                                    layout={ {width: 700, height: 400, title: 'Monthly Production Plot'} }
+                                    layout={ {width: 700, height: 400, title: 'Monthly Production of the Calculated System', 
+                                    xaxis: {title: "Month"}, yaxis: {title: "Production in kWh"}} }
                                     config={{responsive: true}}
                                 />
                             </div>
@@ -344,7 +345,7 @@ function formatMonths(totalMonths, isAlbanian = false) {
 function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
     let electricityPrice = 14;
-    let monthlyProduction = [];
+    let monthlyProd = [];
 
     const roofSpace = document.getElementById("roof-space").value;
     const percentSolar = document.getElementById("percent-solar").value;
@@ -367,11 +368,11 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
             actualMonthlyGen : actualMonthlyGen,
         });
 
-        monthlyProduction.push(actualMonthlyGen);
+        monthlyProd.push(actualMonthlyGen);
     }
     
     return {
-        monthlyProduction: monthlyProduction,
+        monthlyProd: monthlyProd,
     };
 }
 export default Calculator;
