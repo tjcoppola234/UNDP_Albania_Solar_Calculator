@@ -4,6 +4,13 @@ import SettingsListener from "./SettingsListener";
 const DEFAULT_ALBANIAN_VISIBILITY = false;
 const DEFAULT_ENGLISH_VISIBILITY = true;
 
+/**
+ * Defines a collection of global settings that can be subscribed to in order to update React components automatically.
+ * The currently defined settings to subscribe to are:
+ *  albanianVisible: whether elements that use an Albanian translation are visible.
+ *  englishVisible: whether elements that use an English translation are visible.
+ *  disabledMenuItem: the item in the navigation bar that should be disabled. Also the currently opened web page.
+ */
 class Settings {
     constructor(){
         this.albanianVisible = new SettingsListener(DEFAULT_ALBANIAN_VISIBILITY);

@@ -2,7 +2,7 @@ import './global.css';
 import './Calculator.css';
 import { PageHead, PageFoot } from './App';
 import {useState} from 'react';
-import { MunicipalDropdown } from './Dropdown';
+import { MunicipalDropdown } from './MunicipalDropdown';
 import {SolarPanelScrollList} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 import React from 'react';
@@ -12,9 +12,28 @@ import English from './English';
 import Albanian from './Albanian';
 import { settings } from './Settings';
 
+/**
+ * @typedef {import('./SolarPanelReader').SolarPVEntry} SolarPVEntry A collection of data about a specific solar PV example.
+ * 
+ * @typedef Calculations A collection of calculations based on the entered location and solar PV data.
+ * @property {number} AverageMonthlyGeneration
+ * @property {number} TotalSavings
+ * @property {number} TotalCost
+ * @property {number} ReturnOnInvestment
+ */
+
+/**
+ * The HTML for the calculator.
+ * @returns An HTMLElement representing the calculator, with class "Calculator".
+ */
 function Calculator() {
+
     SolarData.loadData();
-    
+
+    //Number of Panels calculator state variables
+    const [numPanels, setNumPanels] = useState("");
+
+    //Payback Period calculator state variables
     const [paybackPeriod, setPaybackPeriod] = useState("");
     const [totalSavings, setTotalSavings] = useState("");
     const [totalCost, setTotalCost] = useState("");
@@ -37,18 +56,17 @@ function Calculator() {
         setAlbanian(visible);
     });
 
+    /**
+     * Updates all relevant react functional hooks with the selected solar PV data.
+     * @param {SolarPVEntry} pvSelection The selected solar PV to update the hooks with.
+     */
     function setSolarData(pvSelection) {
-        setSolarName(pvSelection["Name/Model"]);
-        setSolarManufacturer(pvSelection["Manufacturer"]);
-        setSolarCost(pvSelection["Cost per Panel"]);
-        setSolarArea(pvSelection["Area per Panel"]);
-        setSolarCapacity(pvSelection["Capacity per Panel"]);
-        setSolarEfficiency(pvSelection["Efficiency"].replace("%", ""));
-
-        document.getElementById("solar-cost").value = pvSelection["Cost per Panel"];
-        document.getElementById("solar-area").value = pvSelection["Area per Panel"];
-        document.getElementById("solar-capacity").value = pvSelection["Capacity per Panel"];
-        document.getElementById("solar-efficiency").value = pvSelection["Efficiency"].replace("%", "");
+        setSolarName(pvSelection.NameOrModel);
+        setSolarManufacturer(pvSelection.Manufacturer);
+        setSolarCost(pvSelection.CostPerPanel);
+        setSolarArea(pvSelection.AreaPerPanel);
+        setSolarCapacity(pvSelection.CapacityPerPanel);
+        setSolarEfficiency(pvSelection.Efficiency.replace("%", ""));
     }
 
     return (
@@ -66,8 +84,15 @@ function Calculator() {
                         <English><b>Number of panels</b>: The number of panels required to cover 100% of your electricity consumption</English>
                         <Albanian><b>Numri i paneleve</b>: Numri i paneleve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
-                    <form>
-                        <MunicipalDropdown></MunicipalDropdown>
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        if(prefecture === "") {
+                            return;
+                        }
+                        setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
+                    }}>
+                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
+                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
                         <div className="Hor-flex">
                             <label htmlFor="nop-electricity-usage">
                                 <div className="Hor-flex">
@@ -85,7 +110,9 @@ function Calculator() {
                             </label>
                             <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
                         </div>
-                        <button type="button" id="submit-button">Calculate</button>
+                        <button type="submit" id="submit-button">Calculate</button>
+                        <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
+                        <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
                     </form>
                 </details>
                 <details open> {/* place "open" next to "details" to make it open on load */}
@@ -104,16 +131,8 @@ function Calculator() {
 
                             document.getElementById("production-graph").style.display = "block";
                         }}>
-                        <br />
-                        <SolarPanelScrollList onSelection={e => setSolarData(e)} getIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
-                        <br />
-                        <div className="Vert-flex">
-                            <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value)}}></MunicipalDropdown>
-                            <div>
-                                <English>Your municipality is used to determine how much sunlight is expected</English>
-                                <Albanian>Komuna juaj përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
-                            </div>
-                        </div>
+                        <English>Enter municipality and solar panel info <a href="#muni-panel-choice">here</a></English>
+                        <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice">këtu</a></Albanian>
                         <div className="Hor-flex">
                             <label htmlFor="roof-space">
                                 <English>Flat roof space available for solar</English>
@@ -195,12 +214,29 @@ function Calculator() {
                         </div>
                     </div>
                 </details>
+                <details id="muni-panel-choice">
+                    <summary>
+                        <English><b>Municipality and Solar Panel Info</b>: Input the municipality of your building. Then input information about the solar panels you will use, or select a solar panel from the table</English>
+                        <Albanian><b>Informacionet e bashkisë dhe panelit diellor</b>: Futni komunën e ndërtesës suaj. Më pas futni informacione për panelet diellore që do të përdorni, ose zgjidhni një panel diellor nga tabela</Albanian>
+                    </summary>
+                    <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
+                    <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                </details>
             </div>
             <PageFoot></PageFoot>
         </div>
     )
 }
 
+/**
+ * Use the provided location and solar PV data to calculate {@link Calculations} values.
+ * @param {string} prefecture The prefecture to use for irradiation data
+ * @param {number} solarCost The cost of a single solar PV unit
+ * @param {number} solarArea The dimensions of a single solar PV unit
+ * @param {number} solarCapacity The capacity of a single solar PV unit
+ * @param {number} solarEfficiency The efficiency of the selected solar PV unit
+ * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
+ */
 function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
     const roofSpace = document.getElementById("roof-space");
     const percentSolar = document.getElementById("percent-solar");
@@ -218,18 +254,18 @@ function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEff
 }
 
 /**
- * 
+ * Calculates the return on investment.
  * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
  * @param {number} percentEnergyForSolar Amount of total energy consumption dedicated to solar (between 0 and 100) (%)
  * @param {number} costPerMonth Total amount paid for electricity per month (Lekë per month)
- * @param {*} prefecture The prefecture to gather solar data from
- * @param {*} panelCost Cost of a single solar panel (Lekë)
- * @param {*} panelSize Size of a single solar panel (m^2)
- * @param {*} panelCapacity Capacity of a single solar panel (kW)
- * @param {*} panelEfficiency Efficiency of solar panels (%)
- * @param {*} percentLoan Percentage of payment to be covered by loan
- * @param {*} interest Monthly interest in the case of payment by loan (Lekë per month)
- * @returns An object where: "monthlyGeneration" is the amount of energy a solar panel system would produce in a month, "totalSavings" is the amount of money saved by using a solar panel system, "totalCost" is the amount of money that a solar panel system would cost, "ROI" is the length of the payback period for a solar system purchase. 
+ * @param {string} prefecture The prefecture to gather solar data from
+ * @param {number} singlePanelCost Cost of a single solar panel (Lekë)
+ * @param {number} [panelSize] Size of a single solar panel (m^2)
+ * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
+ * @param {number} [panelEfficiency] Efficiency of solar panels (%)
+ * @param {number} [percentLoan] Percentage of payment to be covered by loan
+ * @param {number} [interest] Monthly interest in the case of payment by loan (Lekë per month)
+ * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
  */
 function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
     let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
@@ -251,16 +287,6 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     // Total time to return on investment in months
     const roi = totalCost / savings;
 
-    // console.log({
-    //     irradiation: solarIrradiation,
-    //     desiredGeneration: desiredMonthlyGen,
-    //     solarPanelCountNeeded: solarPanelAmt,
-    //     monthlyGeneration: actualMonthlyGen,
-    //     cost: totalCost,
-    //     savings: savings,
-    //     returnOnInterest: roi
-    // });
-
     return {
         monthlyGeneration: actualMonthlyGen, 
         totalSavings: savings,
@@ -269,11 +295,20 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
     };
 }
 
+/**
+ * Converts a decimal number of months into a representation as a number of months and years (Eg. 13.11111 total months becomes 1 year and 2 months).
+ * @param {number} totalMonths A decimal representing some amount of months
+ * @param {boolean} isAlbanian Whether the output should use Albanian or English words for "month" and "year"
+ * @returns {string} Some number of years and months
+ */
 function formatMonths(totalMonths, isAlbanian = false) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
     if(years === Infinity) {
-        return "Please input valid numbers";
+        if(isAlbanian)
+            return "Ju lutemi futni numra të vlefshëm";
+        else
+            return "Please input valid numbers";
     }
     
     let yearText, monthText;
@@ -375,4 +410,17 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         monthlyProd: monthlyProd,
     };
 }
+
+function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEfficiency = .15) {
+    const electricityUsage = document.getElementById("nop-electricity-usage");
+    const electricityUsagePeriod = document.getElementById("nop-electricity-usage-period");
+
+    const solarIrradiation = SolarData.getData(prefecture, "AVG", solarCapacity / solarArea, false);
+
+    if(electricityUsagePeriod.value === "year") {
+        return Math.ceil(electricityUsage.value / 12 / (solarEfficiency / 100) / solarIrradiation / solarCapacity);
+    }
+    return Math.ceil(electricityUsage.value / (solarEfficiency / 100) / solarIrradiation / solarCapacity);
+}
+
 export default Calculator;

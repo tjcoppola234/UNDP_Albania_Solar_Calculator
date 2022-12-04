@@ -8,6 +8,9 @@ import Calculator from './Calculator';
 import Help from './Help';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+/**
+ * Defines subdomains for the web app. Each Route is a separate subdomain (e.g. website.al/Resources).
+ */
 root.render(
   // <React.StrictMode>
     <BrowserRouter>

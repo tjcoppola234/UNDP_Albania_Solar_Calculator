@@ -4,9 +4,11 @@ import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
 
-
+/**
+ * The HTML for the resources page.
+ * @returns {HTMLElement} An HTMLElement representing the resources page, with class "Resources".
+ */
 function Resources() {
-    
     return (
         <div className="Resources">
             <PageHead></PageHead>

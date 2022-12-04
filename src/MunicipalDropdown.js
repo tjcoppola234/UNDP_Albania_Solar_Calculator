@@ -4,7 +4,18 @@ import English from './English';
 import Albanian from './Albanian';
 import {settings} from './Settings';
 
-export function MunicipalDropdown({changeEvent}) {
+/**
+ * @callback changeCallback Defines a function that can be used to update components when a new municipality is selected.
+ * @param {HTMLSelectElement} selectElement the select HTML element that has just had its selected value changed.
+ */
+
+/**
+ * The HTML for a dropdown which displays a list of municipalities from data/MunicipalityPrefecture. Each option for the dropdown has a value equal to the name of the prefecture the municipality is located in.
+ * @param {*} props A list of properties related to the dropdown.
+ * @param {changeCallback} props.changeEvent A {@link changeCallback} function that is called when an option from the dropdown is selected. Used to update external HTML with the currently selected value.
+ * @returns {HTMLElement} An HTMLElement representing the dropdown.
+ */
+export function MunicipalDropdown(props) {
     useEffect(() => {
         //Loading csv as string
         fetch("data/MunicipalityPrefecture.csv", {
@@ -68,10 +79,10 @@ export function MunicipalDropdown({changeEvent}) {
     return (
         <div>
             <label htmlFor="municipality-dropdown">
-                <English>Select your municipality:</English>
-                <Albanian>Zgjidhni komunën tuaj:</Albanian>
+                <English>Select your municipality: Used to determine how much sunlight is expected</English>
+                <Albanian>Zgjidhni komunën tuaj: Përdoret për të përcaktuar se sa rreze dielli pritet</Albanian>
             </label>
-            <select className="municipality-dropdown" defaultChecked={false} onChange={e => changeEvent(e)}>
+            <select className="municipality-dropdown" defaultChecked={false} onChange={e => props.changeEvent(e)}>
             </select>
         </div>
     );
