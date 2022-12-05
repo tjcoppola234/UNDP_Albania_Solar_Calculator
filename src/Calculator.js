@@ -105,7 +105,7 @@ function Calculator() {
                         setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
                     }}>
                         <div className="Hor-flex">
-                            <English>Enter municipality and solar photovoltaics info <a href="#muni-panel-choice">here</a></English>
+                            <English>Enter municipality and solar photovoltaics info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
                             <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor <a href="#muni-panel-choice">këtu</a></Albanian>
                             <Tooltip>
                                 <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
