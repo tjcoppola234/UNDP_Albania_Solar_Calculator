@@ -396,12 +396,13 @@ function Resources() {
                 </div>
 
                 <div>
-                        <English><h1 className="largerfontb">How to Finance Your System?</h1></English>
-                        <Albanian><h1 className="largerfontb"></h1></Albanian>
+                        <English><h1 className="largerfontb" id="res-fin-sys">How to Finance Your System</h1></English>
+                        <Albanian><h1 className="largerfontb" id="res-fin-sys">Si të financoni sistemin tuaj</h1></Albanian>
                     </div>
                     <div className="content-section">
                         <div>
-                            <English><h3>Cash Purchase</h3></English>
+                            <English><h3 id="res-cash-pur">Cash Purchase</h3></English>
+                            <Albanian><h3 id="res-cash-pur">Blerje me para në dorë</h3></Albanian>
                         </div>
                         <ul>
                             <p className="p-text">You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</p>
@@ -410,7 +411,8 @@ function Resources() {
                         </ul>
 
                         <div>
-                            <English><h3>Loans</h3></English>
+                            <English><h3 id="res-loans">Loans</h3></English>
+                            <Albanian><h3 id="res-loans">Kredive</h3></Albanian>
                         </div>
                         <ul>
                            <p className="p-text">You can opt to pay your panels with assistance from a loan!</p>
@@ -436,7 +438,7 @@ export function TableOfContents() {
     return (
         <div id="toc" className="Hor-flex">
             <ul id="toc-toplist" className="invisible">
-            <h2>Contents</h2>
+                <h2>Contents</h2>
                 <li><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a>
                     <ul>
                         <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Enviornment</English><Albanian>Mjedisi</Albanian></a></li>
@@ -473,6 +475,12 @@ export function TableOfContents() {
                 </li>
                 <li><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
                 <li><a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a></li>
+                <li><a href="#res-cash-pur" onClick={e => jumpTo(e, "res-cash-pur")}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a>
+                    <ul>
+                        <li><a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a></li>
+                        <li><a href="#res-loans" onClick={e => jumpTo(e, "res-loans")}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
+                    </ul>
+                </li>
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
