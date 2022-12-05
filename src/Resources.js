@@ -36,6 +36,8 @@ function Resources() {
             setImageOpened(true);
             setOpenSRC(image.src);
             setCaption(image.alt);
+            setOpenSRC2("");
+            setCaption2("");
         }
     }
 
@@ -346,8 +348,8 @@ function Resources() {
                 </div>
                 <div className="content-section">
                     <div className="Vert-flex" id="false-modal" onClick={() => load(4)}>
-                        <img id="img4" className="half-top" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="342" height="312"/>
-                        <img id="img5" className="half-bottom" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="342" height="312"/>
+                        <img id="img4" className="half-top" src={process.env.PUBLIC_URL + "part1-install.jpg"} alt="Benefits-1" width="307.8" height="280.8"/>
+                        <img id="img5" className="half-bottom" src={process.env.PUBLIC_URL + "part2-install.png"} alt="Benefits-2" width="307.8" height="280.8"/>
                     </div>
                     <ol>
                         <li className="p-text">
