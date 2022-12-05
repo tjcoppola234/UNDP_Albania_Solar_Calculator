@@ -170,15 +170,40 @@ function hamburgerVis() {
   }
 }
 
+let loop = false;
 /**
  * Hides hamburger dropdown menu when clicking off of the menu.
+ * Also hides tooltips when clicking off of them
  */
-document.onclick = () => {
+document.onclick = ev => {
+  //Hides hamburger when clicking off of it
   let nav = document.getElementById("Nav-options-list");
   if(!switching && window.innerWidth <= 1330 && !nav.classList.contains("invisible")) {
     nav.classList.add("invisible");
   }
   switching = false;
+
+  //Hides tooltips when clicking off of them
+  if(!loop) {
+      const buttonClicked = ev.target.closest(".tool-button");
+
+      const tooltips = document.getElementsByClassName("tool-tip-parent");
+
+      if(ev.target.closest(".tool-tip") === null) {
+          for(let tooltip of tooltips) {
+              if(!tooltip.querySelector(".tool-tip").classList.contains("invisible")) {
+                  const aButton = tooltip.querySelector(".tool-button");
+
+                  if(buttonClicked === null || !buttonClicked.isSameNode(aButton)) {
+                      loop = true;
+                      aButton.click();
+                  }
+              }
+          }
+      }
+
+      loop = false;
+  }
 }
 
 let sizeDecreased = false;
