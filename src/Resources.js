@@ -1,6 +1,6 @@
 import './global.css';
 import './Resources.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
@@ -15,7 +15,12 @@ function Resources() {
     const [openedSRC2, setOpenSRC2] = useState("");
     const [caption, setCaption] = useState("");
     const [caption2, setCaption2] = useState("");
+    const ref = useRef(null);
 
+    /**
+     * Loads an image into the modal popup and displays the modal
+     * @param {number} num An index representing which image to load
+     */
     const load = num => {
         if(num === 4) {
             const img1 = document.getElementById("img4");
@@ -44,8 +49,15 @@ function Resources() {
                 <Albanian><h3 className="page-subtitle">Mësoni më shumë rreth fotovoltaikëve diellorë!</h3></Albanian>
             </div>
             <div className="content">
-                <div className={"modal-img" + (openImage ? "" : " invisible")}>
-                    <span className="close-modal" onClick={() => setImageOpened(false)}>&times;</span>
+            <TableOfContents></TableOfContents>
+                <button id="scroll-to-top" type="button" onClick={e => {
+                    e.preventDefault();
+                    document.body.scrollIntoView({
+                        behavior: "smooth"
+                    });
+                }}>▴</button>
+                <div id="modal-img" ref={ref} className={openImage ? "" : " invisible"}>
+                    <span className="close-modal" onClick={() => { ref.current.scrollTo(0, 0); setImageOpened(false);}}>&times;</span>
                     <div className="modal-content">
                         <div className="modal-caption">{caption}</div>
                         <img className="modal-img-src" src={openedSRC} alt={caption} />
@@ -54,14 +66,14 @@ function Resources() {
                 </div>
                 <div>
                     <div>
-                        <English><h1 className="largerfontb">Why is solar energy important?</h1></English>
-                        <Albanian><h1 className="largerfontb">Pse është e rëndësishme energjia diellore?</h1></Albanian>
+                        <English><h1 className="largerfontb" id="res-why-imp">Why is solar energy important?</h1></English>
+                        <Albanian><h1 className="largerfontb" id="res-why-imp">Pse është e rëndësishme energjia diellore?</h1></Albanian>
                     </div>
                     <div className="content-section">
                         <img className="imagefloat-right" id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450"/>
                         <div>
-                            <English><h3>The Enviornment</h3></English>
-                            <Albanian><h3>Mjedisi</h3></Albanian>
+                            <English><h3 id="res-the-enviro">The Enviornment</h3></English>
+                            <Albanian><h3 id="res-the-enviro">Mjedisi</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -78,8 +90,8 @@ function Resources() {
                             </li>
                         </ul>
                         <div>
-                            <English><h3>Sunny Potential</h3></English>
-                            <Albanian><h3>Potencial me diell</h3></Albanian>
+                            <English><h3 id="res-sunny-pot">Sunny Potential</h3></English>
+                            <Albanian><h3 id="res-sunny-pot">Potencial me diell</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -101,14 +113,14 @@ function Resources() {
                         </ul>
                     </div>
                     <div>
-                        <English><h1 className="largerfontb">What are the benefits of solar energy for your business?</h1></English>
-                        <Albanian><h1 className="largerfontb">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
+                        <English><h1 className="largerfontb" id="res-what-benefits">What are the benefits of solar energy for your business?</h1></English>
+                        <Albanian><h1 className="largerfontb" id="res-what-benefits">Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</h1></Albanian>
                     </div>
                     <div className="content-section">
                         <img className="imagefloat-right" id="img1" src={process.env.PUBLIC_URL + "reasons.png"} alt="Reasons" onClick={() => load(1)} width="450" height="770" />
                         <div>
-                            <English><h3>Reduced Energy Costs</h3></English>
-                            <Albanian><h3>Kosto të reduktuara të energjisë</h3></Albanian>
+                            <English><h3 id="res-reduced-costs">Reduced Energy Costs</h3></English>
+                            <Albanian><h3 id="res-reduced-costs">Kosto të reduktuara të energjisë</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -133,8 +145,8 @@ function Resources() {
                             </li>
                         </ul>
                         <div>
-                            <English><h3>More Energy Security and Independence</h3></English>
-                            <Albanian><h3>Më shumë siguri dhe pavarësi energjetike</h3></Albanian>
+                            <English><h3 id="res-more-security">More Energy Security and Independence</h3></English>
+                            <Albanian><h3 id="res-more-security">Më shumë siguri dhe pavarësi energjetike</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -155,8 +167,8 @@ function Resources() {
                             </li>
                         </ul>
                         <div>
-                            <English><h3>Green Business</h3></English>
-                            <Albanian><h3>Biznesi i gjelbër</h3></Albanian>
+                            <English><h3 id="res-green-bus">Green Business</h3></English>
+                            <Albanian><h3 id="res-green-bus">Biznesi i gjelbër</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -181,8 +193,8 @@ function Resources() {
                             </li>
                         </ul>
                         <div>
-                            <English><h3>Solar Tax Benefit</h3></English>
-                            <Albanian><h3>Përfitimi nga taksat diellore</h3></Albanian>
+                            <English><h3 id="res-solar-tax">Solar Tax Benefit</h3></English>
+                            <Albanian><h3  id="res-solar-tax">Përfitimi nga taksat diellore</h3></Albanian>
                         </div>
                         <ul>
                             <li>
@@ -192,30 +204,30 @@ function Resources() {
                         </ul>
                     </div>
                     <div>
-                        <English><h1 className="largerfontb">Should your business go solar?</h1></English>
-                        <Albanian><h1 className="largerfontb">A duhet të shkojë biznesi juaj diellor?</h1></Albanian>
+                        <English><h1 className="largerfontb" id="res-go-solar">Should your business go solar?</h1></English>
+                        <Albanian><h1 className="largerfontb" id="res-go-solar">A duhet të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
                         <img className="imagefloat-left" id="img2" src={process.env.PUBLIC_URL + "qs.png"} alt="Questions To Ask" onClick={() => load(2)} width="500" height="500" />
                         <div>
-                            <English><h3>Why should I go solar?</h3></English>
-                            <Albanian><h3>Pse duhet të shkoj në diell?</h3></Albanian>
+                            <English><h3 id="res-why-go-solar">Why should I go solar?</h3></English>
+                            <Albanian><h3 id="res-why-go-solar">Pse duhet të shkoj në diell?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Choosing to go solar is completely up to you. There are many benefits to going solar, including electricity bill savings, more stable power, and building a more sustainable business. </English>
                             <Albanian>Zgjedhja për të përdorur diellore varet plotësisht nga ju. Ka shumë përfitime nga përdorimi i energjisë diellore, duke përfshirë kursimet e faturave të energjisë elektrike, energjinë më të qëndrueshme dhe ndërtimin e një biznesi më të qëndrueshëm.</Albanian>
                         </div>
                         <div>
-                            <English><h3>Is my business right for solar?</h3></English>
-                            <Albanian><h3>A është biznesi im i duhur për energjinë diellore?</h3></Albanian>
+                            <English><h3 id="res-bus-right">Is my business right for solar?</h3></English>
+                            <Albanian><h3 id="res-bus-right">A është biznesi im i duhur për energjinë diellore?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Before professional consultation, you can determine on your own whether a solar system makes sense for your system. You want to make sure the panels receive the most possible amount of sunlight as Albania already has a high amount of sunshine per year. You also want to determine if your electricity bills are high enough to justify going solar as the more money you spend now, the more you can save with solar.</English>
                             <Albanian>Përpara konsultimit profesional, ju mund të përcaktoni vetë nëse një sistem diellor ka kuptim për sistemin tuaj. Ju dëshironi të siguroheni që panelet të marrin sasinë më të madhe të mundshme të dritës së diellit pasi Shqipëria tashmë ka një sasi të lartë dielli në vit. Ju gjithashtu dëshironi të përcaktoni nëse faturat tuaja të energjisë elektrike janë mjaft të larta për të justifikuar përdorimin e energjisë diellore, pasi sa më shumë para të shpenzoni tani, aq më shumë mund të kurseni me energjinë diellore.</Albanian>
                         </div>
                         <div>
-                            <English><h3>How much does solar cost?</h3></English>
-                            <Albanian><h3>Sa kushton solari?</h3></Albanian>
+                            <English><h3 id="res-how-cost">How much does solar cost?</h3></English>
+                            <Albanian><h3 id="res-how-cost">Sa kushton solari?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Your energy usuage is directly affected by how much energy is consumed. Solar companies will typically generate a report of your estimations.</English>
@@ -227,32 +239,32 @@ function Resources() {
                             <Albanian>Kompanitë diellore do të bëjnë një vlerësim duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji. <b id="bfix">Vini re se disa kompani e tejkalojnë sistemin tuaj, duke ju bërë të paguani më shumë se sa keni nevojë.</b></Albanian>
                         </div>
                         <div>
-                            <English><h3>How should I finance my panels?</h3></English>
-                            <Albanian><h3>Si duhet t'i financoj panelet e mia?</h3></Albanian>
+                            <English><h3 id="res-how-finance">How should I finance my panels?</h3></English>
+                            <Albanian><h3 id="res-how-finance">Si duhet t'i financoj panelet e mia?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>A business has a variety of options to explore as solar companies have packages of solar systems they sell, or a business may consider taking out a loan to finance their solar panels.</English>
                             <Albanian>Një biznes ka një shumëllojshmëri opsionesh për të eksploruar pasi kompanitë diellore kanë paketa të sistemeve diellore që shesin, ose një biznes mund të marrë në konsideratë marrjen e një kredie për të financuar panelet e tyre diellore.</Albanian>
                         </div>
                         <div>
-                            <English><h3>How much money will I save with solar?</h3></English>
-                            <Albanian><h3>Sa para do të kursej me solar?</h3></Albanian>
+                            <English><h3 id="res-how-money">How much money will I save with solar?</h3></English>
+                            <Albanian><h3 id="res-how-money">Sa para do të kursej me solar?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>A solar company would be installing a custom rooftop solar system for your business, so the costs would ideally fit your needs.</English>
                             <Albanian>Një kompani diellore do të instalonte një sistem diellor me porosi në çati për biznesin tuaj, kështu që kostot do të përshtateshin në mënyrë ideale me nevojat tuaja.</Albanian>
                         </div>
                         <div>
-                            <English><h3>How long will my solar panels last?</h3></English>
-                            <Albanian><h3>Sa do të zgjasin panelet e mia diellore?</h3></Albanian>
+                            <English><h3 id="res-how-long">How long will my solar panels last?</h3></English>
+                            <Albanian><h3 id="res-how-long">Sa do të zgjasin panelet e mia diellore?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Solar panels are continually progressing to be better in power production and efficiency. There are a variety of panels to choose from that may fit your power or aesthetic needs, depending on what manufacturer you’re looking at. Most manufacturers claim their panel’s efficiency to last at least 20-25 years due to slight degradation caused by dirt, pollen, and other external factors, so it is important to clean your panels.</English>
                             <Albanian>Panelet diellore po përparojnë vazhdimisht për të qenë më të mirë në prodhimin dhe efikasitetin e energjisë. Ka një shumëllojshmëri panelesh për të zgjedhur që mund të përshtaten me fuqinë ose nevojat tuaja estetike, në varësi të prodhuesit që po shikoni. Shumica e prodhuesve pretendojnë se efikasiteti i panelit të tyre zgjat të paktën 20-25 vjet për shkak të degradimit të lehtë të shkaktuar nga papastërtia, poleni dhe faktorë të tjerë të jashtëm, kështu që është e rëndësishme të pastroni panelet tuaja.</Albanian>
                         </div>
                         <div>
-                            <English><h3>Do solar panels have a warranty?</h3></English>
-                            <Albanian><h3>A kanë garanci panelet diellore?</h3></Albanian>
+                            <English><h3 id="res-do-panels">Do solar panels have a warranty?</h3></English>
+                            <Albanian><h3 id="res-do-panels">A kanë garanci panelet diellore?</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Warranty depends on the manufacturer with most lasting between 20-25 years. Some solar companies also offer a few years of maintenance as well after they are installed on your roof.</English>
@@ -260,14 +272,14 @@ function Resources() {
                         </div>
                     </div>
                     <div>
-                        <English><h1 className="largerfontb">How can your business go solar?</h1></English>
-                        <Albanian><h1 className="largerfontb">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
+                        <English><h1 className="largerfontb" id="res-how-bus">How can your business go solar?</h1></English>
+                        <Albanian><h1 className="largerfontb" id="res-how-bus">Si mund të shkojë biznesi juaj diellor?</h1></Albanian>
                     </div>
                     <div className="content-section">
                         <img className="imagefloat-right" id="img3" src={process.env.PUBLIC_URL + "how.png"} alt="How to Install" onClick={() => load(3)} width="450" height="650" />
                         <div>
-                            <English><h3>Solar Installers</h3></English>
-                            <Albanian><h3>Instalues ​​diellor</h3></Albanian>
+                            <English><h3 id="res-solar-inst">Solar Installers</h3></English>
+                            <Albanian><h3 id="res-solar-inst">Instalues ​​diellor</h3></Albanian>
                         </div>
                         <div>
                             <div className="p-text">
@@ -275,14 +287,14 @@ function Resources() {
                                 <Albanian>Bisedoni me kompani të ndryshme instalimi diellor për të përcaktuar nëse dhe si një sistem diellor është i duhuri për ju. Shumë kompani ofrojnë konsulencë teknike dhe financiare, së bashku me parashikimet e plota të një sistemi PV në çatinë tuaj. Tek këta shitës do të mund të aplikoni për një leje dhe të filloni instalimin. Disa kompani diellore dhe shumë prodhues të diellit nga të cilët këto kompani instalimi marrin panelet e tyre gjithashtu ofrojnë mirëmbajtje periodike.</Albanian>
                             </div>
                             <div id="center-solar">
-                                <English><h3>Map of solar installers near Tirana</h3></English>
-                                <Albanian><h3>Harta e instaluesve diellorë pranë Tiranës</h3></Albanian>
+                                <English><h3 id="res-solar-inst-tir">Map of solar installers near Tirana</h3></English>
+                                <Albanian><h3 id="res-solar-inst-tir">Harta e instaluesve diellorë pranë Tiranës</h3></Albanian>
                                 <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                         <div>
-                            <English><h3>Banks</h3></English>
-                            <Albanian><h3>Bankat</h3></Albanian>
+                            <English><h3 id="res-banks">Banks</h3></English>
+                            <Albanian><h3 id="res-banks">Bankat</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>Talk to different banks to determine if taking out a loan is right for your company. A couple banks, like Union Bank and ProCredit Bank, offer technical and financial assistance to help you determine if a solar system is right for you. These banks will often be partnered with solar installation companies they will get you in contact with.</English>
@@ -290,16 +302,17 @@ function Resources() {
                         </div>
                         <div>
                             <div>
-                                <English><h3>Financing Options</h3></English>
-                                <Albanian><h3>Opsionet e financimit</h3></Albanian>
+                                <English><h3 id="res-fin-op">Financing Options</h3></English>
+                                <Albanian><h3 id="res-fin-op">Opsionet e financimit</h3></Albanian>
                             </div>
                         </div>
                         <div className="p-text">
                             <English>Ask your local commericial banks for their loan options and solar photovoltaics programs for businesses.</English>
+                            <Albanian>Pyesni bankat tuaja tregtare lokale për opsionet e tyre të kredisë dhe programet e fotovoltaikëve diellorë për bizneset.</Albanian>
                         </div>
                         <div>
-                            <English><h3>Calculations</h3></English>
-                            <Albanian><h3>Llogaritjet</h3></Albanian>
+                            <English><h3 id="res-own-calc">Calculations</h3></English>
+                            <Albanian><h3 id="res-own-calc">Llogaritjet</h3></Albanian>
                         </div>
                         <div className="p-text">
                             <English>To determine which of the offers you are receiving from solar installation companies is the most suitable one for your business, use the app to do your own calculations!</English>
@@ -308,28 +321,28 @@ function Resources() {
                     </div>
                 </div>
                 <div>
-                    <English><h1 className="largerfontb">Applying for a Building Permit</h1></English>
-                    <Albanian></Albanian>
+                    <English><h1 className="largerfontb" id="es-app-permit">Applying for a Building Permit</h1></English>
+                    <Albanian><h1 className="largerfontb" id="es-app-permit">Aplikimi për leje ndërtimi</h1></Albanian>
                 </div>
                 <div className="content-section">
                     <div className="p-text">
                         <English>When starting a private project, you must hire an electrical engineer with a license in solar photovoltaics to develop it. The developed project that includes an explanation of the whole plan is then signed by your business.</English>
-                        <Albanian></Albanian>
+                        <Albanian>Kur filloni një projekt privat, duhet të punësoni një inxhinier elektrik me licencë në fotovoltaikë diellorë për ta zhvilluar atë. Projekti i zhvilluar që përfshin një shpjegim të të gjithë planit më pas nënshkruhet nga biznesi juaj.</Albanian>
                     </div>
                     <br />
                     <div className="p-text">
                         <English>You then hire a lawyer to start the permit application process. The firm goes to E-Permit at E-Albania and fills out the permit, Deklarate Paraprake. The permit will have all the information you and the lawyer need, including the municipality fee that is charged for your project being checked. This fee is dependent on municipality taxes.</English>
-                        <Albanian></Albanian>
+                        <Albanian>Më pas punësoni një avokat për të filluar procesin e aplikimit për leje. Firma shkon në E-Permit në E-Albania dhe plotëson lejen, Deklarate Paraprake. Leja do të ketë të gjitha informacionet që ju nevojiten juve dhe avokatit, duke përfshirë tarifën e bashkisë që ngarkohet për projektin tuaj që po kontrollohet. Kjo tarifë varet nga taksat komunale.</Albanian>
                     </div>
                     <br />
                     <div className="p-text">
                         <English>The next step is to apply for the permit and the application is sent to the municipality who will accept it or deny it.</English>
-                        <Albanian></Albanian>
+                        <Albanian>Hapi tjetër është aplikimi për lejen dhe aplikimi i dërgohet bashkisë e cila do ta pranojë ose refuzojë.</Albanian>
                     </div>
                 </div>
                 <div>
-                    <English><h1 className="largerfontb">Solar Photovoltaic Installation Process</h1></English>
-                    <Albanian></Albanian>
+                    <English><h1 className="largerfontb" id="res-inst-proc">Solar Photovoltaic Installation Process</h1></English>
+                    <Albanian><h1 className="largerfontb" id="res-inst-proc">Procesi i instalimit fotovoltaik diellor</h1></Albanian>
                 </div>
                 <div className="content-section">
                     <div className="Vert-flex" id="false-modal" onClick={() => load(4)}>
@@ -339,43 +352,43 @@ function Resources() {
                     <ol>
                         <li className="p-text">
                             <English>Determine if a solar photovoltaic system is right for your business financially.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Përcaktoni nëse një sistem diellor fotovoltaik është i duhuri për biznesin tuaj financiarisht.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Ekspertët do të përcaktojnë madhësinë e nevojshme të sistemit dhe do të planifikojnë paraqitjen e instalimit. *Vini re se disa kompani e tejkalojnë sistemin tuaj, duke ju bërë të paguani më shumë se sa keni nevojë.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Installers will show up and start setting up their equipment and scaffolding.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Instaluesit do të shfaqen dhe do të fillojnë të konfigurojnë pajisjet dhe skelat e tyre.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Installers will install panel mounts to ensure stability of a system that will ensure maximum sunlight exposure.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Instaluesit do të instalojnë montime panelesh për të siguruar stabilitetin e një sistemi që do të sigurojë ekspozimin maksimal ndaj dritës së diellit.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>The solar panels are then installed onto the panel mounts securely.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Panelet diellore më pas instalohen në montimet e paneleve në mënyrë të sigurt.</Albanian>
                         </li>
                         <li className="p-text">
-                            <English>Electrical wiring is then carried out while the building's electricity supply is shut off. </English>
-                            <Albanian></Albanian>
+                            <English>Electrical wiring is then carried out while the building's electricity supply is shut off.</English>
+                            <Albanian>Më pas kryhet instalimi i instalimeve elektrike ndërkohë që furnizimi me energji elektrike i ndërtesës është i mbyllur.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>The solar inverter is connected to the panels. A battery can also be installed and connected.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Inverteri diellor është i lidhur me panelet. Mund të instalohet dhe lidhet gjithashtu një bateri.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>To finally generate electricity, the inverter is connected to the building's consumer unit.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Për të gjeneruar përfundimisht energji elektrike, inverteri lidhet me njësinë e konsumit të ndërtesës.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Switch the power on and test the new system. Then installation is complete!</English>
-                            <Albanian></Albanian>
+                            <Albanian>Ndizni fuqinë dhe provoni sistemin e ri. Pastaj instalimi ka përfunduar!</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Panels require little maintenance if they remain clean and regularly inspected.</English>
-                            <Albanian></Albanian>
+                            <Albanian>Panelet kërkojnë pak mirëmbajtje nëse mbeten të pastra dhe inspektohen rregullisht.</Albanian>
                         </li>
                     </ol>
                 </div>
@@ -412,3 +425,95 @@ function Resources() {
 }
 
 export default Resources;
+
+/**
+ * The HTML for the table of contents for the Resources page.
+ * @returns {HTMLElement} An HTMLElement representing the table of contents, with id "toc".
+ */
+export function TableOfContents() {
+    return (
+        <div id="toc" className="Hor-flex">
+            <ul id="toc-toplist" className="invisible">
+            <h2>Contents</h2>
+                <li><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Enviornment</English><Albanian>Mjedisi</Albanian></a></li>
+                        <li><a href="#res-sunny-pot" onClick={e => jumpTo(e, "res-sunny-pot")}><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-what-benefits" onClick={e => jumpTo(e, "res-what-benefits")}><English>What are the benefits of solar energy for your business?</English><Albanian>Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-reduced-costs" onClick={e => jumpTo(e, "res-reduced-costs")}><English>Reduced Energy Costs</English><Albanian>Kosto të reduktuara të energjisë</Albanian></a></li>
+                        <li><a href="#res-more-security" onClick={e => jumpTo(e, "res-more-security")}><English>More Energy Security and Independence</English><Albanian>Më shumë siguri dhe pavarësi energjetike</Albanian></a></li>
+                        <li><a href="#res-green-bus" onClick={e => jumpTo(e, "res-green-bus")}><English>Green Business</English><Albanian>Biznesi i gjelbër</Albanian></a></li>
+                        <li><a href="#res-solar-tax" onClick={e => jumpTo(e, "res-solar-tax")}><English>Solar Tax Benefit</English><Albanian>Përfitimi nga taksat diellore</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-go-solar" onClick={e => jumpTo(e, "res-go-solar")}><English>Should your business go solar?</English><Albanian>A duhet të shkojë biznesi juaj diellor?</Albanian></a>
+                    <ul>
+                        <li><a href="res-why-go-solar"><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
+                        <li><a href="res-bus-right"><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
+                        <li><a href="res-how-cost"><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
+                        <li><a href="#res-how-finance" onClick={e => jumpTo(e, "res-how-finance")}><English>How should I finance my panels?</English><Albanian>Si duhet të financoj panelet e mia?</Albanian></a></li>
+                        <li><a href="#res-how-money" onClick={e => jumpTo(e, "res-how-money")}><English>How much money will I save with solar?</English><Albanian>Sa para do të kursej me solar?</Albanian></a></li>
+                        <li><a href="#res-how-long" onClick={e => jumpTo(e, "res-how-long")}><English>How long will my solar panels last?</English><Albanian>Sa do të zgjasin panelet e mia diellore?</Albanian></a></li>
+                        <li><a href="#res-do-panels" onClick={e => jumpTo(e, "res-do-panels")}><English>Do solar panels have a warranty?</English><Albanian>A kanë garanci panelet diellore?</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-how-bus" onClick={e => jumpTo(e, "res-how-bus")}><English>How can your business go solar?</English><Albanian>Si mund të shkojë biznesi juaj diellor?</Albanian></a>
+                    <ul>
+                        <li><a href="#res-solar-inst" onClick={e => jumpTo(e, "res-solar-inst")}><English>Solar Installers</English><Albanian>Instalues ​​diellor</Albanian></a></li>
+                        <li><a href="#res-solar-inst-tir" onClick={e => jumpTo(e, "res-solar-inst-tir")}><English>Solar Installers in Tirana</English><Albanian>Instalues ​​Solar ne Tirane</Albanian></a></li>
+                        <li><a href="#res-banks" onClick={e => jumpTo(e, "res-banks")}><English>Banks</English><Albanian>Bankat</Albanian></a></li>
+                        <li><a href="#res-fin-op" onClick={e => jumpTo(e, "res-fin-op")}><English>Financing Options</English><Albanian>Opsionet e financimit</Albanian></a></li>
+                        <li><a href="#res-own-calc" onClick={e => jumpTo(e, "res-own-calc")}><English>Calculations</English><Albanian>Llogaritjet</Albanian></a></li>
+                    </ul>
+                </li>
+                <li><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
+                <li><a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a></li>
+            </ul>
+            <button id="toc-access" type="button" onClick={e => {
+                e.preventDefault();
+                if(e.target.innerText === ">") {
+                    document.getElementById("toc-toplist").classList.remove("invisible");
+                    document.getElementById("toc").style.backgroundColor = "rgba(198, 219, 243, 0.9)";
+                    e.target.innerText = "<";
+                } else {
+                    document.getElementById("toc-toplist").classList.add("invisible");
+                    document.getElementById("toc").style.backgroundColor = "transparent";
+                    e.target.innerText = ">";
+                }
+            }}>{">"}</button>
+        </div>
+    )
+}
+
+function jumpTo(e, id) {
+    e.preventDefault();
+    const index = document.getElementById(id);
+    window.scrollTo({
+        left: 0,
+        top: index.offsetTop - 85,
+        behavior: 'smooth'
+    });
+    document.getElementById("toc-access").click();
+}
+
+/**
+ * To handle the back-to-top button appearing
+ */
+window.onscroll = () => {
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        document.getElementById("scroll-to-top").style.opacity = 1;
+    } else {
+        document.getElementById("scroll-to-top").style.opacity = 0;
+    }
+}
+
+/**
+ * Headers are in view when table of contents link is pressed
+ * https://stackoverflow.com/a/17535094
+ */
+window.onhashchange = () => {
+    window.scrollTo(window.scrollX, window.scrollY - 80);
+}

@@ -72,7 +72,7 @@
 
 .Calculator #solar-pv-scroll {
     display: inline-block;
-    overflow-x: auto;
+    overflow-x: visible;
     overflow-y: scroll;
     max-height: 300px;
     border: 1px solid black;
@@ -150,4 +150,43 @@
 .Calculator #bottom-margin {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.Calculator .tool-tip {
+    width: 400px;
+    height: fit-content;
+    position: absolute;
+    left: calc(-200px + (var(--font-size) + 4px) / 2); /*Equal to -1/2 width + 1/2 width of .tool-button*/
+    z-index: 50;
+    color: rgb(210,210,210);
+    background-color: rgba(0,0,0,0.75);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.Calculator .tool-tip-parent {
+    position: relative;
+}
+
+.Calculator .tool-tip-centering {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Calculator .tool-button {
+    cursor: help;
+    display: block;
+    color: #fff;
+    background-color: var(--nav-background);
+    width: calc(var(--font-size) + 4px);
+    height: calc(var(--font-size) + 4px);
+    border-radius: 100%;
+    font-size: var(--font-size);
+    text-align: center;
+    margin: 2px;
+    -webkit-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
+    box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
 }
