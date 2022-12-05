@@ -189,7 +189,7 @@ body {
   padding: 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1330px) {
   #Nav-options-list:not(.invisible) {
     display: flex;
     flex-direction: column;
