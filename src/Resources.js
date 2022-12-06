@@ -405,9 +405,15 @@ function Resources() {
                             <Albanian><h3 id="res-cash-pur">Blerje me para në dorë</h3></Albanian>
                         </div>
                         <ul>
-                            <p className="p-text">You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</p>
-                            <img className="imagefloat-center" id="img6" src={process.env.PUBLIC_URL + "cashPurchase.png"} alt="Cash Purchase" onClick={() => load(6)} width="560" height="350"/>
-
+                            <li>
+                                <div className="p-text">
+                                    <English>You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</English>
+                                    <Albanian>Ju mund të paguani të gjithë sistemin tuaj përpara me para në dorë. Ju do të jeni në gjendje t'i shihni kursimet tuaja shumë më shpejt!</Albanian>
+                                </div>
+                            </li>
+                            <div className="image-center-centering">
+                                <img className="imagefloat-center" id="img6" src={process.env.PUBLIC_URL + "cashPurchase.png"} alt="Cash Purchase" onClick={() => load(6)} width="560" height="350"/>
+                            </div>
                         </ul>
 
                         <div>
@@ -415,10 +421,17 @@ function Resources() {
                             <Albanian><h3 id="res-loans">Kredive</h3></Albanian>
                         </div>
                         <ul>
-                           <p className="p-text">You can opt to pay your panels with assistance from a loan!</p>
-                           <img className="imagefloat-center" id="img7" src={process.env.PUBLIC_URL + "loantable.png"} alt="Loan Table" onClick={() => load(7)} width="600" height="350"/>
-                           <img className="imagefloat-center" id="img8" src={process.env.PUBLIC_URL + "loanpurchase.png"} alt="Loan Purchase" onClick={() => load(8)} width="600" height="350"/>
-
+                            <li>
+                                <div className="p-text">
+                                    <English>You can opt to pay your panels with assistance from a loan!</English>
+                                    <Albanian>Ju mund të zgjidhni të paguani panelet tuaja me ndihmën e një kredie!</Albanian>
+                                </div>
+                            </li>
+                            <div className="image-center-centering Vert-flex">
+                                <img className="imagefloat-center" id="img7" src={process.env.PUBLIC_URL + "loantable.png"} alt="Loan Table" onClick={() => load(7)} width="600" height="350"/>
+                                <br />
+                                <img className="imagefloat-center" id="img8" src={process.env.PUBLIC_URL + "loanpurchase.png"} alt="Loan Purchase" onClick={() => load(8)} width="600" height="350"/>
+                            </div>
                         </ul>
                    
                     </div>
@@ -474,10 +487,10 @@ export function TableOfContents() {
                     </ul>
                 </li>
                 <li><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
-                <li><a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a></li>
-                <li><a href="#res-cash-pur" onClick={e => jumpTo(e, "res-cash-pur")}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a>
+                <li><a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a>
+                <li><a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a></li>
                     <ul>
-                        <li><a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a></li>
+                        <li><a href="#res-cash-pur" onClick={e => jumpTo(e, "res-cash-pur")}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a></li>
                         <li><a href="#res-loans" onClick={e => jumpTo(e, "res-loans")}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
                     </ul>
                 </li>
