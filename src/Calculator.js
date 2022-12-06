@@ -326,7 +326,7 @@ function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEff
  * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
  */
 function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
-    let electricityPrice = 14; // Cost of electricity (Lekë per kWh)
+    let electricityPrice = 18; // Cost of electricity (Lekë per kWh)
     let panelCost = singlePanelCost / panelCapacity;
     let expenses = 200000; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
 
@@ -448,7 +448,7 @@ function formatMonths(totalMonths, isAlbanian = false) {
  */
 function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Months, x-axis
-    let electricityPrice = 14;
+    let electricityPrice = 18;
     let monthlyProd = [];
 
     const roofSpace = document.getElementById("roof-space").value;
