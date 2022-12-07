@@ -443,20 +443,24 @@ function Resources() {
                         <English><h3 id="res-bus-title">A Goat Farm with Solar</h3></English>
                         <Albanian><h3 id="res-bus-title">Një fermë dhish me solare</h3></Albanian>
                     </div>
-                    <ul>
-                        <div className="p-text">
-                            <English>A goat farm outside of Tirana produces 150 liters of milk every day and makes dairy, cheese, and yogurt. They used to spend 2 million lek per month on electricity, and they frequently had brownouts that caused milk to spoil.</English>
-                            <Albanian>Një fermë dhish jashtë Tiranës prodhon 150 litra qumësht çdo ditë dhe prodhon bulmet, djathë dhe kos. Ata shpenzonin 2 milionë lekë në muaj për rrymën dhe shpesh herë kishin djegie që shkaktonin prishjen e qumështit.</Albanian>
-                        </div>
-                        <div className="p-text">
-                            <English>The company heard about solar panels and started talking to people they knew. The company then met with a solar panel installer and applied for a permit with OSHEE. With a loan for 200,000 euros, the farm was able to install solar panels.</English>
-                            <Albanian>Kompania dëgjoi për panelet diellore dhe filloi të fliste me njerëzit që njihnin. Më pas kompania u takua me një instalues të paneleve diellore dhe aplikoi për leje pranë OSHEE. Me një kredi prej 200 mijë euro, ferma ka mundur të vendosë panele diellore.</Albanian>
-                        </div>
-                        <div>
-                            <English>After installing the solar panels, the goat farm reduced their electricty bill by 40% and has fewer brownouts. When electricity from the panels is interrupted, the farm uses power from the grid. Now the farm can sell fresher products and pay less for electricity!</English>
-                            <Albanian>Pas instalimit të paneleve diellore, ferma e dhive uli faturën e tyre të energjisë elektrike me 40% dhe ka më pak djegie. Kur ndërpritet energjia elektrike nga panelet, ferma përdor energjinë nga rrjeti. Tani ferma mund të shesë produkte më të freskëta dhe të paguajë më pak për energjinë elektrike!</Albanian>
-                        </div>
-                    </ul>
+                    <div className="p-text">
+                        <English>A goat farm outside of Tirana produces 150 liters of milk every day and makes dairy, cheese, and yogurt. They used to spend 2 million lek per month on electricity, and they frequently had brownouts that caused milk to spoil.</English>
+                        <Albanian>Një fermë dhish jashtë Tiranës prodhon 150 litra qumësht çdo ditë dhe prodhon bulmet, djathë dhe kos. Ata shpenzonin 2 milionë lekë në muaj për rrymën dhe shpesh herë kishin djegie që shkaktonin prishjen e qumështit.</Albanian>
+                    </div>
+                    <br />
+                    <div className="p-text">
+                        <English>The company heard about solar panels and started talking to people they knew. The company then met with a solar panel installer and applied for a permit with OSHEE. With a loan for 200,000 euros, the farm was able to install solar panels.</English>
+                        <Albanian>Kompania dëgjoi për panelet diellore dhe filloi të fliste me njerëzit që njihnin. Më pas kompania u takua me një instalues të paneleve diellore dhe aplikoi për leje pranë OSHEE. Me një kredi prej 200 mijë euro, ferma ka mundur të vendosë panele diellore.</Albanian>
+                    </div>
+                    <br />
+                    <div className="p-text">
+                        <English>After installing the solar panels, the goat farm reduced their electricty bill by 40% and has fewer brownouts. When electricity from the panels is interrupted, the farm uses power from the grid. Now the farm can sell fresher products and pay less for electricity!</English>
+                        <Albanian>Pas instalimit të paneleve diellore, ferma e dhive uli faturën e tyre të energjisë elektrike me 40% dhe ka më pak djegie. Kur ndërpritet energjia elektrike nga panelet, ferma përdor energjinë nga rrjeti. Tani ferma mund të shesë produkte më të freskëta dhe të paguajë më pak për energjinë elektrike!</Albanian>
+                    </div>
+                    <br />
+                    <div className="image-center-centering Vert-flex">
+                        <img className="imagefloat-center" id="img9" src={process.env.PUBLIC_URL + "goatfarm.jpg"} alt="Goat Farm" onClick={() => load(9)} width="700" height="500"/>
+                    </div>
                 </div>
             </div>
         <PageFoot></PageFoot>
