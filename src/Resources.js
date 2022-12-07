@@ -396,45 +396,72 @@ function Resources() {
                 </div>
 
                 <div>
-                        <English><h1 className="largerfontb" id="res-fin-sys">How to Finance Your System</h1></English>
-                        <Albanian><h1 className="largerfontb" id="res-fin-sys">Si të financoni sistemin tuaj</h1></Albanian>
+                    <English><h1 className="largerfontb" id="res-fin-sys">How to Finance Your System</h1></English>
+                    <Albanian><h1 className="largerfontb" id="res-fin-sys">Si të financoni sistemin tuaj</h1></Albanian>
+                </div>
+                <div className="content-section">
+                    <div>
+                        <English><h3 id="res-cash-pur">Cash Purchase</h3></English>
+                        <Albanian><h3 id="res-cash-pur">Blerje me para në dorë</h3></Albanian>
                     </div>
-                    <div className="content-section">
-                        <div>
-                            <English><h3 id="res-cash-pur">Cash Purchase</h3></English>
-                            <Albanian><h3 id="res-cash-pur">Blerje me para në dorë</h3></Albanian>
-                        </div>
-                        <ul>
-                            <li>
-                                <div className="p-text">
-                                    <English>You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</English>
-                                    <Albanian>Ju mund të paguani të gjithë sistemin tuaj përpara me para në dorë. Ju do të jeni në gjendje t'i shihni kursimet tuaja shumë më shpejt!</Albanian>
-                                </div>
-                            </li>
-                            <div className="image-center-centering">
-                                <img className="imagefloat-center" id="img6" src={process.env.PUBLIC_URL + "cashPurchase.png"} alt="Cash Purchase" onClick={() => load(6)} width="560" height="350"/>
+                    <ul>
+                        <li>
+                            <div className="p-text">
+                                <English>You can pay your whole system up front with cash. You will be able to see your savings a lot sooner!</English>
+                                <Albanian>Ju mund të paguani të gjithë sistemin tuaj përpara me para në dorë. Ju do të jeni në gjendje t'i shihni kursimet tuaja shumë më shpejt!</Albanian>
                             </div>
-                        </ul>
+                        </li>
+                        <div className="image-center-centering">
+                            <img className="imagefloat-center" id="img6" src={process.env.PUBLIC_URL + "cashPurchase.png"} alt="Cash Purchase" onClick={() => load(6)} width="560" height="350"/>
+                        </div>
+                    </ul>
+                    <div>
+                        <English><h3 id="res-loans">Loans</h3></English>
+                        <Albanian><h3 id="res-loans">Kredive</h3></Albanian>
+                    </div>
+                    <ul>
+                        <li>
+                            <div className="p-text">
+                                <English>You can opt to pay your panels with assistance from a loan!</English>
+                                <Albanian>Ju mund të zgjidhni të paguani panelet tuaja me ndihmën e një kredie!</Albanian>
+                            </div>
+                        </li>
+                        <div className="image-center-centering Vert-flex">
+                            <img className="imagefloat-center" id="img7" src={process.env.PUBLIC_URL + "loantable.png"} alt="Loan Table" onClick={() => load(7)} width="600" height="350"/>
+                            <br />
+                            <img className="imagefloat-center" id="img8" src={process.env.PUBLIC_URL + "loanpurchase.png"} alt="Loan Purchase" onClick={() => load(8)} width="600" height="350"/>
+                        </div>
+                    </ul>
+                </div>
 
-                        <div>
-                            <English><h3 id="res-loans">Loans</h3></English>
-                            <Albanian><h3 id="res-loans">Kredive</h3></Albanian>
-                        </div>
-                        <ul>
-                            <li>
-                                <div className="p-text">
-                                    <English>You can opt to pay your panels with assistance from a loan!</English>
-                                    <Albanian>Ju mund të zgjidhni të paguani panelet tuaja me ndihmën e një kredie!</Albanian>
-                                </div>
-                            </li>
-                            <div className="image-center-centering Vert-flex">
-                                <img className="imagefloat-center" id="img7" src={process.env.PUBLIC_URL + "loantable.png"} alt="Loan Table" onClick={() => load(7)} width="600" height="350"/>
-                                <br />
-                                <img className="imagefloat-center" id="img8" src={process.env.PUBLIC_URL + "loanpurchase.png"} alt="Loan Purchase" onClick={() => load(8)} width="600" height="350"/>
-                            </div>
-                        </ul>
-                   
+                <div>
+                    <English><h1 className="largerfontb" id="res-bus-success">Business Solar Success Story</h1></English>
+                    <Albanian><h1 className="largerfontb" id="res-bus-success">Histori Suksesi i Biznesit Solar</h1></Albanian>
+                </div>
+                <div className="content-section">
+                    <div>
+                        <English><h3 id="res-bus-title">A Goat Farm with Solar</h3></English>
+                        <Albanian><h3 id="res-bus-title">Një fermë dhish me solare</h3></Albanian>
                     </div>
+                    <div className="p-text">
+                        <English>A goat farm outside of Tirana produces 150 liters of milk every day and makes dairy, cheese, and yogurt. They used to spend 2 million lek per month on electricity, and they frequently had brownouts that caused milk to spoil.</English>
+                        <Albanian>Një fermë dhish jashtë Tiranës prodhon 150 litra qumësht çdo ditë dhe prodhon bulmet, djathë dhe kos. Ata shpenzonin 2 milionë lekë në muaj për rrymën dhe shpesh herë kishin djegie që shkaktonin prishjen e qumështit.</Albanian>
+                    </div>
+                    <br />
+                    <div className="p-text">
+                        <English>The company heard about solar panels and started talking to people they knew. The company then met with a solar panel installer and applied for a permit with OSHEE. With a loan for 200,000 euros, the farm was able to install solar panels.</English>
+                        <Albanian>Kompania dëgjoi për panelet diellore dhe filloi të fliste me njerëzit që njihnin. Më pas kompania u takua me një instalues të paneleve diellore dhe aplikoi për leje pranë OSHEE. Me një kredi prej 200 mijë euro, ferma ka mundur të vendosë panele diellore.</Albanian>
+                    </div>
+                    <br />
+                    <div className="p-text">
+                        <English>After installing the solar panels, the goat farm reduced their electricty bill by 40% and has fewer brownouts. When electricity from the panels is interrupted, the farm uses power from the grid. Now the farm can sell fresher products and pay less for electricity!</English>
+                        <Albanian>Pas instalimit të paneleve diellore, ferma e dhive uli faturën e tyre të energjisë elektrike me 40% dhe ka më pak djegie. Kur ndërpritet energjia elektrike nga panelet, ferma përdor energjinë nga rrjeti. Tani ferma mund të shesë produkte më të freskëta dhe të paguajë më pak për energjinë elektrike!</Albanian>
+                    </div>
+                    <br />
+                    <div className="image-center-centering Vert-flex">
+                        <img className="imagefloat-center" id="img9" src={process.env.PUBLIC_URL + "goatfarm.jpg"} alt="Goat Farm" onClick={() => load(9)} width="700" height="500"/>
+                    </div>
+                </div>
             </div>
         <PageFoot></PageFoot>
     </div>
@@ -494,6 +521,7 @@ export function TableOfContents() {
                         <li><a href="#res-loans" onClick={e => jumpTo(e, "res-loans")}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
                     </ul>
                 </li>
+                <li><a href="#res-bus-success" onClick={e => jumpTo(e, "res-bus-success")}><English>Business Solar Success Story</English><Albanian>Histori Suksesi i Biznesit Solar</Albanian></a></li>
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
