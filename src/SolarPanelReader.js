@@ -117,7 +117,6 @@ export function SolarPanelScrollList(props) {
                                         fetch("https://api.exchangerate-api.com/v4/latest/EUR")
                                         .then(response => response.json())
                                         .then(json => {
-                                            debugger;
                                             const lekPerEuro = json.rates.ALL;
                                             if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
                                                 for (let i = 0; i < cppEntries.length; i++) {
@@ -175,28 +174,28 @@ export function SolarPanelScrollList(props) {
                     <English>Select a solar panel from the table above or enter custom information below</English>
                     <Albanian>Zgjidhni një panel diellor nga tabela e mësipërme ose futni informacione të personalizuara më poshtë</Albanian>
                 </div>
-                <div className="Hor-flex">
+                <div className="full-input-modal">
                     <label htmlFor="solar-cost">
                         <English>Cost of one solar panel (€):</English>
                         <Albanian>Kostoja e një paneli diellor (€):</Albanian>
                     </label>
                     <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => customizePanel(props)}></input>
                 </div>
-                <div className="Hor-flex">
+                <div className="full-input-modal">
                     <label htmlFor="solar-area">
                         <English>Area of one solar panel (m²):</English>
                         <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
                     </label>
                     <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => customizePanel(props)}></input>
                 </div>
-                <div className="Hor-flex">
+                <div className="full-input-modal">
                     <label htmlFor="solar-capacity">
                         <English>Capacity of one solar panel (kW):</English>
                         <Albanian>Kapaciteti i një paneli diellor (kW):</Albanian>
                     </label>
                     <input type="number" min="0" max="1000" step="0.00001" placeholder={albanian ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => customizePanel(props)}></input>
                 </div>
-                <div className="Hor-flex">
+                <div className="full-input-modal">
                     <label htmlFor="solar-efficiency">
                         <English>Efficiency of solar panels (%):</English>
                         <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>

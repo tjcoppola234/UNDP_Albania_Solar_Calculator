@@ -96,7 +96,7 @@ function Calculator() {
                                 <Albanian><b>Informacion komunal dhe fotovoltaik diellor</b>: Futni bashkinë e ndërtesës suaj. Më pas futni informacione rreth fotovoltaikëve diellorë që do të përdorni, ose zgjidhni një sistem fotovoltaik diellor nga tabela</Albanian>
                             </div>
                             <br />
-                            <MunicipalDropdown changeEvent={(e) => {setPrefecture(e.target.value); setMunicipality(e.target.options[e.target.selectedIndex].text);}}></MunicipalDropdown>
+                            <MunicipalDropdown changeEvent={(e) => { setPrefecture(e.target.value); setMunicipality(e.target.options[e.target.selectedIndex].text); }}></MunicipalDropdown>
                             <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
                         </div>
                     </div>
@@ -115,19 +115,15 @@ function Calculator() {
                             setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
                         }}>
                             <MuniDataDashboard visibleToggle={setMuniPanelVisibility} municipalName={municipality} pvStatus={shouldUseName ? solarName : !!(solarArea && solarCost && solarCapacity && solarEfficiency)}></MuniDataDashboard>
-                            <div className="Hor-flex">
+                            <div className="full-input">
                                 <label htmlFor="nop-electricity-usage">
-                                    <div className="Hor-flex">
+                                    <div className="input-label-align">
                                         <English>Electricity usage per&nbsp;</English>
                                         <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
-                                        <select id="nop-electricity-usage-period">
-                                            <option value="month">
-                                                {albanian ? "muaj" : "month"}
-                                            </option>
-                                            <option value="year">
-                                                {albanian ? "vit" : "year"}
-                                            </option>
-                                        </select>
+                                        <label className="switch btn-color-mode-switch">
+                                            <input type="checkbox" name="electric-usage-my" label="Month-Year Toggle" id="electric-usage-my" placeholder="1" />
+                                            <label htmlFor="electric-usage-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
+                                        </label>
                                     </div>
                                 </label>
                                 <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
@@ -160,7 +156,7 @@ function Calculator() {
                             document.getElementById("production-graph").style.display = "block";
                         }}>
                             <MuniDataDashboard visibleToggle={setMuniPanelVisibility} municipalName={municipality} pvStatus={shouldUseName ? solarName : !!(solarArea && solarCost && solarCapacity && solarEfficiency)}></MuniDataDashboard>
-                            <div className="Hor-flex">
+                            <div className="full-input">
                                 <label htmlFor="roof-space">
                                     <English>Flat roof space available for solar</English>
                                     <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
@@ -171,7 +167,7 @@ function Calculator() {
                                     <Albanian>Futni sasinë e hapësirës së hapur të sheshtë që keni në çatinë e biznesit tuaj për fotovoltaikë diellorë. Nëse nuk e dini shumën e saktë, jepni një vlerësim të përafërt. Mbani në mend se hapësira e çatisë duhet të marrë dritën e diellit që fotovoltaikët diellorë të punojnë atje.</Albanian>
                                 </Tooltip>
                             </div>
-                            <div className="Hor-flex">
+                            <div className="full-input">
                                 <label htmlFor="percent-solar">
                                     <English>Percent of electricity consumption for solar</English>
                                     <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
@@ -185,21 +181,17 @@ function Calculator() {
                                     <Albanian>Për shembull, nëse futni 50, atëherë 50% e përdorimit aktual të energjisë elektrike do të gjenerohet nga fotovoltaikët diellorë, dhe 50% e tjera do të vijnë nga rrjeti.</Albanian>
                                 </Tooltip>
                             </div>
-                            <div className="Hor-flex">
-                                <label htmlFor="electricity-paid">
-                                    <div className="Hor-flex">
+                            <div className="full-input">
+                                <div className="input-label-align">
+                                    <label htmlFor="electricity-paid">
                                         <English>Current amount paid for electricity per</English>
                                         <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
-                                        <select id="electricity-paid-period">
-                                            <option value="month">
-                                                {albanian ? "muaj" : "month"}
-                                            </option>
-                                            <option value="year">
-                                                {albanian ? "vit" : "year"}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </label>
+                                    </label>
+                                    <label className="switch btn-color-mode-switch">
+                                        <input type="checkbox" name="electric-paid-my" label="Month-Year Toggle" id="electric-paid-my" placeholder="1" />
+                                        <label htmlFor="electric-paid-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
+                                    </label>
+                                </div>
                                 <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                                 <Tooltip>
                                     <English>Enter the amount of money your businesses spends on electricity on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the cost of electricity for your business for the last 12 months.</English>
@@ -285,7 +277,8 @@ function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEff
     const interest = document.getElementById("loan-interest");
 
     let electricityPaidVal = electricityPaid.value;
-    if (document.getElementById("electricity-paid-period").value === "year") {
+    console.log(document.getElementById("electric-paid-my").checked);
+    if (!document.getElementById("electric-paid-my").checked) { //Checked means month is selected
         electricityPaidVal /= 12;
     }
     const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
@@ -470,11 +463,10 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
  */
 function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEfficiency = .15) {
     const electricityUsage = document.getElementById("nop-electricity-usage");
-    const electricityUsagePeriod = document.getElementById("nop-electricity-usage-period");
 
     const solarIrradiation = SolarData.getData(prefecture, "AVG", solarCapacity / solarArea, false);
 
-    if (electricityUsagePeriod.value === "year") {
+    if (!document.getElementById("electric-usage-my").checked) {
         return Math.ceil(electricityUsage.value / 12 / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
     }
     return Math.ceil(electricityUsage.value / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
@@ -493,19 +485,19 @@ function MuniDataDashboard(props) {
     }
 
     return (
-        <div className="Hor-flex">
+        <div className="full-input">
+            <button type="button" onClick={loadMuniPV} className="muni-data-button">
+                <English>Enter municipality and solar photovoltaics info</English>
+                <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor</Albanian>
+            </button>
             <div className="muni-data-view">
-                <button type="button" onClick={loadMuniPV} className="muni-data-button">
-                    <English>Enter municipality and solar photovoltaics info</English>
-                    <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor</Albanian>
-                </button>
                 <ul className="selected-data-display">
                     <li style={{
                         backgroundColor: `${props.municipalName ? "#d3f5b3" : "#f5bfb3"}`
                     }}>{props.municipalName ? (props.municipalName + " selected!") : "No municipality selected!"}</li>
                     <li style={{
                         backgroundColor: `${props.pvStatus ? "#d3f5b3" : "#f5bfb3"}`
-                    }}>{typeof(props.pvStatus) === 'string' ? props.pvStatus + " entered!": (props.pvStatus ? "Custom PV entered!" : "PV module information missing!")}</li>
+                    }}>{typeof (props.pvStatus) === 'string' ? props.pvStatus + " entered!" : (props.pvStatus ? "Custom PV entered!" : "PV module information missing!")}</li>
                 </ul>
             </div>
             <Tooltip>
