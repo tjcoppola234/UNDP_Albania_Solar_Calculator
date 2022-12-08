@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { PageHead, PageFoot } from './App';
 import English from './English';
 import Albanian from './Albanian';
+import { settings } from './Settings';
 
 /**
  * The HTML for the resources page.
@@ -57,7 +58,7 @@ function Resources() {
                     document.body.scrollIntoView({
                         behavior: "smooth"
                     });
-                }}>▴</button>
+                }}>▲</button>
                 <div id="modal-img" ref={ref} className={openImage ? "" : " invisible"}>
                     <span className="close-modal" onClick={() => { ref.current.scrollTo(0, 0); setImageOpened(false); }}>&times;</span>
                     <div className="modal-content">
@@ -331,8 +332,8 @@ function Resources() {
                     </FadeInSection>
                     <FadeInSection id="section-5">
                         <div>
-                            <English><h1 className="largerfontb" id="es-app-permit">Applying for a Building Permit</h1></English>
-                            <Albanian><h1 className="largerfontb" id="es-app-permit">Aplikimi për leje ndërtimi</h1></Albanian>
+                            <English><h1 className="largerfontb" id="res-app-permit">Applying for a Building Permit</h1></English>
+                            <Albanian><h1 className="largerfontb" id="res-app-permit">Aplikimi për leje ndërtimi</h1></Albanian>
                         </div>
                         <div className="content-section">
                             <div className="p-text">
@@ -495,13 +496,15 @@ export function TableOfContents() {
         <div id="toc" className="Hor-flex">
             <ul id="toc-toplist" className="invisible">
                 <li><h2>Contents</h2></li>
-                <li><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a>
+                <li className="outer-li"><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a></li>
+                <li>
                     <ul>
                         <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Enviornment</English><Albanian>Mjedisi</Albanian></a></li>
                         <li><a href="#res-sunny-pot" onClick={e => jumpTo(e, "res-sunny-pot")}><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#res-what-benefits" onClick={e => jumpTo(e, "res-what-benefits")}><English>What are the benefits of solar energy for your business?</English><Albanian>Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</Albanian></a>
+                <li className="outer-li"><a href="#res-what-benefits" onClick={e => jumpTo(e, "res-what-benefits")}><English>What are the benefits of solar energy for your business?</English><Albanian>Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</Albanian></a></li>
+                <li>
                     <ul>
                         <li><a href="#res-reduced-costs" onClick={e => jumpTo(e, "res-reduced-costs")}><English>Reduced Energy Costs</English><Albanian>Kosto të reduktuara të energjisë</Albanian></a></li>
                         <li><a href="#res-more-security" onClick={e => jumpTo(e, "res-more-security")}><English>More Energy Security and Independence</English><Albanian>Më shumë siguri dhe pavarësi energjetike</Albanian></a></li>
@@ -509,18 +512,20 @@ export function TableOfContents() {
                         <li><a href="#res-solar-tax" onClick={e => jumpTo(e, "res-solar-tax")}><English>Solar Tax Benefit</English><Albanian>Përfitimi nga taksat diellore</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#res-go-solar" onClick={e => jumpTo(e, "res-go-solar")}><English>Should your business go solar?</English><Albanian>A duhet të shkojë biznesi juaj diellor?</Albanian></a>
+                <li className="outer-li"><a href="#res-go-solar" onClick={e => jumpTo(e, "res-go-solar")}><English>Should your business go solar?</English><Albanian>A duhet të shkojë biznesi juaj diellor?</Albanian></a></li>
+                <li>
                     <ul>
-                        <li><a href="res-why-go-solar"><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
-                        <li><a href="res-bus-right"><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
-                        <li><a href="res-how-cost"><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
+                        <li><a href="#res-why-go-solar" onClick={e => jumpTo(e, "res-why-go-solar")}><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
+                        <li><a href="#res-bus-right" onClick={e => jumpTo(e, "res-bus-right")}><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
+                        <li><a href="#res-how-cost" onClick={e => jumpTo(e, "res-how-cost")}><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
                         <li><a href="#res-how-finance" onClick={e => jumpTo(e, "res-how-finance")}><English>How should I finance my panels?</English><Albanian>Si duhet të financoj panelet e mia?</Albanian></a></li>
                         <li><a href="#res-how-money" onClick={e => jumpTo(e, "res-how-money")}><English>How much money will I save with solar?</English><Albanian>Sa para do të kursej me solar?</Albanian></a></li>
                         <li><a href="#res-how-long" onClick={e => jumpTo(e, "res-how-long")}><English>How long will my solar panels last?</English><Albanian>Sa do të zgjasin panelet e mia diellore?</Albanian></a></li>
                         <li><a href="#res-do-panels" onClick={e => jumpTo(e, "res-do-panels")}><English>Do solar panels have a warranty?</English><Albanian>A kanë garanci panelet diellore?</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#res-how-bus" onClick={e => jumpTo(e, "res-how-bus")}><English>How can your business go solar?</English><Albanian>Si mund të shkojë biznesi juaj diellor?</Albanian></a>
+                <li className="outer-li"><a href="#res-how-bus" onClick={e => jumpTo(e, "res-how-bus")}><English>How can your business go solar?</English><Albanian>Si mund të shkojë biznesi juaj diellor?</Albanian></a></li>
+                <li>
                     <ul>
                         <li><a href="#res-solar-inst" onClick={e => jumpTo(e, "res-solar-inst")}><English>Solar Installers</English><Albanian>Instalues ​​diellor</Albanian></a></li>
                         <li><a href="#res-solar-inst-tir" onClick={e => jumpTo(e, "res-solar-inst-tir")}><English>Solar Installers in Tirana</English><Albanian>Instalues ​​Solar ne Tirane</Albanian></a></li>
@@ -529,35 +534,39 @@ export function TableOfContents() {
                         <li><a href="#res-own-calc" onClick={e => jumpTo(e, "res-own-calc")}><English>Calculations</English><Albanian>Llogaritjet</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
+                <li className="outer-li"><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
+                <li className="outer-li"><a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a></li>
+                <li className="outer-li"><a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a></li>
                 <li>
-                    <a href="#res-inst-proc" onClick={e => jumpTo(e, "res-inst-proc")}><English>Solar Photovoltaic Installation Process</English><Albanian>Procesi i instalimit fotovoltaik diellor</Albanian></a>
-                    <a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a>
                     <ul>
                         <li><a href="#res-cash-pur" onClick={e => jumpTo(e, "res-cash-pur")}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a></li>
                         <li><a href="#res-loans" onClick={e => jumpTo(e, "res-loans")}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
                     </ul>
                 </li>
-                <li><a href="#res-bus-success" onClick={e => jumpTo(e, "res-bus-success")}><English>Business Solar Success Story</English><Albanian>Histori Suksesi i Biznesit Solar</Albanian></a></li>
+                <li className="outer-li"><a href="#res-bus-success" onClick={e => jumpTo(e, "res-bus-success")}><English>Business Solar Success Story</English><Albanian>Histori Suksesi i Biznesit Solar</Albanian></a></li>
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
-                if (e.target.innerText === ">") {
+                if (e.currentTarget.style.width === "100px" || e.currentTarget.style.width === "") {
                     document.getElementById("toc-toplist").classList.remove("invisible");
-                    document.getElementById("toc").style.backgroundColor = "rgba(198, 219, 243, 0.9)";
-                    e.target.innerText = "<";
+                    document.getElementById("toc").style.backgroundColor = "";
+                    e.currentTarget.style.width = "440px";
                 } else {
                     document.getElementById("toc-toplist").classList.add("invisible");
                     document.getElementById("toc").style.backgroundColor = "transparent";
-                    e.target.innerText = ">";
+                    e.currentTarget.style.width = "100px";
                 }
-            }}>{">"}</button>
+            }}>☰</button>
         </div>
     )
 }
 
 function jumpTo(e, id) {
     e.preventDefault();
+    for(let sec of document.getElementsByClassName("fade-in-section")) {
+        sec.classList.remove("slow");
+        sec.classList.add("is-visible");
+    }
     const index = document.getElementById(id);
     window.scrollTo({
         left: 0,
@@ -571,10 +580,12 @@ function jumpTo(e, id) {
  * To handle the back-to-top button appearing
  */
 window.onscroll = () => {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        document.getElementById("scroll-to-top").style.opacity = 1;
-    } else {
-        document.getElementById("scroll-to-top").style.opacity = 0;
+    if(settings.disabledMenuItem === "Resources") {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            document.getElementById("scroll-to-top").style.opacity = 1;
+        } else {
+            document.getElementById("scroll-to-top").style.opacity = 0;
+        }
     }
 }
 
@@ -598,6 +609,11 @@ function FadeInSection(props) {
 
     useEffect(() => {
         const cur = domRef.current;
+        if(cur.classList.contains("is-visible"))
+            setVisible(true);
+        if(!cur.classList.contains("slow"))
+            shouldLoadSlow(false);
+
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => isVisible || setVisible(entry.isIntersecting));
         });
@@ -616,7 +632,7 @@ function FadeInSection(props) {
         <div>
             <div ref={domRef} id={props.id}>
                 <div className="rounding"></div>
-                <div className={`fade-in-section ${loadSlow ? 'slow' : ''} ${isVisible ? 'is-visible' : ''}`}>
+                <div className={`fade-in-section${loadSlow ? ' slow' : ''}${isVisible ? ' is-visible' : ''}`}>
                     {props.children}
                 </div>
             </div>
