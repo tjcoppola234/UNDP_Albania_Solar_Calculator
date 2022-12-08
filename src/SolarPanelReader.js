@@ -178,7 +178,25 @@ export function SolarPanelScrollList(props) {
                                         <option id="spr-panel-size-select-area" value="area">Area per panel (m&sup2;)</option>
                                     </select>
                                 </English>
-                                <Albanian>Zona për panel (m<sup>2</sup>)</Albanian>
+                                <Albanian>
+                                    <select id="spr-panel-size-select" onChange={e => {
+                                        e.preventDefault();
+                                        const panelDimensions = document.getElementsByClassName("spr-table-panel-size");
+                                        if(document.getElementById("spr-panel-size-select").value === "area") {
+                                            for (let i = 0; i < panelDimensions.length; i++) {
+                                                const dimensions = pvDimensions[i].split(" x ", 2);
+                                                panelDimensions.item(i).innerHTML = parseFloat(((parseFloat(dimensions[0]) / 1000) * (parseFloat(dimensions[1]) / 1000)).toFixed(1));
+                                            }
+                                        } else {
+                                            for (let i = 0; i < panelDimensions.length; i++) {
+                                                panelDimensions.item(i).innerHTML = pvDimensions[i];
+                                            }
+                                        }
+                                    }}>
+                                        <option id="spr-panel-size-select-dim" value="dimensions">Dimensionet e panelit (L x W x D) (mm)</option>
+                                        <option id="spr-panel-size-select-area" value="area">Zona për panel (m&sup2;)</option>
+                                    </select>
+                                </Albanian>
                             </th>
                             <th>
                                 <English>Capacity per Panel (kW)</English>
