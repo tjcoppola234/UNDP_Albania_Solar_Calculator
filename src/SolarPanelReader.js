@@ -86,6 +86,7 @@ export function SolarPanelScrollList(props) {
                 });
             });
 
+        //apr key: https://api.exchangerate-api.com/v4/latest/EUR
         fetch("https://api.exchangerate-api.com/v4/latest/EUR")
             .then(response => response.json())
             .then(json => setConversionRatio(json.rates.ALL));
@@ -115,14 +116,13 @@ export function SolarPanelScrollList(props) {
                                 <English>Manufacturer</English>
                                 <Albanian>Prodhuesi</Albanian>
                             </th>
-                            {/* apr key: https://api.exchangerate-api.com/v4/latest/EUR */}
                             <th>
                                 <div id="vertical-align-check">
                                     <English>Cost per Panel</English>
                                     <Albanian>Kostoja për panel</Albanian>
                                     <label className="switch btn-color-mode-small-switch">
-                                        <input type="checkbox" name="currency-type" label="Currency Display Toggle" id="currency-type" placeholder="1" />
-                                        <label htmlFor="currency-type" data-on="€" data-off="L" className="btn-color-mode-small-switch-inner"></label>
+                                        <input type="checkbox" name="currency-type" label="Currency Display Toggle" id="currency-type" placeholder="1" onChange={() => setUseLek(!useLek)} />
+                                        <label htmlFor="currency-type" data-on="L" data-off="€" className="btn-color-mode-small-switch-inner"></label>
                                     </label>
                                 </div>
                             </th>
@@ -149,7 +149,7 @@ export function SolarPanelScrollList(props) {
                                 </button></td>
                                 <td className="capped-th-width">{pv.NameOrModel}</td>
                                 <td className="capped-th-width"><a href={pv.ManufacturerLink} target="_blank" rel="noreferrer">{pv.Manufacturer}</a></td>
-                                <td className="spr-table-cost-per-panel">{pv.CostPerPanel}</td>
+                                <td className="spr-table-cost-per-panel">{useLek ? Math.round(conversionRatio * pv.CostPerPanel) : pv.CostPerPanel}</td>
                                 <td>{pv.AreaPerPanel}</td>
                                 <td>{pv.CapacityPerPanel}</td>
                                 <td>{pv.Efficiency}</td>
