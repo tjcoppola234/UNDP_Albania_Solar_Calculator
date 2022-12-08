@@ -487,8 +487,8 @@ function MuniDataDashboard(props) {
     return (
         <div className="full-input">
             <button type="button" onClick={loadMuniPV} className="muni-data-button">
-                <English>Enter municipality and solar photovoltaics info</English>
-                <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor</Albanian>
+                <English>Click here to enter municipality and solar photovoltaics info</English>
+                <Albanian>Klikoni këtu për të hyrë në informacionin e bashkisë dhe fotovoltaikëve diellorë</Albanian>
             </button>
             <div className="muni-data-view">
                 <ul className="selected-data-display">

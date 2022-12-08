@@ -33,6 +33,9 @@ import Tooltip from './Tooltip';
  */
 export function SolarPanelScrollList(props) {
     const [pvList, setPVList] = useState([]);
+    const [useLek, setUseLek] = useState(false);
+    const [conversionRatio, setConversionRatio] = useState(1);
+
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
         setAlbanian(visible);
@@ -40,48 +43,52 @@ export function SolarPanelScrollList(props) {
 
     useEffect(() => {
         fetch("data/SolarPanelData.csv", {
-            headers : { 
+            headers: {
                 'Content-Type': 'application/csv',
                 'Accept': 'application/csv'
             }
-        }).then(response => response.arrayBuffer()).then(function(buffer){
+        }).then(response => response.arrayBuffer()).then(function (buffer) {
             const decoder = new TextDecoder('utf-8');
             return decoder.decode(buffer).replace(new RegExp("(\\r|\\n)+$"), "");
         })
-        .then(function(csvData) {
-            //Converting string into list of solar panel options
-            readString(csvData, {
-                header: true,
-                transformHeader: function(header, index) {
-                    switch(header) {
-                        case "Name/Model":
-                            return "NameOrModel";
-                        case "Manufacturer":
-                            return "Manufacturer";
-                        case "Cost per Panel (Euro)":
-                            return "CostPerPanel";
-                        case "Area per Panel (m^2)":
-                            return "AreaPerPanel";
-                        case "Capacity per Panel (kW)":
-                            return "CapacityPerPanel";
-                        case "Efficiency (%)":
-                            return "Efficiency";
-                        case "Manufacturer Link":
-                            return "ManufacturerLink";
-                        default:
-                            console.error("Undefined header found in SolarPanelData.csv: " + header);
-                            return "UndefinedHeader";
+            .then(function (csvData) {
+                //Converting string into list of solar panel options
+                readString(csvData, {
+                    header: true,
+                    transformHeader: function (header, index) {
+                        switch (header) {
+                            case "Name/Model":
+                                return "NameOrModel";
+                            case "Manufacturer":
+                                return "Manufacturer";
+                            case "Cost per Panel (Euro)":
+                                return "CostPerPanel";
+                            case "Area per Panel (m^2)":
+                                return "AreaPerPanel";
+                            case "Capacity per Panel (kW)":
+                                return "CapacityPerPanel";
+                            case "Efficiency (%)":
+                                return "Efficiency";
+                            case "Manufacturer Link":
+                                return "ManufacturerLink";
+                            default:
+                                console.error("Undefined header found in SolarPanelData.csv: " + header);
+                                return "UndefinedHeader";
+                        }
+                    },
+                    complete: function (results, file) {
+                        //console.log(results.data);
+                        setPVList(results.data);
+                    },
+                    error: function (error, file) {
+                        console.log(error);
                     }
-                },
-                complete: function(results, file) {
-                    //console.log(results.data);
-                    setPVList(results.data);
-                },
-                error: function(error, file) {
-                    console.log(error);
-                }
+                });
             });
-        });
+
+        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
+            .then(response => response.json())
+            .then(json => setConversionRatio(json.rates.ALL));
     }, []);
 
     return (
@@ -110,30 +117,14 @@ export function SolarPanelScrollList(props) {
                             </th>
                             {/* apr key: https://api.exchangerate-api.com/v4/latest/EUR */}
                             <th>
-                                <English>Cost per Panel (
-                                    <select id="spr-cost-per-panel-select" title="Select Currency Type" onChange={(e) => {
-                                        e.preventDefault();
-                                        const cppEntries = document.getElementsByClassName("spr-table-cost-per-panel");
-                                        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
-                                        .then(response => response.json())
-                                        .then(json => {
-                                            const lekPerEuro = json.rates.ALL;
-                                            if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
-                                                for (let i = 0; i < cppEntries.length; i++) {
-                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) * lekPerEuro);
-                                                }
-                                            } else {
-                                                for (let i = 0; i < cppEntries.length; i++) {
-                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) / lekPerEuro);
-                                                }
-                                            }
-                                        })   
-                                    }}>
-                                        <option id="spr-cost-per-panel-select-EUR" value="EUR">€</option>
-                                        <option id="spr-cost-per-panel-select-ALL" value="ALL">L</option>
-                                    </select>
-                                )</English>
-                                <Albanian>Kostoja për panel (€)</Albanian>
+                                <div id="vertical-align-check">
+                                    <English>Cost per Panel</English>
+                                    <Albanian>Kostoja për panel</Albanian>
+                                    <label className="switch btn-color-mode-small-switch">
+                                        <input type="checkbox" name="currency-type" label="Currency Display Toggle" id="currency-type" placeholder="1" />
+                                        <label htmlFor="currency-type" data-on="€" data-off="L" className="btn-color-mode-small-switch-inner"></label>
+                                    </label>
+                                </div>
                             </th>
                             <th>
                                 <English>Area per Panel (m<sup>2</sup>)</English>
@@ -152,7 +143,7 @@ export function SolarPanelScrollList(props) {
                     <tbody>
                         {pvList.map((pv, index) => (
                             <tr key={index}>
-                                <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); props.onSelection(pv); props.checkIsCustomData(false);}} type="button">
+                                <td id="panel-selection"><button onClick={() => { fillPanelFields(pv); props.onSelection(pv); props.checkIsCustomData(false); }} type="button">
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>

@@ -75,12 +75,13 @@
     max-width: 180px;
 }
 
-.Calculator input:not([type="checkbox"]) {
+.Calculator input:not([type="checkbox"]), .Calculator #spr-cost-per-panel-select {
     box-shadow: 0px 0px 6px 0px rgba(17, 17, 17, 0.25) inset;
     font-size: var(--font-size);
     border: none;
     border-radius: 15px;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -moz-appearance: textfield;
@@ -265,17 +266,36 @@ input::-webkit-inner-spin-button {
     padding-right: 10px;
 }
 
+.Calculator #vertical-align-check {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 .Calculator .btn-color-mode-switch {
     display: inline-block;
-    margin: 0px;
+    margin: 0;
     margin-left: 10px;
     position: relative;
 }
+.Calculator .btn-color-mode-small-switch {
+    margin-left: 0;
+}
 
 .Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner {
-    margin: 0px;
     width: 140px;
     height: 50px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner {
+    width: 80px;
+    height: 30px;
+    color: black;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner {
+    margin: 0px;
     background: #E0E0E0;
     border-radius: 26px;
     overflow: hidden;
@@ -286,36 +306,59 @@ input::-webkit-inner-spin-button {
 }
 
 .Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+    top: 16px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:before {
+    top: 7px;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:before,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:before {
     content: attr(data-on);
     position: absolute;
     font-size: 12px;
     font-weight: 500;
-    top: 16px;
     right: 20px;
-
 }
 
 .Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
-    content: attr(data-off);
     width: 70px;
     height: 30px;
-    background: #fff;
-    border-radius: 26px;
     font-size: 20px;
-    font-weight: 500;
-    position: absolute;
     left: 5px;
     top: 5px;
+    padding: 5px 0px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:after {
+    width: 40px;
+    height: 16px;
+    font-size: 12px;
+    left: 3px;
+    top: 3px;
+    padding: 4px 0px;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:after,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:after {
+    content: attr(data-off);
+    background: #fff;
+    border-radius: 26px;
+    font-weight: 500;
+    position: absolute;
     text-align: center;
     transition: all 250ms ease-in-out;
     box-shadow: 0px 0px 6px -2px #111;
-    padding: 5px 0px;
 }
 
 .Calculator .btn-color-mode-switch input[type="checkbox"] {
-    cursor: pointer;
     width: 140px;
     height: 50px;
+}
+.Calculator .btn-color-mode-small-switch input[type="checkbox"] {
+    width: 80px;
+    height: 25px;
+}
+.Calculator .btn-color-mode-switch input[type="checkbox"],
+.Calculator .btn-color-mode-small-switch input[type="checkbox"] {
+    cursor: pointer;
     opacity: 0;
     position: absolute;
     top: 0;
@@ -327,8 +370,13 @@ input::-webkit-inner-spin-button {
     content: attr(data-on);
     left: 65px;
 }
+.Calculator .btn-color-mode-small-switch input[type="checkbox"]:checked + label.btn-color-mode-small-switch-inner:after {
+    content: attr(data-on);
+    left: 37px;
+}
 
-.Calculator .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
+.Calculator .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before,
+.Calculator .btn-color-mode-small-switch input[type="checkbox"]:checked + label.btn-color-mode-small-switch-inner:before {
     content: attr(data-off);
     right: auto;
     left: 20px;
