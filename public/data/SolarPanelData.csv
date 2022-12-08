@@ -1,10 +1,9 @@
 Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (kW),Efficiency (%),Manufacturer Link
-XP 36/156-140 I+35,SunErg,200,1,0.14,14.01%,https://www.sunergsolar.com/en/
-Eco Line Full Black M72/190 W,Luxor Solar,250,1,0.19,15.61%,https://www.luxor.solar/en/
-X75L240 HE Module,Aleo,305,1,0.24,18.00%,https://www.aleo-solar.com/
-Eco Line M72/205 W,Luxor Solar,280,1,0.205,16.84%,https://www.luxor.solar/en/
-SG335P,Peimar,320,2,0.235,14.40%,https://www.peimar.com/uk/home/
-Axitec AxiPower AC-290PH/60S,Axitec,380,1,0.29,17.72%,https://www.axitecsolar.com/en
-Pv Smart-60 KPV 290 WP-POLY Module,Kioto Solar,320,2,0.29,17.55%,https://www.kiotosolar.com/en/
-NUAK300B Module,Sharp,342,2,0.3,18.40%,https://www.sharp.eu/solar-energy/find-a-solar-panel
-Axitec AXIworldpremium AC-300M/156-60S,Axitec,390,1,0.3,19.55%,https://www.axitecsolar.com/en
+XP 36/156-140 I+35,SunErg,200,1480 x 675 x 35,0.14,14.01%,https://www.sunergsolar.com/en/
+Eco Line Full Black M72/190 W,Luxor Solar,250,1580 x 808 x 35,0.19,15.61%,https://www.luxor.solar/en/
+X75L240 HE Module,Aleo,305,1345 x 990 x 42,0.24,18.00%,https://www.aleo-solar.com/
+Eco Line M72/205 W,Luxor Solar,280,1580 x 808 x 35,0.205,16.84%,https://www.luxor.solar/en/
+Axitec AxiPower AC-290PH/60S,Axitec,380,1675 x 992 x 35,0.29,17.72%,https://www.axitecsolar.com/en
+Pv Smart-60 KPV 290 WP-POLY Module,Kioto Solar,320,1666 x 992 x 40,0.29,17.55%,https://www.kiotosolar.com/en/
+NUAK300B Module,Sharp,342,1640 x 992 x 35,0.3,18.40%,https://www.sharp.eu/solar-energy/find-a-solar-panel
+Axitec AXIworldpremium AC-300M/156-60S,Axitec,390,1640 x 992 x 35,0.3,19.55%,https://www.axitecsolar.com/en

@@ -32,6 +32,7 @@ import Tooltip from './Tooltip';
  */
 export function SolarPanelScrollList(props) {
     const [pvList, setPVList] = useState([]);
+    const [pvDimensions, setPVDimensions] = useState([]);
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
         setAlbanian(visible);
@@ -75,6 +76,7 @@ export function SolarPanelScrollList(props) {
                 complete: function(results, file) {
                     //console.log(results.data);
                     setPVList(results.data);
+                    setPVDimensions(results.data.map(entry => entry.AreaPerPanel));
                 },
                 error: function(error, file) {
                     console.log(error);
@@ -116,7 +118,6 @@ export function SolarPanelScrollList(props) {
                                         fetch("https://api.exchangerate-api.com/v4/latest/EUR")
                                         .then(response => response.json())
                                         .then(json => {
-                                            debugger;
                                             const lekPerEuro = json.rates.ALL;
                                             if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
                                                 for (let i = 0; i < cppEntries.length; i++) {
@@ -133,10 +134,50 @@ export function SolarPanelScrollList(props) {
                                         <option id="spr-cost-per-panel-select-ALL" value="ALL">L</option>
                                     </select>
                                 )</English>
-                                <Albanian>Kostoja për panel (€)</Albanian>
+                                <Albanian>Kostoja për panel (
+                                    <select id="spr-cost-per-panel-select" title="Select Currency Type" onChange={(e) => {
+                                        e.preventDefault();
+                                        const cppEntries = document.getElementsByClassName("spr-table-cost-per-panel");
+                                        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
+                                        .then(response => response.json())
+                                        .then(json => {
+                                            const lekPerEuro = json.rates.ALL;
+                                            if(document.getElementById("spr-cost-per-panel-select").value === "ALL") {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) * lekPerEuro);
+                                                }
+                                            } else {
+                                                for (let i = 0; i < cppEntries.length; i++) {
+                                                    cppEntries.item(i).innerHTML = Math.round(parseFloat(cppEntries.item(i).innerHTML) / lekPerEuro);
+                                                }
+                                            }
+                                        })   
+                                    }}>
+                                        <option id="spr-cost-per-panel-select-EUR" value="EUR">€</option>
+                                        <option id="spr-cost-per-panel-select-ALL" value="ALL">L</option>
+                                    </select>
+                                )</Albanian>
                             </th>
-                            <th>
-                                <English>Area per Panel (m<sup>2</sup>)</English>
+                            <th> {/*m<sup>2</sup> */}
+                                <English>
+                                    <select id="spr-panel-size-select" onChange={e => {
+                                        e.preventDefault();
+                                        const panelDimensions = document.getElementsByClassName("spr-table-panel-size");
+                                        if(document.getElementById("spr-panel-size-select").value === "area") {
+                                            for (let i = 0; i < panelDimensions.length; i++) {
+                                                const dimensions = pvDimensions[i].split(" x ", 2);
+                                                panelDimensions.item(i).innerHTML = parseFloat(((parseFloat(dimensions[0]) / 1000) * (parseFloat(dimensions[1]) / 1000)).toFixed(1));
+                                            }
+                                        } else {
+                                            for (let i = 0; i < panelDimensions.length; i++) {
+                                                panelDimensions.item(i).innerHTML = pvDimensions[i];
+                                            }
+                                        }
+                                    }}>
+                                        <option id="spr-panel-size-select-dim" value="dimensions">Panel dimensions (L x W x D) (mm)</option>
+                                        <option id="spr-panel-size-select-area" value="area">Area per panel (m&sup2;)</option>
+                                    </select>
+                                </English>
                                 <Albanian>Zona për panel (m<sup>2</sup>)</Albanian>
                             </th>
                             <th>
@@ -159,7 +200,7 @@ export function SolarPanelScrollList(props) {
                                 <td className="capped-th-width">{pv.NameOrModel}</td>
                                 <td className="capped-th-width"><a href={pv.ManufacturerLink} target="_blank" rel="noreferrer">{pv.Manufacturer}</a></td>
                                 <td className="spr-table-cost-per-panel">{pv.CostPerPanel}</td>
-                                <td>{pv.AreaPerPanel}</td>
+                                <td className="spr-table-panel-size">{pv.AreaPerPanel}</td>
                                 <td>{pv.CapacityPerPanel}</td>
                                 <td>{pv.Efficiency}</td>
                             </tr>))}
