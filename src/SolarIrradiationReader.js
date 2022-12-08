@@ -34,7 +34,7 @@ function loadData() {
         }).then(response => response.arrayBuffer()).then(function(buffer){
             const decoder = new TextDecoder('iso-8859-16');
             //Removes extra line with unecessary data and re-attaches Month to the entry
-            return decoder.decode(buffer).replace(new RegExp("^.*\\r\\n"), "Month").replace(new RegExp("\\r\\n$"), "");
+            return decoder.decode(buffer).replace(new RegExp("^.*(\\r|\\n)+"), "Month").replace(new RegExp("(\\r|\\n)+$"), "");
         })
         .then(function(csvData) {
             //Converting string into map of months and the irradiation for each month

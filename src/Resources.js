@@ -23,6 +23,7 @@ function Resources() {
      * @param {number} num An index representing which image to load
      */
     const load = num => {
+        document.body.style.overflowY = "hidden";
         if (num === 4) {
             const img1 = document.getElementById("img4");
             const img2 = document.getElementById("img5");
@@ -60,7 +61,11 @@ function Resources() {
                     });
                 }}>▲</button>
                 <div id="modal-img" ref={ref} className={openImage ? "" : " invisible"}>
-                    <span className="close-modal" onClick={() => { ref.current.scrollTo(0, 0); setImageOpened(false); }}>&times;</span>
+                    <span className="close-modal" onClick={() => {
+                        ref.current.scrollTo(0, 0);
+                        setImageOpened(false);
+                        document.body.style.overflowY = "scroll";
+                    }}>&times;</span>
                     <div className="modal-content">
                         <div className="modal-caption">{caption}</div>
                         <img className="modal-img-src" src={openedSRC} alt={caption} />

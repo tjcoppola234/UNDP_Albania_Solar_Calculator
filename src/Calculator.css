@@ -82,22 +82,25 @@
     max-width: 180px;
 }
 
-.Calculator .submit-button {
-    width: 200px;
-    height: 50px;
-    border: none;
-    background: none;
-    background-color: var(--nav-background);
-    color: var(--nav-text);
-    font-size: var(--font-size);
-}
-
 .Calculator input {
     font-size: var(--font-size);
     min-width: 300px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 .Calculator select {
     font-size: var(--font-size);
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .Calculator summary {
@@ -189,4 +192,83 @@
     -webkit-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
     box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
+}
+
+.Calculator #modal-img {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0); /*When transparency is not supported*/
+    background-color: rgba(0,0,0,0.9);
+}
+
+.Calculator .close-modal {
+    position: fixed;
+    top: -5px;
+    right: 20px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.Calculator .close-modal:hover,
+.Calculator .close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Calculator .modal-content {
+    background-color: var(--background);
+    margin: 50px 50px;
+    height: 90%;
+    overflow-y: auto;
+}
+
+.Calculator .selected-data-display {
+    list-style-type: none;
+    padding: 0;
+}
+.Calculator .selected-data-display li {
+    margin-right: 20px;
+}
+
+.Calculator .muni-data-button {
+    width: auto;
+    height: 50px;
+}
+.Calculator .submit-button {
+    width: 200px;
+    height: 50px;
+}
+.Calculator .submit-button, .Calculator .muni-data-button {
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    background-color: var(--nav-background);
+    color: var(--nav-text);
+    font-size: var(--font-size);
+    transition: 0.3s;
+}
+.Calculator .submit-button:hover, .Calculator .muni-data-button:hover {
+    background-color: var(--nav-background-hover);
+}
+
+.Calculator .muni-data-view {
+    border-radius: 15px;
+    background-color: white;
+    padding: 10px;
+    margin-right: 10px;
+    width: 60vw;
+}
+
+.Calculator .selected-data-display li {
+    border-radius: 10px;
+    width: inherit;
+    margin: 5px;
+    padding-left: 10px;
 }

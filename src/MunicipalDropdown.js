@@ -26,7 +26,7 @@ export function MunicipalDropdown(props) {
            }
         }).then(response => response.arrayBuffer()).then(function(buffer){
             const decoder = new TextDecoder('iso-8859-16');
-            return decoder.decode(buffer).replace(new RegExp("\\r\\n$"), "");
+            return decoder.decode(buffer).replace(new RegExp("(\\r|\\n)+$"), "");
           })
           .then(function(csvData) {
             //Converting string into array of values
@@ -71,7 +71,7 @@ export function MunicipalDropdown(props) {
                     });
                 },
                 error: function(error, file) {
-                    console.log(error);
+                    console.error(error);
                 }
             });
         });

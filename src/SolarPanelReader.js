@@ -8,6 +8,7 @@ import Tooltip from './Tooltip';
 /**
  * A collection of data about a specific solar PV example.
  * @typedef SolarPVEntry
+ * @property {string} NameOrModel
  * @property {string} Manufacturer
  * @property {number} CostPerPanel
  * @property {number} AreaPerPanel
@@ -45,7 +46,7 @@ export function SolarPanelScrollList(props) {
             }
         }).then(response => response.arrayBuffer()).then(function(buffer){
             const decoder = new TextDecoder('utf-8');
-            return decoder.decode(buffer).replace(new RegExp("\\r\\n$"), "");
+            return decoder.decode(buffer).replace(new RegExp("(\\r|\\n)+$"), "");
         })
         .then(function(csvData) {
             //Converting string into list of solar panel options
@@ -179,32 +180,45 @@ export function SolarPanelScrollList(props) {
                         <English>Cost of one solar panel (€):</English>
                         <Albanian>Kostoja e një paneli diellor (€):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => props.checkIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => customizePanel(props)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-area">
                         <English>Area of one solar panel (m²):</English>
                         <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => props.checkIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => customizePanel(props)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-capacity">
                         <English>Capacity of one solar panel (kW):</English>
                         <Albanian>Kapaciteti i një paneli diellor (kW):</Albanian>
                     </label>
-                    <input type="number" min="0" max="1000" step="0.00001" placeholder={albanian ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => props.checkIsCustomData(true)}></input>
+                    <input type="number" min="0" max="1000" step="0.00001" placeholder={albanian ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => customizePanel(props)}></input>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-efficiency">
                         <English>Efficiency of solar panels (%):</English>
                         <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => props.checkIsCustomData(true)}></input>
+                    <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => customizePanel(props)}></input>
                 </div>
             </div>
         </div>
     );
+}
+
+function customizePanel(props) {
+    props.checkIsCustomData(true);
+    props.onSelection({
+        NameOrModel: "Custom",
+        Manufacturer: "",
+        ManufacturerLink: "",
+        CostPerPanel: document.getElementById("solar-cost").value,
+        AreaPerPanel: document.getElementById("solar-area").value,
+        CapacityPerPanel: document.getElementById("solar-capacity").value,
+        Efficiency: document.getElementById("solar-efficiency").value
+    });
 }
 
 /**
