@@ -1,3 +1,14 @@
+.Resources {
+    --section-1: rgb(235, 240, 202);
+    --section-2: rgb(254, 203, 251);
+    --section-3: rgb(191, 255, 207);
+    --section-4: rgb(224, 193, 254);
+    --section-5: rgb(193, 244, 254);
+    --section-6: rgb(255, 216, 216);
+    --section-7: rgb(201, 255, 187);
+    --section-8: rgb(254, 242, 193);
+}
+
 .Resources #solar-map {
     width: 50vw;
     height: 450px;
@@ -73,10 +84,6 @@
 }
 
 .Resources .content-section {
-    background-color: var(--content-background);
-    border-radius: 25px;
-    border: 4px solid var(--content-heading);
-    margin:70px;
     padding: 20px 35px;
 }
 
@@ -183,13 +190,14 @@
 .Resources #toc {
     position: fixed;
     top: 100px;
-    background-color: rgba(198, 219, 243, 0.9);
     max-width: 400px;
     max-height: 80vh;
     padding-right: 20px;
     padding-bottom: 20px;
+    left: 10px;
     overflow-y: auto;
     border-radius: 25px 0px 0px 0px;
+    z-index: 5;
 }
 .Resources #toc ul {
     list-style: none;
@@ -198,7 +206,7 @@
     text-decoration: none;
     color: var(--nav-background);
 }
-.Resources #toc a :hover {
+.Resources #toc a:hover {
     background-color: #b0c2d7e0;
 }
 
@@ -210,6 +218,7 @@
     background-color: var(--content-background);
     font-weight: bold;
     position: fixed;
+    left: 10px;
     font-size: 20px;
     color: var(--content-heading);
 }
@@ -230,8 +239,92 @@
     text-align: center;
     padding: 0px;
     transition: opacity ease-in 0.1s;
-  }
+}
 .Resources #scroll-to-top:hover {
     background-color: var(--content-heading);
     color: var(--content-background);
-  }
+}
+
+.Resources .fade-in-section.slow {
+    opacity: 0;
+    transform: translateY(40vh);
+    visibility: hidden;
+    transition: opacity 0.6s ease-out, transform 0.8s ease-out;
+    will-change: opacity, visibility;
+}
+.Resources .fade-in-section:not(:last-child) {
+    padding-bottom: 50px;
+}
+.Resources .fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
+
+.Resources .content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.Resources .rounding {
+    width: 100%;
+    min-height: 50px;
+    height: 50px;
+}
+
+.Resources #section-1 {
+    background-color: var(--section-1);
+}
+.Resources #section-1 .rounding {
+    background-color: var(--background);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-2 {
+    background-color: var(--section-2);
+}
+.Resources #section-2 .rounding {
+    background-color: var(--section-1);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-3 {
+    background-color: var(--section-3);
+}
+.Resources #section-3 .rounding {
+    background-color: var(--section-2);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-4 {
+    background-color: var(--section-4);
+}
+.Resources #section-4 .rounding {
+    background-color: var(--section-3);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-5 {
+    background-color: var(--section-5);
+}
+.Resources #section-5 .rounding {
+    background-color: var(--section-4);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-6 {
+    background-color: var(--section-6);
+}
+.Resources #section-6 .rounding {
+    background-color: var(--section-5);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-7 {
+    background-color: var(--section-7);
+}
+.Resources #section-7 .rounding {
+    background-color: var(--section-6);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-8 {
+    background-color: var(--section-8);
+}
+.Resources #section-8 .rounding {
+    background-color: var(--section-7);
+    border-radius: 0 0 90% 0 / 40px;
+}
