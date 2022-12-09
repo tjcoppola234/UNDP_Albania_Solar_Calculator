@@ -74,9 +74,12 @@ export function SolarPanelScrollList(props) {
                     }
                 },
                 complete: function(results, file) {
-                    //console.log(results.data);
-                    setPVList(results.data);
-                    setPVDimensions(results.data.map(entry => entry.AreaPerPanel));
+                    // On load, convert width x height to area
+                    setPVList(results.data.map(entry => {
+                        return {...entry, AreaPerPanel: dimensionsToArea(entry.AreaPerPanel)};
+                    }));
+                    // Preserve the original dimensions of the panels
+                    setPVDimensions([...results.data].map(entry => entry.AreaPerPanel));
                 },
                 error: function(error, file) {
                     console.log(error);
@@ -165,8 +168,7 @@ export function SolarPanelScrollList(props) {
                                         const panelDimensions = document.getElementsByClassName("spr-table-panel-size");
                                         if(document.getElementById("spr-panel-size-select").value === "area") {
                                             for (let i = 0; i < panelDimensions.length; i++) {
-                                                const dimensions = pvDimensions[i].split(" x ", 2);
-                                                panelDimensions.item(i).innerHTML = parseFloat(((parseFloat(dimensions[0]) / 1000) * (parseFloat(dimensions[1]) / 1000)).toFixed(1));
+                                                panelDimensions.item(i).innerHTML = dimensionsToArea(pvDimensions[i]);
                                             }
                                         } else {
                                             for (let i = 0; i < panelDimensions.length; i++) {
@@ -174,8 +176,8 @@ export function SolarPanelScrollList(props) {
                                             }
                                         }
                                     }}>
-                                        <option id="spr-panel-size-select-dim" value="dimensions">Panel dimensions (L x W x D) (mm)</option>
                                         <option id="spr-panel-size-select-area" value="area">Area per panel (m&sup2;)</option>
+                                        <option id="spr-panel-size-select-dim" value="dimensions">Panel dimensions (L x W x D) (mm)</option>
                                     </select>
                                 </English>
                                 <Albanian>
@@ -184,8 +186,7 @@ export function SolarPanelScrollList(props) {
                                         const panelDimensions = document.getElementsByClassName("spr-table-panel-size");
                                         if(document.getElementById("spr-panel-size-select").value === "area") {
                                             for (let i = 0; i < panelDimensions.length; i++) {
-                                                const dimensions = pvDimensions[i].split(" x ", 2);
-                                                panelDimensions.item(i).innerHTML = parseFloat(((parseFloat(dimensions[0]) / 1000) * (parseFloat(dimensions[1]) / 1000)).toFixed(1));
+                                                panelDimensions.item(i).innerHTML = dimensionsToArea(pvDimensions[i]);
                                             }
                                         } else {
                                             for (let i = 0; i < panelDimensions.length; i++) {
@@ -193,8 +194,8 @@ export function SolarPanelScrollList(props) {
                                             }
                                         }
                                     }}>
-                                        <option id="spr-panel-size-select-dim" value="dimensions">Dimensionet e panelit (L x W x D) (mm)</option>
                                         <option id="spr-panel-size-select-area" value="area">Zona për panel (m&sup2;)</option>
+                                        <option id="spr-panel-size-select-dim" value="dimensions">Dimensionet e panelit (L x W x D) (mm)</option>
                                     </select>
                                 </Albanian>
                             </th>
@@ -275,4 +276,18 @@ function fillPanelFields(pvSelection) {
     document.getElementById("solar-area").value = pvSelection.AreaPerPanel;
     document.getElementById("solar-capacity").value = pvSelection.CapacityPerPanel;
     document.getElementById("solar-efficiency").value = pvSelection.Efficiency.replace("%", "");
+}
+
+/**
+ * Converts a string containing the dimensions of a solar panel to the numerical area of the solar panel in meters squared.
+ * @param {*} dimStr a string of format, "{width} x {height} x {depth}" representing the dimensions of a panel in mm.
+ * @returns {Number} the area of a single solar panel specified by the passed-in dimensions.
+ */
+function dimensionsToArea(dimStr) {
+    // Separates numbers in string
+    const dimensions = dimStr.split(" x ", 2);
+    // The area from width * height in meters squared
+    let area = (parseFloat(dimensions[0]) / 1000) * (parseFloat(dimensions[1]) / 1000);
+    // Round the area to the nearest tenth and round to whole number if .0
+    return parseFloat(area.toFixed(1));
 }
