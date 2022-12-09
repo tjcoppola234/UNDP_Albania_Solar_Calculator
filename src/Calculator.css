@@ -234,6 +234,7 @@ input::-webkit-inner-spin-button {
 }
 .Calculator .selected-data-display li:first-child {
     border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid black;
 }
 .Calculator .selected-data-display li:last-child {
     border-radius: 0 0 10px 10px;
@@ -284,6 +285,7 @@ input::-webkit-inner-spin-button {
 }
 .Calculator .btn-color-mode-small-switch {
     margin-left: 0;
+    position: relative;
 }
 
 .Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner {
@@ -356,7 +358,7 @@ input::-webkit-inner-spin-button {
 }
 .Calculator .btn-color-mode-small-switch input[type="checkbox"] {
     width: 80px;
-    height: 25px;
+    height: 30px;
 }
 .Calculator .btn-color-mode-switch input[type="checkbox"],
 .Calculator .btn-color-mode-small-switch input[type="checkbox"] {
@@ -364,6 +366,7 @@ input::-webkit-inner-spin-button {
     opacity: 0;
     position: absolute;
     top: 0;
+    left: 0;
     z-index: 1;
     margin: 0px;
 }
@@ -400,13 +403,8 @@ input::-webkit-inner-spin-button {
     width: 80%;
     min-height: 60px;
 }
-.Calculator .full-input-modal {
-    grid-template-columns: 5fr 5fr;
-    width: 50%;
-    min-height: 40px;
-}
-.Calculator #shortened-input {
-    width: 50%;
+.Calculator .modal-shorter {
+    width: 60%;
 }
 
 .Calculator .full-input > *:not(:first-child) {

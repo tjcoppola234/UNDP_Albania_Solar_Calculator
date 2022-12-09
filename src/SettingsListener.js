@@ -19,7 +19,7 @@ export default class SettingsListener {
      * @param {stateCallback} listener The {@link stateCallback} event to be called when the state is updated. Must only take a single value, of the same type as this class's state.
      * @returns {stateRemoval} A {@link stateRemoval} function to call when the subscriber is being deleted (to avoid calling an undefined function).
      */
-    addListener (listener) {
+    addListener(listener) {
         this.listeners.push(listener);
         const removeListener = () => {
             this.listeners = this.listeners.splice(this.listeners.indexOf(listener), 1);

@@ -34,7 +34,6 @@ import Tooltip from './Tooltip';
 export function SolarPanelScrollList(props) {
     const [pvList, setPVList] = useState([]);
     const [useLek, setUseLek] = useState(false);
-    const [conversionRatio, setConversionRatio] = useState(1);
 
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
@@ -65,7 +64,7 @@ export function SolarPanelScrollList(props) {
                                 return "CostPerPanel";
                             case "Area per Panel (m^2)":
                                 return "AreaPerPanel";
-                            case "Capacity per Panel (kW)":
+                            case "Capacity per Panel (W)":
                                 return "CapacityPerPanel";
                             case "Efficiency (%)":
                                 return "Efficiency";
@@ -85,11 +84,6 @@ export function SolarPanelScrollList(props) {
                     }
                 });
             });
-
-        //apr key: https://api.exchangerate-api.com/v4/latest/EUR
-        fetch("https://api.exchangerate-api.com/v4/latest/EUR")
-            .then(response => response.json())
-            .then(json => setConversionRatio(json.rates.ALL));
     }, []);
 
     return (
@@ -99,8 +93,8 @@ export function SolarPanelScrollList(props) {
                     <thead>
                         <tr>
                             <th colSpan="7" id="solar-pv-title">
-                                <English>Solar Panel Info</English>
-                                <Albanian>Informacion mbi panelin diellor</Albanian>
+                                <English>Example Solar Photovoltaics</English>
+                                <Albanian>Shembull Fotovoltaike Diellore</Albanian>
                             </th>
                         </tr>
                         <tr>
@@ -118,8 +112,8 @@ export function SolarPanelScrollList(props) {
                             </th>
                             <th>
                                 <div id="vertical-align-check">
-                                    <English>Cost per Panel</English>
-                                    <Albanian>Kostoja për panel</Albanian>
+                                    <English>Cost per kW</English>
+                                    <Albanian>Kostoja për kW</Albanian>
                                     <label className="switch btn-color-mode-small-switch">
                                         <input type="checkbox" name="currency-type" label="Currency Display Toggle" id="currency-type" placeholder="1" onChange={() => setUseLek(!useLek)} />
                                         <label htmlFor="currency-type" data-on="L" data-off="€" className="btn-color-mode-small-switch-inner"></label>
@@ -131,8 +125,8 @@ export function SolarPanelScrollList(props) {
                                 <Albanian>Zona për panel (m<sup>2</sup>)</Albanian>
                             </th>
                             <th>
-                                <English>Capacity per Panel (kW)</English>
-                                <Albanian>Kapaciteti për panel (kW)</Albanian>
+                                <English>Peak Capacity per Panel (Wp)</English>
+                                <Albanian>Kapaciteti maksimal për panel (Wp)</Albanian>
                             </th>
                             <th>
                                 <English>Efficiency (%)</English>
@@ -148,8 +142,10 @@ export function SolarPanelScrollList(props) {
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
                                 <td className="capped-th-width">{pv.NameOrModel}</td>
-                                <td className="capped-th-width"><a href={pv.ManufacturerLink} target="_blank" rel="noreferrer">{pv.Manufacturer}</a></td>
-                                <td className="spr-table-cost-per-panel">{useLek ? Math.round(conversionRatio * pv.CostPerPanel) : pv.CostPerPanel}</td>
+                                <td className="capped-th-width">
+                                    {pv.ManufacturerLink ? <a href={pv.ManufacturerLink} target="_blank" rel="noreferrer">{pv.Manufacturer}</a> : pv.Manufacturer}
+                                </td>
+                                <td className="spr-table-cost-per-panel">{useLek ? Math.round(settings.lekPerEuro.getState() * pv.CostPerPanel) : pv.CostPerPanel}</td>
                                 <td>{pv.AreaPerPanel}</td>
                                 <td>{pv.CapacityPerPanel}</td>
                                 <td>{pv.Efficiency}</td>
@@ -165,33 +161,49 @@ export function SolarPanelScrollList(props) {
                     <English>Select a solar panel from the table above or enter custom information below</English>
                     <Albanian>Zgjidhni një panel diellor nga tabela e mësipërme ose futni informacione të personalizuara më poshtë</Albanian>
                 </div>
-                <div className="full-input-modal">
+                <div className="full-input modal-shorter">
                     <label htmlFor="solar-cost">
-                        <English>Cost of one solar panel (€):</English>
-                        <Albanian>Kostoja e një paneli diellor (€):</Albanian>
+                        <English>Cost for one kW of panel (€):</English>
+                        <Albanian>Kostoja për një kW panel (€):</Albanian>
                     </label>
-                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => customizePanel(props)}></input>
+                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston e panelit për kW (€)" : "Enter panel's cost per kW (€)"} id="solar-cost" onInput={() => customizePanel(props)}></input>
+                    <Tooltip>
+                        <English>What is the price for one kW peak capacity's worth of photovoltaics? Use the table for an estimate if you aren't sure.</English>
+                        <Albanian>Cili është çmimi për një kW kapacitet maksimal të fotovoltaikëve? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
+                    </Tooltip>
                 </div>
-                <div className="full-input-modal">
+                <div className="full-input modal-shorter">
                     <label htmlFor="solar-area">
                         <English>Area of one solar panel (m²):</English>
                         <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
                     </label>
                     <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => customizePanel(props)}></input>
+                    <Tooltip>
+                        <English>What is the size of one panel? Use the table for an estimate if you aren't sure.</English>
+                        <Albanian>Sa është madhësia e një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
+                    </Tooltip>
                 </div>
-                <div className="full-input-modal">
+                <div className="full-input modal-shorter">
                     <label htmlFor="solar-capacity">
-                        <English>Capacity of one solar panel (kW):</English>
-                        <Albanian>Kapaciteti i një paneli diellor (kW):</Albanian>
+                        <English>Peak capacity of one solar panel (W):</English>
+                        <Albanian>Kapaciteti maksimal i një paneli diellor (W):</Albanian>
                     </label>
-                    <input type="number" min="0" max="1000" step="0.00001" placeholder={albanian ? "Fut kapacitetin për panel (kW)" : "Enter capacity per panel (kW)"} id="solar-capacity" onInput={() => customizePanel(props)}></input>
+                    <input type="number" min="0" max="1000" step="0.001" placeholder={albanian ? "Fut kapacitetin për panel (W)" : "Enter capacity per panel (W)"} id="solar-capacity" onInput={() => customizePanel(props)}></input>
+                    <Tooltip>
+                        <English>What is the peak capacity of one panel? Use the table for an estimate if you aren't sure.</English>
+                        <Albanian>Sa është kapaciteti maksimal i një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
+                    </Tooltip>
                 </div>
-                <div className="full-input-modal">
+                <div className="full-input modal-shorter">
                     <label htmlFor="solar-efficiency">
                         <English>Efficiency of solar panels (%):</English>
                         <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>
                     </label>
                     <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => customizePanel(props)}></input>
+                    <Tooltip>
+                        <English>What is the efficiency of the panels? Use the table for an estimate if you aren't sure.</English>
+                        <Albanian>Cili është efikasiteti i paneleve? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
+                    </Tooltip>
                 </div>
             </div>
         </div>

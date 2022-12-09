@@ -1,5 +1,10 @@
 import { readString } from 'react-papaparse';
 
+/**
+ * A possible month to get solar irradiation data for. Average is unique, and is equivalent to the average irradiation across all months
+ * @readonly
+ * @enum {string} timeOption
+ */
 const timeOptions = {
     January: "Jan",
     February: "Feb",
@@ -16,8 +21,10 @@ const timeOptions = {
     Average: "AVG"
 };
 
-let solarData = [{Month: "Jan"}, {Month: "Feb"}, {Month: "Mar"}, {Month: "Apr"}, {Month: "May"}, {Month: "Jun"},{Month: "Jul"},
-                 {Month: "Aug"}, {Month: "Sep"}, {Month: "Oct"}, {Month: "Nov"}, {Month: "Dec"}, {Month: "AVG"}];
+let solarData = [{Month: timeOptions.January}, {Month: timeOptions.February}, {Month: timeOptions.March}, {Month: timeOptions.April},
+                 {Month: timeOptions.May}, {Month: timeOptions.June},{Month: timeOptions.July}, {Month: timeOptions.August},
+                 {Month: timeOptions.September}, {Month: timeOptions.October}, {Month: timeOptions.November}, {Month: timeOptions.December},
+                 {Month: timeOptions.Average}];
 let loaded = false;
 
 /**
@@ -57,12 +64,12 @@ function loadData() {
  * Must have called loadData first in order to function properly. Check that data has been loaded first with isLoaded().
  * If called with invalid arguments or without data being loaded, returns the average irradiation for all of Albania.
  * @param {string} prefecture The name of a prefecture, which must match the format use in SolarIrradiation.csv
- * @param {string} month The month to get data for. Must be one of the strings in timeOptions. AVG returns the overall average accross all months
- * @param {number} capacity The capacity of solar panel being calculated for in kW/m^2. Important for converting from (kWh/month)/m^2 to (kWh/month)/kW.
+ * @param {timeOptions} month The month to get data for. Must be one of the strings in timeOptions. AVG returns the overall average accross all months
+ * @param {number} capPerM2 The capacity of solar panel being calculated for in kW/m^2. Important for converting from (kWh/month)/m^2 to (kWh/month)/kW.
  * @param {boolean} isLeapYear Whether the year is a leap year. The default is false, and only matters for calculations for February
  * @returns {number} The average amount of solar irradiation for the provided prefecture in (kWh/month)/kW
  */
-function getData(prefecture, month, capacity, isLeapYear = false) {
+function getData(prefecture, month, capPerM2, isLeapYear = false) {
     if(!loaded) {
         console.error("Municipality irradiation data not loaded.");
     }
@@ -83,7 +90,7 @@ function getData(prefecture, month, capacity, isLeapYear = false) {
             //Irradiation of prefecture is in (kJ/day)/m^2
             //s = (irradiation of prefecture / 3600 * days in month) / capacity of panels = (kWh/month)/kW capacity
             //3600 converts kJ to kWh, days in month converts from days to month
-            return (solarData[i][prefecture].replace(",", "") / 3600 * days(month, isLeapYear)) / capacity;
+            return (solarData[i][prefecture].replace(",", "") / 3600 * days(month, isLeapYear)) / capPerM2;
         }
     }
 
@@ -98,12 +105,12 @@ function getData(prefecture, month, capacity, isLeapYear = false) {
  * @returns {number} The number of days in the month, or the average number of days in all months if the average was provided as the current month.
  */
 function days(month, isLeapYear) {
-    if(month === "Jan" || month === "Mar" || month === "May" || month === "Jul" || month === "Aug" || month === "Oct" || month === "Dec")
+    if(month === timeOptions.January || month === timeOptions.March || month === timeOptions.May || month === timeOptions.July ||
+       month === timeOptions.August || month === timeOptions.October || month === timeOptions.December)
         return 31;
-    if(month === "Apr" || month === "Jun" || month === "Sep" || month === "Nov")
+    if(month === timeOptions.April || month === timeOptions.June || month === timeOptions.September || month === timeOptions.November)
         return 30;
-    //This is really dumb; !!isLeapYear = 1 if isLeapYear is true, 0 otherwise
-    if(month === "Feb")
+    if(month === timeOptions.February)
         return 28 + !!isLeapYear;
 
     //Average number of days in a month (for using AVG)
