@@ -3,7 +3,7 @@ import './Calculator.css';
 import { PageHead, PageFoot } from './App';
 import React, {useState} from 'react';
 import { MunicipalDropdown } from './MunicipalDropdown';
-import {SolarPanelScrollList} from './SolarPanelReader';
+import {SolarPanelScrollList, dimensionsToArea} from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 import Plot from 'react-plotly.js';
 

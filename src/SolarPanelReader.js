@@ -212,7 +212,7 @@ export function SolarPanelScrollList(props) {
                     <tbody>
                         {pvList.map((pv, index) => (
                             <tr key={index}>
-                                <td id="panel-selection"><button onClick={() => {fillPanelFields(pv); props.onSelection(pv); props.checkIsCustomData(false);}} type="button">
+                                <td id="panel-selection"><button onClick={() => {console.log(pv);fillPanelFields(pv); props.onSelection(pv); props.checkIsCustomData(false);}} type="button">
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
@@ -242,11 +242,33 @@ export function SolarPanelScrollList(props) {
                     <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston për panel (€)" : "Enter cost per panel (€)"} id="solar-cost" onInput={() => props.checkIsCustomData(true)}></input>
                 </div>
                 <div className="Hor-flex">
-                    <label htmlFor="solar-area">
-                        <English>Area of one solar panel (m²):</English>
-                        <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
-                    </label>
-                    <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => props.checkIsCustomData(true)}></input>
+                    <div style={{marginRight: 20}}>
+                        <label htmlFor="solar-area">
+                            <English>Area of one solar panel (m²):</English>
+                            <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
+                        </label>
+                        <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => props.checkIsCustomData(true)}></input>
+                    </div>
+                    <p>Or</p>
+                    <div style={{marginLeft: 20}}>
+                        <label htmlFor="solar-area-dim">
+                            <English>Length and width of one panel (mm):</English>
+                            <Albanian>Gjatësia dhe gjerësia e një paneli (mm):</Albanian>
+                        </label>
+                        <div className="Vert-flex">
+                            <input type="number" min="0" step="0.01" placeholder={albanian ? "Fut gjatësinë e panelit (mm)" : "Enter panel length (mm)"} id="solar-area-length"></input>
+                            <input type="number" min="0" step="0.01" placeholder={albanian ? "Fut gjerësinë e panelit (mm)" : "Enter panel width (mm)"} id="solar-area-width"></input>
+                            <button onClick={e => {
+                                e.preventDefault();
+                                const length = document.getElementById("solar-area-length");
+                                const width = document.getElementById("solar-area-width");
+                                if(length.value === "" || width.value === "") {
+                                    return;
+                                }
+                                document.getElementById("solar-area").value = parseFloat(((length.value / 1000) * (width.value / 1000)).toFixed(2));
+                            }}>Compute Area</button>
+                        </div>
+                    </div>
                 </div>
                 <div className="Hor-flex">
                     <label htmlFor="solar-capacity">
@@ -283,7 +305,7 @@ function fillPanelFields(pvSelection) {
  * @param {*} dimStr a string of format, "{width} x {height} x {depth}" representing the dimensions of a panel in mm.
  * @returns {Number} the area of a single solar panel specified by the passed-in dimensions.
  */
-function dimensionsToArea(dimStr) {
+export function dimensionsToArea(dimStr) {
     // Separates numbers in string
     const dimensions = dimStr.split(" x ", 2);
     // The area from width * height in meters squared
