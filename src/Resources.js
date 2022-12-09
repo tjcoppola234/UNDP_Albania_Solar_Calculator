@@ -74,7 +74,7 @@ function Resources() {
                     <div className="content-section">
                         <img className="imagefloat-right" id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450"/>
                         <div>
-                            <English><h3 id="res-the-enviro">The Enviornment</h3></English>
+                            <English><h3 id="res-the-enviro">The Environment</h3></English>
                             <Albanian><h3 id="res-the-enviro">Mjedisi</h3></Albanian>
                         </div>
                         <ul>
@@ -159,14 +159,6 @@ function Resources() {
                                 <English>Costs of using solar are very predictable as many additionally pay service charges that go towards grid maintenance, charges for net metering, and other associated costs</English>
                                 <Albanian>Kostot e përdorimit të energjisë diellore janë shumë të parashikueshme pasi shumë paguajnë gjithashtu tarifa shërbimi që shkojnë për mirëmbajtjen e rrjetit, tarifat për matjen neto dhe kosto të tjera të lidhura.</Albanian>
                             </li>
-                            <li className="has-sublist">
-                                <ul>
-                                    <li>
-                                        <English>Just remember if you do not go 100% solar, then you will have some level of remaining electric bill that will vary through the year.</English>
-                                        <Albanian>Mos harroni nëse nuk përdorni 100% diellore, atëherë do të keni një nivel të mbetur të faturës elektrike që do të ndryshojë gjatë vitit.</Albanian>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                         <div>
                             <English><h3 id="res-green-bus">Green Business</h3></English>
@@ -237,8 +229,8 @@ function Resources() {
                         </div>
                         <br />
                         <div className="p-text">
-                            <English>Solar companies will build out an estimate by using the last six months of your energy bills and utilizing sun tracking software to determine the necessary size of your system to generate 100% of your power needs. <b id="bfix">Make note that some companies oversize your system, making you pay more than what you need.</b></English>
-                            <Albanian>Kompanitë diellore do të bëjnë një vlerësim duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji. <b id="bfix">Vini re se disa kompani e tejkalojnë sistemin tuaj, duke ju bërë të paguani më shumë se sa keni nevojë.</b></Albanian>
+                            <English>Solar companies will build out an estimate by using the last six months of your energy bills and utilizing sun tracking software to determine the necessary size of your system to generate 100% of your power needs.</English>
+                            <Albanian>Kompanitë diellore do të bëjnë një vlerësim duke përdorur gjashtë muajt e fundit të faturave tuaja të energjisë dhe duke përdorur softuerin e gjurmimit të diellit për të përcaktuar madhësinë e nevojshme të sistemit tuaj për të gjeneruar 100% të nevojave tuaja për energji.</Albanian>
                         </div>
                         <div>
                             <English><h3 id="res-how-finance">How should I finance my panels?</h3></English>
@@ -357,8 +349,8 @@ function Resources() {
                             <Albanian>Përcaktoni nëse një sistem diellor fotovoltaik është i duhuri për biznesin tuaj financiarisht.</Albanian>
                         </li>
                         <li className="p-text">
-                            <English>Experts will determine the system size needed and plan the layout of the installation. *Make note that some companies oversize your system, making you pay more than what you need.</English>
-                            <Albanian>Ekspertët do të përcaktojnë madhësinë e nevojshme të sistemit dhe do të planifikojnë paraqitjen e instalimit. *Vini re se disa kompani e tejkalojnë sistemin tuaj, duke ju bërë të paguani më shumë se sa keni nevojë.</Albanian>
+                            <English>Experts will determine the system size needed and plan the layout of the installation.</English>
+                            <Albanian>Ekspertët do të përcaktojnë madhësinë e nevojshme të sistemit dhe do të planifikojnë paraqitjen e instalimit.</Albanian>
                         </li>
                         <li className="p-text">
                             <English>Installers will show up and start setting up their equipment and scaffolding.</English>
@@ -481,7 +473,7 @@ export function TableOfContents() {
                 <h2>Contents</h2>
                 <li><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a>
                     <ul>
-                        <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Enviornment</English><Albanian>Mjedisi</Albanian></a></li>
+                        <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Environment</English><Albanian>Mjedisi</Albanian></a></li>
                         <li><a href="#res-sunny-pot" onClick={e => jumpTo(e, "res-sunny-pot")}><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
                     </ul>
                 </li>
