@@ -1,10 +1,10 @@
-Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (kW),Efficiency (%),Manufacturer Link
-XP 36/156-140 I+35,SunErg,200,1,0.14,14.01%,https://www.sunergsolar.com/en/
-Eco Line Full Black M72/190 W,Luxor Solar,250,1,0.19,15.61%,https://www.luxor.solar/en/
-X75L240 HE Module,Aleo,305,1,0.24,18.00%,https://www.aleo-solar.com/
-Eco Line M72/205 W,Luxor Solar,280,1,0.205,16.84%,https://www.luxor.solar/en/
-SG335P,Peimar,320,2,0.235,14.40%,https://www.peimar.com/uk/home/
-Axitec AxiPower AC-290PH/60S,Axitec,380,1,0.29,17.72%,https://www.axitecsolar.com/en
-Pv Smart-60 KPV 290 WP-POLY Module,Kioto Solar,320,2,0.29,17.55%,https://www.kiotosolar.com/en/
-NUAK300B Module,Sharp,342,2,0.3,18.40%,https://www.sharp.eu/solar-energy/find-a-solar-panel
-Axitec AXIworldpremium AC-300M/156-60S,Axitec,390,1,0.3,19.55%,https://www.axitecsolar.com/en
+Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (W),Efficiency (%),Manufacturer Link
+Panel A,Brand A,200,1,140,14.01%,
+Panel B,Brand B,250,1,190,15.61%,
+Panel C,Brand C,305,1,240,18.00%,
+Panel D,Brand B,280,1,205,16.84%,
+Panel E,Brand D,320,2,235,14.40%,
+Panel F,Brand E,380,1,290,17.72%,
+Panel G,Brand F,320,2,290,17.55%,
+Panel H,Brand G,342,2,300,18.40%,
+Panel I,Brand E,390,1,300,19.55%

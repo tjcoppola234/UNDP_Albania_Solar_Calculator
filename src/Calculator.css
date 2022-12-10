@@ -8,13 +8,9 @@
     color: rgb(241, 76, 76);
 }
 
-.Calculator input {
-    margin-left: 8px;
-}
-
 .Calculator .municipality-dropdown {
-    margin-left: 8px;
-    min-width: 134.8px;
+    width: 100%;
+    box-shadow: 0px 0px 6px 0px rgba(17, 17, 17, 0.25) inset;
     font-size: var(--font-size);
 }
 
@@ -63,9 +59,6 @@
     background-color: #93A393;
 }
 
-.Calculator #solar-panel-info input {
-    width: 200px;
-}
 .Calculator #electricity-paid-period {
     margin-left: 5px;
 }
@@ -82,22 +75,25 @@
     max-width: 180px;
 }
 
-.Calculator .submit-button {
-    width: 200px;
-    height: 50px;
-    border: none;
-    background: none;
-    background-color: var(--nav-background);
-    color: var(--nav-text);
+.Calculator input:not([type="checkbox"]), .Calculator #spr-cost-per-panel-select {
+    box-shadow: 0px 0px 6px 0px rgba(17, 17, 17, 0.25) inset;
     font-size: var(--font-size);
+    border: none;
+    border-radius: 15px;
 }
 
-.Calculator input {
-    font-size: var(--font-size);
-    min-width: 300px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 .Calculator select {
     font-size: var(--font-size);
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .Calculator summary {
@@ -130,9 +126,8 @@
     margin-top: 40px;
 }
 
-.Calculator form div, .Calculator #solar-panel-info .Hor-flex {
-    margin-bottom: 5px;
-    margin-top: 5px;
+.Calculator details .Hor-flex {
+    width: inherit;
 }
 
 .Calculator .spaced-result {
@@ -189,4 +184,246 @@
     -webkit-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
     box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
+}
+
+.Calculator #modal-img {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0); /*When transparency is not supported*/
+    background-color: rgba(0,0,0,0.9);
+}
+
+.Calculator .close-modal {
+    position: fixed;
+    top: -5px;
+    right: 20px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.Calculator .close-modal:hover,
+.Calculator .close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Calculator .modal-content {
+    background-color: var(--background);
+    margin: 50px 50px;
+    height: 90%;
+    overflow-y: auto;
+}
+
+.Calculator .selected-data-display {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+.Calculator .selected-data-display li {
+    width: inherit;
+    margin: 0px;
+    padding: 8px;
+}
+.Calculator .selected-data-display li:first-child {
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid black;
+}
+.Calculator .selected-data-display li:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.Calculator .muni-data-button {
+    width: 95%;
+    max-width: 95%;
+    min-height: 50px;
+}
+.Calculator .submit-button {
+    width: 200px;
+    height: 50px;
+}
+.Calculator .submit-button, .Calculator .muni-data-button {
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    background-color: var(--nav-background);
+    color: var(--nav-text);
+    font-size: var(--font-size);
+    transition: 0.3s;
+}
+.Calculator .submit-button:hover, .Calculator .muni-data-button:hover {
+    background-color: var(--nav-background-hover);
+}
+
+.Calculator .muni-data-view {
+    display: block;
+    border-radius: 15px;
+    background-color: white;
+    width: 100%;
+}
+
+.Calculator #vertical-align-check {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.Calculator .btn-color-mode-switch {
+    display: inline-block;
+    margin: 0;
+    margin-left: 10px;
+    position: relative;
+}
+.Calculator .btn-color-mode-small-switch {
+    margin-left: 0;
+    position: relative;
+}
+
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner {
+    width: 140px;
+    height: 50px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner {
+    width: 80px;
+    height: 30px;
+    color: black;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner {
+    margin: 0px;
+    background: #E0E0E0;
+    border-radius: 26px;
+    overflow: hidden;
+    position: relative;
+    transition: all 250ms ease-in-out;
+    box-shadow: 0px 0px 6px 0px rgba(17, 17, 17, 0.25) inset;
+    display: block;
+}
+
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+    top: 16px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:before {
+    top: 7px;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:before,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:before {
+    content: attr(data-on);
+    position: absolute;
+    font-size: 12px;
+    font-weight: 500;
+    right: 20px;
+}
+
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
+    width: 70px;
+    height: 30px;
+    font-size: 20px;
+    left: 5px;
+    top: 5px;
+    padding: 5px 0px;
+}
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:after {
+    width: 40px;
+    height: 16px;
+    font-size: 12px;
+    left: 3px;
+    top: 3px;
+    padding: 4px 0px;
+}
+.Calculator .btn-color-mode-switch > label.btn-color-mode-switch-inner:after,
+.Calculator .btn-color-mode-small-switch > label.btn-color-mode-small-switch-inner:after {
+    content: attr(data-off);
+    background: #fff;
+    border-radius: 26px;
+    font-weight: 500;
+    position: absolute;
+    text-align: center;
+    transition: all 250ms ease-in-out;
+    box-shadow: 0px 0px 6px -2px #111;
+}
+
+.Calculator .btn-color-mode-switch input[type="checkbox"] {
+    width: 140px;
+    height: 50px;
+}
+.Calculator .btn-color-mode-small-switch input[type="checkbox"] {
+    width: 80px;
+    height: 30px;
+}
+.Calculator .btn-color-mode-switch input[type="checkbox"],
+.Calculator .btn-color-mode-small-switch input[type="checkbox"] {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    margin: 0px;
+}
+
+.Calculator .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
+    content: attr(data-on);
+    left: 65px;
+}
+.Calculator .btn-color-mode-small-switch input[type="checkbox"]:checked + label.btn-color-mode-small-switch-inner:after {
+    content: attr(data-on);
+    left: 37px;
+}
+
+.Calculator .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before,
+.Calculator .btn-color-mode-small-switch input[type="checkbox"]:checked + label.btn-color-mode-small-switch-inner:before {
+    content: attr(data-off);
+    right: auto;
+    left: 20px;
+}
+
+.Calculator .full-input, .full-input-modal {
+    display: grid;
+    grid-template-columns: 5fr 4fr 1fr;
+    min-height: 60px;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.Calculator .full-input {
+    grid-template-columns: 5fr 4fr 1fr;
+    width: 80%;
+    min-height: 60px;
+}
+.Calculator .modal-shorter {
+    width: 60%;
+}
+
+.Calculator .full-input > *:not(:first-child) {
+    margin: auto;
+}
+.Calculator .full-input > *:first-child, .Calculator .full-input-modal *:first-child {
+    margin-left: auto;
+    margin-right: 10px;
+}
+.Calculator .full-input > *:not(button):first-child, .Calculator .full-input-modal *:not(button):first-child {
+    text-align: right;
+}
+.Calculator .full-input input, .Calculator .full-input-modal input {
+    height: 50px;
+    padding-left: 10px;
+    width: calc(100% - 10px);
+}
+.Calculator .input-label-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

@@ -1,3 +1,23 @@
+.Resources {
+    --section-1: rgb(235, 240, 202);
+    --section-2: rgb(254, 203, 251);
+    --section-3: rgb(191, 255, 207);
+    --section-4: rgb(224, 193, 254);
+    --section-5: rgb(193, 244, 254);
+    --section-6: rgb(255, 216, 216);
+    --section-7: rgb(201, 255, 187);
+    --section-8: rgb(254, 242, 193);
+    
+    --img-border: rgb(0, 0, 0);
+
+    --toc-background: rgb(247, 247, 247);
+    --toc-text: rgb(0, 0, 0);
+    --toc-background-highlighted: rgb(230, 230, 230);
+    --toc-text-highlighted: rgb(137, 137, 255);
+    --resource-nav-icon: #767DD3;
+    --resource-nav-button: #bec3f8;
+}
+
 .Resources #solar-map {
     width: 50vw;
     height: 450px;
@@ -47,7 +67,7 @@
 }
 
 .Resources .imagefloat-center {
-    border : 4px solid var(--content-heading);
+    border : 2px solid var(--img-border);
     cursor: pointer;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -57,7 +77,7 @@
 }
 
 .Resources .imagefloat-left, .Resources .imagefloat-right {
-    border : 4px solid var(--content-heading);
+    border : 2px solid var(--img-border);
     border-radius: 25px;
     margin-bottom: 20px;
     cursor: pointer;
@@ -73,10 +93,6 @@
 }
 
 .Resources .content-section {
-    background-color: var(--content-background);
-    border-radius: 25px;
-    border: 4px solid var(--content-heading);
-    margin:70px;
     padding: 20px 35px;
 }
 
@@ -136,7 +152,7 @@
 
 .Resources .modal-img-src, .Resources .modal-caption {
     animation-name: zoom;
-    animation-duration: 0.6s;
+    animation-duration: 0.5s;
 }
 
 @keyframes zoom {
@@ -182,56 +198,154 @@
 
 .Resources #toc {
     position: fixed;
-    top: 100px;
-    background-color: rgba(198, 219, 243, 0.9);
-    max-width: 400px;
-    max-height: 80vh;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    overflow-y: auto;
-    border-radius: 25px 0px 0px 0px;
+    top: 80px;
+    background-color: var(--toc-background);
+    z-index: 5;
 }
+.Resources #toc-toplist {
+    max-width: 400px;
+    margin-top: 50px;
+    max-height: calc(100vh - 130px);
+    padding-right: 10px;
+    overflow-y: auto;
+}
+
 .Resources #toc ul {
     list-style: none;
+    padding-left: 30px;
 }
-.Resources #toc a {
+.Resources #toc li {
+    padding-left: 10px;
+}
+.Resources #toc ul ul li:not(:hover) a, .Resources .outer-li:not(:hover) a {
     text-decoration: none;
-    color: var(--nav-background);
+    color: var(--toc-text);
 }
-.Resources #toc a :hover {
-    background-color: #b0c2d7e0;
+.Resources #toc ul ul li:hover, .Resources .outer-li:hover {
+    color: var(--toc-text-highlighted);
+    background-color: var(--toc-background-highlighted);
+}
+.Resources #toc ul ul li:hover a, .Resources ul li:hover a {
+    color: var(--toc-text-highlighted);
+    text-decoration: none;
 }
 
 .Resources #toc-access {
-    width: 50px;
     height: 50px;
-    border: 4px solid var(--content-heading);
-    border-radius: 20px;
-    background-color: var(--content-background);
+    width: 100px;
+    border: 0;
     font-weight: bold;
     position: fixed;
     font-size: 20px;
-    color: var(--content-heading);
 }
-
 .Resources #scroll-to-top {
     cursor: pointer;
     position: fixed;
     z-index: 20;
-    bottom: 40px;
-    right: 10px;
-    background-color: var(--content-background);
-    color: var(--content-heading);
-    border: 4px solid var(--content-heading);
-    border-radius: 20px;
+    bottom: 0;
+    right: 0;
+    border: 0;
     width: 50px;
     height: 50px;
     font-size: 25px;
     text-align: center;
     padding: 0px;
     transition: opacity ease-in 0.1s;
-  }
-.Resources #scroll-to-top:hover {
-    background-color: var(--content-heading);
-    color: var(--content-background);
-  }
+}
+
+.Resources #scroll-to-top, .Resources #toc-access {
+    background-color: var(--resource-nav-button);
+    color: var(--resource-nav-icon);
+    transition: color linear 0.3s;
+    -webkit-transition: background-color 300ms linear, color 300ms linear;
+    -ms-transition: background-color 300ms linear, color 300ms linear;
+    transition: background-color 300ms linear, color 300ms linear;
+}
+.Resources #scroll-to-top:hover, .Resources #toc-access:hover {
+    background-color: var(--resource-nav-icon);
+    color: var(--resource-nav-button);
+}
+
+.Resources .fade-in-section.slow {
+    opacity: 0;
+    transform: translateY(40vh);
+    visibility: hidden;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, visibility;
+}
+.Resources .fade-in-section:not(:last-child) {
+    padding-bottom: 50px;
+}
+.Resources .fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
+
+.Resources .content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.Resources .rounding {
+    width: 100%;
+    min-height: 50px;
+    height: 50px;
+}
+
+.Resources #section-1 {
+    background-color: var(--section-1);
+}
+.Resources #section-1 .rounding {
+    background-color: var(--background);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-2 {
+    background-color: var(--section-2);
+}
+.Resources #section-2 .rounding {
+    background-color: var(--section-1);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-3 {
+    background-color: var(--section-3);
+}
+.Resources #section-3 .rounding {
+    background-color: var(--section-2);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-4 {
+    background-color: var(--section-4);
+}
+.Resources #section-4 .rounding {
+    background-color: var(--section-3);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-5 {
+    background-color: var(--section-5);
+}
+.Resources #section-5 .rounding {
+    background-color: var(--section-4);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-6 {
+    background-color: var(--section-6);
+}
+.Resources #section-6 .rounding {
+    background-color: var(--section-5);
+    border-radius: 0 0 90% 0 / 40px;
+}
+.Resources #section-7 {
+    background-color: var(--section-7);
+}
+.Resources #section-7 .rounding {
+    background-color: var(--section-6);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources #section-8 {
+    background-color: var(--section-8);
+}
+.Resources #section-8 .rounding {
+    background-color: var(--section-7);
+    border-radius: 0 0 90% 0 / 40px;
+}
