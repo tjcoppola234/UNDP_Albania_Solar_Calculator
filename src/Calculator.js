@@ -1,9 +1,9 @@
 import './global.css';
 import './Calculator.css';
 import { PageHead, PageFoot } from './App';
-import React, {useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { MunicipalDropdown } from './MunicipalDropdown';
-import {SolarPanelScrollList} from './SolarPanelReader';
+import { SolarPanelScrollList } from './SolarPanelReader';
 import * as SolarData from './SolarIrradiationReader';
 import Plot from 'react-plotly.js';
 
@@ -29,7 +29,9 @@ import Tooltip from './Tooltip';
  */
 function Calculator() {
     SolarData.loadData();
-    
+    const ref = useRef();
+    const [muniPanelVisibility, setMuniPanelVisibility] = useState(false);
+
     //Number of Panels calculator state variables
     const [numPanels, setNumPanels] = useState("");
 
@@ -41,6 +43,8 @@ function Calculator() {
     const [emissionsSavings, setEmissionsSavings] = useState("");
 
     const [prefecture, setPrefecture] = useState("");
+    const [municipality, setMunicipality] = useState("");
+    const [manualIrradiation, setManualIrradiation] = useState(0);
 
     const [solarName, setSolarName] = useState("Unnamed");
     const [solarManufacturer, setSolarManufacturer] = useState("Unnamed");
@@ -50,7 +54,7 @@ function Calculator() {
     const [solarEfficiency, setSolarEfficiency] = useState(0);
     const [shouldUseName, setShouldUseName] = useState(false);
 
-    const [monthlyProduction, setMonthlyProduction] = useState([0,0,0,0,0,0,0,0,0,0,0,0]);
+    const [monthlyProduction, setMonthlyProduction] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
     settings.albanianVisible.addListener(visible => {
@@ -70,77 +74,85 @@ function Calculator() {
         setSolarEfficiency(pvSelection.Efficiency.replace("%", ""));
     }
 
-    /**
-     * Opens the data entry for solar PV selection and municipality selection while bringing the page there
-     * @param {React.MouseEvent} e Event data based on click information
-     */
-    function openMuniPanel(e) {
-        e.preventDefault();
-        const muniPanel = document.getElementById("muni-panel-choice");
-        muniPanel.open = true;
-        window.scrollTo(0, muniPanel.offsetTop - 85);
-    }
-
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <div className="title-box Vert-flex" style={{backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)`}}>  
+            <div className="title-box Vert-flex" style={{ backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)` }}>
                 <English><h2 className="page-title">Solar Calculator</h2></English>
                 <Albanian><h2 className="page-title">Llogaritësi diellor</h2></Albanian>
                 <English><h3 className="page-subtitle">Find an estimate for your business</h3></English>
                 <Albanian><h3 className="page-subtitle">Gjeni një vlerësim për biznesin tuaj</h3></Albanian>
             </div>
             <div className="content">
+                <div id="modal-img" ref={ref} className={muniPanelVisibility ? "" : " invisible"}>
+                    <span className="close-modal" onClick={() => {
+                        ref.current.scrollTo(0, 0);
+                        setMuniPanelVisibility(false);
+                        document.body.style.overflowY = "scroll";
+                    }}>&times;</span>
+                    <div className="modal-content">
+                        <div className="detail-content">
+                            <div>
+                                <English><b>Municipality and Solar Photovoltaic Info</b>: Input the municipality of your building. Then input information about the solar photovoltaics you will use, or select a solar photovoltaic system from the table</English>
+                                <Albanian><b>Informacion komunal dhe fotovoltaik diellor</b>: Futni bashkinë e ndërtesës suaj. Më pas futni informacione rreth fotovoltaikëve diellorë që do të përdorni, ose zgjidhni një sistem fotovoltaik diellor nga tabela</Albanian>
+                            </div>
+                            <br />
+                            <MunicipalDropdown changeEvent={(e, v) => {
+                                if(e === undefined) {
+                                    setPrefecture("");
+                                    setMunicipality("");
+                                    setManualIrradiation(v);
+                                }
+                                else {
+                                    setPrefecture(e.target.value);
+                                    setMunicipality(e.target.options[e.target.selectedIndex].text);
+                                    setManualIrradiation(0);
+                                }
+                            }}></MunicipalDropdown>
+                            <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
+                        </div>
+                    </div>
+                </div>
                 <details open> {/* place "open" next to "details" to make it open on load */}
                     <summary>
                         <English><b>Number of photovoltaics</b>: The number of photovoltaics required to cover 100% of your electricity consumption</English>
                         <Albanian><b>Numri i fotovoltaikëve</b>: Numri i fotovoltaikëve të nevojshme për të mbuluar 100% të konsumit të energjisë elektrike</Albanian>
                     </summary>
-                <div className="detail-content">
-                    <form onSubmit={e => {
-                        e.preventDefault();
-                        if(prefecture === "") {
-                            return;
-                        }
-                        setNumPanels(calcNumPanels(prefecture, solarArea, solarCapacity, solarEfficiency));
-                    }}>
-                        <div className="Hor-flex">
-                            <English>Enter municipality and solar photovoltaics info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
-                            <Albanian>Shkruani informacionin e bashkisë dhe fotovoltaikëve diellor <a href="#muni-panel-choice">këtu</a></Albanian>
-                            <Tooltip>
-                                <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
-                                <Albanian>Komuna juaj është qyteti ose qyteti ku jetoni dhe përdoret për të gjetur sasinë e rrezatimit diellor që marrin bizneset në zonën tuaj.</Albanian>
-                                <br />
-                                <English>For solar photovoltaics, either choose an example from our list, or enter photovoltaics information yourself!</English>
-                                <Albanian>Për fotovoltaikëve diellore, ose zgjidhni një shembull nga lista jonë, ose vendosni vetë informacionin e fotovoltaikëve!</Albanian>
-                            </Tooltip>
-                        </div>
-                        <div className="Hor-flex">
-                            <label htmlFor="nop-electricity-usage">
-                                <div className="Hor-flex">
-                                    <English>Electricity usage per&nbsp;</English>
-                                    <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
-                                    <select id="nop-electricity-usage-period">
-                                        <option value="month">
-                                            {albanian ? "muaj" : "month"}
-                                        </option>
-                                        <option value="year">
-                                            {albanian ? "vit" : "year"}
-                                        </option>
-                                    </select>
-                                </div>
-                            </label>
-                            <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
-                            <Tooltip>
-                                <English>Enter the amount of electricity your business uses on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the last 12 months of electrictiy usage for your business.</English>
-                                <Albanian>Shkruani sasinë e energjisë elektrike që biznesi juaj përdor mesatarisht në muaj. Ky informacion duhet të jetë në faturën tuaj të energjisë elektrike, ose mund të llogaritet lehtësisht duke marrë mesataren e 12 muajve të fundit të përdorimit të energjisë elektrike për biznesin tuaj.</Albanian>
-                            </Tooltip>
-                        </div>
-                        <button type="submit" className="submit-button">Calculate</button>
-                        <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
-                        <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
-                    </form>
-                </div>
+                    <div className="detail-content">
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            if (prefecture === "" && manualIrradiation === 0)
+                                return;
+
+                            let monthlyConsumption = document.getElementById("nop-electricity-usage").value;
+                            const isMonthly = document.getElementById("electric-usage-my").checked;
+                            if(!isMonthly)
+                                monthlyConsumption = monthlyConsumption / 12;
+                            setNumPanels(calcNumPanels(monthlyConsumption, prefecture, manualIrradiation, solarArea, solarCapacity, solarEfficiency));
+                        }}>
+                            <MuniDataDashboard visibleToggle={setMuniPanelVisibility} municipalName={municipality} manualIrradiation={manualIrradiation} pvStatus={shouldUseName ? solarName : !!(solarArea && solarCost && solarCapacity && solarEfficiency)}></MuniDataDashboard>
+                            <div className="full-input">
+                                <label htmlFor="nop-electricity-usage">
+                                    <div className="input-label-align">
+                                        <English>Electricity usage per&nbsp;</English>
+                                        <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
+                                        <label className="switch btn-color-mode-switch">
+                                            <input type="checkbox" name="electric-usage-my" label="Month-Year Toggle" id="electric-usage-my" placeholder="1" />
+                                            <label htmlFor="electric-usage-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
+                                        </label>
+                                    </div>
+                                </label>
+                                <input id="nop-electricity-usage" type="number" placeholder="kWh"></input>
+                                <Tooltip>
+                                    <English>Enter the amount of electricity your business uses on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the last 12 months of electrictiy usage for your business.</English>
+                                    <Albanian>Shkruani sasinë e energjisë elektrike që biznesi juaj përdor mesatarisht në muaj. Ky informacion duhet të jetë në faturën tuaj të energjisë elektrike, ose mund të llogaritet lehtësisht duke marrë mesataren e 12 muajve të fundit të përdorimit të energjisë elektrike për biznesin tuaj.</Albanian>
+                                </Tooltip>
+                            </div>
+                            <button type="submit" className="submit-button">Calculate</button>
+                            <English>{numPanels ? `Panels required: ${numPanels} panels` : ""}</English>
+                            <Albanian>{numPanels ? `Kërkohen panele: ${numPanels} panele` : ""}</Albanian>
+                        </form>
+                    </div>
                 </details>
                 <details open>
                     <summary>
@@ -151,7 +163,9 @@ function Calculator() {
                         <form onSubmit={(e) => {
                             e.preventDefault();
                             setMonthlyProduction(calcMonthlyProduction(prefecture, solarArea, solarCapacity, solarEfficiency));
-                            const results = getSystemData(prefecture, solarCost * 100, solarArea, solarCapacity, solarEfficiency);
+                            const results = getSystemData(prefecture, manualIrradiation, solarCost, solarArea, solarCapacity);
+                            //console.log(results);
+
                             setEnergyGenerated(results.AverageMonthlyGeneration);
                             setTotalSavings(results.TotalSavings);
                             setTotalCost(results.TotalCost);
@@ -159,18 +173,19 @@ function Calculator() {
                             setEmissionsSavings(results.EmissionsSavings);
                             document.getElementById("production-graph").style.display = "block";
                         }}>
-                            <div className="Hor-flex">
-                                <English>Enter municipality and solar panel info <a href="#muni-panel-choice" onClick={openMuniPanel}>here</a></English>
-                                <Albanian>Shkruani informacionin e bashkisë dhe panelit diellor <a href="#muni-panel-choice" onClick={openMuniPanel}>këtu</a></Albanian>
+                            <MuniDataDashboard visibleToggle={setMuniPanelVisibility} manualIrradiation={manualIrradiation} municipalName={municipality} pvStatus={shouldUseName ? solarName : !!(solarArea && solarCost && solarCapacity && solarEfficiency)}></MuniDataDashboard>
+                            <div className="full-input">
+                                <label htmlFor="electricity-price">
+                                    <English>Price of electricity:</English>
+                                    <Albanian>Çmimi i energjisë elektrike:</Albanian>
+                                </label>
+                                <input id="electricity-price" type="number" min="0" max="1000" step="0.01" placeholder={"Lekë/kWh"}></input>
                                 <Tooltip>
-                                    <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
-                                    <Albanian>Komuna juaj është qyteti ose qyteti ku jetoni dhe përdoret për të gjetur sasinë e rrezatimit diellor që marrin bizneset në zonën tuaj.</Albanian>
-                                    <br />
-                                    <English>For solar photovoltaics, either choose an example from our list, or enter photovoltaic information yourself!</English>
-                                    <Albanian>Për fotovoltaikëve diellore, ose zgjidhni një shembull nga lista jonë, ose vendosni vetë informacionin e fotovoltaikëve!</Albanian>
+                                    <English>Enter the most recent price of electricity per kilowatt hour for your business.</English>
+                                    <Albanian>Shkruani çmimin më të fundit të energjisë elektrike për kilovat orë për biznesin tuaj.</Albanian>
                                 </Tooltip>
                             </div>
-                            <div className="Hor-flex">
+                            <div className="full-input">
                                 <label htmlFor="roof-space">
                                     <English>Flat roof space available for solar</English>
                                     <Albanian>Hapësirë ​​me çati të sheshtë e disponueshme për diell</Albanian>
@@ -181,7 +196,7 @@ function Calculator() {
                                     <Albanian>Futni sasinë e hapësirës së hapur të sheshtë që keni në çatinë e biznesit tuaj për fotovoltaikë diellorë. Nëse nuk e dini shumën e saktë, jepni një vlerësim të përafërt. Mbani në mend se hapësira e çatisë duhet të marrë dritën e diellit që fotovoltaikët diellorë të punojnë atje.</Albanian>
                                 </Tooltip>
                             </div>
-                            <div className="Hor-flex">
+                            <div className="full-input">
                                 <label htmlFor="percent-solar">
                                     <English>Percent of electricity consumption for solar</English>
                                     <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
@@ -195,21 +210,17 @@ function Calculator() {
                                     <Albanian>Për shembull, nëse futni 50, atëherë 50% e përdorimit aktual të energjisë elektrike do të gjenerohet nga fotovoltaikët diellorë, dhe 50% e tjera do të vijnë nga rrjeti.</Albanian>
                                 </Tooltip>
                             </div>
-                            <div className="Hor-flex">
-                                <label htmlFor="electricity-paid">
-                                    <div className="Hor-flex">
+                            <div className="full-input">
+                                <div className="input-label-align">
+                                    <label htmlFor="electricity-paid">
                                         <English>Current amount paid for electricity per</English>
                                         <Albanian>Shuma aktuale e paguar për energjinë elektrike në</Albanian>
-                                        <select id="electricity-paid-period">
-                                            <option value="month">
-                                                {albanian ? "muaj" : "month"}
-                                            </option>
-                                            <option value="year">
-                                                {albanian ? "vit" : "year"}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </label>
+                                    </label>
+                                    <label className="switch btn-color-mode-switch">
+                                        <input type="checkbox" name="electric-paid-my" label="Month-Year Toggle" id="electric-paid-my" placeholder="1" />
+                                        <label htmlFor="electric-paid-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
+                                    </label>
+                                </div>
                                 <input id="electricity-paid" type="number" placeholder="Lekë"></input>
                                 <Tooltip>
                                     <English>Enter the amount of money your businesses spends on electricity on average per month. This information should be on your electricity bill, or can be easily calculated by taking the average of the cost of electricity for your business for the last 12 months.</English>
@@ -232,12 +243,12 @@ function Calculator() {
                                 <Albanian>{energyGenerated ? `Energjia e gjeneruar nga sistemi diellor: ${Math.round(energyGenerated)} kWh në muaj` : ""}</Albanian>
                             </div>
                             <div className={totalSavings ? "spaced-result" : ""}>
-                                <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} Lekë` : ""}</English>
-                                <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} Lekë` : ""}</Albanian>
+                                <English>{totalSavings ? `Total amount saved by solar panel system purchase: ${Math.round(totalSavings)} euro per month` : ""}</English>
+                                <Albanian>{totalSavings ? `Shuma totale e kursyer nga blerja e sistemit të paneleve diellore: ${Math.round(totalSavings)} euro në muaj` : ""}</Albanian>
                             </div>
                             <div className={totalCost ? "spaced-result" : ""}>
-                                <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} Lekë` : ""}</English>
-                                <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} Lekë` : ""}</Albanian>
+                                <English>{totalCost ? `Total cost of solar panel system: ${Math.round(totalCost)} euro` : ""}</English>
+                                <Albanian>{totalCost ? `Kostoja totale e sistemit të paneleve diellore: ${Math.round(totalCost)} euro` : ""}</Albanian>
                             </div>
                             <div className={paybackPeriod ? "spaced-result" : ""}>
                                 <English>{paybackPeriod ? `Time to make a return on investment: ${formatMonths(paybackPeriod)}` : ""}</English>
@@ -248,8 +259,8 @@ function Calculator() {
                                 <Albanian>{emissionsSavings ? `Dioksidi i karbonit kursehet: ${Number(emissionsSavings).toFixed(3)} ton CO2` : ""}</Albanian>
                             </div>
                         </div>
-                        <div id="production-graph" style={{display: 'none'}}>
-                            <div id = "bottom-margin">
+                        <div id="production-graph" style={{ display: 'none' }}>
+                            <div id="bottom-margin">
                                 <English><b>See the production of a solar photovoltaic system by month</b></English>
                                 <Albanian><b>Shihni prodhimin e një sistemi fotovoltaik diellor sipas muajve</b></Albanian>
                             </div>
@@ -257,27 +268,19 @@ function Calculator() {
                                 <Plot
                                     data={[
                                         {
-                                        x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                        y: monthlyProduction,
-                                        type: 'bar',
+                                            x: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                                            y: monthlyProduction,
+                                            type: 'bar',
                                         },
                                     ]}
-                                    layout={ {width: 700, height: 400, title: 'Monthly Production of the Calculated System', 
-                                    xaxis: {title: "Month"}, yaxis: {title: "Production in kWh"}} }
-                                    config={{responsive: true}}
+                                    layout={{
+                                        width: 700, height: 400, title: 'Monthly Production of the Calculated System',
+                                        xaxis: { title: "Month" }, yaxis: { title: "Production in kWh" }
+                                    }}
+                                    config={{ responsive: true }}
                                 />
                             </div>
                         </div>
-                    </div>
-                </details>
-                <details id="muni-panel-choice">
-                    <summary>
-                        <English><b>Municipality and Solar Photovoltaic Info</b>: Input the municipality of your building. Then input information about the solar photovoltaics you will use, or select a solar photovoltaic system from the table</English>
-                        <Albanian><b>Informacion komunal dhe fotovoltaik diellor</b>: Futni bashkinë e ndërtesës suaj. Më pas futni informacione rreth fotovoltaikëve diellorë që do të përdorni, ose zgjidhni një sistem fotovoltaik diellor nga tabela</Albanian>
-                    </summary>
-                    <div className="detail-content">
-                        <MunicipalDropdown changeEvent={(e) => setPrefecture(e.target.value)}></MunicipalDropdown>
-                        <SolarPanelScrollList onSelection={e => setSolarData(e)} checkIsCustomData={b => setShouldUseName(!b)}></SolarPanelScrollList>
                     </div>
                 </details>
             </div>
@@ -289,24 +292,22 @@ function Calculator() {
 /**
  * Use the provided location and solar PV data to calculate {@link Calculations} values.
  * @param {string} prefecture The prefecture to use for irradiation data
+ * @param {number} manualIrradiation A manual value to use for irradiation instead of a prefecture
  * @param {number} solarCost The cost of a single solar PV unit
  * @param {number} solarArea The dimensions of a single solar PV unit
  * @param {number} solarCapacity The capacity of a single solar PV unit
- * @param {number} solarEfficiency The efficiency of the selected solar PV unit
  * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
  */
-function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEfficiency) {
-    const roofSpace = document.getElementById("roof-space");
-    const percentSolar = document.getElementById("percent-solar");
-    const electricityPaid = document.getElementById("electricity-paid");
-    const percentLoan = document.getElementById("loan-percent");
-    const interest = document.getElementById("loan-interest");
+function getSystemData(prefecture, manualIrradiation, solarCost, solarArea, solarCapacity) {
+    const roofSpace = document.getElementById("roof-space").value;
+    const percentSolar = document.getElementById("percent-solar").value;
+    let monthlyConsumption = document.getElementById("nop-electricity-usage").value;
+    const electricityPrice = document.getElementById("electricity-price").value;
 
-    let electricityPaidVal = electricityPaid.value;
-    if(document.getElementById("electricity-paid-period").value === "year") {
-        electricityPaidVal /= 12;
-    }
-    const systemData = calcROI(roofSpace.value, percentSolar.value, electricityPaidVal, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency);
+    if (!document.getElementById("electric-usage-my").checked) //Unchecked means that amount is yearly
+        monthlyConsumption = monthlyConsumption / 12;
+
+    const systemData = calcROI(roofSpace, percentSolar, electricityPrice, monthlyConsumption, prefecture, manualIrradiation, solarCost, solarArea, solarCapacity);
 
     return systemData;
 }
@@ -315,40 +316,38 @@ function getSystemData(prefecture, solarCost, solarArea, solarCapacity, solarEff
  * Calculates the return on investment.
  * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
  * @param {number} percentEnergyForSolar Amount of total energy consumption dedicated to solar (between 0 and 100) (%)
- * @param {number} costPerMonth Total amount paid for electricity per month (Lekë per month)
+ * @param {number} monthlyConsumption Total energy used per month (kWh / month)
  * @param {string} prefecture The prefecture to gather solar data from
- * @param {number} singlePanelCost Cost of a single solar panel (Lekë)
- * @param {number} [panelSize] Size of a single solar panel (m^2)
- * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
- * @param {number} [panelEfficiency] Efficiency of solar panels (%)
- * @param {number} [percentLoan] Percentage of payment to be covered by loan
- * @param {number} [interest] Monthly interest in the case of payment by loan (Lekë per month)
+ * @param {number} manualIrradiation A manually entered solar irradiation amount to use instead of a prefecture
+ * @param {number} costPerKW Cost of a single kW of PV (euro)
+ * @param {number} panelSize Size of a single solar panel (m^2)
+ * @param {number} panelCapacity Capacity of a single solar panel (W)
  * @returns {Calculations} A collection of calculations represented by a {@link Calculations} object.
  */
-function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, singlePanelCost, panelSize = 1.66, panelCapacity = .150, panelEfficiency = 15, percentLoan = 0, interest = 0) {
-    let electricityPrice = 18; // Cost of electricity (Lekë per kWh)
-    let panelCost = singlePanelCost / panelCapacity;
-    let expenses = 200000; // Initial costs apart from the panels themselves (Ex: batteries, installation costs, replacing grid cables, etc.) (Lekë)
-
-    // Amount of solar irradiation for the specified municipality (kWh/month)/kW
-    const solarIrradiation = SolarData.getData(prefecture, "AVG", panelCapacity / panelSize, false);
+function calcROI(roofArea, percentEnergyForSolar, electricityPrice, monthlyConsumption, prefecture, manualIrradiation, costPerKW, panelSize, panelCapacity) {
+    // Amount of solar irradiation for the specified municipality kWh/kW per month. Uses a manual value if entered (non-0)
+    const solarIrradiation = manualIrradiation || SolarData.getData(prefecture, "AVG", panelCapacity / panelSize / 1000, false);
     // Ideal amount of energy generated per month for a system (kWh/month)
-    const desiredMonthlyGen = ((percentEnergyForSolar / 100) * costPerMonth) / electricityPrice;
-    // Number of solar panels needed
-    const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity / 1.15 / .99)); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
+    const desiredMonthlyGen = (percentEnergyForSolar / 100) * monthlyConsumption;
+    //Expected number of solar panels required
+    const solarPanelReq = calcNumPanels(desiredMonthlyGen, prefecture, manualIrradiation, panelSize, panelCapacity);
+    // Number of solar panels needed, or as many as fit on the roof if the amount needed does not fit
+    const solarPanelAmt = Math.min(Math.floor(roofArea / panelSize), solarPanelReq);
+    //Capacity of solarPanelAmt (kW)
+    const solarCapacityAmt = panelCapacity * solarPanelAmt / 1000;
     // Amount of energy generated per month for a system (kWh per month)
-    const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
-    // Total cost of the system in Lekë
-    const totalCost = (panelCost * panelCapacity * solarPanelAmt) + expenses;
-    // Amount of Lekë saved per month
-    const savings = (electricityPrice * actualMonthlyGen) - (percentLoan * interest * totalCost / 10000);
+    const actualMonthlyGen = solarCapacityAmt * solarIrradiation;
+    // Total cost of the system in euro
+    const totalCost = solarCapacityAmt * costPerKW;
+    // Amount of euro saved per month
+    const savings = actualMonthlyGen * (electricityPrice / settings.lekPerEuro.getState());
     // Total time to return on investment in months
     const roi = totalCost / savings;
     //energy in kwh * 0.38 MWh per toe (tonnes of crude oil burned) / 1000 = tonnes of CO2
-    const emissionsSaved = (actualMonthlyGen * 0.38) / 1000; 
+    const emissionsSaved = (actualMonthlyGen * 0.38) / 1000;
 
     return {
-        AverageMonthlyGeneration: actualMonthlyGen, 
+        AverageMonthlyGeneration: actualMonthlyGen,
         TotalSavings: savings,
         TotalCost: totalCost,
         ReturnOnInvestment: roi,
@@ -365,76 +364,50 @@ function calcROI(roofArea, percentEnergyForSolar, costPerMonth, prefecture, sing
 function formatMonths(totalMonths, isAlbanian = false) {
     let years = Math.floor(totalMonths / 12);
     const months = Math.round(totalMonths % 12);
-    if(years === Infinity) {
-        if(isAlbanian)
+    if (years === Infinity) {
+        if (isAlbanian)
             return "Ju lutemi futni numra të vlefshëm";
         else
             return "Please input valid numbers";
     }
-    
+
     let yearText, monthText;
-    switch(years) {
+    switch (years) {
         case 0:
             yearText = "";
             break;
         case 1:
-            if(isAlbanian)
-                yearText = "1 Vit";
-            else
-                yearText = "1 Year";
+            yearText = `1 ${isAlbanian ? "Vit" : "Year"}`;
             break;
         default:
-            if(isAlbanian)
-                yearText = `${years} Vjet`;
-            else
-                yearText = `${years} Years`;
+            yearText = `${years} ${isAlbanian ? "Vjet" : "Years"}`;
             break;
     }
 
     //Adds line break when displaying both month and year counts
-    if(years !== 0 && months !== 0)
+    if (years !== 0 && months !== 0)
         yearText += "\n";
 
-    switch(months) {
+    switch (months) {
         case 0:
-            if(years === 0) {
-                if(isAlbanian)
-                    monthText = "Më pak se 1 muaj!";
-                else
-                    monthText = "Less than 1 month!";
-            }
+            if (years === 0)
+                monthText = isAlbanian ? "Më pak se 1 muaj!" : "Less than 1 month!";
             else
                 monthText = "";
             break;
         case 1:
-            if(isAlbanian)
-                monthText = "1 muaj";
-            else
-                monthText = "1 month";
+            monthText = `1 ${isAlbanian ? "muaj" : "month"}`;
             break;
         case 12:
             years++;
-            if(isAlbanian)
-                yearText = `${years} Vit`;
-            else {
-                yearText = `${years} Years`;
-            }
-            if(years > 1) {
-                if(isAlbanian)
-                    yearText = `${years} Vjet`;
-                else
-                    yearText = `${years} Years`;
-            }
+            yearText = `${years} ${isAlbanian ? (years > 1 ? "Vjet" : "Vit") : (years > 1 ? "Years" : "Year")}`;
             monthText = "";
             break;
         default:
-            if(isAlbanian)
-                monthText = `${months} Muaj`;
-            else
-                monthText = `${months} Months`;
-             break;
+            monthText = `${months} ${isAlbanian ? "Muaj" : "Months"}`;
+            break;
     }
-    
+
     return yearText + monthText;
 }
 
@@ -455,7 +428,7 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
     const percentSolar = document.getElementById("percent-solar").value;
     const costPerMonth = document.getElementById("electricity-paid").value;
 
-    for(let i in months) {
+    for (let i in months) {
         // Amount of solar irradiation for the specified municipality (kWh/month)/kW
         const solarIrradiation = SolarData.getData(prefecture, months[i], panelCapacity / panelSize, false);
         // Ideal amount of energy generated per month for a system (kWh/month)
@@ -464,7 +437,7 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
         const solarPanelAmt = Math.min(Math.floor(roofSpace / panelSize), Math.ceil(desiredMonthlyGen / (panelEfficiency / 100) / solarIrradiation / panelCapacity / 1.15 / .99)); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
         // Amount of energy generated per month for a system (kWh per month)
         const actualMonthlyGen = panelCapacity * solarPanelAmt * solarIrradiation * (panelEfficiency / 100) * 1.15 * .99; //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
-        
+
         // console.log({
         //     irradiation: solarIrradiation,
         //     desiredMonthlyGen: desiredMonthlyGen,
@@ -474,28 +447,72 @@ function calcMonthlyProduction(prefecture, panelSize = 1.66, panelCapacity = .15
 
         monthlyProd.push(actualMonthlyGen);
     }
-    
+
     return monthlyProd;
 }
 
 /**
  * Calculates the amount of solar PV units required to produce 100% of electricity consumption
+ * @param {number} monthlyConsumption The amount of electricity used per month in kWh
  * @param {number} roofArea Amount of roof space to be used for solar panels (m^2)
+ * @param {number} manualIrradiation A value to use if a prefecture is not selected for the irradiation
  * @param {string} prefecture The prefecture to gather solar data from
- * @param {number} [panelCapacity] Capacity of a single solar panel (kW)
- * @param {number} [panelEfficiency] Efficiency of solar panels (%)
+ * @param {number} panelCapacity Capacity of a single solar panel (kW)
  * @returns {number} The number of PV units required to replace electricity consumption
  */
-function calcNumPanels(prefecture, solarArea = 1, solarCapacity = .21, solarEfficiency = .15) {
-    const electricityUsage = document.getElementById("nop-electricity-usage");
-    const electricityUsagePeriod = document.getElementById("nop-electricity-usage-period");
+function calcNumPanels(monthlyConsumption, prefecture, manualIrradiation, solarArea, solarCapacity) {
+    // console.log({
+    //     monthlyConsumption: monthlyConsumption,
+    //     prefecture: prefecture,
+    //     manualIrradiation: manualIrradiation,
+    //     solarArea: solarArea,
+    //     solarCapacity: solarCapacity
+    // });
+    const solarIrradiation = manualIrradiation || SolarData.getData(prefecture, "AVG", (solarCapacity / 1000) / solarArea, false);
+    let capacityNeeded = monthlyConsumption / solarIrradiation;
+    //capacityNeeded = capacityNeeded / 1.15 / 0.99; //Accounts for optimal angle and orientation (extra 15%) and efficiency of cables (99%)
 
-    const solarIrradiation = SolarData.getData(prefecture, "AVG", solarCapacity / solarArea, false);
+    const numberNeeded = Math.ceil(capacityNeeded / (solarCapacity / 1000));
+    return numberNeeded;
+}
 
-    if(electricityUsagePeriod.value === "year") {
-        return Math.ceil(electricityUsage.value / 12 / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
+
+
+function MuniDataDashboard(props) {
+    /**
+     * Opens the municipality and pv selection modal
+     */
+    function loadMuniPV(e) {
+        e.preventDefault();
+        document.body.style.overflow = "hidden";
+        props.visibleToggle(true);
     }
-    return Math.ceil(electricityUsage.value / (solarEfficiency / 100) / solarIrradiation / solarCapacity / 1.15 / .99); //1.15 is efficiency multiplier of panel angle, .99 is efficiency mutliplier of cables
+
+    return (
+        <div className="full-input">
+            <button type="button" onClick={loadMuniPV} className="muni-data-button">
+                <English>Click here to enter municipality and solar photovoltaics info</English>
+                <Albanian>Klikoni këtu për të hyrë në informacionin e bashkisë dhe fotovoltaikëve diellorë</Albanian>
+            </button>
+            <div className="muni-data-view">
+                <ul className="selected-data-display">
+                    <li style={{
+                        backgroundColor: `${(props.municipalName || props.manualIrradiation) ? "#d3f5b3" : "#f5bfb3"}`
+                    }}>{props.municipalName ? (props.municipalName + " selected!") : (props.manualIrradiation ? "Custom irradiation entered!": "No municipality selected!")}</li>
+                    <li style={{
+                        backgroundColor: `${props.pvStatus ? "#d3f5b3" : "#f5bfb3"}`
+                    }}>{typeof (props.pvStatus) === 'string' ? props.pvStatus + " entered!" : (props.pvStatus ? "Custom PV entered!" : "PV module information missing!")}</li>
+                </ul>
+            </div>
+            <Tooltip>
+                <English>Your municipality is the city or town you live in, and is used to find the amount of solar irradiation businesses in your area recieve.</English>
+                <Albanian>Komuna juaj është qyteti ose qyteti ku jetoni dhe përdoret për të gjetur sasinë e rrezatimit diellor që marrin bizneset në zonën tuaj.</Albanian>
+                <br />
+                <English>For solar photovoltaics, either choose an example from our list, or enter photovoltaic information yourself!</English>
+                <Albanian>Për fotovoltaikëve diellore, ose zgjidhni një shembull nga lista jonë, ose vendosni vetë informacionin e fotovoltaikëve!</Albanian>
+            </Tooltip>
+        </div>
+    );
 }
 
 export default Calculator;
