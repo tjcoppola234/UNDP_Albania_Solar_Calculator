@@ -1,5 +1,6 @@
 import './global.css';
 import './App.css';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Albanian from './Albanian';
 import English from './English';
@@ -12,7 +13,7 @@ import { settings } from './Settings';
  */
 function App() {
   return (
-    <div className="App" style={{backgroundImage: `linear-gradient(to bottom, rgba(236,240,241,0.25), rgba(236,240,241,0.25)), url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+    <div className="App" style={{ backgroundImage: `linear-gradient(to bottom, rgba(236,240,241,0.25), rgba(236,240,241,0.25)), url(${process.env.PUBLIC_URL}/home-background.jpeg)`, backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
       <PageHead></PageHead>
       <div className="content">
         <div id="center-fade">
@@ -70,12 +71,12 @@ function App() {
               <Albanian>Ndihmë</Albanian>
             </Link></button>
             <div className="square-bullets">
-            <ul>
-              <li>
-                <English>See frequently asked questions about solar</English>
-                <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
-              </li>
-            </ul>
+              <ul>
+                <li>
+                  <English>See frequently asked questions about solar</English>
+                  <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -90,6 +91,17 @@ function App() {
  * @returns {HTMLElement} An HTMLElement representing the navigation bar, with class "App-header".
  */
 export function PageHead() {
+  const [dropdownVis, setDropdownVis] = useState(false);
+
+  window.addEventListener("resize", e => {
+    setDropdownVis(window.innerWIdth > 1330);
+  });
+  
+  document.addEventListener("click", e => {
+    if (e.target.closest("#Nav-options") === null && window.innerWidth <= 1330)
+      setDropdownVis(false);
+  });
+
   return (
     <div>
       <header id="App-header">
@@ -100,9 +112,9 @@ export function PageHead() {
           </div>
         </a>
         <nav id="Nav-options">
-          <button id="Hamburger" type="button" onClick={() => hamburgerVis()}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
-          <ul id="Nav-options-list">
-          <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => settings.disabledMenuItem.setState("Home")}>
+          <button id="Hamburger" type="button" onClick={() => setDropdownVis(!dropdownVis)}><img src={process.env.PUBLIC_URL + "icons8-menu-50.png"} alt="hamburger icon"></img></button>
+          <ul id="Nav-options-list" className={dropdownVis ? "" : "invisible"}>
+            <li className={settings.disabledMenuItem.getState() === "Home" ? "current-tab" : ""}><Link to="/" onClick={() => settings.disabledMenuItem.setState("Home")}>
               <English>Home</English>
               <Albanian>Shitet</Albanian>
             </Link></li>
@@ -137,12 +149,12 @@ export function PageFoot() {
       <footer>
         <div className="Sponsor-logos">
           <div className="Center-items">
-            <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL+'AEE_logo.png'} alt='Logo for AEE'></img></a>
+            <a href="http://eficenca.gov.al/" target="_blank" rel="noreferrer"><img id="aee-logo" src={process.env.PUBLIC_URL + 'AEE_logo.png'} alt='Logo for AEE'></img></a>
             <div>
               <English>in collaboration with</English>
               <Albanian>ne bashkepunim me</Albanian>
             </div>
-            <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL+'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
+            <a href="https://www.undp.org/albania" target="_blank" rel="noreferrer"><img id="undp-logo" src={process.env.PUBLIC_URL + 'UNDP_logo.png'} alt='Logo for UNDP'></img></a>
           </div>
         </div>
         <div>
@@ -154,79 +166,33 @@ export function PageFoot() {
   )
 }
 
-let switching = false;
-/**
- * Switches hamburger dropdown from visible to invisible and back when clicking on the menu icon.
- * The variable switching is to stop visibility loops keeping the menu invisible even when clicking on the menu icon.
- */
-function hamburgerVis() {
-  switching = true;
-  let nav = document.getElementById("Nav-options-list");
-  if(nav.classList.contains("invisible")) {
-    nav.classList.remove("invisible");
-  }
-  else {
-    nav.classList.add("invisible");
-  }
-}
-
 let loop = false;
 /**
  * Hides hamburger dropdown menu when clicking off of the menu.
  * Also hides tooltips when clicking off of them
  */
-document.onclick = ev => {
-  //Hides hamburger when clicking off of it
-  let nav = document.getElementById("Nav-options-list");
-  if(!switching && window.innerWidth <= 1330 && !nav.classList.contains("invisible")) {
-    nav.classList.add("invisible");
-  }
-  switching = false;
-
+document.addEventListener("click", ev => {
   //Hides tooltips when clicking off of them
-  if(!loop) {
-      const buttonClicked = ev.target.closest(".tool-button");
+  if (!loop) {
+    const buttonClicked = ev.target.closest(".tool-button");
 
-      const tooltips = document.getElementsByClassName("tool-tip-parent");
+    const tooltips = document.getElementsByClassName("tool-tip-parent");
 
-      if(ev.target.closest(".tool-tip") === null) {
-          for(let tooltip of tooltips) {
-              if(!tooltip.querySelector(".tool-tip").classList.contains("invisible")) {
-                  const aButton = tooltip.querySelector(".tool-button");
+    if (ev.target.closest(".tool-tip") === null) {
+      for (let tooltip of tooltips) {
+        if (!tooltip.querySelector(".tool-tip").classList.contains("invisible")) {
+          const aButton = tooltip.querySelector(".tool-button");
 
-                  if(buttonClicked === null || !buttonClicked.isSameNode(aButton)) {
-                      loop = true;
-                      aButton.click();
-                  }
-              }
+          if (buttonClicked === null || !buttonClicked.isSameNode(aButton)) {
+            loop = true;
+            aButton.click();
           }
+        }
       }
+    }
 
-      loop = false;
+    loop = false;
   }
-}
-
-let sizeDecreased = false;
-/**
- * Hides or shows hamburger dropdown menu when resizing screen. Hides the menu when adding the hamburger menu, and adds the menu when there is no hamburger element.
- * The variable sizeDecreased prevents hiding the dropdown when the hamburger menu is already visible.
- */
-window.onresize = () => {
-  if(window.innerWidth > 1330) {
-    document.getElementById("Nav-options-list").classList.remove("invisible");
-    sizeDecreased = false;
-  } else if(!sizeDecreased && window.innerWidth <= 1330) {
-    document.getElementById("Nav-options-list").classList.add("invisible");
-    sizeDecreased = true;
-  }
-}
-/**
- * Hides hamburger dropdown menu when the page is loaded, if necessary.
- */
-window.onload = () => {
-  if(window.innerWidth <= 1330) {
-    document.getElementById("Nav-options-list").classList.add("invisible");
-  }
-}
+});
 
 export default App;
