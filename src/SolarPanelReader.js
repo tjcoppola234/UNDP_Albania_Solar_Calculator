@@ -3,7 +3,6 @@ import { readString } from 'react-papaparse';
 import English from './English';
 import Albanian from './Albanian';
 import { settings } from './Settings';
-import Tooltip from './Tooltip';
 
 /**
  * A collection of data about a specific solar PV example.
@@ -34,11 +33,6 @@ import Tooltip from './Tooltip';
 export function SolarPanelScrollList(props) {
     const [pvList, setPVList] = useState([]);
     const [useLek, setUseLek] = useState(false);
-
-    const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
-    settings.albanianVisible.addListener(visible => {
-        setAlbanian(visible);
-    });
 
     useEffect(() => {
         fetch("data/SolarPanelData.csv", {
@@ -136,8 +130,12 @@ export function SolarPanelScrollList(props) {
                     </thead>
                     <tbody>
                         {pvList.map((pv, index) => (
-                            <tr key={index}>
-                                <td id="panel-selection"><button onClick={() => { fillPanelFields(pv); props.onSelection(pv); props.checkIsCustomData(false); }} type="button">
+                            <tr className="data-row" key={index} style={(props.isSelected(pv.NameOrModel, pv.Manufacturer) ? {backgroundColor: "#faffd9"} : {})} onClick={() => {
+                                fillPanelFields(pv);
+                                props.onSelection(pv);
+                                props.checkIsCustomData(false);
+                            }}>
+                                <td id="panel-selection"><button type="button">
                                     <English>Use this panel</English>
                                     <Albanian>Përdorni këtë panel</Albanian>
                                 </button></td>
@@ -153,74 +151,8 @@ export function SolarPanelScrollList(props) {
                     </tbody>
                 </table>
             </div>
-            <div id="solar-panel-info">
-                <div>
-                    <English><b>Disclaimer:</b> Data as of November 2022</English>
-                </div>
-                <div>
-                    <English>Select a solar panel from the table above or enter custom information below</English>
-                    <Albanian>Zgjidhni një panel diellor nga tabela e mësipërme ose futni informacione të personalizuara më poshtë</Albanian>
-                </div>
-                <div className="full-input modal-shorter">
-                    <label htmlFor="solar-cost">
-                        <English>Cost for one kW of panel (€):</English>
-                        <Albanian>Kostoja për një kW panel (€):</Albanian>
-                    </label>
-                    <input type="number" min="0" max="100000" step="0.001" placeholder={albanian ? "Fut koston e panelit për kW (€)" : "Enter panel's cost per kW (€)"} id="solar-cost" onInput={() => customizePanel(props)}></input>
-                    <Tooltip>
-                        <English>What is the price for one kW peak capacity's worth of photovoltaics? Use the table for an estimate if you aren't sure.</English>
-                        <Albanian>Cili është çmimi për një kW kapacitet maksimal të fotovoltaikëve? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
-                    </Tooltip>
-                </div>
-                <div className="full-input modal-shorter">
-                    <label htmlFor="solar-area">
-                        <English>Area of one solar panel (m²):</English>
-                        <Albanian>Sipërfaqja e një paneli diellor (m²):</Albanian>
-                    </label>
-                    <input type="number" min="0" max="100" step="0.01" placeholder={albanian ? "Fut zonën për panel (m²)" : "Enter area per panel (m²)"} id="solar-area" onInput={() => customizePanel(props)}></input>
-                    <Tooltip>
-                        <English>What is the size of one panel? Use the table for an estimate if you aren't sure.</English>
-                        <Albanian>Sa është madhësia e një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
-                    </Tooltip>
-                </div>
-                <div className="full-input modal-shorter">
-                    <label htmlFor="solar-capacity">
-                        <English>Peak capacity of one solar panel (W):</English>
-                        <Albanian>Kapaciteti maksimal i një paneli diellor (W):</Albanian>
-                    </label>
-                    <input type="number" min="0" max="1000" step="0.001" placeholder={albanian ? "Fut kapacitetin për panel (W)" : "Enter capacity per panel (W)"} id="solar-capacity" onInput={() => customizePanel(props)}></input>
-                    <Tooltip>
-                        <English>What is the peak capacity of one panel? Use the table for an estimate if you aren't sure.</English>
-                        <Albanian>Sa është kapaciteti maksimal i një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
-                    </Tooltip>
-                </div>
-                <div className="full-input modal-shorter">
-                    <label htmlFor="solar-efficiency">
-                        <English>Efficiency of solar panels (%):</English>
-                        <Albanian>Efikasiteti i paneleve diellore (%):</Albanian>
-                    </label>
-                    <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => customizePanel(props)}></input>
-                    <Tooltip>
-                        <English>What is the efficiency of the panels? Use the table for an estimate if you aren't sure.</English>
-                        <Albanian>Cili është efikasiteti i paneleve? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
-                    </Tooltip>
-                </div>
-            </div>
         </div>
     );
-}
-
-function customizePanel(props) {
-    props.checkIsCustomData(true);
-    props.onSelection({
-        NameOrModel: "Custom",
-        Manufacturer: "",
-        ManufacturerLink: "",
-        CostPerPanel: document.getElementById("solar-cost").value,
-        AreaPerPanel: document.getElementById("solar-area").value,
-        CapacityPerPanel: document.getElementById("solar-capacity").value,
-        Efficiency: document.getElementById("solar-efficiency").value
-    });
 }
 
 /**

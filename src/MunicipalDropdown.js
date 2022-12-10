@@ -1,5 +1,5 @@
 import { readString } from 'react-papaparse';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import English from './English';
 import Albanian from './Albanian';
 import Tooltip from './Tooltip';
@@ -19,6 +19,13 @@ import { settings } from './Settings';
  */
 export function MunicipalDropdown(props) {
     const [looping, setLooping] = useState(false);
+    const [isManualShown, setIsManualShown] = useState(false);
+    const ref = useRef(null);
+
+    const [albanian, setAlbanian] = useState(settings.albanianVisible.getState());
+    settings.albanianVisible.addListener(visible => {
+        setAlbanian(visible);
+    });
 
     useEffect(() => {
         //Loading csv as string
@@ -82,13 +89,45 @@ export function MunicipalDropdown(props) {
 
     return (
         <div>
-            <div className="full-input modal-shorter">
+            <div ref={ref} className={"modal-img" + (isManualShown ? "" : " invisible")}>
+                <span className="close-modal" onClick={() => {
+                    ref.current.scrollTo(0, 0);
+                    setIsManualShown(false);
+                    document.body.style.overflowY = "scroll";
+                }}>&times;</span>
+                <div className="modal-content">
+                    <div className="center-label">
+                        <label htmlFor="mun-irradiation">
+                            <English>Manually enter the average amount of irradiation in your area per month:</English>
+                            <Albanian>Vendosni manualisht sasinë mesatare të rrezatimit në zonën tuaj në muaj:</Albanian>
+                        </label>
+                    </div>
+                    <div className="full-input">
+                        <input id="mun-irradiation" type="number" placeholder={albanian ? "kWh/kW në muaj" : "kWh/kW per month"} min="0.01" max="100000" step="0.01" onChange={v => {
+                            if (!looping) {
+                                props.changeEvent(undefined, v.target.valueAsNumber);
+                                setLooping(true);
+                                for (let drop of document.getElementsByClassName("municipality-dropdown"))
+                                    drop.value = "";
+                                setLooping(false);
+                            }
+                        }}></input>
+                        <Tooltip>
+                            <English>Your municipality is used to determine the approximate solar irradiation, or amount of sunlight, reaching your business.</English>
+                            <Albanian>Komuna juaj përdoret për të përcaktuar rrezatimin e përafërt diellor ose sasinë e dritës së diellit që arrin në biznesin tuaj.</Albanian>
+                        </Tooltip>
+                    </div>
+                </div>
+            </div>
+            <div className="center-label">
                 <label htmlFor="municipality-dropdown">
-                    <English>Select your municipality:</English>
-                    <Albanian>Zgjidhni komunën tuaj:</Albanian>
+                    <English>Select your municipality</English>
+                    <Albanian>Zgjidhni komunën tuaj</Albanian>
                 </label>
+            </div>
+            <div className="full-input extra-manual-option">
                 <select className="municipality-dropdown" title="Select Municipality" defaultChecked={false} onChange={e => {
-                    if(!looping) {
+                    if (!looping) {
                         props.changeEvent(e, 0);
                         setLooping(true);
                         document.getElementById("mun-irradiation").value = parseFloat(SolarData.getData(e.target.value, SolarData.timeOptions.Average, 1, false)).toFixed(2);
@@ -100,25 +139,11 @@ export function MunicipalDropdown(props) {
                     <English>Your municipality is used to determine the approximate solar irradiation, or amount of sunlight, reaching your business.</English>
                     <Albanian>Komuna juaj përdoret për të përcaktuar rrezatimin e përafërt diellor ose sasinë e dritës së diellit që arrin në biznesin tuaj.</Albanian>
                 </Tooltip>
-            </div>
-            <div className="full-input modal-shorter">
-                <label htmlFor="mun-irradiation">
-                    <English>Or manually enter the average amount of irradiation in your area per month:</English>
-                    <Albanian>Ose vendosni manualisht sasinë mesatare të rrezatimit në zonën tuaj në muaj:</Albanian>
-                </label>
-                <input id="mun-irradiation" type="number" placeholder={"Lekë/kWh"} min="0.01" max="100000" step="0.01" onChange={v => {
-                    if(!looping) {
-                        props.changeEvent(undefined, v.target.valueAsNumber);
-                        setLooping(true);
-                        for(let drop of document.getElementsByClassName("municipality-dropdown"))
-                            drop.value = "";
-                        setLooping(false);
-                    }
-                }}></input>
-                <Tooltip>
-                    <English>Your municipality is used to determine the approximate solar irradiation, or amount of sunlight, reaching your business.</English>
-                    <Albanian>Komuna juaj përdoret për të përcaktuar rrezatimin e përafërt diellor ose sasinë e dritës së diellit që arrin në biznesin tuaj.</Albanian>
-                </Tooltip>
+                <button type="button" className="submit-button" onClick={e => {
+                    e.preventDefault();
+                    document.body.style.overflow = "hidden";
+                    setIsManualShown(true);
+                }}>{albanian ? "Futni rrezatimin me dorë" : "Enter irradiation manually"}</button>
             </div>
         </div>
     );
