@@ -112,6 +112,7 @@ function Calculator() {
             setTotalCost(results.TotalCost);
             setPaybackPeriod(results.ReturnOnInvestment);
             setEmissionsSavings(results.EmissionsSavings);
+            //console.log(results);
         }
 
         setShowGeneration(shouldUpdate);
@@ -383,11 +384,11 @@ function Calculator() {
                                 <Albanian>CO<sub>2</sub> u ruajt</Albanian>
                             </div>
                             <div className={"center-calc-middle calc-color-alt" + (showGeneration ? "" : " hidden-result")}><div className="calc-result">{Math.round(totalCost)}</div></div>
-                            <div className={"center-calc-middle" + (showGeneration ? "" : " hidden-result")}>
+                            <div className={"center-calc-middle" + (showGeneration ? "" : " hidden-result") + (paybackPeriod.years ? " year-font" : "")}>
                                 <English>{formatYears(paybackPeriod.years, false) || (paybackPeriod.months ? "" : "Less than one month!")}</English>
                                 <Albanian>{formatYears(paybackPeriod.years, true) || (paybackPeriod.months ? "" : "Më pak se një muaj!")}</Albanian>
                             </div>
-                            <div className={"center-calc-middle calc-color-alt" + (showGeneration ? "" : " hidden-result")}><div className="calc-result">{Math.round(emissionsSavings)}</div></div>
+                            <div className={"center-calc-middle calc-color-alt" + (showGeneration ? "" : " hidden-result")}><div className="calc-result">{parseFloat(emissionsSavings).toFixed(2)}</div></div>
                             <div className={"center-calc-bottom calc-color-alt" + (showGeneration ? "" : " hidden-result")}>
                                 <English>euro</English>
                                 <Albanian>euro</Albanian>
@@ -401,27 +402,30 @@ function Calculator() {
                                 <Albanian>ton CO<sub>2</sub></Albanian>
                             </div>
                         </div>
-                        <div id="production-graph">
-                            <Plot
-                                data={[
-                                    {
-                                        x: (albanian ? ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qërshor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"] :
-                                            ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
-                                        y: monthlyProduction,
-                                        type: 'bar',
-                                    },
-                                ]}
-                                layout={{
-                                    title: (albanian ? 'Prodhimi mujor' : 'Monthly Production'),
-                                    xaxis: { title: (albanian ? "Muaj" : "Month") },
-                                    yaxis: { title: (albanian ? "Prodhimi në kWh" : "Production in kWh") }
-                                }}
-                                style={{
-                                    width: 'inherit',
-                                    height: 'inherit'
-                                }}
-                                config={{ responsive: true }}
-                            />
+                        <div id="production-wrapper">
+                            <div id="production-graph">
+                                <Plot
+                                    data={[
+                                        {
+                                            x: (albanian ? ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qërshor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"] :
+                                                ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]),
+                                            y: monthlyProduction,
+                                            type: 'bar',
+                                        },
+                                    ]}
+                                    layout={{
+                                        title: (albanian ? 'Prodhimi mujor' : 'Monthly Production'),
+                                        xaxis: { title: (albanian ? "Muaj" : "Month") },
+                                        yaxis: { title: (albanian ? "Prodhimi në kWh" : "Production in kWh") }
+                                    }}
+                                    style={{
+                                        width: 'inherit',
+                                        height: '40vh',
+                                        overflowX: "hidden"
+                                    }}
+                                    config={{ responsive: true }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
