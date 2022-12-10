@@ -18,6 +18,11 @@ function Resources() {
     const [caption2, setCaption2] = useState("");
     const ref = useRef(null);
 
+    const [showToTop, setShowToTop] = useState(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
+    window.addEventListener("scroll", e => {
+        setShowToTop(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
+    });
+    
     /**
      * Loads an image into the modal popup and displays the modal
      * @param {number} num An index representing which image to load
@@ -54,7 +59,7 @@ function Resources() {
             </div>
             <div className="content">
                 <TableOfContents></TableOfContents>
-                <button id="scroll-to-top" style={{ opacity: ((document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? 1 : 0) }} type="button" onClick={e => {
+                <button id="scroll-to-top" style={{ opacity: showToTop ? 1 : 0 }} type="button" onClick={e => {
                     e.preventDefault();
                     document.body.scrollIntoView({
                         behavior: "smooth"
