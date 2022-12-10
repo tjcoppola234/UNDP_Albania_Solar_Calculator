@@ -66,7 +66,7 @@ function App() {
             </div>
           </div>
           <div className="square">
-            <button><Link to="/Help" onClick={() => settings.disabledMenuItem.setState("Help")}>
+            <button><Link to="/Help" onClick={() => {settings.disabledMenuItem.setState("Help"); document.body.scrollTo(0, 0); }}>
               <English>Help</English>
               <Albanian>Ndihmë</Albanian>
             </Link></button>

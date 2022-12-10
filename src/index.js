@@ -6,6 +6,7 @@ import App from './App'
 import Resources from './Resources';
 import Calculator from './Calculator';
 import Help from './Help';
+import ScrollToTop from './ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 /**
@@ -13,13 +14,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
  */
 root.render(
   // <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Calculator" element={<Calculator />} />
         <Route path="/Resources" element={<Resources />} />
         <Route path="/Help" element={<Help />} />
       </Routes>
-    </BrowserRouter>
+  </BrowserRouter>
   // </React.StrictMode>
 );
