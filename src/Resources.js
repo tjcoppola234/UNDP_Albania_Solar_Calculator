@@ -18,6 +18,11 @@ function Resources() {
     const [caption2, setCaption2] = useState("");
     const ref = useRef(null);
 
+    const [showToTop, setShowToTop] = useState(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
+    window.addEventListener("scroll", e => {
+        setShowToTop(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
+    });
+    
     /**
      * Loads an image into the modal popup and displays the modal
      * @param {number} num An index representing which image to load
@@ -54,7 +59,7 @@ function Resources() {
             </div>
             <div className="content">
                 <TableOfContents></TableOfContents>
-                <button id="scroll-to-top" type="button" onClick={e => {
+                <button id="scroll-to-top" style={{ opacity: showToTop ? 1 : 0 }} type="button" onClick={e => {
                     e.preventDefault();
                     document.body.scrollIntoView({
                         behavior: "smooth"
@@ -544,23 +549,23 @@ export function TableOfContents() {
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
-                if (e.currentTarget.style.width === "100px" || e.currentTarget.style.width === "") {
+                if (e.currentTarget.style.width === "150px" || e.currentTarget.style.width === "") {
                     document.getElementById("toc-toplist").classList.remove("invisible");
                     document.getElementById("toc").style.backgroundColor = "";
                     e.currentTarget.style.width = "440px";
                 } else {
                     document.getElementById("toc-toplist").classList.add("invisible");
                     document.getElementById("toc").style.backgroundColor = "transparent";
-                    e.currentTarget.style.width = "100px";
+                    e.currentTarget.style.width = "150px";
                 }
-            }}>☰</button>
+            }}>☰ Contents</button>
         </div>
     )
 }
 
 function jumpTo(e, id) {
     e.preventDefault();
-    for(let sec of document.getElementsByClassName("fade-in-section")) {
+    for (let sec of document.getElementsByClassName("fade-in-section")) {
         sec.classList.remove("slow");
         sec.classList.add("is-visible");
     }
@@ -571,19 +576,6 @@ function jumpTo(e, id) {
         behavior: 'smooth'
     });
     document.getElementById("toc-access").click();
-}
-
-/**
- * To handle the back-to-top button appearing
- */
-window.onscroll = () => {
-    if(settings.disabledMenuItem === "Resources") {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            document.getElementById("scroll-to-top").style.opacity = 1;
-        } else {
-            document.getElementById("scroll-to-top").style.opacity = 0;
-        }
-    }
 }
 
 /**
@@ -606,9 +598,9 @@ function FadeInSection(props) {
 
     useEffect(() => {
         const cur = domRef.current;
-        if(cur.classList.contains("is-visible"))
+        if (cur.classList.contains("is-visible"))
             setVisible(true);
-        if(!cur.classList.contains("slow"))
+        if (!cur.classList.contains("slow"))
             shouldLoadSlow(false);
 
         const observer = new IntersectionObserver(entries => {
@@ -618,7 +610,7 @@ function FadeInSection(props) {
         observer.observe(cur);
 
         const bBox = domRef.current.getBoundingClientRect();
-        if(bBox.top > 0 && (bBox.bottom < window.innerHeight || document.documentElement.clientHeight)) {
+        if (bBox.top > 0 && (bBox.bottom < window.innerHeight || document.documentElement.clientHeight)) {
             shouldLoadSlow(true);
         }
 
