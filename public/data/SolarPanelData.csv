@@ -1,10 +1,7 @@
 Name/Model,Manufacturer,Cost per Panel (Euro),Area per Panel (m^2),Capacity per Panel (W),Efficiency (%),Manufacturer Link
-Panel A,Brand A,200,1,140,14.01%,
-Panel B,Brand B,250,1,190,15.61%,
-Panel C,Brand C,305,1,240,18.00%,
-Panel D,Brand B,280,1,205,16.84%,
-Panel E,Brand D,320,2,235,14.40%,
-Panel F,Brand E,380,1,290,17.72%,
-Panel G,Brand F,320,2,290,17.55%,
-Panel H,Brand G,342,2,300,18.40%,
-Panel I,Brand E,390,1,300,19.55%
+Q.PEAK DUO L-G8.2 430W MONO,Qcells,356,2.2,430,20.10%,https://qcells.com/ane/
+REC Alpha Black REC405AA 405W Mono,REC,640,1.8,405,21.90%,https://www.recgroup.com/en
+PW1650-155/24V,Photowatt,350,1.3,155,15.00%,https://www.photowatt.com/en/
+I'M SOLAR 410W Mono,I'M SOLAR,221,1.9,410,20.00%,https://im.solar/en
+Meyer Burger 380W Mono black,Meyer Burger,275,1.8,380,20.70%,https://www.meyerburger.com/en
+JAM72S10/MR,JA Solar,375,2,410,20.40%,https://www.jasolar.com/html/en/
