@@ -121,14 +121,15 @@ function Calculator() {
     return (
         <div className="Calculator">
             <PageHead></PageHead>
-            <div id="half-split">
-                <div className="calculations">
-                    <div className="title-box Vert-flex" style={{ backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)` }}>
+            <div className="title-box Vert-flex" style={{ backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)` }}>
                         <English><h2 className="page-title">Solar Calculator</h2></English>
                         <Albanian><h2 className="page-title">Llogaritësi diellor</h2></Albanian>
                         <English><h3 className="page-subtitle">Find an estimate for your business</h3></English>
                         <Albanian><h3 className="page-subtitle">Gjeni një vlerësim për biznesin tuaj</h3></Albanian>
                     </div>
+            <div id="half-split">
+                <div className="calculations">
+                    
                     <div className="content">
                         <summary>
                             <English><b>Number of photovoltaics</b>: The number of photovoltaics required to cover 100% of your electricity consumption</English>
@@ -335,7 +336,7 @@ function Calculator() {
                             </div>
                         </div>
                     </div>
-                    <PageFoot></PageFoot>
+                    
                 </div>
                 <div className="results">
                     <div className="results-wrapper">
@@ -429,7 +430,9 @@ function Calculator() {
                         </div>
                     </div>
                 </div>
+
             </div>
+            <PageFoot></PageFoot>
         </div>
     )
 }
