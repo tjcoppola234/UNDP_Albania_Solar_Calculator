@@ -557,16 +557,16 @@ export function TableOfContents() {
             </ul>
             <button id="toc-access" type="button" onClick={e => {
                 e.preventDefault();
-                if (e.currentTarget.style.width === "100px" || e.currentTarget.style.width === "") {
+                if (e.currentTarget.style.width === "150px" || e.currentTarget.style.width === "") {
                     document.getElementById("toc-toplist").classList.remove("invisible");
                     document.getElementById("toc").style.backgroundColor = "";
                     e.currentTarget.style.width = "440px";
                 } else {
                     document.getElementById("toc-toplist").classList.add("invisible");
                     document.getElementById("toc").style.backgroundColor = "transparent";
-                    e.currentTarget.style.width = "100px";
+                    e.currentTarget.style.width = "150px";
                 }
-            }}>☰</button>
+            }}>☰ Contents</button>
         </div>
     )
 }

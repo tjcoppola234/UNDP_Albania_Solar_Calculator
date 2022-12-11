@@ -25,11 +25,12 @@
 .Calculator .results {
     position: sticky;
     top: 80px;
-    right: 0;
+    right: 10px;
     height: calc(100vh - 80px);
     background-color: var(--results-background);
     width: 100%;
     overflow-y: auto;
+    border-radius: 20px;
 }
 .Calculator .results-wrapper {
     padding: 10px;
