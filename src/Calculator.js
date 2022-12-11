@@ -245,7 +245,11 @@ function Calculator() {
                                             <English>Electricity usage per&nbsp;</English>
                                             <Albanian>Shfrytëzimi i energjisë elektrike në &nbsp;</Albanian>
                                             <label className="switch btn-color-mode-switch">
-                                                <input type="checkbox" name="electric-usage-my" label="Month-Year Toggle" id="electric-usage-my" placeholder="1" />
+                                                <input type="checkbox" name="electric-usage-my" label="Month-Year Toggle" id="electric-usage-my" placeholder="1" onChange={e => {
+                                                    e.preventDefault();
+                                                    updateNumPanelVisibility(manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption);
+                                                    updateGenerationVisibility(manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption, electricityPrice, roofArea, percentSolar);
+                                                }}/>
                                                 <label htmlFor="electric-usage-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
                                             </label>
                                         </div>
