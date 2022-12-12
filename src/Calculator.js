@@ -57,6 +57,7 @@ function Calculator() {
     const [roofArea, setRoofArea] = useState(0);
     const [percentSolar, setPercentSolar] = useState();
 
+    const [showCapacityManOpt, setShowCapacityManOpt] = useState(true);
     const [showNumPanels, setShowNumPanels] = useState(false);
     const [showGeneration, setShowGeneration] = useState(false);
 
@@ -85,6 +86,10 @@ function Calculator() {
      */
     const updateNumPanelVisibility = (manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption) => {
         const shouldUpdate = !!((manualIrradiation || prefecture) && solarCost && solarArea && (solarCapacity || solarEfficiency) && monthlyConsumption);
+        
+        //Calculate capacity using efficiency
+        if(!showCapacityManOpt)
+            solarCapacity = solarEfficiency / 100 * solarArea;
 
         if (shouldUpdate) {
             const isMonthly = document.getElementById("electric-usage-my").checked;
@@ -99,6 +104,10 @@ function Calculator() {
     const updateGenerationVisibility = (manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption, electricityPrice, roofArea, percentSolar) => {
         let shouldUpdate = !!((manualIrradiation || prefecture) && solarCost && solarArea && (solarCapacity || solarEfficiency) && monthlyConsumption);
         shouldUpdate &= !!(electricityPrice && roofArea && percentSolar);
+        
+        //Calculate capacity using efficiency
+        if(!showCapacityManOpt)
+            solarCapacity = solarEfficiency / 100 * solarArea;
 
         if (shouldUpdate) {
             //Set data to use in graph
@@ -122,14 +131,14 @@ function Calculator() {
         <div className="Calculator">
             <PageHead></PageHead>
             <div className="title-box Vert-flex" style={{ backgroundImage: `linear-gradient(to bottom, rgba(204,208,209,0) 0%, rgba(220,224,225,0.75) 75%, rgba(236,240,241,1) 100%), url(${process.env.PUBLIC_URL}/calculator-background.jpg)` }}>
-                        <English><h2 className="page-title">Solar Calculator</h2></English>
-                        <Albanian><h2 className="page-title">Llogaritësi diellor</h2></Albanian>
-                        <English><h3 className="page-subtitle">Find an estimate for your business</h3></English>
-                        <Albanian><h3 className="page-subtitle">Gjeni një vlerësim për biznesin tuaj</h3></Albanian>
-                    </div>
+                <English><h2 className="page-title">Solar Calculator</h2></English>
+                <Albanian><h2 className="page-title">Llogaritësi diellor</h2></Albanian>
+                <English><h3 className="page-subtitle">Find an estimate for your business</h3></English>
+                <Albanian><h3 className="page-subtitle">Gjeni një vlerësim për biznesin tuaj</h3></Albanian>
+            </div>
             <div id="half-split">
                 <div className="calculations">
-                    
+
                     <div className="content">
                         <summary>
                             <English><b>Number of photovoltaics</b>: The number of photovoltaics required to cover 100% of your electricity consumption</English>
@@ -210,31 +219,45 @@ function Calculator() {
                                                     <Albanian>Sa është madhësia e një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
                                                 </Tooltip>
                                             </div>
-                                            <div className="center-label">
+                                            <div className={"center-label" + (showCapacityManOpt ? "" : " invisible")}>
                                                 <label htmlFor="solar-capacity">
                                                     <English>Peak capacity of one solar panel (W)</English>
                                                     <Albanian>Kapaciteti maksimal i një paneli diellor (W)</Albanian>
                                                 </label>
                                             </div>
-                                            <div className="full-input">
+                                            <div className={"full-input" + (showCapacityManOpt ? "" : " invisible")}>
                                                 <input type="number" min="0" max="1000" step="0.001" placeholder={albanian ? "Fut kapacitetin për panel (W)" : "Enter capacity per panel (W)"} id="solar-capacity" onInput={() => customizePanel(setSolarData, setShouldUseName)}></input>
                                                 <Tooltip>
                                                     <English>What is the peak capacity of one panel? Use the table for an estimate if you aren't sure.</English>
                                                     <Albanian>Sa është kapaciteti maksimal i një paneli? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
                                                 </Tooltip>
                                             </div>
-                                            <div className="center-label">
+                                            <div className={"center-label" + (showCapacityManOpt ? " invisible" : "")}>
                                                 <label htmlFor="solar-efficiency">
                                                     <English>Efficiency of solar panels (%)</English>
                                                     <Albanian>Efikasiteti i paneleve diellore (%)</Albanian>
                                                 </label>
                                             </div>
-                                            <div className="full-input">
+                                            <div className={"full-input" + (showCapacityManOpt ? " invisible" : "")}>
                                                 <input type="number" min="0" max="100" step="0.001" placeholder={albanian ? "Fut efikasitetin (%)" : "Enter efficiency (%)"} id="solar-efficiency" onInput={() => customizePanel(setSolarData, setShouldUseName)}></input>
                                                 <Tooltip>
                                                     <English>What is the efficiency of the panels? Use the table for an estimate if you aren't sure.</English>
                                                     <Albanian>Cili është efikasiteti i paneleve? Përdorni tabelën për një vlerësim nëse nuk jeni të sigurt.</Albanian>
                                                 </Tooltip>
+                                            </div>
+                                            <div className="center-label">
+                                                <label htmlFor="swap-cap-eff">
+                                                    <English>{showCapacityManOpt ? "Calculate capacity using efficiency" : "Enter capacity directly"}</English>
+                                                    <Albanian>{showCapacityManOpt ? "Llogarit kapacitetin duke përdorur efikasitetin" : "Fut direkt kapacitetin"}</Albanian>
+                                                </label>
+                                            </div>
+                                            <div id="center-swap-cap-eff">
+                                                <button type="button" id="swap-cap-eff" className="submit-button" onClick={e => {
+                                                    setShowCapacityManOpt(!showCapacityManOpt);
+                                                }}>
+                                                    <English>{showCapacityManOpt ? "Switch to using efficiency" : "Switch to using capacity"}</English>
+                                                    <Albanian>{showCapacityManOpt ? "Kaloni te efikasiteti i përdorimit" : "Kaloni te kapaciteti i përdorimit"}</Albanian>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +272,7 @@ function Calculator() {
                                                     e.preventDefault();
                                                     updateNumPanelVisibility(manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption);
                                                     updateGenerationVisibility(manualIrradiation, prefecture, solarCost, solarArea, solarCapacity, solarEfficiency, monthlyConsumption, electricityPrice, roofArea, percentSolar);
-                                                }}/>
+                                                }} />
                                                 <label htmlFor="electric-usage-my" data-on={albanian ? "muaj" : "month"} data-off={albanian ? "vit" : "year"} className="btn-color-mode-switch-inner"></label>
                                             </label>
                                         </div>
@@ -340,7 +363,7 @@ function Calculator() {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className="results">
                     <div className="results-wrapper">
@@ -406,8 +429,74 @@ function Calculator() {
                                 <English>tonnes of CO<sub>2</sub></English>
                                 <Albanian>ton CO<sub>2</sub></Albanian>
                             </div>
+                            <div className={"hidden-pv-count" + (showNumPanels ? " invisible" : "")}>
+                                <div className="hidden-wrapper">
+                                    <English>
+                                        Information needed:
+                                        <ul>
+                                            {!!(prefecture || manualIrradiation) || <li>Prefecture or irradiation data</li>}
+                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Solar photovoltaic info</li>}
+                                            {!!monthlyConsumption || <li>Monthly energy consumption</li>}
+                                        </ul>
+                                    </English>
+                                    <Albanian>
+                                        Informacioni i nevojshëm:
+                                        <ul>
+                                            {!!(prefecture || manualIrradiation) || <li>Të dhënat e prefekturës ose rrezatimit</li>}
+                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Informacione fotovoltaike diellore</li>}
+                                            {!!monthlyConsumption || <li>Konsumimi mujor i energjisë</li>}
+                                        </ul>
+                                    </Albanian>
+                                </div>
+                            </div>
+                            <div className={"hidden-generation" + (showGeneration ? " invisible" : "")}>
+                                <div className="hidden-wrapper">
+                                    <English>
+                                        {!showNumPanels || "Information needed:"}
+                                        <ul>
+                                            {!!electricityPrice || <li>Price of electricity</li>}
+                                            {!!roofArea || <li>Roof size</li>}
+                                            {!!percentSolar || <li>Desired solar offset</li>}
+                                        </ul>
+                                    </English>
+                                    <Albanian>
+                                        {!showNumPanels || "Informacioni i nevojshëm:"}
+                                        <ul>
+                                            {!!electricityPrice || <li>Çmimi i energjisë elektrike</li>}
+                                            {!!roofArea || <li>Madhësia e çatisë</li>}
+                                            {!!percentSolar || <li>Kompensimi i dëshiruar diellor</li>}
+                                        </ul>
+                                    </Albanian>
+                                </div>
+                            </div>
                         </div>
                         <div id="production-wrapper">
+                            <div className={"hidden-generation-graph" + (showGeneration ? " invisible" : "")}>
+                                <div className="hidden-wrapper">
+                                    <English>
+                                        Information needed:
+                                        <ul>
+                                            {!!(prefecture || manualIrradiation) || <li>Prefecture or irradiation data</li>}
+                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Solar photovoltaic info</li>}
+                                            {!!monthlyConsumption || <li>Monthly energy consumption</li>}
+                                            {!!electricityPrice || <li>Price of electricity</li>}
+                                            {!!roofArea || <li>Roof size</li>}
+                                            {!!percentSolar || <li>Desired solar offset</li>}
+                                        </ul>
+                                    </English>
+                                    <Albanian>
+                                        Informacioni i nevojshëm:
+                                        <ul>
+                                            {!!(prefecture || manualIrradiation) || <li>Të dhënat e prefekturës ose rrezatimit</li>}
+                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Informacione fotovoltaike diellore</li>}
+                                            {!!monthlyConsumption || <li>Konsumimi mujor i energjisë</li>}
+                                            {!!electricityPrice || <li>Çmimi i energjisë elektrike</li>}
+                                            {!!roofArea || <li>Madhësia e çatisë</li>}
+                                            {!!percentSolar || <li>Kompensimi i dëshiruar diellor</li>}
+                                        </ul>
+                                    </Albanian>
+                                </div>
+                            </div>
                             <div id="production-graph">
                                 <Plot
                                     data={[
@@ -434,7 +523,6 @@ function Calculator() {
                         </div>
                     </div>
                 </div>
-
             </div>
             <PageFoot></PageFoot>
         </div>

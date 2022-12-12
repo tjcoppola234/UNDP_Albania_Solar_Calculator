@@ -422,6 +422,9 @@
     margin-bottom: 5px;
     margin-top: 5px;
 }
+.Calculator .full-input.invisible {
+    display: none;
+}
 .Calculator .center-label {
     width: 80%;
     margin-left: auto;
@@ -528,4 +531,58 @@
 
 .Calculator .year-font {
     font-size: 40px;
+}
+
+.Calculator .hidden-pv-count {
+    position: absolute;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    height: 100%;
+}
+.Calculator .hidden-generation {
+    position: absolute;
+    grid-row-start: 4;
+    grid-row-end: 7;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    height: 100%;
+}
+.Calculator .hidden-generation-graph {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1;
+    color: rgb(247, 247, 247);
+}
+.Calculator .hidden-wrapper {
+    box-sizing: border-box;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.Calculator .hidden-wrapper ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Calculator #solar-panel-info .center-label:first-child {
+    margin-top: 0;
+}
+
+.Calculator #center-swap-cap-eff {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Calculator #swap-cap-eff {
+    width: 60%;
+    margin-top: 10px;
 }
