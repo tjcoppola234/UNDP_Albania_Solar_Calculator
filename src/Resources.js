@@ -118,7 +118,7 @@ function Resources() {
                             setSlide1Height(maxHeight);
                         }}>
                             <div className={"slide fade" + (slide1 === 0 ? "" : " hidden-slide")}>
-                            <img className={"imagefloat-right" + (slide1 === 0 ? "" : " hidden-slide")} id="img0" src={process.env.PUBLIC_URL + "mitigateclimatechange.png"} alt="Benefits" onClick={() => load(0)} width="450" height="450" />
+                            <img className={"imagefloat-right" + (slide1 === 0 ? "" : " hidden-slide")} id="img0" src={process.env.PUBLIC_URL + "mitigateclimatechange.png"} alt="Mitigating Climate Change" onClick={() => load(0)} width="450" height="450" />
                                 <div className="slide-caption">
                                     <English><h3 id="res-the-enviro">Helps mitigate climate change.</h3></English>
                                     <Albanian><h3 id="res-the-enviro"></h3></Albanian>

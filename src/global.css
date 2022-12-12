@@ -1,13 +1,13 @@
 :root {
   /* Accessible for large text: https://webaim.org/resources/contrastchecker/?fcolor=FEFEFE&bcolor=357AB6 */
-  --nav-background: #0f4b94;
-  --nav-background-hover: #053671;
+  --nav-background: #0b755e;
+  --nav-background-hover: #034C3C;
   --nav-text: #ffffff;
-  --nav-text-hover: #e6ee9c;
+  --nav-text-hover: #e7ee9c;
   --background: #ecf0f1;
   --font-size: 20px;
-  --content-background: #bec3f8;
-  --content-heading: #767DD3;
+  --content-background: #bef8de;
+  --content-heading: #0b755e;
 }
 
 #root {
