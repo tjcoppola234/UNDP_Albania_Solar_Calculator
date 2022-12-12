@@ -182,8 +182,8 @@ function Calculator() {
                                     id="panel-selection"
                                 ></SolarPanelScrollList>
                                 <div>
-                                    <English><b>Disclaimer:</b> Examples as of November 2022</English>
-                                    <Albanian><b>Mohimi i përgjegjësisë:</b> Shembuj që nga nëntori 2022</Albanian>
+                                    <English><b>Disclaimer:</b> Examples as of December 2022</English>
+                                    <Albanian><b>Mohimi i përgjegjësisë:</b> Shembuj që nga dhjetor 2022</Albanian>
                                 </div>
                                 <div ref={ref} className={"modal-img" + (muniPanelVisibility ? "" : " invisible")}>
                                     <span className="close-modal" onClick={() => {
