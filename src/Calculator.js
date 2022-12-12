@@ -429,39 +429,25 @@ function Calculator() {
                                 <English>tonnes of CO<sub>2</sub></English>
                                 <Albanian>ton CO<sub>2</sub></Albanian>
                             </div>
-                            <div className={"hidden-pv-count" + (showNumPanels ? " invisible" : "")}>
+                            <div className={"hidden-pv-count" + (showNumPanels ? " only-generation" : "") + (showGeneration ? " invisible" : "")}>
                                 <div className="hidden-wrapper">
                                     <English>
-                                        Information needed:
+                                        <p className="slight-font-inc">Information needed:</p>
                                         <ul>
                                             {!!(prefecture || manualIrradiation) || <li>Prefecture or irradiation data</li>}
                                             {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Solar photovoltaic info</li>}
                                             {!!monthlyConsumption || <li>Monthly energy consumption</li>}
-                                        </ul>
-                                    </English>
-                                    <Albanian>
-                                        Informacioni i nevojshëm:
-                                        <ul>
-                                            {!!(prefecture || manualIrradiation) || <li>Të dhënat e prefekturës ose rrezatimit</li>}
-                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Informacione fotovoltaike diellore</li>}
-                                            {!!monthlyConsumption || <li>Konsumimi mujor i energjisë</li>}
-                                        </ul>
-                                    </Albanian>
-                                </div>
-                            </div>
-                            <div className={"hidden-generation" + (showGeneration ? " invisible" : "")}>
-                                <div className="hidden-wrapper">
-                                    <English>
-                                        {!showNumPanels || "Information needed:"}
-                                        <ul>
                                             {!!electricityPrice || <li>Price of electricity</li>}
                                             {!!roofArea || <li>Roof size</li>}
                                             {!!percentSolar || <li>Desired solar offset</li>}
                                         </ul>
                                     </English>
                                     <Albanian>
-                                        {!showNumPanels || "Informacioni i nevojshëm:"}
+                                        <p className="slight-font-inc">Informacioni i nevojshëm:</p>
                                         <ul>
+                                            {!!(prefecture || manualIrradiation) || <li>Të dhënat e prefekturës ose rrezatimit</li>}
+                                            {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Informacione fotovoltaike diellore</li>}
+                                            {!!monthlyConsumption || <li>Konsumimi mujor i energjisë</li>}
                                             {!!electricityPrice || <li>Çmimi i energjisë elektrike</li>}
                                             {!!roofArea || <li>Madhësia e çatisë</li>}
                                             {!!percentSolar || <li>Kompensimi i dëshiruar diellor</li>}
@@ -474,7 +460,7 @@ function Calculator() {
                             <div className={"hidden-generation-graph" + (showGeneration ? " invisible" : "")}>
                                 <div className="hidden-wrapper">
                                     <English>
-                                        Information needed:
+                                        <p className="slight-font-inc">Information needed:</p>
                                         <ul>
                                             {!!(prefecture || manualIrradiation) || <li>Prefecture or irradiation data</li>}
                                             {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Solar photovoltaic info</li>}
@@ -485,7 +471,7 @@ function Calculator() {
                                         </ul>
                                     </English>
                                     <Albanian>
-                                        Informacioni i nevojshëm:
+                                        <p className="slight-font-inc">Informacioni i nevojshëm:</p>
                                         <ul>
                                             {!!(prefecture || manualIrradiation) || <li>Të dhënat e prefekturës ose rrezatimit</li>}
                                             {!!(solarArea && solarCost && (solarCapacity || solarEfficiency)) || <li>Informacione fotovoltaike diellore</li>}
