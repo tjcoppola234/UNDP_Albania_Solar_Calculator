@@ -1,7 +1,7 @@
-Q.PEAK DUO L-G8.2 430W MONO, 2080 × 1031 × 35 ㎜
-EC 325M60-HD 325Wp, 1684 x 1002 x 35 mm
-SM+ SW300 mono BFR, 1675 x 1001 x 33 mm
-REC TwinPeak 4 REC360TP4 Black, 1755.0 x 1040 x 30 mm
-Boviet BVM6610M-370S-H-HC-BF, 1749 x 1046 x 35 mm
-LONGi Solar LR4-60HPH 355M, 1776 x 1052 x 35 mm
-Axitec AXIpreium X HC Mono AC-410MH/144S, 2008 x 1002 x 40 mm
+Panel A, 2080 × 1031 × 35 ㎜
+Panel B, 1684 x 1002 x 35 mm
+Panel C, 1675 x 1001 x 33 mm
+Panel D, 1755.0 x 1040 x 30 mm
+Panel E, 1749 x 1046 x 35 mm
+Panel F, 1776 x 1052 x 35 mm
+Panel G, 2008 x 1002 x 40 mm
