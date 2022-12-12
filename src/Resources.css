@@ -7,7 +7,7 @@
     --section-6: rgb(255, 216, 216);
     --section-7: rgb(201, 255, 187);
     --section-8: rgb(254, 242, 193);
-    
+
     --img-border: rgb(0, 0, 0);
 
     --toc-background: rgb(247, 247, 247);
@@ -24,7 +24,7 @@
     border: none;
 }
 
-.Resources body { 
+.Resources body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -33,7 +33,8 @@
     text-align: center;
 }
 
-.Resources .content li, .Resources .content ol {
+.Resources .content li,
+.Resources .content ol {
     margin-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -66,28 +67,29 @@
     justify-content: center;
 }
 
-.Resources .imagefloat-center {
-    border : 2px solid var(--img-border);
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+.Resources .imagefloat-left,
+.Resources .imagefloat-right {
+    border-radius: 25px;
 }
 
-.Resources .imagefloat-left, .Resources .imagefloat-right {
-    border : 2px solid var(--img-border);
-    border-radius: 25px;
-    margin-bottom: 20px;
+.Resources .imagefloat-left,
+.Resources .imagefloat-center,
+.Resources .imagefloat-right {
+    position: relative;
+    border: 2px solid var(--img-border);
+    display: block;
     cursor: pointer;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: filter 0.3s ease;
+    -moz-transition: filter 0.3s ease;
+    -o-transition: filter 0.3s ease;
+    -ms-transition: filter 0.3s ease;
+    transition: filter 0.3s ease;
+    z-index: 2;
 }
-.Resources .imagefloat-left:hover, .Resources .imagefloat-right:hover, .Resources .imagefloat-center:hover {
+
+.Resources .imagefloat-left:hover,
+.Resources .imagefloat-right:hover,
+.Resources .imagefloat-center:hover {
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
 }
@@ -105,8 +107,9 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0); /*When transparency is not supported*/
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgb(0, 0, 0);
+    /*When transparency is not supported*/
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .Resources .modal-img-src {
@@ -136,7 +139,7 @@
     font-weight: bold;
     transition: 0.3s;
 }
-  
+
 .Resources .close-modal:hover,
 .Resources .close-modal:focus {
     color: #bbb;
@@ -150,18 +153,24 @@
     }
 }
 
-.Resources .modal-img-src, .Resources .modal-caption {
+.Resources .modal-img-src,
+.Resources .modal-caption {
     animation-name: zoom;
     animation-duration: 0.5s;
 }
 
 @keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
 }
 
 .Resources .title-box {
-  background-position: 0 55%;
+    background-position: 0 55%;
 }
 
 .Resources .modal-content {
@@ -191,6 +200,7 @@
     border-radius: 25px;
     margin-bottom: 20px;
 }
+
 .Resources #false-modal:hover {
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
@@ -202,6 +212,7 @@
     background-color: var(--toc-background);
     z-index: 5;
 }
+
 .Resources #toc-toplist {
     max-width: 400px;
     margin-top: 50px;
@@ -214,18 +225,25 @@
     list-style: none;
     padding-left: 30px;
 }
+
 .Resources #toc li {
     padding-left: 10px;
 }
-.Resources #toc ul ul li:not(:hover) a, .Resources .outer-li:not(:hover) a {
+
+.Resources #toc ul ul li:not(:hover) a,
+.Resources .outer-li:not(:hover) a {
     text-decoration: none;
     color: var(--toc-text);
 }
-.Resources #toc ul ul li:hover, .Resources .outer-li:hover {
+
+.Resources #toc ul ul li:hover,
+.Resources .outer-li:hover {
     color: var(--toc-text-highlighted);
     background-color: var(--toc-background-highlighted);
 }
-.Resources #toc ul ul li:hover a, .Resources ul li:hover a {
+
+.Resources #toc ul ul li:hover a,
+.Resources ul li:hover a {
     color: var(--toc-text-highlighted);
     text-decoration: none;
 }
@@ -241,6 +259,7 @@
     -ms-transition: background-color 300ms linear, color 300ms linear;
     transition: background-color 300ms linear, color 300ms linear;
 }
+
 .Resources #scroll-to-top {
     cursor: pointer;
     position: fixed;
@@ -258,11 +277,14 @@
     transition: background-color 300ms linear, color 300ms linear, opacity ease-in 0.2s;
 }
 
-.Resources #scroll-to-top, .Resources #toc-access {
+.Resources #scroll-to-top,
+.Resources #toc-access {
     background-color: var(--resource-nav-button);
     color: var(--resource-nav-icon);
 }
-.Resources #scroll-to-top:hover, .Resources #toc-access:hover {
+
+.Resources #scroll-to-top:hover,
+.Resources #toc-access:hover {
     background-color: var(--resource-nav-icon);
     color: var(--resource-nav-button);
 }
@@ -274,9 +296,11 @@
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     will-change: opacity, visibility;
 }
+
 .Resources .fade-in-section:not(:last-child) {
     padding-bottom: 50px;
 }
+
 .Resources .fade-in-section.is-visible {
     opacity: 1;
     transform: none;
@@ -297,56 +321,161 @@
 .Resources #section-1 {
     background-color: var(--section-1);
 }
+
 .Resources #section-1 .rounding {
     background-color: var(--background);
     border-radius: 0 0 0 90% / 40px;
 }
+
 .Resources #section-2 {
     background-color: var(--section-2);
 }
+
 .Resources #section-2 .rounding {
     background-color: var(--section-1);
     border-radius: 0 0 90% 0 / 40px;
 }
+
 .Resources #section-3 {
     background-color: var(--section-3);
 }
+
 .Resources #section-3 .rounding {
     background-color: var(--section-2);
     border-radius: 0 0 0 90% / 40px;
 }
+
 .Resources #section-4 {
     background-color: var(--section-4);
 }
+
 .Resources #section-4 .rounding {
     background-color: var(--section-3);
     border-radius: 0 0 90% 0 / 40px;
 }
+
 .Resources #section-5 {
     background-color: var(--section-5);
 }
+
 .Resources #section-5 .rounding {
     background-color: var(--section-4);
     border-radius: 0 0 0 90% / 40px;
 }
+
 .Resources #section-6 {
     background-color: var(--section-6);
 }
+
 .Resources #section-6 .rounding {
     background-color: var(--section-5);
     border-radius: 0 0 90% 0 / 40px;
 }
+
 .Resources #section-7 {
     background-color: var(--section-7);
 }
+
 .Resources #section-7 .rounding {
     background-color: var(--section-6);
     border-radius: 0 0 0 90% / 40px;
 }
+
 .Resources #section-8 {
     background-color: var(--section-8);
 }
+
 .Resources #section-8 .rounding {
     background-color: var(--section-7);
     border-radius: 0 0 90% 0 / 40px;
+}
+
+.Resources .slideshow-display {
+    width: 80%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.Resources .slide-prev,
+.Resources .slide-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    text-align: center;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.5s ease;
+    user-select: none;
+    background-color: transparent;
+    border: transparent;
+}
+
+.Resources .slide-prev {
+    left: -30px;
+    border-radius: 3px;
+}
+
+.Resources .slide-next {
+    right: -30px;
+    border-radius: 3px;
+}
+
+.Resources .slide-prev:hover,
+.Resources .slide-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.Resources .slide-dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.5s ease;
+    margin-top: 10px;
+}
+
+.Resources .slide-dot.active,
+.Resources .slide-dot:hover {
+    background-color: #717171;
+}
+
+.Resources .slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.Resources .fade {
+    animation-name: fade;
+    animation-duration: 0.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.Resources .content-pane {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+}
+
+.Resources .hidden-slide {
+    height: 0;
+    overflow: hidden;
 }

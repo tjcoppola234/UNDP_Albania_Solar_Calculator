@@ -28,7 +28,8 @@ class Settings {
             //apr key: https://api.exchangerate-api.com/v4/latest/EUR
             fetch("https://api.exchangerate-api.com/v4/latest/EUR")
                 .then(response => response.json())
-                .then(json => that.lekPerEuro.setState(json.rates.ALL));
+                .then(json => that.lekPerEuro.setState(json.rates.ALL))
+                .catch(err => that.lekPerEuro.setState(117));
         }
 
         updateConversionRatio();
