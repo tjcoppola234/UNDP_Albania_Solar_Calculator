@@ -18,11 +18,28 @@ function Resources() {
     const [caption2, setCaption2] = useState("");
     const ref = useRef(null);
 
+    const [slide1Height, setSlide1Height] = useState(0);
+    const [slide2Height, setSlide2Height] = useState(0);
+    const [slide3Height, setSlide3Height] = useState(0);
+    const [slide4Height, setSlide4Height] = useState(0);
+    const [slide5Height, setSlide5Height] = useState(0);
+    const [slide6Height, setSlide6Height] = useState(0);
+    const [slide7Height, setSlide7Height] = useState(0);
+    const [slide8Height, setSlide8Height] = useState(0);
+    const [slide1, setSlide1] = useState(0);
+    const [slide2, setSlide2] = useState(0);
+    const [slide3, setSlide3] = useState(0);
+    const [slide4, setSlide4] = useState(0);
+    const [slide5, setSlide5] = useState(0);
+    const [slide6, setSlide6] = useState(0);
+    const [slide7, setSlide7] = useState(0);
+    const [slide8, setSlide8] = useState(0);
+
     const [showToTop, setShowToTop] = useState(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
     window.addEventListener("scroll", e => {
         setShowToTop(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100);
     });
-    
+
     /**
      * Loads an image into the modal popup and displays the modal
      * @param {number} num An index representing which image to load
@@ -65,7 +82,7 @@ function Resources() {
                         behavior: "smooth"
                     });
                 }}>▲</button>
-                <div id="modal-img" ref={ref} className={openImage ? "" : " invisible"}>
+                <div id="modal-img" ref={ref} className={openImage ? "" : "invisible"}>
                     <span className="close-modal" onClick={() => {
                         ref.current.scrollTo(0, 0);
                         setImageOpened(false);
@@ -83,48 +100,69 @@ function Resources() {
                             <English><h1 className="largerfontb" id="res-why-imp">Why is solar energy important?</h1></English>
                             <Albanian><h1 className="largerfontb" id="res-why-imp">Pse është e rëndësishme energjia diellore?</h1></Albanian>
                         </div>
-                        <div className="content-section">
-                            <img className="imagefloat-right" id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450" />
-                            <div>
-                                <English><h3 id="res-the-enviro">The Environment</h3></English>
-                                <Albanian><h3 id="res-the-enviro">Mjedisi</h3></Albanian>
+                        <div className="slideshow-display" style={{height: slide1Height}} onLoad={e => {
+                            let maxHeight = 0;
+                            for(let slide of e.currentTarget.querySelectorAll(".slide").values()) {
+                                maxHeight = Math.max(maxHeight, slide.scrollHeight);
+                            }
+                            setSlide1Height(maxHeight);
+                        }}>
+                            <div className={"slide fade" + (slide1 === 0 ? "" : " hidden-slide")}>
+                                <img className={"imagefloat-right" + (slide1 === 0 ? "" : " hidden-slide")} id="img0" src={process.env.PUBLIC_URL + "solarmap.png"} alt="Benefits" onClick={() => load(0)} width="360" height="450" />
+                                <div className="slide-caption">
+                                    <English><h3 id="res-the-enviro">The Environment</h3></English>
+                                    <Albanian><h3 id="res-the-enviro">Mjedisi</h3></Albanian>
+                                </div>
+                                <div className="content-pane">
+                                    <ul>
+                                        <li>
+                                            <English>Reduces the amount of carbon dioxide released into the air.</English>
+                                            <Albanian>Redukton sasinë e dioksidit të karbonit të lëshuar në ajër.</Albanian>
+                                        </li>
+                                        <li>
+                                            <English>Provides better air quality.</English>
+                                            <Albanian>Ofron cilësi më të mirë të ajrit.</Albanian>
+                                        </li>
+                                        <li>
+                                            <English>Helps mitigate climate change.</English>
+                                            <Albanian>Ndihmon në zbutjen e ndryshimeve klimatike.</Albanian>
+                                        </li>
+                                    </ul>
+                                    <div style={{clear: "both"}}></div>
+                                </div>
                             </div>
-                            <ul>
-                                <li>
-                                    <English>Reduces the amount of carbon dioxide released into the air.</English>
-                                    <Albanian>Redukton sasinë e dioksidit të karbonit të lëshuar në ajër.</Albanian>
-                                </li>
-                                <li>
-                                    <English>Provides better air quality.</English>
-                                    <Albanian>Ofron cilësi më të mirë të ajrit.</Albanian>
-                                </li>
-                                <li>
-                                    <English>Helps mitigate climate change.</English>
-                                    <Albanian>Ndihmon në zbutjen e ndryshimeve klimatike.</Albanian>
-                                </li>
-                            </ul>
-                            <div>
-                                <English><h3 id="res-sunny-pot">Sunny Potential</h3></English>
-                                <Albanian><h3 id="res-sunny-pot">Potencial me diell</h3></Albanian>
+                            <div className={"slide fade" + (slide1 === 1 ? "" : " hidden-slide")}>
+                                <div className="slide-caption">
+                                    <English><h3 id="res-sunny-pot">Sunny Potential</h3></English>
+                                    <Albanian><h3 id="res-sunny-pot">Potencial me diell</h3></Albanian>
+                                </div>
+                                <div className="content-pane">
+                                    <ul>
+                                        <li>
+                                            <English>Albania has extensive potential for solar energy.</English>
+                                            <Albanian>Shqipëria ka një potencial të gjerë për energjinë diellore.</Albanian>
+                                        </li>
+                                        <li>
+                                            <English>Between 2400-2500 hours of sunshine per year.</English>
+                                            <Albanian>Mes 2400-2500 orëve me diell në vit.</Albanian>
+                                        </li>
+                                        <li>
+                                            <English>The irradiation is the amount of power received from the sun.</English>
+                                            <Albanian>Rrezatimi është sasia e fuqisë së marrë nga dielli.</Albanian>
+                                        </li>
+                                        <li>
+                                            <English>The graph to the right shows the irradiation of Albanian regions.</English>
+                                            <Albanian>Grafiku në të djathtë tregon rrezatimin e rajoneve shqiptare.</Albanian>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <ul>
-                                <li>
-                                    <English>Albania has extensive potential for solar energy.</English>
-                                    <Albanian>Shqipëria ka një potencial të gjerë për energjinë diellore.</Albanian>
-                                </li>
-                                <li>
-                                    <English>Between 2400-2500 hours of sunshine per year.</English>
-                                    <Albanian>Mes 2400-2500 orëve me diell në vit.</Albanian>
-                                </li>
-                                <li>
-                                    <English>The irradiation is the amount of power received from the sun.</English>
-                                    <Albanian>Rrezatimi është sasia e fuqisë së marrë nga dielli.</Albanian>
-                                </li>
-                                <li>
-                                    <English>The graph to the right shows the irradiation of Albanian regions.</English>
-                                    <Albanian>Grafiku në të djathtë tregon rrezatimin e rajoneve shqiptare.</Albanian>
-                                </li>
-                            </ul>
+                            <button type="button" className="slide-prev" onClick={() => setSlide1(((slide1 - 1) % 2 + 2) % 2)}>&#10094;</button>
+                            <button type="button" className="slide-next" onClick={() => setSlide1((slide1 + 1) % 2)}>&#10095;</button>
+                        </div>
+                        <div className="image-center-centering">
+                            <span className={"slide-dot" + (slide1 === 0 ? " active" : "")} onClick={() => setSlide1(0)}></span>
+                            <span className={"slide-dot" + (slide1 === 1 ? " active" : "")} onClick={() => setSlide1(1)}></span>
                         </div>
                     </FadeInSection>
                     <FadeInSection id="section-2">
