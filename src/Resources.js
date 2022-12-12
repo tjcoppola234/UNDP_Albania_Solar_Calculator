@@ -416,6 +416,8 @@ function Resources() {
                                     <ul>
                                      <English>Talk to different solar installation companies to determine if and how a solar system is right for your business. Many companies offer technical consulting and full projections of a PV system on the roof.</English>
                                      <Albanian></Albanian>
+                                     <iframe id="solar-map" title="Map of solar companies in Tirana" src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d47942.37394858916!2d19.7906942!3d41.32195!3m2!1i1024!2i768!4f13.1!2m1!1ssolar%20companies!5e0!3m2!1sen!2s!4v1667231658526!5m2!1sen!2s" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+
                                     </ul>
                                     <div style={{ clear: "both" }}></div>
                                 </div>
@@ -430,11 +432,14 @@ function Resources() {
                                     <ul>
                                         <English>Talk to different banks to determine if taking out a loan is right for the company. There are banks that offer technical and financial assistance to help you determine if a solar system is right for your business. These banks will often be partnered with solar installation companies they will get you in contact with.</English>
                                         <Albanian></Albanian>
+                    
 
                                         <p> </p>
 
                                         <English>Ask your local commercial banks for their loan options and solar photovoltaics programs for businesses.</English>
                                         <Albanian></Albanian>
+
+
                                     </ul> 
                                 </div>
                             </div>

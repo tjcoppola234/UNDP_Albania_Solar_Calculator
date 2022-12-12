@@ -13,9 +13,9 @@
     --toc-background: rgb(247, 247, 247);
     --toc-text: rgb(0, 0, 0);
     --toc-background-highlighted: rgb(230, 230, 230);
-    --toc-text-highlighted: rgb(137, 137, 255);
-    --resource-nav-icon: #767DD3;
-    --resource-nav-button: #bec3f8;
+    --toc-text-highlighted: rgb(15, 15, 205);
+    --resource-nav-icon: #0b755e;;
+    --resource-nav-button: #a8ccc4;
 }
 
 .Resources #solar-map {

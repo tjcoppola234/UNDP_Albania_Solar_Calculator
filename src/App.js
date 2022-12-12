@@ -29,16 +29,8 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>See how much energy you could generate</English>
-                  <Albanian>Shihni sa energji mund të gjeneroni</Albanian>
-                </li>
-                <li>
-                  <English>See how much money you could save</English>
-                  <Albanian>Shihni sa para mund të kurseni</Albanian>
-                </li>
-                <li>
                   <English>Learn if solar photovoltaics are right for you!</English>
-                  <Albanian>Mësoni nëse fotovoltaikët diellorë janë të duhurat për ju!</Albanian>
+                  <Albanian>Shihni sa energji mund të gjeneroni</Albanian>
                 </li>
               </ul>
             </div>
@@ -51,16 +43,8 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>Learn about how solar photovoltaics works</English>
+                  <English>Learn about what solar energy is!</English>
                   <Albanian>Mësoni se si funksionojnë fotovoltaikët diellorë</Albanian>
-                </li>
-                <li>
-                  <English>Find solar installers</English>
-                  <Albanian>Gjeni instalues ​​diellor</Albanian>
-                </li>
-                <li>
-                  <English>Explore links to banks with solar energy programs</English>
-                  <Albanian>Eksploroni lidhjet me bankat me programe të energjisë diellore</Albanian>
                 </li>
               </ul>
             </div>
@@ -73,7 +57,7 @@ function App() {
             <div className="square-bullets">
               <ul>
                 <li>
-                  <English>See frequently asked questions about solar</English>
+                  <English>Learn how to use the tool!</English>
                   <Albanian>Shikoni pyetjet e bëra më shpesh në lidhje me energjinë diellore</Albanian>
                 </li>
               </ul>
