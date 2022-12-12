@@ -75,7 +75,16 @@ function Resources() {
                 <Albanian><h3 className="page-subtitle">Mësoni më shumë rreth fotovoltaikëve diellorë!</h3></Albanian>
             </div>
             <div className="content">
-                <TableOfContents></TableOfContents>
+                <TableOfContents setSlides={{
+                    setSlide1: setSlide1,
+                    setSlide2: setSlide2,
+                    setSlide3: setSlide3,
+                    setSlide4: setSlide4,
+                    setSlide5: setSlide5,
+                    setSlide6: setSlide6,
+                    setSlide7: setSlide7,
+                    setSlide8: setSlide8
+                }}></TableOfContents>
                 <button id="scroll-to-top" style={{ opacity: showToTop ? 1 : 0 }} type="button" onClick={e => {
                     e.preventDefault();
                     document.body.scrollIntoView({
@@ -100,9 +109,10 @@ function Resources() {
                             <English><h1 className="largerfontb" id="res-why-imp">Why is solar energy important?</h1></English>
                             <Albanian><h1 className="largerfontb" id="res-why-imp">Pse është e rëndësishme energjia diellore?</h1></Albanian>
                         </div>
-                        <div className="slideshow-display" style={{height: slide1Height}} onLoad={e => {
+                        <span id="res-why-imp-content"></span>
+                        <div className="slideshow-display" style={{ height: slide1Height }} onLoad={e => {
                             let maxHeight = 0;
-                            for(let slide of e.currentTarget.querySelectorAll(".slide").values()) {
+                            for (let slide of e.currentTarget.querySelectorAll(".slide").values()) {
                                 maxHeight = Math.max(maxHeight, slide.scrollHeight);
                             }
                             setSlide1Height(maxHeight);
@@ -128,7 +138,7 @@ function Resources() {
                                             <Albanian>Ndihmon në zbutjen e ndryshimeve klimatike.</Albanian>
                                         </li>
                                     </ul>
-                                    <div style={{clear: "both"}}></div>
+                                    <div style={{ clear: "both" }}></div>
                                 </div>
                             </div>
                             <div className={"slide fade" + (slide1 === 1 ? "" : " hidden-slide")}>
@@ -531,7 +541,9 @@ export default Resources;
  * The HTML for the table of contents for the Resources page.
  * @returns {HTMLElement} An HTMLElement representing the table of contents, with id "toc".
  */
-export function TableOfContents() {
+export function TableOfContents(props) {
+    const setSlides = props.setSlides;
+
     return (
         <div id="toc" className="Hor-flex">
             <ul id="toc-toplist" className="invisible">
@@ -539,39 +551,39 @@ export function TableOfContents() {
                 <li className="outer-li"><a href="#res-why-imp" onClick={e => jumpTo(e, "res-why-imp")}><English>Why is solar energy important?</English><Albanian>Pse është e rëndësishme energjia diellore?</Albanian></a></li>
                 <li>
                     <ul>
-                        <li><a href="#res-the-enviro" onClick={e => jumpTo(e, "res-the-enviro")}><English>The Environment</English><Albanian>Mjedisi</Albanian></a></li>
-                        <li><a href="#res-sunny-pot" onClick={e => jumpTo(e, "res-sunny-pot")}><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
+                        <li><a href="#res-why-imp-content" onClick={e => { jumpTo(e, "res-why-imp-content"); setSlides.setSlide1(0); }}><English>The Environment</English><Albanian>Mjedisi</Albanian></a></li>
+                        <li><a href="#res-why-imp-content" onClick={e => { jumpTo(e, "res-why-imp-content"); setSlides.setSlide1(1); }}><English>Sunny Potential</English><Albanian>Potencial me diell</Albanian></a></li>
                     </ul>
                 </li>
                 <li className="outer-li"><a href="#res-what-benefits" onClick={e => jumpTo(e, "res-what-benefits")}><English>What are the benefits of solar energy for your business?</English><Albanian>Cilat janë përfitimet e energjisë diellore për biznesin tuaj?</Albanian></a></li>
                 <li>
                     <ul>
-                        <li><a href="#res-reduced-costs" onClick={e => jumpTo(e, "res-reduced-costs")}><English>Reduced Energy Costs</English><Albanian>Kosto të reduktuara të energjisë</Albanian></a></li>
-                        <li><a href="#res-more-security" onClick={e => jumpTo(e, "res-more-security")}><English>More Energy Security and Independence</English><Albanian>Më shumë siguri dhe pavarësi energjetike</Albanian></a></li>
-                        <li><a href="#res-green-bus" onClick={e => jumpTo(e, "res-green-bus")}><English>Green Business</English><Albanian>Biznesi i gjelbër</Albanian></a></li>
-                        <li><a href="#res-solar-tax" onClick={e => jumpTo(e, "res-solar-tax")}><English>Solar Tax Benefit</English><Albanian>Përfitimi nga taksat diellore</Albanian></a></li>
+                        <li><a href="#res-reduced-costs" onClick={e => { jumpTo(e, "res-reduced-costs") }}><English>Reduced Energy Costs</English><Albanian>Kosto të reduktuara të energjisë</Albanian></a></li>
+                        <li><a href="#res-more-security" onClick={e => { jumpTo(e, "res-more-security") }}><English>More Energy Security and Independence</English><Albanian>Më shumë siguri dhe pavarësi energjetike</Albanian></a></li>
+                        <li><a href="#res-green-bus" onClick={e => { jumpTo(e, "res-green-bus") }}><English>Green Business</English><Albanian>Biznesi i gjelbër</Albanian></a></li>
+                        <li><a href="#res-solar-tax" onClick={e => { jumpTo(e, "res-solar-tax") }}><English>Solar Tax Benefit</English><Albanian>Përfitimi nga taksat diellore</Albanian></a></li>
                     </ul>
                 </li>
                 <li className="outer-li"><a href="#res-go-solar" onClick={e => jumpTo(e, "res-go-solar")}><English>Should your business go solar?</English><Albanian>A duhet të shkojë biznesi juaj diellor?</Albanian></a></li>
                 <li>
                     <ul>
-                        <li><a href="#res-why-go-solar" onClick={e => jumpTo(e, "res-why-go-solar")}><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
-                        <li><a href="#res-bus-right" onClick={e => jumpTo(e, "res-bus-right")}><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
-                        <li><a href="#res-how-cost" onClick={e => jumpTo(e, "res-how-cost")}><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
-                        <li><a href="#res-how-finance" onClick={e => jumpTo(e, "res-how-finance")}><English>How should I finance my panels?</English><Albanian>Si duhet të financoj panelet e mia?</Albanian></a></li>
-                        <li><a href="#res-how-money" onClick={e => jumpTo(e, "res-how-money")}><English>How much money will I save with solar?</English><Albanian>Sa para do të kursej me solar?</Albanian></a></li>
-                        <li><a href="#res-how-long" onClick={e => jumpTo(e, "res-how-long")}><English>How long will my solar panels last?</English><Albanian>Sa do të zgjasin panelet e mia diellore?</Albanian></a></li>
-                        <li><a href="#res-do-panels" onClick={e => jumpTo(e, "res-do-panels")}><English>Do solar panels have a warranty?</English><Albanian>A kanë garanci panelet diellore?</Albanian></a></li>
+                        <li><a href="#res-why-go-solar" onClick={e => { jumpTo(e, "res-why-go-solar"); }}><English>Why should I go solar?</English><Albanian>Pse duhet të shkoj në diell?</Albanian></a></li>
+                        <li><a href="#res-bus-right" onClick={e => { jumpTo(e, "res-bus-right") }}><English>Is my business right for solar?</English><Albanian>A është biznesi im i duhur për energjinë diellore?</Albanian></a></li>
+                        <li><a href="#res-how-cost" onClick={e => { jumpTo(e, "res-how-cost") }}><English>How much does solar cost?</English><Albanian>Sa kushton solari?</Albanian></a></li>
+                        <li><a href="#res-how-finance" onClick={e => { jumpTo(e, "res-how-finance") }}><English>How should I finance my panels?</English><Albanian>Si duhet të financoj panelet e mia?</Albanian></a></li>
+                        <li><a href="#res-how-money" onClick={e => { jumpTo(e, "res-how-money") }}><English>How much money will I save with solar?</English><Albanian>Sa para do të kursej me solar?</Albanian></a></li>
+                        <li><a href="#res-how-long" onClick={e => { jumpTo(e, "res-how-long") }}><English>How long will my solar panels last?</English><Albanian>Sa do të zgjasin panelet e mia diellore?</Albanian></a></li>
+                        <li><a href="#res-do-panels" onClick={e => { jumpTo(e, "res-do-panels") }}><English>Do solar panels have a warranty?</English><Albanian>A kanë garanci panelet diellore?</Albanian></a></li>
                     </ul>
                 </li>
                 <li className="outer-li"><a href="#res-how-bus" onClick={e => jumpTo(e, "res-how-bus")}><English>How can your business go solar?</English><Albanian>Si mund të shkojë biznesi juaj diellor?</Albanian></a></li>
                 <li>
                     <ul>
-                        <li><a href="#res-solar-inst" onClick={e => jumpTo(e, "res-solar-inst")}><English>Solar Installers</English><Albanian>Instalues ​​diellor</Albanian></a></li>
-                        <li><a href="#res-solar-inst-tir" onClick={e => jumpTo(e, "res-solar-inst-tir")}><English>Solar Installers in Tirana</English><Albanian>Instalues ​​Solar ne Tirane</Albanian></a></li>
-                        <li><a href="#res-banks" onClick={e => jumpTo(e, "res-banks")}><English>Banks</English><Albanian>Bankat</Albanian></a></li>
-                        <li><a href="#res-fin-op" onClick={e => jumpTo(e, "res-fin-op")}><English>Financing Options</English><Albanian>Opsionet e financimit</Albanian></a></li>
-                        <li><a href="#res-own-calc" onClick={e => jumpTo(e, "res-own-calc")}><English>Calculations</English><Albanian>Llogaritjet</Albanian></a></li>
+                        <li><a href="#res-solar-inst" onClick={e => { jumpTo(e, "res-solar-inst") }}><English>Solar Installers</English><Albanian>Instalues ​​diellor</Albanian></a></li>
+                        <li><a href="#res-solar-inst-tir" onClick={e => { jumpTo(e, "res-solar-inst-tir") }}><English>Solar Installers in Tirana</English><Albanian>Instalues ​​Solar ne Tirane</Albanian></a></li>
+                        <li><a href="#res-banks" onClick={e => { jumpTo(e, "res-banks") }}><English>Banks</English><Albanian>Bankat</Albanian></a></li>
+                        <li><a href="#res-fin-op" onClick={e => { jumpTo(e, "res-fin-op") }}><English>Financing Options</English><Albanian>Opsionet e financimit</Albanian></a></li>
+                        <li><a href="#res-own-calc" onClick={e => { jumpTo(e, "res-own-calc") }}><English>Calculations</English><Albanian>Llogaritjet</Albanian></a></li>
                     </ul>
                 </li>
                 <li className="outer-li"><a href="#res-app-permit" onClick={e => jumpTo(e, "res-app-permit")}><English>Applying for a Building Permit</English><Albanian>Aplikimi për Leje Ndërtimi</Albanian></a></li>
@@ -579,8 +591,8 @@ export function TableOfContents() {
                 <li className="outer-li"><a href="#res-fin-sys" onClick={e => jumpTo(e, "res-fin-sys")}><English>How to Finance Your System</English><Albanian>Si të financoni sistemin tuaj</Albanian></a></li>
                 <li>
                     <ul>
-                        <li><a href="#res-cash-pur" onClick={e => jumpTo(e, "res-cash-pur")}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a></li>
-                        <li><a href="#res-loans" onClick={e => jumpTo(e, "res-loans")}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
+                        <li><a href="#res-cash-pur" onClick={e => { jumpTo(e, "res-cash-pur") }}><English>Cash Purchase</English><Albanian>Blerje me para në dorë</Albanian></a></li>
+                        <li><a href="#res-loans" onClick={e => { jumpTo(e, "res-loans") }}><English>Loans</English><Albanian>Kredive</Albanian></a></li>
                     </ul>
                 </li>
                 <li className="outer-li"><a href="#res-bus-success" onClick={e => jumpTo(e, "res-bus-success")}><English>Business Solar Success Story</English><Albanian>Histori Suksesi i Biznesit Solar</Albanian></a></li>
