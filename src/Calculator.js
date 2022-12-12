@@ -340,8 +340,8 @@ function Calculator() {
                                 </div>
                                 <div className="center-label">
                                     <label htmlFor="percent-solar">
-                                        <English>Percent of electricity consumption for solar</English>
-                                        <Albanian>Përqindja e konsumit të energjisë elektrike për energjinë diellore</Albanian>
+                                        <English>Percent of PV share</English>
+                                        <Albanian>Përqindja e pjesës së PV</Albanian>
                                     </label>
                                 </div>
                                 <div className="full-input">
