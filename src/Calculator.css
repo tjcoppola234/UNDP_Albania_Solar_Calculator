@@ -1,9 +1,9 @@
 .Calculator {
-    --results-background: rgb(122, 146, 193);
-    --result-cluster-background: rgb(36, 15, 112);
-    --result-cluster-background2: rgb(47, 19, 148);
+    --results-background: #D8ECE0;
+    --result-cluster-background: #034C3C;
+    --result-cluster-background2: #034C3C;
     --result-cluster-text: rgb(247, 247, 247);
-    --result-cluster-blocked: rgb(85, 90, 181);
+    --result-cluster-blocked: #7B9E89;
 }
 
 .Calculator #half-split {
