@@ -62,22 +62,18 @@ This section provides an explanation on:
  - How solar energy is beneficial to the environment 
  - Solar and climate
  - Albania has high solar irradiation. That means that using solar energy in Albania is a good idea. 
- - The irradiation graph can be found here: https://solargis.com/maps-and-gis-data/download/albania. 
 
  ### The benefits of solar energy for your business
 This section provides:
  - Advantages of a business using solar energy for their electricity needs. 
- - The infographic template can be found here: https://www.canva.com/design/DAFULg1nnjQ/BIscYmKj1Xcxf35zcEebfg/view?utm_content=DAFULg1nnjQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview. 
 
  ### Should your business go solar?
 This section provides:
  - A list of important questions businesses may have when considering solar energy.
- - The infographic template can be found here: https://www.canva.com/design/DAFSeJj09Wk/lYJRCaNk-7Nm70DA_EZZfg/view?utm_content=DAFSeJj09Wk&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview. 
 
  ### Contact for more information
 This section explains:
  - Who a business can contact to learn more about solar energy, solar systems, and financing options. 
- - The infographic template can be found here: https://www.canva.com/design/DAFULqZ676o/YiwSA2Q6oxd5iexDZd50aQ/view?utm_content=DAFULqZ676o&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview. 
 
  ### Applying for a Building Permit
 This section explains:
@@ -86,7 +82,6 @@ This section explains:
  ### The Day of Installment
 This section explains:
  - What happens on installation day when solar installers arrive and start setting up the solar system. 
- - The infographic template can be found here: https://www.canva.com/design/DAFTgi4a3o8/cKBgaAE1c7o7qZkLy8_Xqw/view?utm_content=DAFTgi4a3o8&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview. 
 
  ### Financing Your System
 This section provides:
