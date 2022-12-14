@@ -7,22 +7,37 @@
     margin-right: 50px;
 }
 
-.Help .content li {
+.Help .content li,
+.Help .content .or-spacing {
     margin-bottom: 10px;
 }
-
-.Help #center-help-table {
-    width: 100vw;
-    background-image: linear-gradient(to bottom, rgba(236,240,241,0) 0%, rgba(168, 204, 196, 0.75) 5%, rgba(168, 204, 196, 1) 30%, rgba(168, 204, 196, 1) 70%, rgba(168, 204, 196, 0.75) 95%, rgba(236,240,241,0) 100%);
-    margin-left: -50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.Help .content img {
+    border: 8px solid var(--nav-background);
+    border-radius: 16px;
 }
 
 .Help .title-box {
   background-position: 0 50%;
+}
+
+.Help .centering {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Help .indented {
+    margin-left: 40px;
+}
+
+.Help .undotted {
+    list-style-type: none;
+}
+
+.Help .bottom-spacing {
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    display: block;
+    width: 100%;
 }
