@@ -1,4 +1,4 @@
-# UNDP_Albania_Solar_Calculator
+# UNDP Albania Solar Calculator
 A solar calculator and information app for Albanian businesses
 
 ## Contents
