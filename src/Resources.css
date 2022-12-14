@@ -1,12 +1,6 @@
 .Resources {
-    --section-1: #a8ccc4;;
-    --section-2: #EDE7E3;
-    --section-3: #a8ccc4;
-    --section-4: #EDE7E3;
-    --section-5: rgb(193, 244, 254);
-    --section-6: rgb(255, 216, 216);
-    --section-7: rgb(201, 255, 187);
-    --section-8: rgb(254, 242, 193);
+    --section-odd: #a8ccc4;;
+    --section-even: #EDE7E3;
 
     --img-border: rgb(0, 0, 0);
 
@@ -33,8 +27,8 @@
     text-align: center;
 }
 
-.Resources .content li,
-.Resources .content ol {
+.Resources #actual-content li,
+.Resources #actual-content ol {
     margin-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -226,8 +220,10 @@
     padding-left: 30px;
 }
 
-.Resources #toc li {
-    padding-left: 10px;
+.Resources #toc a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: block;
 }
 
 .Resources #toc ul ul li:not(:hover) a,
@@ -318,80 +314,31 @@
     height: 50px;
 }
 
-.Resources #section-1 {
-    background-color: var(--section-1);
+.Resources .odd-section {
+    background-color: var(--section-odd);
 }
 
-.Resources #section-1 .rounding {
+.Resources .odd-section .rounding {
+    background-color: var(--section-even);
+    border-radius: 0 0 0 90% / 40px;
+}
+.Resources .odd-section.first .rounding {
     background-color: var(--background);
     border-radius: 0 0 0 90% / 40px;
 }
 
-.Resources #section-2 {
-    background-color: var(--section-2);
+.Resources .even-section {
+    background-color: var(--section-even);
 }
 
-.Resources #section-2 .rounding {
-    background-color: var(--section-1);
-    border-radius: 0 0 90% 0 / 40px;
-}
-
-.Resources #section-3 {
-    background-color: var(--section-3);
-}
-
-.Resources #section-3 .rounding {
-    background-color: var(--section-2);
-    border-radius: 0 0 0 90% / 40px;
-}
-
-.Resources #section-4 {
-    background-color: var(--section-4);
-}
-
-.Resources #section-4 .rounding {
-    background-color: var(--section-3);
-    border-radius: 0 0 90% 0 / 40px;
-}
-
-.Resources #section-5 {
-    background-color: var(--section-5);
-}
-
-.Resources #section-5 .rounding {
-    background-color: var(--section-4);
-    border-radius: 0 0 0 90% / 40px;
-}
-
-.Resources #section-6 {
-    background-color: var(--section-6);
-}
-
-.Resources #section-6 .rounding {
-    background-color: var(--section-5);
-    border-radius: 0 0 90% 0 / 40px;
-}
-
-.Resources #section-7 {
-    background-color: var(--section-7);
-}
-
-.Resources #section-7 .rounding {
-    background-color: var(--section-6);
-    border-radius: 0 0 0 90% / 40px;
-}
-
-.Resources #section-8 {
-    background-color: var(--section-8);
-}
-
-.Resources #section-8 .rounding {
-    background-color: var(--section-7);
+.Resources .even-section .rounding {
+    background-color: var(--section-odd);
     border-radius: 0 0 90% 0 / 40px;
 }
 
 .Resources .slideshow-display {
     width: 80%;
+    height: auto;
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -478,4 +425,19 @@
 .Resources .hidden-slide {
     height: 0;
     overflow: hidden;
+}
+.Resources .bottom-margin {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.Resources .static-display {
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+.Resources .static-display ul {
+    margin: 0;
 }
